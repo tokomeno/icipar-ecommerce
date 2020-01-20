@@ -1,0 +1,68 @@
+@font-face {
+  font-family: 'Roboto _GEO Nus';
+  src: url('../fonts/fonts/Roboto_GEONus.eot');
+  src: url('../fonts/fonts/Roboto_GEONus.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/fonts/Roboto_GEONus.woff2') format('woff2'),
+  url('../fonts/fonts/Roboto_GEONus.woff') format('woff'),
+  url('../fonts/fonts/Roboto_GEONus.ttf') format('truetype'),
+  url('../fonts/fonts/Roboto_GEONus.svg#Roboto_GEONus') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto _GEO Mt';
+  src: url('../fonts/fonts/Roboto_GEOMt.eot');
+  src: url('../fonts/fonts/Roboto_GEOMt.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/fonts/Roboto_GEOMt.woff2') format('woff2'),
+  url('../fonts/fonts/Roboto_GEOMt.woff') format('woff'),
+  url('../fonts/fonts/Roboto_GEOMt.ttf') format('truetype'),
+  url('../fonts/fonts/Roboto_GEOMt.svg#Roboto_GEOMt') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto _GEO Mt-bold';
+  src: url('../fonts/fonts/Roboto_GEOMtBold.eot');
+  src: url('../fonts/fonts/Roboto_GEOMtBold.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/fonts/Roboto_GEOMtBold.woff2') format('woff2'),
+  url('../fonts/fonts/Roboto_GEOMtBold.woff') format('woff'),
+  url('../fonts/fonts/Roboto_GEOMtBold.ttf') format('truetype'),
+  url('../fonts/fonts/Roboto_GEOMtBold.svg#Roboto_GEOMtBold') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '! BPG GEL';
+  src: url('../fonts/fonts/BPGGEL.eot');
+  src: url('../fonts/fonts/BPGGEL.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/fonts/BPGGEL.woff2') format('woff2'),
+  url('../fonts/fonts/BPGGEL.woff') format('woff'),
+  url('../fonts/fonts/BPGGEL.ttf') format('truetype'),
+  url('../fonts/fonts/BPGGEL.svg#!BPGGEL') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Helvetica-roman';
+  src: url('../fonts/fonts/HelveticaNeueLTGEO-55Roman.eot');
+  src: url('../fonts/fonts/HelveticaNeueLTGEO-55Roman.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/fonts/HelveticaNeueLTGEO-55Roman.woff2') format('woff2'),
+  url('../fonts/fonts/HelveticaNeueLTGEO-55Roman.woff') format('woff'),
+  url('../fonts/fonts/HelveticaNeueLTGEO-55Roman.ttf') format('truetype'),
+  url('../fonts/fonts/HelveticaNeueLTGEO-55Roman.svg#HelveticaNeueLTGEO-55Roman') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+$primary-font: 'Roboto _GEO Nus';
+$caps-font: 'Roboto _GEO Mt';
+$bold-font: 'Roboto _GEO Mt-bold';
+$gel: '! BPG GEL';
+
+$regular: 'Helvetica-roman';

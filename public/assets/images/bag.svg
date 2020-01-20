@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30.337" height="38" viewBox="0 0 30.337 38">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="30.338" height="38" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="Group_326" data-name="Group 326" transform="translate(-1569.498 -90)">
+    <g id="Repeat_Grid_5" data-name="Repeat Grid 5" transform="translate(1569.498 90)" clip-path="url(#clip-path)">
+      <g transform="translate(-1569.498 -90)">
+        <path id="Path_235" data-name="Path 235" d="M82.334,30.512,80.682,9.691A2.6,2.6,0,0,0,78.1,7.3H74.837V7.152a7.151,7.151,0,1,0-14.3,0V7.3H57.272A2.6,2.6,0,0,0,54.69,9.688L53.038,30.515A6.024,6.024,0,0,0,59.043,37H76.328a6.024,6.024,0,0,0,6.006-6.488ZM62.7,7.152a4.984,4.984,0,1,1,9.968,0V7.3H62.7ZM79.158,33.6a3.817,3.817,0,0,1-2.829,1.236H59.043A3.857,3.857,0,0,1,55.2,30.683L56.85,9.857a.425.425,0,0,1,.422-.391h3.263v2.669a1.083,1.083,0,1,0,2.167,0V9.466H72.67v2.669a1.083,1.083,0,1,0,2.167,0V9.466H78.1a.426.426,0,0,1,.422.394L80.174,30.68A3.818,3.818,0,0,1,79.158,33.6Z" transform="translate(1516.98 90.5)" fill="#fa7268" stroke="#fa7268" stroke-width="1"/>
+      </g>
+    </g>
+  </g>
+</svg>

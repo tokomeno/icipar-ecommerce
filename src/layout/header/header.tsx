@@ -1,4 +1,5 @@
 import React, { ReactElement } from "react";
+import { products } from "../../data/categories";
 
 interface HeaderProps {}
 
@@ -159,7 +160,10 @@ export const Header: React.FC<HeaderProps> = props => {
                       <div className="dropdown-menu" aria-labelledby="cart1">
                         <div className="d-flex align-items-center item">
                           <div className="image d-flex align-items-center justify-content-center">
-                            <img src="uploads/images/cart-product.png" alt="" />
+                            <img
+                              src="/assets/uploads/images/cart-product.png"
+                              alt=""
+                            />
                           </div>
                           <div className="desc">
                             <div className="item-title">
@@ -173,7 +177,10 @@ export const Header: React.FC<HeaderProps> = props => {
                         </div>
                         <div className="d-flex align-items-center item">
                           <div className="image d-flex align-items-center justify-content-center">
-                            <img src="uploads/images/cart-product.png" alt="" />
+                            <img
+                              src="/assets/uploads/images/cart-product.png"
+                              alt=""
+                            />
                           </div>
                           <div className="desc">
                             <div className="item-title">
@@ -218,7 +225,10 @@ export const Header: React.FC<HeaderProps> = props => {
                       >
                         <div className="d-flex align-items-center item">
                           <div className="image d-flex align-items-center justify-content-center">
-                            <img src="uploads/images/cart-product.png" alt="" />
+                            <img
+                              src="/assets/uploads/images/cart-product.png"
+                              alt=""
+                            />
                           </div>
                           <div className="desc">
                             <div className="item-title">
@@ -228,7 +238,10 @@ export const Header: React.FC<HeaderProps> = props => {
                         </div>
                         <div className="d-flex align-items-center item">
                           <div className="image d-flex align-items-center justify-content-center">
-                            <img src="uploads/images/cart-product.png" alt="" />
+                            <img
+                              src="/assets/uploads/images/cart-product.png"
+                              alt=""
+                            />
                           </div>
                           <div className="desc">
                             <div className="item-title">
@@ -256,21 +269,8 @@ export const Header: React.FC<HeaderProps> = props => {
           </div>
           <div className="container d-none d-lg-block">
             <div className="header-menu d-flex justify-content-between">
-              {[
-                "სუნამოები",
-                "კანის მოვლა",
-                "თმის მოვლა",
-                "მაკიაჟი",
-                "ფრჩხილის მოვლა",
-                "პარაფარმაცია",
-                "ფასდაკლება",
-                "სიახლე",
-                "ბრენდები",
-                "სასაჩუქრე ბარათი",
-                "ნაკრებები",
-                "ბლოგი"
-              ].map(item => (
-                <HeaderMenuItem title={item} />
+              {products.map(item => (
+                <HeaderMenuItem title={item.title} />
               ))}
             </div>
           </div>
@@ -406,7 +406,10 @@ const HeaderMenuItem: React.FC<HeaderMenuItemProps> = ({ title }) => {
               <div className="title">დღის შეთავაზება</div>
               <a href="#!" className="d-flex align-items-center flex-column">
                 <div className="image">
-                  <img src="uploads/images/suggestion1.png" alt="suggestion" />
+                  <img
+                    src="/assets/uploads/images/suggestion1.png"
+                    alt="suggestion"
+                  />
                 </div>
                 <div className="prod-name">Calvin Klein All, 100ml</div>
                 <div className="price d-flex">
@@ -425,7 +428,10 @@ const HeaderMenuItem: React.FC<HeaderMenuItemProps> = ({ title }) => {
               <div className="title">ბლოგ ბოსტი</div>
               <a href="#!" className="d-flex align-items-center flex-column">
                 <div className="image">
-                  <img src="uploads/images/suggestion2.png" alt="suggestion" />
+                  <img
+                    src="/assets/uploads/images/suggestion2.png"
+                    alt="suggestion"
+                  />
                 </div>
                 <div className="prod-name">სუნამოს შერჩევის ხელოვნება</div>
               </a>

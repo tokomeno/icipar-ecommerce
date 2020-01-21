@@ -1,7 +1,8 @@
 import React from "react";
-import { SearchNav } from "./Header/searchNav";
-import { BurgerNav } from "./Header/buergerNav";
-import { Header } from "./Header/header";
+import { SearchNav } from "./header/searchNav";
+import { BurgerNav } from "./header/buergerNav";
+import { Header } from "./header/header";
+import { Footer } from "./footer/footer";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -13,7 +14,8 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       <SearchNav />
       <BurgerNav />
       <Header />
-      {children}
+      <main className="site__content">{children}</main>
+      <Footer />
     </React.Fragment>
   );
 };

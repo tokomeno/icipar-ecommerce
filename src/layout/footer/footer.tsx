@@ -75,7 +75,7 @@ export const Footer: React.FC<FooterProps> = props => {
                 <div className="col-md-3 d-none d-md-block">
                   <div className="title">პროდუქცია</div>
                   {productCategories.map(c => (
-                    <a href="#!" className="footer-link">
+                    <a key={c.id} href="#!" className="footer-link">
                       {c.title}
                     </a>
                   ))}

@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import { productCategories } from "../../data/categories";
+import { Link } from "react-router-dom";
 
 interface HeaderProps {}
 
@@ -35,9 +36,9 @@ export const Header: React.FC<HeaderProps> = props => {
                       </a>
                     </li>
                     <li>
-                      <a href="#!" className="sup-hdr_link">
+                      <Link to="/about-us" className="sup-hdr_link">
                         ჩვენს შესახებ
-                      </a>
+                      </Link>
                     </li>
                     <li>
                       <a href="#!" className="sup-hdr_link">
@@ -270,7 +271,7 @@ export const Header: React.FC<HeaderProps> = props => {
           <div className="container d-none d-lg-block">
             <div className="header-menu d-flex justify-content-between">
               {productCategories.map(item => (
-                <HeaderMenuItem title={item.title} />
+                <HeaderMenuItem key={item.id} title={item.title} />
               ))}
             </div>
           </div>

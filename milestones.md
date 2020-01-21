@@ -1,6 +1,6 @@
 # MARKDOWN
 
-## Defining the Project
+## First Phase
 
 - [ ] Project Setup
 - [ ] Website Layout

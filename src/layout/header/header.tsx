@@ -30,10 +30,10 @@ export const Header: React.FC<HeaderProps> = props => {
                       </a>
                     </li>
                     <li className="store">
-                      <a href="#!" className="sup-hdr_link">
+                      <Link to="/shops" className="sup-hdr_link">
                         <img src="/assets/images/marker.svg" alt="map marker" />
                         მაღაზიები
-                      </a>
+                      </Link>
                     </li>
                     <li>
                       <Link to="/about-us" className="sup-hdr_link">
@@ -41,19 +41,19 @@ export const Header: React.FC<HeaderProps> = props => {
                       </Link>
                     </li>
                     <li>
-                      <a href="#!" className="sup-hdr_link">
+                      <Link to="/contact" className="sup-hdr_link">
                         კონტაქტი
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a href="#!" className="sup-hdr_link">
+                      <Link to="/how-it-works" className="sup-hdr_link">
                         როგორ მუშაობს?
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a href="#!" className="sup-hdr_link">
+                      <Link to="/faq" className="sup-hdr_link">
                         FAQ
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                   <div className="burger-btn d-lg-none d-block">

@@ -1,5 +1,6 @@
 import React, { ReactElement, useEffect } from "react";
 import { Layout } from "../../layout";
+import { PageSideMenu } from "../../components/pageSideMenu";
 
 interface AboutUsPageProps {}
 
@@ -8,25 +9,7 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = props => {
     <Layout>
       <div className="container">
         <div className="about row">
-          <div className="col-md-3 d-none d-lg-block">
-            <div className="aboutmenu">
-              <a href="#!" className="aboutmenu-item active">
-                ჩვენს შესახებ
-              </a>
-              <a href="#!" className="aboutmenu-item">
-                როგორ მუშაობს
-              </a>
-              <a href="#!" className="aboutmenu-item">
-                მიტანის პირობები
-              </a>
-              <a href="#!" className="aboutmenu-item">
-                კონტაქტი
-              </a>
-              <a href="#!" className="aboutmenu-item">
-                FAQ
-              </a>
-            </div>
-          </div>
+          <PageSideMenu />
           <div className="col-lg-9">
             <div className="right">
               <div className="top">

@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { products } from "../../data/categories";
+import { productCategories } from "../../data/categories";
 
 interface HeaderProps {}
 
@@ -269,7 +269,7 @@ export const Header: React.FC<HeaderProps> = props => {
           </div>
           <div className="container d-none d-lg-block">
             <div className="header-menu d-flex justify-content-between">
-              {products.map(item => (
+              {productCategories.map(item => (
                 <HeaderMenuItem title={item.title} />
               ))}
             </div>

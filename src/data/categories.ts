@@ -1,8 +1,8 @@
-interface IProduct {
+export interface IProductCetegory {
   title: string;
 }
 
-export const products: IProduct[] = [
+export const productCategories: IProductCetegory[] = [
   { title: "სუნამოები" },
   { title: "კანის მოვლა" },
   { title: "თმის მოვლა" },

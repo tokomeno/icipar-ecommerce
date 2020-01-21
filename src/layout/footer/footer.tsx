@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { products } from "../../data/categories";
+import { productCategories } from "../../data/categories";
 
 interface FooterProps {}
 
@@ -74,7 +74,7 @@ export const Footer: React.FC<FooterProps> = props => {
               <div className="row justify-content-center">
                 <div className="col-md-3 d-none d-md-block">
                   <div className="title">პროდუქცია</div>
-                  {products.map(c => (
+                  {productCategories.map(c => (
                     <a href="#!" className="footer-link">
                       {c.title}
                     </a>

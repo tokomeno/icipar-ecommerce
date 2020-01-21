@@ -28,5 +28,19 @@ export const dummyProductData: IProduct[] = [
     price: 150,
     qty: 11,
     image: "/assets/uploads/images/slider3.png"
+  },
+  {
+    id: 2,
+    title: "Super Bower, 200ml",
+    price: 150,
+    qty: 11,
+    image: "/assets/uploads/images/slider3.png"
+  },
+  {
+    id: 2,
+    title: "Bruno Banna, 100ml",
+    price: 89,
+    qty: 12,
+    image: "/assets/uploads/images/slider2.png"
   }
 ];

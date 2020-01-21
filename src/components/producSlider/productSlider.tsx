@@ -1,16 +1,17 @@
-import React, { ReactElement, useEffect } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import { Layout } from "../../layout";
 import { IProductCetegory } from "../../data/categories";
 import { ProductSliderItem } from "./productSliderItem";
 import { IProduct } from "../../data/product";
 import classNames from "classnames";
+import Swiper from "react-id-swiper";
 
 interface ProductSliderProps {
   products: IProduct[];
   title: string;
   showMoreNumber: number;
   menuCetegories: IProductCetegory[];
-  initSlider: () => void;
+  initSlider?: () => void;
   classes: {
     sectionClasses?: string[];
   };
@@ -24,9 +25,46 @@ export const ProductSlider: React.FC<ProductSliderProps> = ({
   initSlider,
   classes
 }) => {
-  useEffect(() => {
-    initSlider();
-  }, [products, initSlider]);
+  const [currentSliderIndex, setCurrentSliderIndex] = useState(0);
+  const sliderNav = (direction: "forward" | "backward") => {
+    if (direction === "forward" && currentSliderIndex < products.length)
+      setCurrentSliderIndex(currentSliderIndex + 1);
+    else {
+      setCurrentSliderIndex(0);
+    }
+    if (direction === "backward" && currentSliderIndex !== 0)
+      setCurrentSliderIndex(currentSliderIndex - 1);
+  };
+  const params = {
+    slidesPerView: 5,
+    spaceBetween: 60,
+    renderPrevButton: () => null,
+    renderNextButton: () => null,
+    breakpoints: {
+      1799: {
+        spaceBetween: 30
+      },
+      1199: {
+        slidesPerView: 4,
+        spaceBetween: 40
+      },
+      991: {
+        slidesPerView: 3,
+        spaceBetween: 50
+      },
+      767: {
+        slidesPerView: 2
+      },
+      575: {
+        slidesPerView: 1.5
+      },
+      400: {
+        slidesPerView: 1.5,
+        spaceBetween: 20
+      }
+    }
+  };
+  console.log(currentSliderIndex.toString());
   return (
     <section
       className={classNames("slider-section", classes.sectionClasses)}
@@ -50,19 +88,27 @@ export const ProductSlider: React.FC<ProductSliderProps> = ({
       </div>
       <div className="slider news-slide">
         <div className="container">
-          <div className="swiper-container newsslider">
-            <div className="swiper-wrapper">
-              {products.map(product => (
-                <ProductSliderItem product={product} />
-              ))}
-            </div>
-          </div>
+          {/* <div className="swiper-container newsslider"> */}
+          {/* <div className="swiper-wrapper"> */}
+          <Swiper activeSlideKey={currentSliderIndex.toString()} {...params}>
+            {products.map((product, index) => (
+              <ProductSliderItem key={index} product={product} />
+            ))}
+          </Swiper>
+          {/* </div> */}
+          {/* </div> */}
         </div>
         {/* Add Arrows */}
-        <div className="swiper-button-next d-flex align-items-center justify-content-center">
+        <div
+          onClick={() => sliderNav("forward")}
+          className="swiper-button-next d-flex align-items-center justify-content-center"
+        >
           <i className="fas fa-angle-right" />
         </div>
-        <div className="swiper-button-prev d-flex align-items-center justify-content-center">
+        <div
+          onClick={() => sliderNav("backward")}
+          className="swiper-button-prev d-flex align-items-center justify-content-center"
+        >
           <i className="fas fa-angle-left" />
         </div>
       </div>

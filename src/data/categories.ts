@@ -9,10 +9,10 @@ export const productCategories: IProductCetegory[] = [
   { title: "მაკიაჟი" },
   { title: "ფრჩხილის მოვლა" },
   { title: "პარაფარმაცია" },
-  { title: "ფასდაკლება" },
-  { title: "სიახლე" },
-  { title: "ბრენდები" },
-  { title: "სასაჩუქრე ბარათი" },
-  { title: "ნაკრებები" },
-  { title: "ბლოგი" }
+  { title: "ფასდაკლება" }
+  // { title: "სიახლე" },
+  // { title: "ბრენდები" },
+  // { title: "სასაჩუქრე ბარათი" },
+  // { title: "ნაკრებები" },
+  // { title: "ბლოგი" }
 ];

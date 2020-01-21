@@ -11,9 +11,9 @@ interface LayoutProps {
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <React.Fragment>
-      <SearchNav />
+      {/* <SearchNav />
       <BurgerNav />
-      <Header />
+      <Header /> */}
       <main className="site__content">{children}</main>
       <Footer />
     </React.Fragment>

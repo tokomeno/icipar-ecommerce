@@ -5,7 +5,7 @@
 - [ ] Project Setup
 - [ ] Website Layout
 - [ ] Pages
-      &lt;&gt; - [ ] HomePage
-      &lt;&gt; - [ ] Product Page
+- [ ] HomePage
+- [ ] Product Page
 - [ ] ავტორიზაცია/რეგისტაცია
 - [ ] Render Product

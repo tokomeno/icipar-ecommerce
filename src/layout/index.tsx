@@ -4,6 +4,8 @@ import { BurgerNav } from "./header/buergerNav";
 import { Header } from "./header/header";
 import { Footer } from "./footer/footer";
 import { MapComponent } from "./map/map";
+import { RegisterLogin } from "../components/register-login";
+import { ActiveModalProvider } from "../contexts/modalContex";
 interface LayoutProps {
   children: React.ReactNode;
 }
@@ -11,16 +13,19 @@ interface LayoutProps {
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <React.Fragment>
-      <SearchNav />
-      <BurgerNav />
-      <Header />
-      <main className="site__content">
-        <div className="content">
-          {children}
-          <MapComponent />
-        </div>
-      </main>
-      <Footer />
+      <ActiveModalProvider>
+        <SearchNav />
+        <BurgerNav />
+        <Header />
+        <main className="site__content">
+          <div className="content">
+            {children}
+            <MapComponent />
+          </div>
+        </main>
+        <Footer />
+        <RegisterLogin />
+      </ActiveModalProvider>
     </React.Fragment>
   );
 };

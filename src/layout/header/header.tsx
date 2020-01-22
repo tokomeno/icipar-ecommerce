@@ -1,10 +1,17 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useContext } from "react";
 import { productCategories } from "../../data/categories";
 import { Link } from "react-router-dom";
+import {
+  IActiveModalContext,
+  ActiveModalContext
+} from "../../contexts/modalContex";
 
 interface HeaderProps {}
 
 export const Header: React.FC<HeaderProps> = props => {
+  const { setActiveModal } = useContext<IActiveModalContext>(
+    ActiveModalContext
+  );
   return (
     <React.Fragment>
       <div className="bg__site"></div>
@@ -64,6 +71,7 @@ export const Header: React.FC<HeaderProps> = props => {
                 </div>
                 <div className="col-lg-3 col-md-4 text-right">
                   <a
+                    onClick={() => setActiveModal("login-register")}
                     href="#!"
                     className="sup-hdr_link"
                     data-target=".login"

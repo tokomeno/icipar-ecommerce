@@ -4,6 +4,7 @@ export interface IProduct {
   price: number;
   qty: number;
   image: string;
+  rate: number;
 }
 
 export const dummyProductData: IProduct[] = [
@@ -11,6 +12,7 @@ export const dummyProductData: IProduct[] = [
     id: 1,
     title: "Calvin Klein All, 100ml",
     price: 123,
+    rate: 13,
     qty: 12,
     image: "/assets/uploads/images/slider1.png"
   },
@@ -19,6 +21,7 @@ export const dummyProductData: IProduct[] = [
     id: 2,
     title: "Bruno Banna, 100ml",
     price: 89,
+    rate: 13,
     qty: 12,
     image: "/assets/uploads/images/slider2.png"
   },
@@ -26,6 +29,7 @@ export const dummyProductData: IProduct[] = [
     id: 2,
     title: "Super Bower, 200ml",
     price: 150,
+    rate: 13,
     qty: 11,
     image: "/assets/uploads/images/slider3.png"
   },
@@ -33,14 +37,32 @@ export const dummyProductData: IProduct[] = [
     id: 2,
     title: "Super Bower, 200ml",
     price: 150,
+    rate: 13,
     qty: 11,
-    image: "/assets/uploads/images/slider3.png"
+    image: "/assets/uploads/images/slider4.png"
   },
   {
     id: 2,
     title: "Bruno Banna, 100ml",
     price: 89,
+    rate: 13,
     qty: 12,
-    image: "/assets/uploads/images/slider2.png"
+    image: "/assets/uploads/images/slider5.png"
+  },
+  {
+    id: 2,
+    title: "Bruno Banna, 100ml",
+    price: 89,
+    rate: 13,
+    qty: 12,
+    image: "/assets/uploads/images/slider6.png"
+  },
+  {
+    id: 2,
+    title: "Bruno Banna, 100ml",
+    price: 89,
+    rate: 13,
+    qty: 12,
+    image: "/assets/uploads/images/slider7.png"
   }
 ];

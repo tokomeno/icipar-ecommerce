@@ -15,7 +15,7 @@ export const ActiveModalProvider: React.FC<{}> = ({ children }) => {
   const [state, setState] = useState<{
     activeModal: IActiveModalContext["activeModal"];
   }>({
-    activeModal: "login-register"
+    activeModal: null
   });
 
   const hideModal = () => setState({ ...state, activeModal: null });

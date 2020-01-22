@@ -74,13 +74,13 @@ function grid2(){
     });
 }
 
-function rating(){
-    $(".rating .fa-star").click(function(){
-        $(this).addClass("checked"),
-        $(this).prevAll(".fa-star").addClass("checked"),
-        $(this).nextAll(".fa-star").removeClass("checked")
-    })
-}
+// function rating(){
+//     $(".rating .fa-star").click(function(){
+//         $(this).addClass("checked"),
+//         $(this).prevAll(".fa-star").addClass("checked"),
+//         $(this).nextAll(".fa-star").removeClass("checked")
+//     })
+// }
 
 function mapBlock(){
     $('.map-btn').click(function (){
@@ -341,18 +341,18 @@ function commentSlider() {
     });
 }
 
-function option(){
-    $('.heart').click(function(){
-        $(this).toggleClass('active');
-    });
+// function option(){
+//     $('.heart').click(function(){
+//         $(this).toggleClass('active');
+//     });
 
-    $('.cart').click(function(){
-        $(this).addClass('active');
-        var count = $(this).find('.num').html();
-        count++;
-        $(this).find('.num').html(count);
-    })
-}
+//     $('.cart').click(function(){
+//         $(this).addClass('active');
+//         var count = $(this).find('.num').html();
+//         count++;
+//         $(this).find('.num').html(count);
+//     })
+// }
 
 function navigation(){
     $('.xs-hdr_btn.btn-search').click(function(){

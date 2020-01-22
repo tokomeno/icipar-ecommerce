@@ -3,9 +3,11 @@ import { Layout } from "../../layout";
 import { MainSlider } from "./mainSlider";
 import { HotSlider } from "./hotSlider";
 
-import { ProductSlider } from "../../components/producSlider/productSlider";
+import { ProductSlider } from "../../components/sliders/producSlider/productSlider";
 import { productCategories } from "../../data/categories";
 import { dummyProductData } from "../../data/product";
+import { BrandSlider } from "../../components/sliders/brandSlider/brandSlider";
+import { brandsSlider } from "../../data/brands";
 
 interface HomePageProps {}
 
@@ -15,11 +17,8 @@ export const HomePage: React.FC<HomePageProps> = props => {
     windowM.grid1();
     windowM.grid2();
     windowM.menuSort();
-    windowM.rating();
     windowM.blogSlider();
-    windowM.brandsSlider();
     windowM.commentSlider();
-    windowM.option();
     windowM.searchDrop();
   }, []);
   return (
@@ -419,49 +418,8 @@ export const HomePage: React.FC<HomePageProps> = props => {
           </div>
         </div>
       </section>
-      <section className="brands">
-        <div className="container">
-          <h3 className="brands-title text-center section-title">
-            ჩვენი ბრენდები
-          </h3>
-          <div className="slider">
-            <div className="swiper-container brands-slider">
-              <div className="swiper-wrapper">
-                <a href="#!" className="swiper-slide">
-                  <img src="/assets/uploads/images/brand1.png" alt="chanel" />
-                </a>
-                <a href="#!" className="swiper-slide">
-                  <img src="/assets/uploads/images/brand2.png" alt="versace" />
-                </a>
-                <a href="#!" className="swiper-slide">
-                  <img src="/assets/uploads/images/brand3.png" alt="hermes" />
-                </a>
-                <a href="#!" className="swiper-slide">
-                  <img src="/assets/uploads/images/brand4.png" alt="moschino" />
-                </a>
-                <a href="#!" className="swiper-slide">
-                  <img src="/assets/uploads/images/brand5.png" alt="burberry" />
-                </a>
-                <a href="#!" className="swiper-slide">
-                  <img
-                    src="/assets/uploads/images/brand6.png"
-                    alt="calvin klein"
-                  />
-                </a>
-                <a href="#!" className="swiper-slide">
-                  <img src="/assets/uploads/images/brand1.png" alt="chanel" />
-                </a>
-              </div>
-            </div>
-            <div className="swiper-button-next">
-              <img src="/assets/images/next.svg" alt="next" />
-            </div>
-            <div className="swiper-button-prev">
-              <img src="/assets/images/next.svg" alt="prev" />
-            </div>
-          </div>
-        </div>
-      </section>
+      <BrandSlider brands={brandsSlider} />
+
       <div className="comments">
         <div className="container">
           <div className="swiper-container comment-slider">

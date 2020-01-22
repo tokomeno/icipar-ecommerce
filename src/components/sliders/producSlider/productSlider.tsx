@@ -1,10 +1,10 @@
 import React, { ReactElement, useEffect, useState } from "react";
-import { Layout } from "../../layout";
-import { IProductCetegory } from "../../data/categories";
-import { ProductSliderItem } from "./productSliderItem";
-import { IProduct } from "../../data/product";
 import classNames from "classnames";
 import Swiper from "react-id-swiper";
+import { IProduct } from "../../../data/product";
+import { IProductCetegory } from "../../../data/categories";
+import { useSliderNav } from "../../../hooks/common/useSliderNav";
+import { Product } from "../../product/product";
 
 interface ProductSliderProps {
   products: IProduct[];
@@ -17,53 +17,45 @@ interface ProductSliderProps {
   };
 }
 
+const params = {
+  slidesPerView: 5,
+  spaceBetween: 60,
+  renderPrevButton: () => null,
+  renderNextButton: () => null,
+  breakpoints: {
+    1799: {
+      spaceBetween: 30
+    },
+    1199: {
+      slidesPerView: 4,
+      spaceBetween: 40
+    },
+    991: {
+      slidesPerView: 3,
+      spaceBetween: 50
+    },
+    767: {
+      slidesPerView: 2
+    },
+    575: {
+      slidesPerView: 1.5
+    },
+    400: {
+      slidesPerView: 1.5,
+      spaceBetween: 20
+    }
+  }
+};
+
 export const ProductSlider: React.FC<ProductSliderProps> = ({
   title,
   showMoreNumber,
   menuCetegories,
   products,
-  initSlider,
   classes
 }) => {
-  const [currentSliderIndex, setCurrentSliderIndex] = useState(0);
-  const sliderNav = (direction: "forward" | "backward") => {
-    if (direction === "forward" && currentSliderIndex < products.length)
-      setCurrentSliderIndex(currentSliderIndex + 1);
-    else {
-      setCurrentSliderIndex(0);
-    }
-    if (direction === "backward" && currentSliderIndex !== 0)
-      setCurrentSliderIndex(currentSliderIndex - 1);
-  };
-  const params = {
-    slidesPerView: 5,
-    spaceBetween: 60,
-    renderPrevButton: () => null,
-    renderNextButton: () => null,
-    breakpoints: {
-      1799: {
-        spaceBetween: 30
-      },
-      1199: {
-        slidesPerView: 4,
-        spaceBetween: 40
-      },
-      991: {
-        slidesPerView: 3,
-        spaceBetween: 50
-      },
-      767: {
-        slidesPerView: 2
-      },
-      575: {
-        slidesPerView: 1.5
-      },
-      400: {
-        slidesPerView: 1.5,
-        spaceBetween: 20
-      }
-    }
-  };
+  const { sliderNav, currentSliderIndex } = useSliderNav(products.length, 0);
+
   console.log(currentSliderIndex.toString());
   return (
     <section
@@ -92,7 +84,11 @@ export const ProductSlider: React.FC<ProductSliderProps> = ({
           {/* <div className="swiper-wrapper"> */}
           <Swiper activeSlideKey={currentSliderIndex.toString()} {...params}>
             {products.map((product, index) => (
-              <ProductSliderItem key={index} product={product} />
+              <Product
+                wrapperClass={"swiper-slide"}
+                key={index}
+                product={product}
+              />
             ))}
           </Swiper>
           {/* </div> */}

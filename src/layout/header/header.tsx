@@ -90,9 +90,9 @@ export const Header: React.FC<HeaderProps> = props => {
           <div className="sub-hdr d-none d-md-block">
             <div className="container">
               <div className="row align-items-center">
-                <a href="index.html" className="logo col-md-3">
+                <Link to="/" className="logo col-md-3">
                   <img src="/assets/images/logo.svg" alt="logo" />
-                </a>
+                </Link>
                 <div className="col-md-7">
                   <form className="search d-flex justify-content-between">
                     <div className="search-dropdown dropdown d-flex">
@@ -291,9 +291,9 @@ export const Header: React.FC<HeaderProps> = props => {
                   <span />
                   <span />
                 </div>
-                <a href="index.html" className="logo-xs">
+                <Link to="/" className="logo-xs">
                   <img src="/assets/images/logo.svg" alt="logo" />
-                </a>
+                </Link>
               </div>
               <div className="d-flex">
                 <div className="xs-hdr_btn btn-search">

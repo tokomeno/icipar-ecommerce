@@ -22,13 +22,13 @@ export const RegisterLogin: React.FC<RegisterLoginProps> = ({}) => {
       onHide={hideModal}
     >
       <Modal.Body>
-        <ModalContent />
+        <ModalContent hideModal={hideModal} />
       </Modal.Body>
     </Modal>
   );
 };
 
-const ModalContent: React.FC<{}> = () => {
+const ModalContent: React.FC<{ hideModal: () => void }> = ({ hideModal }) => {
   const [activeForm, setActiveForm] = useState<"login" | "register">("login");
   const showLoginForm = () => setActiveForm("login");
   const showRegisterForm = () => setActiveForm("register");
@@ -37,7 +37,7 @@ const ModalContent: React.FC<{}> = () => {
       <button
         type="button"
         className="close"
-        data-dismiss="modal"
+        onClick={hideModal}
         aria-label="Close"
       >
         <img

@@ -3,7 +3,7 @@ import { SearchNav } from "./header/searchNav";
 import { BurgerNav } from "./header/buergerNav";
 import { Header } from "./header/header";
 import { Footer } from "./footer/footer";
-import { MapComponent } from "./map";
+import { MapComponent } from "./map/map";
 interface LayoutProps {
   children: React.ReactNode;
 }

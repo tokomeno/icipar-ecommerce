@@ -9,6 +9,7 @@ import { dummyProductData } from "../../data/product";
 import { BrandSlider } from "../../components/sliders/brandSlider/brandSlider";
 import { brandsSlider } from "../../data/brands";
 import { BlogSlider } from "../../components/sliders/blog-slider/blog-slider";
+import { CommentSlider } from "../../components/comment-slider/comment-slider";
 
 interface HomePageProps {}
 
@@ -18,7 +19,7 @@ export const HomePage: React.FC<HomePageProps> = props => {
     windowM.grid1();
     windowM.grid2();
     windowM.menuSort();
-    windowM.commentSlider();
+    // windowM.commentSlider();
     windowM.searchDrop();
   }, []);
   return (
@@ -220,75 +221,7 @@ export const HomePage: React.FC<HomePageProps> = props => {
       <BlogSlider />
       <BrandSlider brands={brandsSlider} />
 
-      <div className="comments">
-        <div className="container">
-          <div className="swiper-container comment-slider">
-            <div className="swiper-wrapper">
-              <div className="swiper-slide d-flex flex-column align-items-center justify-content-center">
-                <div className="rate">
-                  <span className="fa fa-star checked" />
-                  <span className="fa fa-star checked" />
-                  <span className="fa fa-star" />
-                  <span className="fa fa-star" />
-                  <span className="fa fa-star" />
-                </div>
-                <div className="comment">საუკეთესო სერვისი თბილისში</div>
-                <div className="user">ანა თოიძე</div>
-              </div>
-              <div className="swiper-slide d-flex flex-column align-items-center justify-content-center">
-                <div className="rate">
-                  <span className="fa fa-star checked" />
-                  <span className="fa fa-star checked" />
-                  <span className="fa fa-star checked" />
-                  <span className="fa fa-star checked" />
-                  <span className="fa fa-star" />
-                </div>
-                <div className="comment">საუკეთესო სერვისი თბილისში</div>
-                <div className="user">ანა თოიძე</div>
-              </div>
-              <div className="swiper-slide d-flex flex-column align-items-center justify-content-center">
-                <div className="rate">
-                  <span className="fa fa-star checked" />
-                  <span className="fa fa-star checked" />
-                  <span className="fa fa-star checked" />
-                  <span className="fa fa-star" />
-                  <span className="fa fa-star" />
-                </div>
-                <div className="comment">საუკეთესო სერვისი თბილისში</div>
-                <div className="user">ანა თოიძე</div>
-              </div>
-              <div className="swiper-slide d-flex flex-column align-items-center justify-content-center">
-                <div className="rate">
-                  <span className="fa fa-star checked" />
-                  <span className="fa fa-star checked" />
-                  <span className="fa fa-star" />
-                  <span className="fa fa-star" />
-                  <span className="fa fa-star" />
-                </div>
-                <div className="comment">საუკეთესო სერვისი თბილისში</div>
-                <div className="user">ანა თოიძე</div>
-              </div>
-              <div className="swiper-slide d-flex flex-column align-items-center justify-content-center">
-                <div className="rate">
-                  <span className="fa fa-star checked" />
-                  <span className="fa fa-star checked" />
-                  <span className="fa fa-star" />
-                  <span className="fa fa-star" />
-                  <span className="fa fa-star" />
-                </div>
-                <div className="comment">საუკეთესო სერვისი თბილისში</div>
-                <div className="user">ანა თოიძე</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="swiper-button-next d-flex align-items-center justify-content-center">
-          <i className="fas fa-angle-right" />
-        </div>
-        <div className="swiper-button-prev d-flex align-items-center justify-content-center">
-          <i className="fas fa-angle-left" />
-        </div>
-      </div>
+      <CommentSlider />
 
       <div className="container" data-aos="fade-down">
         <div className="insta text-center">

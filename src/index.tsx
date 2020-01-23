@@ -1,14 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import * as serviceWorker from "./serviceWorker";
-import { createStore, applyMiddleware } from "redux";
-import { reducers } from "./redux";
-import thunk from "redux-thunk";
+
 import { Provider } from "react-redux";
 import { App } from "./App";
 import "swiper/swiper.scss";
-
-const store = createStore(reducers, applyMiddleware(thunk));
+import { store } from "./redux/store";
 
 ReactDOM.render(
   <Provider store={store}>

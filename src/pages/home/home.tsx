@@ -8,6 +8,7 @@ import { productCategories } from "../../data/categories";
 import { dummyProductData } from "../../data/product";
 import { BrandSlider } from "../../components/sliders/brandSlider/brandSlider";
 import { brandsSlider } from "../../data/brands";
+import { BlogSlider } from "../../components/blog-slider/blog-slider";
 
 interface HomePageProps {}
 
@@ -418,6 +419,7 @@ export const HomePage: React.FC<HomePageProps> = props => {
           </div>
         </div>
       </section>
+      <BlogSlider />
       <BrandSlider brands={brandsSlider} />
 
       <div className="comments">

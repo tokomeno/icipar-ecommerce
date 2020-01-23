@@ -80,8 +80,6 @@ export const ProductSlider: React.FC<ProductSliderProps> = ({
       </div>
       <div className="slider news-slide">
         <div className="container">
-          {/* <div className="swiper-container newsslider"> */}
-          {/* <div className="swiper-wrapper"> */}
           <Swiper activeSlideKey={currentSliderIndex.toString()} {...params}>
             {products.map((product, index) => (
               <Product
@@ -91,8 +89,6 @@ export const ProductSlider: React.FC<ProductSliderProps> = ({
               />
             ))}
           </Swiper>
-          {/* </div> */}
-          {/* </div> */}
         </div>
         {/* Add Arrows */}
         <div

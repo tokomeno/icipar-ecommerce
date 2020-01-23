@@ -2,7 +2,7 @@ import React from "react";
 
 interface ReveiwProps {}
 
-export const Reveiw: React.FC<ReveiwProps> = props => {
+export const Reviews: React.FC<ReveiwProps> = props => {
   return (
     <React.Fragment>
       <div className="line-sliders d-none d-sm-block" />

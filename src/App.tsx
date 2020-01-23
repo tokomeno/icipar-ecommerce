@@ -1,10 +1,10 @@
 import React from "react";
-import { Switch, Route, Router, BrowserRouter } from "react-router-dom";
+import { Switch, Route, BrowserRouter } from "react-router-dom";
 import { HomePage } from "./pages/home/home";
 import { TodoApp } from "./pages/Todo";
 import { AboutUsPage } from "./pages/about-us/aboutUsPage";
 import { ContactPage } from "./pages/contact/contact";
-import { HowItWorksPage } from "./pages/howItWorks/howItWorks";
+import { HowItWorksPage } from "./pages/how-it-works/how-it-works";
 import { ShopPage } from "./pages/shops/shopPage";
 import { FaqPage } from "./pages/faq/faqPage";
 import { AboutBrandPage } from "./pages/about-brand/about-brand-page";
@@ -16,6 +16,11 @@ import { GiftCardPage } from "./pages/gift-card/gift-card-page";
 import { ProfileCheckoutPage } from "./pages/profile/checkout-page/checkout-page";
 import { GiftCardProfilePage } from "./pages/profile/gift-cart/gift-card-profile";
 import { OrdersProfilePage } from "./pages/profile/orders/orders-profile";
+import { ProducShowPage } from "./pages/product-show/product-show-page";
+import { ScrollToTop } from "./scrollToTop";
+import { AddressProiflePage } from "./pages/profile/address/address-profile";
+import { WishlistProfilePage } from "./pages/profile/wishlist/wishlist-profile-page";
+import { ProfilePage } from "./pages/profile/ProfilePage";
 
 export const HistoryContext = React.createContext<History>(
   (null as any) as History
@@ -24,6 +29,7 @@ export const HistoryContext = React.createContext<History>(
 const App: React.FC<{}> = props => {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Switch>
         <Route path="/" exact component={HomePage} />
         {/* PAGES */}
@@ -36,11 +42,16 @@ const App: React.FC<{}> = props => {
         <Route path="/all-brands" exact component={AllBrandsPage} />
         <Route path="/catalog" exact component={CatalogPage} />
         <Route path="/gift-card" exact component={GiftCardPage} />
+        <Route path="/product/:id" exact component={ProducShowPage} />
 
         {/* PROFILE PAGES */}
+        <Route path="/profile" exact component={ProfilePage} />
         <Route path="/profile/coupons" exact component={CouponsPage} />
         <Route path="/profile/checkout" exact component={ProfileCheckoutPage} />
+        <Route path="/profile/cart" exact component={ProfileCheckoutPage} />
         <Route path="/profile/orders" exact component={OrdersProfilePage} />
+        <Route path="/profile/address" exact component={AddressProiflePage} />
+        <Route path="/profile/wishlist" exact component={WishlistProfilePage} />
         <Route
           path="/profile/gift-cards"
           exact

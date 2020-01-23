@@ -1,10 +1,10 @@
 import React from "react";
-import { BlogSliderItem } from "./blog-slider-item";
-import { dummyBlogData } from "../../data/blog";
-import { SwiperCustomNavBtn } from "../swiper/swiper-custom-nav-btn";
+import { useSliderNav } from "../../../hooks/common/useSliderNav";
+import { dummyBlogData } from "../../../data/blog";
+import { productCategories } from "../../../data/categories";
 import Swiper from "react-id-swiper";
-import { useSliderNav } from "../../hooks/common/useSliderNav";
-import { productCategories } from "../../data/categories";
+import { BlogSliderItem } from "./blog-slider-item";
+import { SwiperCustomNavBtn } from "../../swiper/swiper-custom-nav-btn";
 
 interface BlogSliderProps {}
 

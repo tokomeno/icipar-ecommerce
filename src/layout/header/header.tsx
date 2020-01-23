@@ -281,6 +281,17 @@ export const Header: React.FC<HeaderProps> = props => {
               {productCategories.map(item => (
                 <HeaderMenuItem key={item.id} title={item.title} />
               ))}
+              <div className="header-menu_item">
+                <Link to="/gift-card" className="link">
+                  სასაჩუქრე ბარათი
+                </Link>
+              </div>
+
+              <div className="header-menu_item">
+                <Link to="/all-brands" className="link">
+                  ბრენდები
+                </Link>
+              </div>
             </div>
           </div>
           <div className="container d-block d-md-none">

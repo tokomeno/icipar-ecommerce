@@ -1,5 +1,5 @@
 import React from "react";
-import { IBlog } from "../../data/blog";
+import { IBlog } from "../../../data/blog";
 import { Link } from "react-router-dom";
 
 interface BlogSliderItemProps {

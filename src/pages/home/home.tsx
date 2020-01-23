@@ -8,7 +8,7 @@ import { productCategories } from "../../data/categories";
 import { dummyProductData } from "../../data/product";
 import { BrandSlider } from "../../components/sliders/brandSlider/brandSlider";
 import { brandsSlider } from "../../data/brands";
-import { BlogSlider } from "../../components/blog-slider/blog-slider";
+import { BlogSlider } from "../../components/sliders/blog-slider/blog-slider";
 
 interface HomePageProps {}
 

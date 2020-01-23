@@ -4,6 +4,7 @@ import { IProduct } from "../../data/product";
 import { ProductRaiting } from "./product-raiting";
 import { ProductCartBtn } from "./product-cart-btn";
 import { ProductHeartBtn } from "./product-heart-btn";
+import { Link } from "react-router-dom";
 
 interface ProductProps {
   product: IProduct;
@@ -15,9 +16,9 @@ export const Product: React.FC<ProductProps> = ({ wrapperClass, product }) => {
     <React.Fragment>
       <div className={wrapperClass}>
         <div className="image">
-          <a href="#!" className="img">
+          <Link to={`/product/${product.id}`} className="img">
             <img src={product.image} alt="" />
-          </a>
+          </Link>
           <div className="option d-flex justify-content-between align-items-center">
             <ProductRaiting rateNum={product.rate} starRate={1} />
             <div className="d-flex">
@@ -26,9 +27,9 @@ export const Product: React.FC<ProductProps> = ({ wrapperClass, product }) => {
             </div>
           </div>
         </div>
-        <a href="#!" className="news_link">
+        <Link to={`/product/${product.id}`} className="news_link">
           {product.title}
-        </a>
+        </Link>
         <div className="price">
           {product.price}
           <sub>D</sub>

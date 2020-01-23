@@ -26,7 +26,7 @@ export const dummyProductData: IProduct[] = [
     image: "/assets/uploads/images/slider2.png"
   },
   {
-    id: 2,
+    id: 3,
     title: "Super Bower, 200ml",
     price: 150,
     rate: 13,
@@ -34,7 +34,7 @@ export const dummyProductData: IProduct[] = [
     image: "/assets/uploads/images/slider3.png"
   },
   {
-    id: 2,
+    id: 4,
     title: "Super Bower, 200ml",
     price: 150,
     rate: 13,
@@ -42,7 +42,7 @@ export const dummyProductData: IProduct[] = [
     image: "/assets/uploads/images/slider4.png"
   },
   {
-    id: 2,
+    id: 5,
     title: "Bruno Banna, 100ml",
     price: 89,
     rate: 13,
@@ -50,7 +50,7 @@ export const dummyProductData: IProduct[] = [
     image: "/assets/uploads/images/slider5.png"
   },
   {
-    id: 2,
+    id: 6,
     title: "Bruno Banna, 100ml",
     price: 89,
     rate: 13,
@@ -58,7 +58,7 @@ export const dummyProductData: IProduct[] = [
     image: "/assets/uploads/images/slider6.png"
   },
   {
-    id: 2,
+    id: 7,
     title: "Bruno Banna, 100ml",
     price: 89,
     rate: 13,

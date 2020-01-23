@@ -9,7 +9,7 @@ export const BundleProduct: React.FC<BundleProductProps> = props => {
       <div className="bundle-prod_cont d-flex align-items-center justify-content-md-center justify-content-start">
         <div className="bundle-item d-flex flex-column align-items-center">
           <div className="image d-flex align-items-center justify-content-center">
-            <img src="uploads/images/bundle1.png" alt="bundle" />
+            <img src="/assets/uploads/images/bundle1.png" alt="bundle" />
           </div>
           <div className="name">Calvin Klein All, 100ml</div>
           <div className="bundle-price d-flex">
@@ -24,11 +24,11 @@ export const BundleProduct: React.FC<BundleProductProps> = props => {
           </div>
         </div>
         <div className="plus">
-          <img src="images/plus.png" alt="" />
+          <img src="/assets/images/plus.png" alt="" />
         </div>
         <div className="bundle-item d-flex flex-column align-items-center">
           <div className="image d-flex align-items-center justify-content-center">
-            <img src="uploads/images/bundle2.png" alt="bundle" />
+            <img src="/assets/uploads/images/bundle2.png" alt="bundle" />
           </div>
           <div className="name">Calvin Klein All, 100ml</div>
           <div className="bundle-price d-flex">
@@ -43,11 +43,11 @@ export const BundleProduct: React.FC<BundleProductProps> = props => {
           </div>
         </div>
         <div className="plus">
-          <img src="images/plus.png" alt="" />
+          <img src="/assets/images/plus.png" alt="" />
         </div>
         <div className="bundle-item d-flex flex-column align-items-center">
           <div className="image d-flex align-items-center justify-content-center">
-            <img src="uploads/images/bundle3.png" alt="bundle" />
+            <img src="/assets/uploads/images/bundle3.png" alt="bundle" />
           </div>
           <div className="name">Calvin</div>
           <div className="bundle-price d-flex">
@@ -62,7 +62,7 @@ export const BundleProduct: React.FC<BundleProductProps> = props => {
           </div>
         </div>
         <div className="plus">
-          <img src="images/equal.png" alt="" />
+          <img src="/assets/images/equal.png" alt="" />
         </div>
         <div className="equal-block">
           <div className="sum">
@@ -78,8 +78,12 @@ export const BundleProduct: React.FC<BundleProductProps> = props => {
           </div>
           <a href="#!" className="bag-btn d-flex">
             კალათა
-            <img src="images/arrow-right.svg" alt="arrow" />
-            <img src="images/arrow-right_red.svg" alt="arrow" className="red" />
+            <img src="/assets/images/arrow-right.svg" alt="arrow" />
+            <img
+              src="/assets/images/arrow-right_red.svg"
+              alt="arrow"
+              className="red"
+            />
           </a>
         </div>
       </div>

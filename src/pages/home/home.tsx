@@ -289,6 +289,7 @@ export const HomePage: React.FC<HomePageProps> = props => {
           <i className="fas fa-angle-left" />
         </div>
       </div>
+
       <div className="container" data-aos="fade-down">
         <div className="insta text-center">
           <img src="/assets/images/insta.svg" alt="instagram" />

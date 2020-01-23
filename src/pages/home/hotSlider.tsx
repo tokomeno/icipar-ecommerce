@@ -1,5 +1,6 @@
 import React, { ReactElement, useEffect } from "react";
 import { Layout } from "../../layout";
+import { productCategories } from "../../data/categories";
 
 interface HotSliderProps {}
 
@@ -21,21 +22,11 @@ export const HotSlider: React.FC<HotSliderProps> = props => {
         </div>
         <div className="line" />
         <div className="menu d-flex justify-content-center align-items-center">
-          <a href="#!" className="menu_link active">
-            ყველა
-          </a>
-          <a href="#!" className="menu_link">
-            სუნამოები
-          </a>
-          <a href="#!" className="menu_link">
-            კანის მოვლა
-          </a>
-          <a href="#!" className="menu_link">
-            მაკიაჟი
-          </a>
-          <a href="#!" className="menu_link">
-            პარაფარმაცია
-          </a>
+          {productCategories.map(i => (
+            <a href="#!" className="menu_link">
+              {i.title}
+            </a>
+          ))}
         </div>
       </div>
       <div className="slider hot-slide">

@@ -5,6 +5,7 @@ import { IProduct } from "../../../data/product";
 import { IProductCetegory } from "../../../data/categories";
 import { useSliderNav } from "../../../hooks/common/useSliderNav";
 import { Product } from "../../product/product";
+import { SwiperCustomNavBtn } from "../../swiper/swiper-custom-nav-btn";
 
 interface ProductSliderProps {
   products: IProduct[];
@@ -91,18 +92,7 @@ export const ProductSlider: React.FC<ProductSliderProps> = ({
           </Swiper>
         </div>
         {/* Add Arrows */}
-        <div
-          onClick={() => sliderNav("forward")}
-          className="swiper-button-next d-flex align-items-center justify-content-center"
-        >
-          <i className="fas fa-angle-right" />
-        </div>
-        <div
-          onClick={() => sliderNav("backward")}
-          className="swiper-button-prev d-flex align-items-center justify-content-center"
-        >
-          <i className="fas fa-angle-left" />
-        </div>
+        <SwiperCustomNavBtn sliderNav={sliderNav} />
       </div>
     </section>
   );

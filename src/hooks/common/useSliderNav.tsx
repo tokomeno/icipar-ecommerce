@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+export type ISliderNav = (direction: "forward" | "backward") => void;
+
 export const useSliderNav = (
   length: number,
   defaultCurrentIndex: number = 0
@@ -8,7 +10,7 @@ export const useSliderNav = (
     defaultCurrentIndex
   );
 
-  const sliderNav = (direction: "forward" | "backward") => {
+  const sliderNav: ISliderNav = (direction: "forward" | "backward") => {
     if (direction === "forward" && currentSliderIndex < length)
       setCurrentSliderIndex(currentSliderIndex + 1);
     else {

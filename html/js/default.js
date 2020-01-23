@@ -258,31 +258,31 @@ function recommendedSlider() {
     });
 }
 
-function blogSlider() {
-    var swiper = new Swiper('.blog-container', {
-        slidesPerView: 4,
-        spaceBetween: 20,
-        navigation: {
-            nextEl: '.blogSlider .swiper-button-next',
-            prevEl: '.blogSlider .swiper-button-prev',
-        },
-        breakpoints: {
-            1499: {
-                slidesPerView: 4,
-                spaceBetween: 10,
-            },
-            991: {
-                slidesPerView: 3,
-            },
-            767: {
-                slidesPerView: 2,
-            },
-            480: {
-                slidesPerView: 1,
-            },
-        }
-    });
-}
+// function blogSlider() {
+//     var swiper = new Swiper('.blog-container', {
+//         slidesPerView: 4,
+//         spaceBetween: 20,
+//         navigation: {
+//             nextEl: '.blogSlider .swiper-button-next',
+//             prevEl: '.blogSlider .swiper-button-prev',
+//         },
+//         breakpoints: {
+//             1499: {
+//                 slidesPerView: 4,
+//                 spaceBetween: 10,
+//             },
+//             991: {
+//                 slidesPerView: 3,
+//             },
+//             767: {
+//                 slidesPerView: 2,
+//             },
+//             480: {
+//                 slidesPerView: 1,
+//             },
+//         }
+//     });
+// }
 
 function brandsSlider() {
     var swiper = new Swiper('.brands-slider', {

@@ -15,6 +15,8 @@ i18n
     lng: "ka",
     fallbackLng: "en",
     debug: true,
+    nonExplicitWhitelist: true,
+    load: "languageOnly",
     whitelist: ["ka", "en"],
     interpolation: {
       escapeValue: false // not needed for react as it escapes by default

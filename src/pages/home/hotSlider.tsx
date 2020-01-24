@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import { productCategories } from "../../data/categories";
+import { useTranslation } from "react-i18next";
 
 interface HotSliderProps {}
 
 export const HotSlider: React.FC<HotSliderProps> = props => {
+  const { t } = useTranslation();
   useEffect(() => {
     let windowM: any = window;
     windowM.hotSlider();
@@ -13,7 +15,7 @@ export const HotSlider: React.FC<HotSliderProps> = props => {
       <div className="slider-section-top">
         <div className=" d-flex align-items-center justify-content-sm-center justify-content-between xs-titlesblock">
           <h3 className="slider-section-top_title section-title">
-            ცხელი შეთავაზებები
+            {t("hotOffer")}
           </h3>
           <a href="#!" className="slider-section-top_link">
             <span>/</span>მეტის ნახვა (250)

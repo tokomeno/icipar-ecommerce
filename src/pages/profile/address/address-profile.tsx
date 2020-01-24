@@ -43,13 +43,13 @@ export const AddressProiflePage: React.FC<AddressProiflePageProps> = props => {
                   className="dropdown-menu"
                   aria-labelledby="dropdownMenuButton"
                 >
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#!">
                     თბილისი
                   </a>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#!">
                     ბათუმი
                   </a>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#!">
                     ქუთაისი
                   </a>
                 </div>

@@ -1,9 +1,7 @@
 import React from "react";
-import { dummyBlogData } from "../../data/blog";
 import { SwiperCustomNavBtn } from "../swiper/swiper-custom-nav-btn";
 import Swiper from "react-id-swiper";
 import { useSliderNav } from "../../hooks/common/useSliderNav";
-import { productCategories } from "../../data/categories";
 import { CommentSliderItem } from "./comment-slider-item";
 
 interface CommentSliderProps {}
@@ -37,7 +35,7 @@ const params = {
   }
 };
 
-export const CommentSlider: React.FC<CommentSliderProps> = ({}) => {
+export const CommentSlider: React.FC<CommentSliderProps> = () => {
   const { sliderNav, currentSliderIndex } = useSliderNav(5, 0);
   return (
     <div className="comments">

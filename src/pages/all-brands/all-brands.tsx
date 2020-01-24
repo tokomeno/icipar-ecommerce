@@ -1,7 +1,5 @@
-import React, { ReactElement, useEffect } from "react";
+import React from "react";
 import { Layout } from "../../layout";
-import Swiper from "react-id-swiper";
-import { useSliderNav } from "../../hooks/common/useSliderNav";
 import chunk from "lodash.chunk";
 import { BrandSlider } from "../../components/sliders/brandSlider/brandSlider";
 import { brandsSlider } from "../../data/brands";

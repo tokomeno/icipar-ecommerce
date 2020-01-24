@@ -104,10 +104,10 @@ export const CatalogPage: React.FC<CatalogPageProps> = props => {
                         className="dropdown-menu"
                         aria-labelledby="dropdownMenuButton"
                       >
-                        <a className="dropdown-item" href="#">
+                        <a className="dropdown-item" href="#!">
                           კლებადობით
                         </a>
-                        <a className="dropdown-item" href="#">
+                        <a className="dropdown-item" href="#!">
                           ზრდადობით
                         </a>
                       </div>

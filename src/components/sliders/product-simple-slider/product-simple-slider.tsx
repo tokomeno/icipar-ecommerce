@@ -1,9 +1,9 @@
 import React from "react";
 import { Product } from "../../product/product";
-import { dummyProductData, IProduct } from "../../../data/product";
 import { SwiperCustomNavBtn } from "../../swiper/swiper-custom-nav-btn";
 import { useSliderNav } from "../../../hooks/common/useSliderNav";
 import Swiper from "react-id-swiper";
+import { IProduct } from "../../../data/product";
 
 interface ProductSimpleSliderProps {
   title: string;

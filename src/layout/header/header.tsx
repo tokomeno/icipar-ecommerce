@@ -5,6 +5,7 @@ import {
   IActiveModalContext,
   ActiveModalContext
 } from "../../contexts/modalContex";
+import { ChangeLang } from "../../components/change-lang";
 
 interface HeaderProps {}
 
@@ -80,9 +81,7 @@ export const Header: React.FC<HeaderProps> = props => {
                     <img src="/assets/images/user.svg" alt="user" />
                     რეგისტრაცია/შესვლა
                   </a>
-                  <a href="#!" className="lang">
-                    <img src="/assets/images/en.svg" alt="english" />
-                  </a>
+                  <ChangeLang />
                 </div>
               </div>
             </div>
@@ -116,22 +115,22 @@ export const Header: React.FC<HeaderProps> = props => {
                         className="dropdown-menu search-menu"
                         aria-labelledby="categories"
                       >
-                        <a className="dropdown-item" href="#">
+                        <a className="dropdown-item" href="#!">
                           სუნამოები
                         </a>
-                        <a className="dropdown-item" href="#">
+                        <a className="dropdown-item" href="#!">
                           კანის მოვლა
                         </a>
-                        <a className="dropdown-item" href="#">
+                        <a className="dropdown-item" href="#!">
                           თმის მოვლა
                         </a>
-                        <a className="dropdown-item" href="#">
+                        <a className="dropdown-item" href="#!">
                           მაკიაჟი
                         </a>
-                        <a className="dropdown-item" href="#">
+                        <a className="dropdown-item" href="#!">
                           ფრჩხილის მოვლა
                         </a>
-                        <a className="dropdown-item" href="#">
+                        <a className="dropdown-item" href="#!">
                           პარაფარმაცია
                         </a>
                       </div>

@@ -30,7 +30,7 @@ const params = {
   }
 };
 
-export const BlogSlider: React.FC<BlogSliderProps> = ({}) => {
+export const BlogSlider: React.FC<BlogSliderProps> = () => {
   const { sliderNav, currentSliderIndex } = useSliderNav(
     dummyBlogData.length,
     0

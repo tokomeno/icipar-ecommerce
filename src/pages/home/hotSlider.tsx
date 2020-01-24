@@ -1,5 +1,4 @@
-import React, { ReactElement, useEffect } from "react";
-import { Layout } from "../../layout";
+import React, { useEffect } from "react";
 import { productCategories } from "../../data/categories";
 
 interface HotSliderProps {}

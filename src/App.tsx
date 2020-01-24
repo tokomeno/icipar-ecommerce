@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import { HomePage } from "./pages/home/home";
 import { TodoApp } from "./pages/Todo";
@@ -26,41 +26,59 @@ export const HistoryContext = React.createContext<History>(
   (null as any) as History
 );
 
+// loading component for suspense fallback
+const Loader = () => (
+  <div className="App">
+    {/* <img src={logo} className="App-logo" alt="logo" /> */}
+    <div>loading...</div>
+  </div>
+);
+
 const App: React.FC<{}> = props => {
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <Switch>
-        <Route path="/" exact component={HomePage} />
-        {/* PAGES */}
-        <Route path="/about-us" exact component={AboutUsPage} />
-        <Route path="/about-brand" exact component={AboutBrandPage} />
-        <Route path="/contact" exact component={ContactPage} />
-        <Route path="/how-it-works" exact component={HowItWorksPage} />
-        <Route path="/faq" exact component={FaqPage} />
-        <Route path="/shops" exact component={ShopPage} />
-        <Route path="/all-brands" exact component={AllBrandsPage} />
-        <Route path="/catalog" exact component={CatalogPage} />
-        <Route path="/gift-card" exact component={GiftCardPage} />
-        <Route path="/product/:id" exact component={ProducShowPage} />
+    <Suspense fallback={<Loader />}>
+      <BrowserRouter>
+        <ScrollToTop />
+        <Switch>
+          <Route path="/" exact component={HomePage} />
+          {/* PAGES */}
+          <Route path="/about-us" exact component={AboutUsPage} />
+          <Route path="/about-brand" exact component={AboutBrandPage} />
+          <Route path="/contact" exact component={ContactPage} />
+          <Route path="/how-it-works" exact component={HowItWorksPage} />
+          <Route path="/faq" exact component={FaqPage} />
+          <Route path="/shops" exact component={ShopPage} />
+          <Route path="/all-brands" exact component={AllBrandsPage} />
+          <Route path="/catalog" exact component={CatalogPage} />
+          <Route path="/gift-card" exact component={GiftCardPage} />
+          <Route path="/product/:id" exact component={ProducShowPage} />
 
-        {/* PROFILE PAGES */}
-        <Route path="/profile" exact component={ProfilePage} />
-        <Route path="/profile/coupons" exact component={CouponsPage} />
-        <Route path="/profile/checkout" exact component={ProfileCheckoutPage} />
-        <Route path="/profile/cart" exact component={ProfileCheckoutPage} />
-        <Route path="/profile/orders" exact component={OrdersProfilePage} />
-        <Route path="/profile/address" exact component={AddressProiflePage} />
-        <Route path="/profile/wishlist" exact component={WishlistProfilePage} />
-        <Route
-          path="/profile/gift-cards"
-          exact
-          component={GiftCardProfilePage}
-        />
+          {/* PROFILE PAGES */}
+          <Route path="/profile" exact component={ProfilePage} />
+          <Route path="/profile/coupons" exact component={CouponsPage} />
+          <Route
+            path="/profile/checkout"
+            exact
+            component={ProfileCheckoutPage}
+          />
+          <Route path="/profile/cart" exact component={ProfileCheckoutPage} />
+          <Route path="/profile/orders" exact component={OrdersProfilePage} />
+          <Route path="/profile/address" exact component={AddressProiflePage} />
+          <Route
+            path="/profile/wishlist"
+            exact
+            component={WishlistProfilePage}
+          />
+          <Route
+            path="/profile/gift-cards"
+            exact
+            component={GiftCardProfilePage}
+          />
 
-        <Route path="/todos" exact component={TodoApp} />
-      </Switch>
-    </BrowserRouter>
+          <Route path="/todos" exact component={TodoApp} />
+        </Switch>
+      </BrowserRouter>
+    </Suspense>
   );
 };
 

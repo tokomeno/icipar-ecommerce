@@ -1,10 +1,9 @@
 import React from "react";
-import { Layout } from "../../layout";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 interface ProfileLeftProps {}
 
-export const ProfileLeft: React.FC<ProfileLeftProps> = ({}) => {
+export const ProfileLeft: React.FC<ProfileLeftProps> = () => {
   return (
     <div className="profile-left profile-side d-lg-block d-none">
       <div className="username text-center d-lg-none d-block">

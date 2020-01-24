@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from "react";
+import React from "react";
 import classNames from "classnames";
 import Swiper from "react-id-swiper";
 import { IProduct } from "../../../data/product";

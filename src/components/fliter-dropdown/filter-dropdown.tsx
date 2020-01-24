@@ -1,6 +1,4 @@
 import React from "react";
-import { Layout } from "../../layout";
-import { IProductCetegory } from "../../data/categories";
 import { useToggle } from "../../hooks/common/useToggle";
 import classnames from "classnames";
 

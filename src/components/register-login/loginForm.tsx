@@ -1,5 +1,4 @@
-import React, { ReactElement, useEffect, useState } from "react";
-import { Modal } from "react-bootstrap";
+import React from "react";
 import classnames from "classnames";
 import { AuthInput } from "./authInput";
 import { useInput } from "../../hooks/common/useInput";

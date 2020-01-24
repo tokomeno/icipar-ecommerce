@@ -2,7 +2,7 @@ import React from "react";
 
 interface CommentSliderItemProps {}
 
-export const CommentSliderItem: React.FC<CommentSliderItemProps> = ({}) => {
+export const CommentSliderItem: React.FC<CommentSliderItemProps> = () => {
   return (
     <div className="swiper-slide d-flex flex-column align-items-center justify-content-center">
       <div className="rate">

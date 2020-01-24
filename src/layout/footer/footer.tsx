@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import { productCategories } from "../../data/categories";
 
 interface FooterProps {}

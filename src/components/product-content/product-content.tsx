@@ -41,7 +41,7 @@ export const ProductContent: React.FC<ProductContentProps> = props => {
             <div className="more-block d-flex flex-column align-items-center">
               <img
                 src="uploads/images/more1.png"
-                alt="photo"
+                alt=""
                 className="main-photo"
               />
               <h2 className="title">პროდუქტის სრული სახელწოდება</h2>

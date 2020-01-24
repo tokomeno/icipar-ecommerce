@@ -1,5 +1,4 @@
 import React from "react";
-import classnames from "classnames";
 import { IProduct } from "../../data/product";
 import { ProductRaiting } from "./product-raiting";
 import { ProductCartBtn } from "./product-cart-btn";

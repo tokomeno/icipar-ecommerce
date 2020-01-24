@@ -10,10 +10,15 @@ import { BrandSlider } from "../../components/sliders/brandSlider/brandSlider";
 import { brandsSlider } from "../../data/brands";
 import { BlogSlider } from "../../components/sliders/blog-slider/blog-slider";
 import { CommentSlider } from "../../components/comment-slider/comment-slider";
+import { useTranslation } from "react-i18next";
 
 interface HomePageProps {}
 
-export const HomePage: React.FC<HomePageProps> = props => {
+export const HomePage: React.FC<HomePageProps> = () => {
+  const { t, i18n } = useTranslation();
+  // console.log(t, i18n);
+  console.log(t("hey"), "asdffffffffffffffffffff");
+
   let windowM: any = window;
   useEffect(() => {
     windowM.grid1();

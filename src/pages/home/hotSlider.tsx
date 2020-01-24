@@ -22,7 +22,7 @@ export const HotSlider: React.FC<HotSliderProps> = props => {
         <div className="line" />
         <div className="menu d-flex justify-content-center align-items-center">
           {productCategories.map(i => (
-            <a href="#!" className="menu_link">
+            <a href="#!" key={i.id} className="menu_link">
               {i.title}
             </a>
           ))}

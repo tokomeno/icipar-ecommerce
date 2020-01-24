@@ -8,10 +8,11 @@ interface MapComponentProps {
 export const MapComponent: React.FC<MapComponentProps> = ({ children }) => {
   const [mapBlockActive, setMapBlockActive] = useState<boolean>(false);
   let mW: any = window;
+  const initMap = mW.initMap();
   const mapIsLoaded = mW.mapIsLoaded;
   useEffect(() => {
-    if (mapIsLoaded) mW.initMap();
-  }, [mapIsLoaded]);
+    if (mapIsLoaded) initMap();
+  }, [mapIsLoaded, initMap]);
   return (
     <div className="map-content">
       <button

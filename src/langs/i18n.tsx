@@ -12,10 +12,10 @@ i18n
       en: en,
       ka: ka
     },
+    lng: "ka",
     fallbackLng: "en",
     debug: true,
     whitelist: ["ka", "en"],
-
     interpolation: {
       escapeValue: false // not needed for react as it escapes by default
     },

@@ -221,7 +221,7 @@ export const ProfileCheckoutPage: React.FC<ProfileCheckoutPageProps> = props => 
 export type CartItemProps = {
   product: IProduct;
 };
-const CartItem: React.FC<CartItemProps> = ({ children }) => {
+export const CartItem: React.FC<CartItemProps> = ({ children }) => {
   return (
     <tr>
       <td className="first-td">
@@ -281,7 +281,7 @@ const CartItem: React.FC<CartItemProps> = ({ children }) => {
   );
 };
 
-const modal = (
+export const Modal = (
   <div className="checkout-saleBAnner d-none d-lg-block">
     <button className="close-sale d-flex align-items-center justify-content-center">
       <i className="fas fa-times" />

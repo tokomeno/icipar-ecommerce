@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Layout } from "../../layout";
 import { MainSlider } from "./mainSlider";
 import { HotSlider } from "./hotSlider";
@@ -15,7 +15,7 @@ import { useTranslation } from "react-i18next";
 interface HomePageProps {}
 
 export const HomePage: React.FC<HomePageProps> = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   // console.log(t, i18n);
   console.log(t("hey"), "asdffffffffffffffffffff");
 

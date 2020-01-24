@@ -1,6 +1,6 @@
-import React, { ReactElement, useContext } from "react";
+import React, { useContext } from "react";
 import { productCategories } from "../../data/categories";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import {
   IActiveModalContext,
   ActiveModalContext
@@ -257,17 +257,19 @@ export const Header: React.FC<HeaderProps> = props => {
                             </div>
                           </div>
                         </div>
-                        <a
-                          href="https://www.facebook.com/"
+                        <NavLink
+                          to="https://www.facebook.com/"
                           target="_blank"
                           className="d-flex justify-content-between cart-btn"
+                          rel="noopener noreferrer"
                         >
+                          {" "}
                           სურვილები
                           <img
                             src="/assets/images/arrow-right.svg"
                             alt="right arrow"
                           />
-                        </a>
+                        </NavLink>
                       </div>
                     </div>
                   </div>
@@ -315,8 +317,7 @@ export const Header: React.FC<HeaderProps> = props => {
                 </div>
                 <div
                   className="xs-hdr_btn btn-user"
-                  data-target=".login"
-                  data-toggle="modal"
+                  onClick={() => setActiveModal("login-register")}
                 >
                   <img src="/assets/images/user.svg" alt="user" />
                 </div>

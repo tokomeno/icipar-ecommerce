@@ -35,7 +35,7 @@ export const BrandSlider: React.FC<BrandSliderProps> = ({ brands }) => {
             {...params}
           >
             {brands.map(b => (
-              <a href="#!" className="swiper-slide">
+              <a href="#!" key={b.id} className="swiper-slide">
                 <img key={b.id} src={b.image} alt="chanel" />
               </a>
             ))}

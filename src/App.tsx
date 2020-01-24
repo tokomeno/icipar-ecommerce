@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import { HomePage } from "./pages/home/home";
 import { TodoApp } from "./pages/Todo";
@@ -22,21 +22,18 @@ import { AddressProiflePage } from "./pages/profile/address/address-profile";
 import { WishlistProfilePage } from "./pages/profile/wishlist/wishlist-profile-page";
 import { ProfilePage } from "./pages/profile/ProfilePage";
 
+import { I18nextProvider } from "react-i18next";
+import i18next from "i18next";
+
+import "./langs//i18n";
+
 export const HistoryContext = React.createContext<History>(
   (null as any) as History
 );
 
-// loading component for suspense fallback
-const Loader = () => (
-  <div className="App">
-    {/* <img src={logo} className="App-logo" alt="logo" /> */}
-    <div>loading...</div>
-  </div>
-);
-
 const App: React.FC<{}> = props => {
   return (
-    <Suspense fallback={<Loader />}>
+    <I18nextProvider i18n={i18next}>
       <BrowserRouter>
         <ScrollToTop />
         <Switch>
@@ -78,7 +75,7 @@ const App: React.FC<{}> = props => {
           <Route path="/todos" exact component={TodoApp} />
         </Switch>
       </BrowserRouter>
-    </Suspense>
+    </I18nextProvider>
   );
 };
 

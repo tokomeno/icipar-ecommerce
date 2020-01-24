@@ -1,6 +1,4 @@
-import React, { ReactElement, useEffect } from "react";
-import { Layout } from "../../layout";
-import { IProductCetegory } from "../../data/categories";
+import React from "react";
 import { IProduct } from "../../data/product";
 
 interface ProductSliderItemProps {

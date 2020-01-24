@@ -14,7 +14,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({
   isActive,
   showRegisterForm
 }) => {
-  const handleSubmit = () => {
+  const handleSubmit = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.preventDefault();
     const userData = { email, password, isRemeber };
     console.log(userData);
     Axios.get("/hay")

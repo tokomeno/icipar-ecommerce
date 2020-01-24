@@ -12,9 +12,7 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({
   children
 }) => {
   const { isActive, toggle } = useToggle(true);
-  const { isActive: showMoreIsActive, toggle: showMoreToggler } = useToggle(
-    true
-  );
+  const { isActive: showMoreIsActive } = useToggle(true);
   return (
     <div
       onClick={toggle}

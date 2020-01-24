@@ -5,17 +5,15 @@ import i18next from "i18next";
 interface ChangeLangProps {}
 
 export const ChangeLang: React.FC<ChangeLangProps> = props => {
-  const activeLang = i18next.languages;
-  console.log("i18next.language", i18next.languages);
-  const { t, i18n } = useTranslation();
-
+  const activeLang = i18next.languages[0];
+  const { i18n } = useTranslation();
   const changeLanguage = (lng: "ka" | "en") => {
     i18n.changeLanguage(lng);
   };
 
   return (
     <React.Fragment>
-      {"ka" === "ka" ? (
+      {activeLang === "ka" ? (
         <a href="#!" onClick={() => changeLanguage("ka")} className="lang">
           <img src="/assets/images/en.svg" alt="English" />
         </a>

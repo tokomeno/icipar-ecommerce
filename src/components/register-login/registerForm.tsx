@@ -1,31 +1,36 @@
 import React from "react";
 import classnames from "classnames";
 import { useInput } from "../../hooks/common/useInput";
-import Axios from "axios";
 import { AuthInput } from "./authInput";
+import { connect } from "react-redux";
+import { loginUser } from "../../redux/auth/authActions";
+import { StoreState } from "../../redux/mainReducer";
+import { AuthState } from "../../redux/auth/authTypes";
 
 interface RegisterFormProps {
-  isActive: boolean;
   showLoginForm: () => void;
+  isActive: boolean;
+  errors: AuthState["errors"];
+  loginUser: typeof loginUser;
 }
 
-export const RegisterForm: React.FC<RegisterFormProps> = ({
+const _RegisterForm: React.FC<RegisterFormProps> = ({
   isActive,
-  showLoginForm
+  showLoginForm,
+  errors
 }) => {
-  const handleSubmit = () => {
-    const userData = { email, password, password2, phone };
-    console.log(userData);
-    Axios.get("/hay")
-      .then(() => {})
-      .catch(err => {
-        console.log(err);
-      });
+  const handleSubmit = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.preventDefault();
+    const userData = { email, password, c_password, phone };
+    loginUser(userData);
   };
+
   const { value: email, onChange: setEmail } = useInput("");
   const { value: phone, onChange: setPhone } = useInput("");
   const { value: password, onChange: setPassword } = useInput("");
-  const { value: password2, onChange: setPassword2 } = useInput("");
+  const { value: c_password, onChange: setC_Password } = useInput("");
 
   return (
     <form
@@ -40,6 +45,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
         value={email}
         type="email"
         placeholder="იმეილი"
+        errorMessage={errors && errors.email && errors.email[0]}
       >
         <div className="or-reg d-flex flex-column align-items-center justify-content-between">
           <span />
@@ -53,7 +59,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
         value={phone}
         type="text"
         placeholder="ტელეფონი"
-        errorMessage={null}
+        errorMessage={errors && errors.phone && errors.phone[0]}
       />
 
       <AuthInput
@@ -62,15 +68,15 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
         value={password}
         type="password"
         placeholder="პაროლი"
-        errorMessage={null}
+        errorMessage={errors && errors.password && errors.password[0]}
       />
       <AuthInput
         iconPath="/assets/images/form-pass.svg"
-        onChange={setPassword2}
-        value={password2}
+        onChange={setC_Password}
+        value={c_password}
         type="password"
         placeholder="პაროლი"
-        errorMessage={null}
+        errorMessage={errors && errors.c_password && errors.c_password[0]}
       />
 
       <div className="btn-block d-flex align-items-center justify-content-end">
@@ -84,3 +90,11 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
     </form>
   );
 };
+
+const mapStateToProps = ({ auth }: StoreState) => {
+  return { errors: auth.errors };
+};
+
+export const RegisterForm = connect(mapStateToProps, { loginUser })(
+  _RegisterForm
+);

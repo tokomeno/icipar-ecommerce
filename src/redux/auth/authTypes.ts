@@ -10,6 +10,12 @@ export interface AuthState {
   isAuth: boolean;
   token: string | null;
   loading: false;
+  errors: {
+    email?: string[];
+    phone?: string[];
+    password?: string[];
+    c_password?: string[];
+  } | null;
 }
 
 export enum AuthActionTypes {

@@ -9,7 +9,7 @@ import {
 
 interface RegisterLoginProps {}
 
-export const RegisterLogin: React.FC<RegisterLoginProps> = ({}) => {
+export const RegisterLogin: React.FC<RegisterLoginProps> = () => {
   const { hideModal, activeModal } = useContext<IActiveModalContext>(
     ActiveModalContext
   );
@@ -21,9 +21,9 @@ export const RegisterLogin: React.FC<RegisterLoginProps> = ({}) => {
       show={activeModal === "login-register"}
       onHide={hideModal}
     >
-      <Modal.Body>
-        <ModalContent hideModal={hideModal} />
-      </Modal.Body>
+      {/* <Modal.Body> */}
+      <ModalContent hideModal={hideModal} />
+      {/* </Modal.Body> */}
     </Modal>
   );
 };

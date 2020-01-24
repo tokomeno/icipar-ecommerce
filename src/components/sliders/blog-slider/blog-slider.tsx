@@ -47,7 +47,7 @@ export const BlogSlider: React.FC<BlogSliderProps> = () => {
             </h3>
             <div className="menu d-flex align-items-center">
               {productCategories.map(i => (
-                <a href="#!" className="menu_link">
+                <a key={i.id} href="#!" className="menu_link">
                   {i.title}
                 </a>
               ))}

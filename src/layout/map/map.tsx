@@ -20,10 +20,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({ children }) => {
       >
         ჩვენი მაღაზიები
       </button>
-      <div
-        className={classnames("map-block", { active: mapBlockActive })}
-        data-aos="fade-up"
-      >
+      <div className={classnames("map-block", { active: mapBlockActive })}>
         <div id="map"></div>
       </div>
     </div>

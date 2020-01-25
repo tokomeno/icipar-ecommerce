@@ -16,9 +16,6 @@ interface HomePageProps {}
 
 export const HomePage: React.FC<HomePageProps> = () => {
   const { t } = useTranslation();
-  // console.log(t, i18n);
-  console.log(t("hey"), "asdffffffffffffffffffff");
-
   let windowM: any = window;
   useEffect(() => {
     windowM.grid1();
@@ -192,7 +189,7 @@ export const HomePage: React.FC<HomePageProps> = () => {
       </div>
       <HotSlider />
       <ProductSlider
-        title="სიახლეები"
+        title={t("news")}
         menuCetegories={productCategories}
         showMoreNumber={123}
         products={dummyProductData}
@@ -202,7 +199,7 @@ export const HomePage: React.FC<HomePageProps> = () => {
       <ProductSlider
         initSlider={() => {}}
         classes={{ sectionClasses: ["saleslider"] }}
-        title="ფასდაკლება"
+        title={t("sales")}
         menuCetegories={productCategories}
         showMoreNumber={123}
         products={dummyProductData}
@@ -210,7 +207,7 @@ export const HomePage: React.FC<HomePageProps> = () => {
       <ProductSlider
         initSlider={() => {}}
         classes={{ sectionClasses: ["bestsellerslider"] }}
-        title="ბესტსელერები"
+        title={t("bestsellers")}
         menuCetegories={productCategories}
         showMoreNumber={123}
         products={dummyProductData}
@@ -218,7 +215,7 @@ export const HomePage: React.FC<HomePageProps> = () => {
       <ProductSlider
         initSlider={() => {}}
         classes={{ sectionClasses: ["recommendedslider"] }}
-        title="რეკომენდაციები"
+        title={t("recomendations")}
         menuCetegories={productCategories}
         showMoreNumber={123}
         products={dummyProductData}
@@ -234,7 +231,7 @@ export const HomePage: React.FC<HomePageProps> = () => {
           <div className="insta-block">
             <div className="bg d-block d-md-none" />
             <a href="#!" className="insta-block_btn">
-              გამოგვყევით ინსტაგრამზე
+              {t("folow_on_instargam")}
             </a>
           </div>
         </div>

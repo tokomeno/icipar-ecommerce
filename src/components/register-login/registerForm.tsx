@@ -3,34 +3,46 @@ import classnames from "classnames";
 import { useInput } from "../../hooks/common/useInput";
 import { AuthInput } from "./authInput";
 import { connect } from "react-redux";
-import { loginUser } from "../../redux/auth/authActions";
+import { registerUser } from "../../redux/auth/authActions";
 import { StoreState } from "../../redux/mainReducer";
 import { AuthState } from "../../redux/auth/authTypes";
+import { useTranslation } from "react-i18next";
 
 interface RegisterFormProps {
   showLoginForm: () => void;
   isActive: boolean;
   errors: AuthState["errors"];
-  loginUser: typeof loginUser;
+  registerUser: typeof registerUser;
+  hideModal: () => void;
 }
 
 const _RegisterForm: React.FC<RegisterFormProps> = ({
   isActive,
   showLoginForm,
-  errors
+  errors,
+  registerUser,
+  hideModal
 }) => {
+  const { t } = useTranslation();
   const handleSubmit = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     event.preventDefault();
-    const userData = { email, password, c_password, phone };
-    loginUser(userData);
+    const userData = {
+      email,
+      password,
+      password_confirmation,
+      phone
+    };
+    registerUser({ userData, hideModal });
   };
 
   const { value: email, onChange: setEmail } = useInput("");
   const { value: phone, onChange: setPhone } = useInput("");
   const { value: password, onChange: setPassword } = useInput("");
-  const { value: c_password, onChange: setC_Password } = useInput("");
+  const { value: password_confirmation, onChange: setC_Password } = useInput(
+    ""
+  );
 
   return (
     <form
@@ -44,12 +56,12 @@ const _RegisterForm: React.FC<RegisterFormProps> = ({
         onChange={setEmail}
         value={email}
         type="email"
-        placeholder="იმეილი"
+        placeholder={t("email")}
         errorMessage={errors && errors.email && errors.email[0]}
       >
         <div className="or-reg d-flex flex-column align-items-center justify-content-between">
           <span />
-          <div className="txt">ან</div>
+          <div className="txt">{t("or")}</div>
           <span />
         </div>
       </AuthInput>
@@ -58,7 +70,7 @@ const _RegisterForm: React.FC<RegisterFormProps> = ({
         onChange={setPhone}
         value={phone}
         type="text"
-        placeholder="ტელეფონი"
+        placeholder={t("phone")}
         errorMessage={errors && errors.phone && errors.phone[0]}
       />
 
@@ -67,25 +79,29 @@ const _RegisterForm: React.FC<RegisterFormProps> = ({
         onChange={setPassword}
         value={password}
         type="password"
-        placeholder="პაროლი"
+        placeholder={t("password")}
         errorMessage={errors && errors.password && errors.password[0]}
       />
       <AuthInput
         iconPath="/assets/images/form-pass.svg"
         onChange={setC_Password}
-        value={c_password}
+        value={password_confirmation}
         type="password"
-        placeholder="პაროლი"
-        errorMessage={errors && errors.c_password && errors.c_password[0]}
+        placeholder={t("password")}
+        errorMessage={
+          errors &&
+          errors.password_confirmation &&
+          errors.password_confirmation[0]
+        }
       />
 
       <div className="btn-block d-flex align-items-center justify-content-end">
         <button onClick={handleSubmit} className="btn">
-          დარეგისტრირდი
+          {t("register")}
         </button>
       </div>
       <div onClick={showLoginForm} className="backto-login">
-        ავტორიზაცია
+        {t("authorization")}
       </div>
     </form>
   );
@@ -95,6 +111,6 @@ const mapStateToProps = ({ auth }: StoreState) => {
   return { errors: auth.errors };
 };
 
-export const RegisterForm = connect(mapStateToProps, { loginUser })(
+export const RegisterForm = connect(mapStateToProps, { registerUser })(
   _RegisterForm
 );

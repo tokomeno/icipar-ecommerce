@@ -1,27 +1,30 @@
 import React from "react";
 import { ProfileBasePage } from "../index";
 import { IProduct } from "../../../data/product";
+import { useTranslation } from "react-i18next";
 
 interface ProfileCheckoutPageProps {}
 
 export const ProfileCheckoutPage: React.FC<ProfileCheckoutPageProps> = props => {
+  const { t } = useTranslation();
+
   return (
     <ProfileBasePage>
       <div className="checkout-cont">
         <div className="checkout-top d-md-none d-flex align-items-center justify-content-center">
-          <div className="top_cart show active">ჩემი კალათა</div>
+          <div className="top_cart show active">ჩემი {t("cart")}</div>
           <span>/</span>
           <div className="top_buy">შეძენა</div>
         </div>
         <div className="profile-right profile-side table-profile checkout-first">
           <div className="profile-top d-none d-md-block">
-            <h1 className="profile-top_title">ჩემი კალათა</h1>
+            <h1 className="profile-top_title">ჩემი {t("cart")}</h1>
           </div>
           <div className="table-responsive">
             <table className="table">
               <thead>
                 <tr>
-                  <th>პროდუქტები</th>
+                  <th>{t("products")}</th>
                   <th className="text-right">რაოდენობა</th>
                   <th className="text-right">ფასი</th>
                   <th className="text-right">ჯამი</th>
@@ -45,7 +48,9 @@ export const ProfileCheckoutPage: React.FC<ProfileCheckoutPageProps> = props => 
                           100ml, Red
                         </div>
                         <div className="profbtns d-flex">
-                          <button className="profbtns_btn">წაშლა</button>
+                          <button className="profbtns_btn">
+                            {t("delete")}
+                          </button>
                           <button className="profbtns_btn d-none d-md-block">
                             მოგვიანებით შევიძენ
                           </button>
@@ -222,6 +227,8 @@ export type CartItemProps = {
   product: IProduct;
 };
 export const CartItem: React.FC<CartItemProps> = ({ children }) => {
+  const { t } = useTranslation();
+
   return (
     <tr>
       <td className="first-td">
@@ -232,7 +239,7 @@ export const CartItem: React.FC<CartItemProps> = ({ children }) => {
           <div>
             <div className="name">Calvin Klein All, 100ml, Red</div>
             <div className="profbtns d-flex">
-              <button className="profbtns_btn">წაშლა</button>
+              <button className="profbtns_btn">{t("delete")}</button>
               <button className="profbtns_btn d-none d-md-block">
                 მოგვიანებით შევიძენ
               </button>

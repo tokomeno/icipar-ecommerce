@@ -1,13 +1,18 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
-interface ProfileLeftProps {}
+interface ProfileLeftProps {
+  name?: string;
+}
 
-export const ProfileLeft: React.FC<ProfileLeftProps> = () => {
+export const ProfileLeft: React.FC<ProfileLeftProps> = ({ name }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="profile-left profile-side d-lg-block d-none">
       <div className="username text-center d-lg-none d-block">
-        გამარჯობა <span>ქრისტინე</span>
+        გამარჯობა <span>{name}</span>
       </div>
       <div className="user-image">
         <img src="/assets/uploads/images/user.png" alt="user" />
@@ -18,7 +23,7 @@ export const ProfileLeft: React.FC<ProfileLeftProps> = () => {
       </NavItem>
 
       <div className="profile-menu">
-        <NavItem to={"/profile/cart"} title={"კალათა"}>
+        <NavItem to={"/profile/cart"} title={t("cart")}>
           <img src="/assets/images/bag-g.svg" alt="cart" />
           <img src="/assets/images/bag-r.svg" alt="cart" className="active" />
           <div className="ntfc" />
@@ -29,7 +34,7 @@ export const ProfileLeft: React.FC<ProfileLeftProps> = () => {
           <img src="/assets/images/order-r.svg" alt="cart" className="active" />
         </NavItem>
 
-        <NavItem to={"/profile/wishlist"} title={"სურვილები"}>
+        <NavItem to={"/profile/wishlist"} title={t("wishes")}>
           <img src="/assets/images/heart-g.svg" alt="cart" />
           <img src="/assets/images/heart-r.svg" alt="cart" className="active" />
           <div className="ntfc" />
@@ -65,7 +70,7 @@ export const ProfileLeft: React.FC<ProfileLeftProps> = () => {
           <div className="image-b d-flex align-items-center justify-content-center">
             <img src="/assets/images/logout.svg" alt="info" />
           </div>
-          <div className="title">გამოსვლა</div>
+          <div className="title">{t("logout")}</div>
         </a>
       </div>
     </div>

@@ -4,16 +4,23 @@ import { AuthInput } from "./authInput";
 import { useInput } from "../../hooks/common/useInput";
 import Axios from "axios";
 import { useToggle } from "../../hooks/common/useToggle";
+import { FbLoginBtn } from "./fbLoginBtn.js";
+import { GoogleLoginBtn } from "./GoogleLoginButton";
+import { useTranslation } from "react-i18next";
 
 interface LoginFormProps {
   isActive: boolean;
   showRegisterForm: () => void;
+  hideModal: () => void;
 }
 
 export const LoginForm: React.FC<LoginFormProps> = ({
   isActive,
-  showRegisterForm
+  showRegisterForm,
+  hideModal
 }) => {
+  const { t } = useTranslation();
+
   const handleSubmit = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
@@ -66,29 +73,19 @@ export const LoginForm: React.FC<LoginFormProps> = ({
           დამახსოვრება
         </label>
         <button onClick={handleSubmit} className="btn">
-          შესვლა
+          {t("login")}
         </button>
       </div>
       <a onClick={showRegisterForm} href="#!" className="registration-btn">
-        რეგისტრაცია
+        {t("register")}
       </a>
       <div className="or d-flex align-items-center justify-content-between">
         <span />
         ან
         <span />
       </div>
-      <a href="#!" className="loginBtn fb d-flex align-items-center">
-        <div className="icon d-flex align-items-center justify-content-center">
-          <i className="fab fa-facebook" />
-        </div>
-        <div className="txt text-center">ფეისბუქით ავტორიზაცია</div>
-      </a>
-      <a href="#!" className="loginBtn google d-flex align-items-center">
-        <div className="icon d-flex align-items-center justify-content-center">
-          <i className="fab fa-google" />
-        </div>
-        <div className="txt text-center">გუგლით ავტორიზაცია</div>
-      </a>
+      <FbLoginBtn />
+      <GoogleLoginBtn />
       <a href="#!" className="pass-forgot">
         დაგავიწყდა პაროლი?
       </a>

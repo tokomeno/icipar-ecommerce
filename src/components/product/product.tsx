@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 interface ProductProps {
   product: IProduct;
-  wrapperClass: "catalog-item" | "swiper-slide";
+  wrapperClass: "catalog-item" | "swiper-slide" | "product";
 }
 
 export const Product: React.FC<ProductProps> = ({ wrapperClass, product }) => {

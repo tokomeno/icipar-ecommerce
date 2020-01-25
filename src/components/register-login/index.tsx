@@ -56,10 +56,12 @@ const ModalContent: React.FC<{ hideModal: () => void }> = ({ hideModal }) => {
           <LoginForm
             isActive={activeForm === "login"}
             showRegisterForm={showRegisterForm}
+            hideModal={hideModal}
           />
           <RegisterForm
             isActive={activeForm === "register"}
             showLoginForm={showLoginForm}
+            hideModal={hideModal}
           />
         </div>
         <div className="col-lg-6 login_content d-none d-md-block">

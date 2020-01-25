@@ -20,7 +20,7 @@ import { ProducShowPage } from "./pages/product-show/product-show-page";
 import { ScrollToTop } from "./scrollToTop";
 import { AddressProiflePage } from "./pages/profile/address/address-profile";
 import { WishlistProfilePage } from "./pages/profile/wishlist/wishlist-profile-page";
-import { ProfilePage } from "./pages/profile/ProfilePage";
+import { ProfilePage } from "./pages/profile/main/MainProfilePage";
 
 import { I18nextProvider } from "react-i18next";
 import i18next from "i18next";

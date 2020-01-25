@@ -1,4 +1,8 @@
-import { SetCurrentUserAction } from "./authActions";
+import {
+  SetCurrentUserAction,
+  SetAuthErrorAction,
+  LogoutUserAction
+} from "./authActions";
 
 // TODO: ADD User Type When ip will be rady
 export interface IUser {
@@ -9,21 +13,19 @@ export interface AuthState {
   user: IUser | null;
   isAuth: boolean;
   token: string | null;
-  loading: false;
+  loading: boolean;
   errors: {
     email?: string[];
     phone?: string[];
     password?: string[];
-    c_password?: string[];
+    password_confirmation?: string[];
   } | null;
 }
 
 export enum AuthActionTypes {
   setCurrentUser = "setCurrentUser",
-  //   loginUser = "loginUser",
   logoutUser = "logoutUser",
-  authStartLoading = "authStartLoading",
-  authStopLoading = "authStopLoading"
+  setAuthErrors = "setAuthErrors"
 }
 
 // // TODO:
@@ -32,4 +34,7 @@ export enum AuthActionTypes {
 //   payload: any;
 // }
 
-export type AuthActions = SetCurrentUserAction;
+export type AuthActions =
+  | SetCurrentUserAction
+  | SetAuthErrorAction
+  | LogoutUserAction;

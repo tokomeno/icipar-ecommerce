@@ -1,11 +1,13 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 interface BundleProductProps {}
 
 export const BundleProduct: React.FC<BundleProductProps> = props => {
+  const { t } = useTranslation();
   return (
     <div className="bundle-prod">
-      <h3 className="title text-center">ერთად იაფია</h3>
+      <h3 className="title text-center">{t("ertad_iafi")}</h3>
       <div className="bundle-prod_cont d-flex align-items-center justify-content-md-center justify-content-start">
         <div className="bundle-item d-flex flex-column align-items-center">
           <div className="image d-flex align-items-center justify-content-center">
@@ -77,7 +79,7 @@ export const BundleProduct: React.FC<BundleProductProps> = props => {
             </div>
           </div>
           <a href="#!" className="bag-btn d-flex">
-            კალათა
+            {t("cart")}
             <img src="/assets/images/arrow-right.svg" alt="arrow" />
             <img
               src="/assets/images/arrow-right_red.svg"

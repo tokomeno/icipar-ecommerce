@@ -3,6 +3,7 @@ import Swiper from "react-id-swiper";
 // import chunk from "lodash.chunk";
 import { useSliderNav } from "../../../hooks/common/useSliderNav";
 import { IBrandSliderItem } from "../../../data/brands";
+import { useTranslation } from "react-i18next";
 
 interface BrandSliderProps {
   brands: IBrandSliderItem[];
@@ -21,12 +22,13 @@ const params = {
   }
 };
 export const BrandSlider: React.FC<BrandSliderProps> = ({ brands }) => {
+  const { t } = useTranslation();
   const { sliderNav, currentSliderIndex } = useSliderNav(BrandSlider.length, 0);
   return (
     <section className="brands">
       <div className="container">
         <h3 className="brands-title text-center section-title">
-          ჩვენი ბრენდები
+          {t("our_brands")}
         </h3>
         <div className="slider">
           <Swiper

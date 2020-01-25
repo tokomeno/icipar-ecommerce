@@ -6,10 +6,18 @@ import {
   ActiveModalContext
 } from "../../contexts/modalContex";
 import { ChangeLang } from "../../components/change-lang";
+import { useTranslation } from "react-i18next";
+import { StoreState } from "../../redux/mainReducer";
+import { connect } from "react-redux";
+import { DEFAULT_AVATAR_PATH } from "../../consts";
 
-interface HeaderProps {}
+interface HeaderProps {
+  user: StoreState["auth"]["user"];
+}
 
-export const Header: React.FC<HeaderProps> = props => {
+const _Header: React.FC<HeaderProps> = ({ user }) => {
+  const { t } = useTranslation();
+
   const { setActiveModal } = useContext<IActiveModalContext>(
     ActiveModalContext
   );
@@ -71,16 +79,27 @@ export const Header: React.FC<HeaderProps> = props => {
                   </div>
                 </div>
                 <div className="col-lg-3 col-md-4 text-right">
-                  <a
-                    onClick={() => setActiveModal("login-register")}
-                    href="#!"
-                    className="sup-hdr_link"
-                    data-target=".login"
-                    data-toggle="modal"
-                  >
-                    <img src="/assets/images/user.svg" alt="user" />
-                    რეგისტრაცია/შესვლა
-                  </a>
+                  {user ? (
+                    <NavLink to="profile" className="sup-hdr_link login-user">
+                      <img
+                        src={user.avatar || DEFAULT_AVATAR_PATH}
+                        alt="user"
+                      />
+                      {user.name}
+                    </NavLink>
+                  ) : (
+                    <a
+                      onClick={() => setActiveModal("login-register")}
+                      href="#!"
+                      className="sup-hdr_link"
+                      data-target=".login"
+                      data-toggle="modal"
+                    >
+                      <img src="/assets/images/user.svg" alt="user" />
+                      {t("register")}/{t("login")}
+                    </a>
+                  )}
+
                   <ChangeLang />
                 </div>
               </div>
@@ -162,7 +181,7 @@ export const Header: React.FC<HeaderProps> = props => {
                             110
                             <sub>D</sub>
                           </div>
-                          <div className="title">კალათა</div>
+                          <div className="title">{t("cart")}</div>
                         </div>
                       </button>
                       <div className="dropdown-menu" aria-labelledby="cart1">
@@ -205,7 +224,7 @@ export const Header: React.FC<HeaderProps> = props => {
                           target="_blank"
                           className="d-flex justify-content-between cart-btn"
                         >
-                          კალათა
+                          {t("cart")}
                           <img
                             src="/assets/images/arrow-right.svg"
                             alt="right arrow"
@@ -264,7 +283,7 @@ export const Header: React.FC<HeaderProps> = props => {
                           rel="noopener noreferrer"
                         >
                           {" "}
-                          სურვილები
+                          {t("wishes")}
                           <img
                             src="/assets/images/arrow-right.svg"
                             alt="right arrow"
@@ -329,6 +348,13 @@ export const Header: React.FC<HeaderProps> = props => {
     </React.Fragment>
   );
 };
+
+const mapStateToProps = ({ auth }: StoreState) => {
+  return {
+    user: auth.user
+  };
+};
+export const Header = connect(mapStateToProps)(_Header);
 
 type HeaderMenuItemProps = {
   title: string;

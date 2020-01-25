@@ -1,6 +1,26 @@
 {
   "translations": {
     "hey": "hey hey trans",
-    "hotOffer": "Hot Offer"
+    "hotOffer": "Hot Offer",
+    "our_brands": "Our Brands",
+    "sales": "Sales",
+    "bestsellers": "Bestsellers",
+    "register": "Register",
+    "fb_auth": "ფეისბუქით ავტორიზაცია",
+    "phone": "phone",
+    "password": "password",
+    "password": "password",
+    "authorization": "authorization",
+    "email": "email",
+    "or": "or",
+    "phone": "phone",
+    "password": "password",
+    "password": "password",
+    "authorization": "authorization",
+    "cart": "cart",
+    "wishes": "wishes",
+    "payment_type": "payment type",
+    "follow": "follow",
+    "logout": "გამოსვლა"
   }
 }

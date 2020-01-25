@@ -1,9 +1,12 @@
 import React from "react";
 import { productCategories } from "../../data/categories";
+import { useTranslation } from "react-i18next";
 
 interface FooterProps {}
 
 export const Footer: React.FC<FooterProps> = props => {
+  const { t } = useTranslation();
+
   return (
     <React.Fragment>
       <footer className="site__footer">
@@ -12,7 +15,7 @@ export const Footer: React.FC<FooterProps> = props => {
             <div className="sup-footer d-flex flex-column-reverse flex-md-column">
               <div className="row flex-column-reverse flex-md-row align-items-center">
                 <div className="col-lg-3 col-md-6 col-7 text-lg-left text-center pay">
-                  <div className="title">გადახდის მეთოდი</div>
+                  <div className="title">{t("payment_type")}</div>
                   <ul className="d-flex justify-content-center justify-content-lg-start card-block">
                     <li className="card-block_item">
                       <img src="/assets/images/card1.svg" alt="mastercard" />
@@ -29,7 +32,7 @@ export const Footer: React.FC<FooterProps> = props => {
                   </ul>
                 </div>
                 <div className="col-lg-3 col-md-6 col-7 text-lg-left text-center follow">
-                  <div className="title">გამოგვყევით</div>
+                  <div className="title">{t("follow")}</div>
                   <ul className="d-flex justify-content-center justify-content-lg-start card-block">
                     <li className="card-block_item">
                       <a
@@ -101,10 +104,10 @@ export const Footer: React.FC<FooterProps> = props => {
                 <div className="col-md-3 d-none d-md-block">
                   <div className="title">პირადი პროფილი</div>
                   <a href="#!" className="footer-link">
-                    ჩემი კალათა
+                    ჩემი {t("cart")}
                   </a>
                   <a href="#!" className="footer-link">
-                    ჩემი სურვილები
+                    ჩემი {t("wishes")}
                   </a>
                   <a href="#!" className="footer-link">
                     პერსონალური ინფორმაცია

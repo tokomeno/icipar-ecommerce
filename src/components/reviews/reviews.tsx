@@ -1,8 +1,11 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 interface ReveiwProps {}
 
 export const Reviews: React.FC<ReveiwProps> = props => {
+  const { t } = useTranslation();
+
   return (
     <React.Fragment>
       <div className="line-sliders d-none d-sm-block" />
@@ -78,7 +81,7 @@ export const Reviews: React.FC<ReveiwProps> = props => {
               </div>
             </div>
             <div className="pagination">
-              გვერდები:
+              {t("pages")}:
               <div className="pages">
                 <span className="pages-link">1</span>
                 <a href="#!" className="pages-link">

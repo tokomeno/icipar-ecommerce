@@ -16,6 +16,7 @@ export interface FetchTodosAction {
 
 export const fetchTodos = (): Function => {
   return async (dispatch: Dispatch) => {
+    console.log("sadfasdfa");
     const response = await axios.get<Todo[]>(url);
     dispatch<FetchTodosAction>({
       type: ActionTypes.fetchTodos,

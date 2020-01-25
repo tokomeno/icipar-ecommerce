@@ -1,9 +1,12 @@
 import React from "react";
 import { Layout } from "../../layout";
+import { useTranslation } from "react-i18next";
 
 interface GiftCardPageProps {}
 
 export const GiftCardPage: React.FC<GiftCardPageProps> = props => {
+  const { t } = useTranslation();
+
   return (
     <Layout>
       <div className="container">
@@ -16,17 +19,17 @@ export const GiftCardPage: React.FC<GiftCardPageProps> = props => {
           <div className="select">
             <div className="or-reg d-flex flex-column align-items-center justify-content-between">
               <span />
-              <div className="txt">ან</div>
+              <div className="txt">{t("or")}</div>
               <span />
             </div>
             <button type="button" className="select-btn online">
-              ონლაინ ვაუჩერი
+              {t("online_coupon")}
             </button>
             <button type="button" className="select-btn deliv">
-              ადგილზე მიტანით
+              {t("adgilze_mitanit")}
             </button>
           </div>
-          <button className="add">კალათაში დამატება</button>
+          <button className="add">{t("add_to_cart")}</button>
         </form>
       </div>
     </Layout>

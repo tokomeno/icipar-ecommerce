@@ -1,34 +1,13 @@
 import axios from "axios";
 // import { useHistory } from "react-router";
-import { AuthActionTypes, IUser } from "./authTypes";
+import { AuthActionTypes, IUser, AuthState } from "./authTypes";
 import { Dispatch } from "redux";
-import { API_LOGIN_URL } from "../../api/endpoints";
+import { API_LOGIN_URL, API_REGISTER_URL } from "../../api/endpoints";
 
-interface LoginUserParams {
-  email: string;
-  phone: string;
-  password: string;
-  c_password: string;
+export interface SetAuthErrorAction {
+  type: AuthActionTypes.setAuthErrors;
+  payload: AuthState["errors"];
 }
-export interface LoginUserAction {
-  type: AuthActionTypes.logoutUser;
-  payload: IUser;
-}
-
-export const loginUser = (userData: LoginUserParams): Function => {
-  return async (dispatch: Dispatch) => {
-    axios
-      .post<IUser>(API_LOGIN_URL)
-      .then(res => {
-        console.log(res);
-        dispatch<SetCurrentUserAction>({
-          type: AuthActionTypes.setCurrentUser,
-          payload: res.data.user
-        });
-      })
-      .catch(err => {});
-  };
-};
 
 export interface SetCurrentUserAction {
   type: AuthActionTypes.setCurrentUser;
@@ -50,4 +29,89 @@ export const setCurrentUser = ({
     type: AuthActionTypes.setCurrentUser,
     payload: { user, token }
   };
+};
+
+interface LoginUserParams {
+  userData: {
+    email: string;
+    password: string;
+  };
+  hideModal: () => void;
+}
+export const loginUser = ({
+  userData,
+  hideModal
+}: LoginUserParams): Function => {
+  return async (dispatch: Dispatch) => {
+    axios
+      .post(API_LOGIN_URL, userData)
+      .then(res => {
+        dispatch<SetCurrentUserAction>({
+          type: AuthActionTypes.setCurrentUser,
+          payload: res.data.user
+        });
+        hideModal();
+      })
+      .catch(err => {
+        console.log(err);
+        catchLoginRegisterError(err, dispatch);
+      });
+  };
+};
+
+interface RegisterUserParams {
+  userData: {
+    email: string;
+    phone: string;
+    password: string;
+    password_confirmation: string;
+  };
+  hideModal: () => void;
+}
+export const registerUser = ({
+  userData,
+  hideModal
+}: RegisterUserParams): Function => {
+  return async (dispatch: Dispatch) => {
+    axios
+      .post<IUser>(API_REGISTER_URL, {
+        ...userData,
+        name: "asdf"
+      })
+      .then(res => {
+        dispatch<SetCurrentUserAction>({
+          type: AuthActionTypes.setCurrentUser,
+          payload: {
+            user: res.data.user,
+            token: res.data.token
+          }
+        });
+        hideModal();
+      })
+      .catch(err => {
+        console.log(err);
+        catchLoginRegisterError(err, dispatch);
+      });
+  };
+};
+
+export interface LogoutUserAction {
+  type: AuthActionTypes.logoutUser;
+}
+
+export const logoutUser = (): LogoutUserAction => {
+  return {
+    type: AuthActionTypes.logoutUser
+  };
+};
+
+const catchLoginRegisterError = (err: any, dispatch: Dispatch) => {
+  if (err.response && err.response.data && err.response.data.error) {
+    dispatch<SetAuthErrorAction>({
+      type: AuthActionTypes.setAuthErrors,
+      payload: err.response.data.error
+    });
+  } else {
+    alert("დაფიქსირდა შეცდომა");
+  }
 };

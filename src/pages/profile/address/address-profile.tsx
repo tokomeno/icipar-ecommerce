@@ -1,9 +1,12 @@
 import React from "react";
 import { ProfileBasePage } from "../index";
+import { useTranslation } from "react-i18next";
 
 interface AddressProiflePageProps {}
 
 export const AddressProiflePage: React.FC<AddressProiflePageProps> = props => {
+  const { t } = useTranslation();
+
   return (
     <ProfileBasePage>
       <div className="profile-right profile-side table-profile">
@@ -13,7 +16,7 @@ export const AddressProiflePage: React.FC<AddressProiflePageProps> = props => {
               <h1 className="profile-top_title">
                 დაამატე ახალი
                 <a href="#!" className="delete">
-                  წაშლა
+                  {t("delete")}
                 </a>
               </h1>
             </div>

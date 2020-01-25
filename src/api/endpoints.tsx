@@ -3,9 +3,10 @@ export const AUTH_BASE_URL = "http://3.15.209.19/api";
 export const API_LOGIN_URL = AUTH_BASE_URL + "/login";
 export const API_REGISTER_URL = AUTH_BASE_URL + "/register";
 
-export const API_FB_LOGIN_URL = AUTH_BASE_URL + "/auth/provider/facebook";
+export const API_FB_LOGIN_URL =
+  AUTH_BASE_URL + "/api/sociallogin/facebook/callback";
 export const API_GA_LOGIN_URL = AUTH_BASE_URL + "/auth/provider/google";
-
+// api/sociallogin/facebook/callback
 interface login_endpointParams {
   email: string;
   phone: string;

@@ -21,6 +21,9 @@
     "wishes": "wishes",
     "payment_type": "payment type",
     "follow": "follow",
-    "logout": "გამოსვლა"
+    "logout": "გამოსვლა",
+    "frogot_password": "დაგავიწყდა პაროლი",
+    "remember": "დამახსოვრება",
+    "hello": "გამარჯობა"
   }
 }

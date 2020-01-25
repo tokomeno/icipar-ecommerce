@@ -61,7 +61,7 @@ export const ProductSlider: React.FC<ProductSliderProps> = ({
   return (
     <section
       className={classNames("slider-section", classes.sectionClasses)}
-      data-aos="fade-up"
+      data-aos-off="fade-up"
     >
       <div className="slider-section-top">
         <div className=" d-flex align-items-center justify-content-sm-center justify-content-between xs-titlesblock">

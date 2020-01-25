@@ -37,7 +37,7 @@ export const BlogSlider: React.FC<BlogSliderProps> = () => {
   );
 
   return (
-    <section className="blogSection" data-aos="fade-up">
+    <section className="blogSection" data-aos-off="fade-up">
       <div className="blogSlider-top">
         <div className="container">
           <div className="d-flex flex-column flex-md-row">

@@ -80,7 +80,7 @@ const _Header: React.FC<HeaderProps> = ({ user }) => {
                 </div>
                 <div className="col-lg-3 col-md-4 text-right">
                   {user ? (
-                    <NavLink to="profile" className="sup-hdr_link login-user">
+                    <NavLink to="/profile" className="sup-hdr_link login-user">
                       <img
                         src={user.avatar || DEFAULT_AVATAR_PATH}
                         alt="user"

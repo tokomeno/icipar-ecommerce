@@ -11,7 +11,7 @@ export const HotSlider: React.FC<HotSliderProps> = props => {
     windowM.hotSlider();
   }, []);
   return (
-    <section className="slider-section hot__slide" data-aos="fade-up">
+    <section className="slider-section hot__slide" data-aos-off="fade-up">
       <div className="slider-section-top">
         <div className=" d-flex align-items-center justify-content-sm-center justify-content-between xs-titlesblock">
           <h3 className="slider-section-top_title section-title">

@@ -2,15 +2,19 @@ import React from "react";
 import { ProfileBasePage } from "../index";
 import { dummyProductData } from "../../../data/product";
 import { Product } from "../../../components/product/product";
+import { useTranslation } from "react-i18next";
 
-interface ProfilePageProps {}
+interface ProfilePageProps {
+  name?: string;
+}
 
-export const ProfilePage: React.FC<ProfilePageProps> = props => {
+export const ProfilePage: React.FC<ProfilePageProps> = ({ name }) => {
+  const { t } = useTranslation();
   return (
     <ProfileBasePage>
       <div className="profile-right profile-side d-lg-block d-none">
         <div className="hello text-center">
-          გამარჯობა <span className="name">ქრისტინე</span>
+          {t("hello")} <span className="name">{name}</span>
         </div>
         <div className="prof-grid d-flex justify-content-between">
           <a

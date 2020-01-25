@@ -2,22 +2,25 @@ import React from "react";
 import classnames from "classnames";
 import { AuthInput } from "./authInput";
 import { useInput } from "../../hooks/common/useInput";
-import Axios from "axios";
 import { useToggle } from "../../hooks/common/useToggle";
 import { FbLoginBtn } from "./fbLoginBtn.js";
 import { GoogleLoginBtn } from "./GoogleLoginButton";
 import { useTranslation } from "react-i18next";
+import { loginUser } from "../../redux/auth/authActions";
+import { StoreState } from "../../redux/mainReducer";
+import { connect } from "react-redux";
 
 interface LoginFormProps {
   isActive: boolean;
   showRegisterForm: () => void;
   hideModal: () => void;
+  errors: StoreState["auth"]["errors"];
 }
-
-export const LoginForm: React.FC<LoginFormProps> = ({
+const _LoginForm: React.FC<LoginFormProps> = ({
   isActive,
   showRegisterForm,
-  hideModal
+  hideModal,
+  errors
 }) => {
   const { t } = useTranslation();
 
@@ -26,12 +29,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
   ) => {
     event.preventDefault();
     const userData = { email, password, isRemeber };
-    console.log(userData);
-    Axios.get("/hay")
-      .then(() => {})
-      .catch(err => {
-        console.log(err);
-      });
+    loginUser({ userData, hideModal });
   };
   const { value: email, onChange: setEmail } = useInput("");
   const { value: password, onChange: setPassword } = useInput("");
@@ -50,6 +48,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
         value={email}
         type="email"
         placeholder="იმეილი"
+        errorMessage={errors && errors.email && errors.email[0]}
       ></AuthInput>
 
       <AuthInput
@@ -58,7 +57,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
         value={password}
         type="password"
         placeholder="პაროლი"
-        errorMessage={null}
+        errorMessage={errors && errors.password && errors.password[0]}
       />
 
       <div className="btn-block d-flex align-items-center justify-content-between">
@@ -70,7 +69,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
             onChange={toggleRemember}
           />
           <span className="checkmark" />
-          დამახსოვრება
+          {t("remember")}
         </label>
         <button onClick={handleSubmit} className="btn">
           {t("login")}
@@ -81,14 +80,20 @@ export const LoginForm: React.FC<LoginFormProps> = ({
       </a>
       <div className="or d-flex align-items-center justify-content-between">
         <span />
-        ან
+        {t("or")}
         <span />
       </div>
       <FbLoginBtn />
       <GoogleLoginBtn />
       <a href="#!" className="pass-forgot">
-        დაგავიწყდა პაროლი?
+        {t("frogot_password")}?
       </a>
     </form>
   );
 };
+
+const mapStateToProps = ({ auth }: StoreState) => {
+  return { errors: auth.errors };
+};
+
+export const LoginForm = connect(mapStateToProps, { loginUser })(_LoginForm);

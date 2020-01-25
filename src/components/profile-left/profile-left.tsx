@@ -12,7 +12,7 @@ export const ProfileLeft: React.FC<ProfileLeftProps> = ({ name }) => {
   return (
     <div className="profile-left profile-side d-lg-block d-none">
       <div className="username text-center d-lg-none d-block">
-        გამარჯობა <span>{name}</span>
+        {t("hello")} <span>{name}</span>
       </div>
       <div className="user-image">
         <img src="/assets/uploads/images/user.png" alt="user" />

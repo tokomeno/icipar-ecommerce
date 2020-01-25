@@ -85,7 +85,7 @@ export const HomePage: React.FC<HomePageProps> = () => {
               <div className="row">
                 <div
                   className="col-md-8"
-                  data-aos="fade-up"
+                  data-aos-off="fade-up"
                   data-aos-duration={1200}
                 >
                   <a href="#!" className="d-block">
@@ -144,7 +144,7 @@ export const HomePage: React.FC<HomePageProps> = () => {
               <div className="row last-row">
                 <div
                   className="col-md-4"
-                  data-aos="fade-up"
+                  data-aos-off="fade-up"
                   data-aos-duration={800}
                 >
                   <a href="#!" className="grid4 grid-item row-item d-block">

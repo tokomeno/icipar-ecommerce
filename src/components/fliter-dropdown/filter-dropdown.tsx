@@ -4,19 +4,22 @@ import classnames from "classnames";
 
 interface FilterDropdownProps {
   title: string;
-  //   checkboxes: { id: number; title: string }[];
+  classes?: "price-filter";
+  childClass: "filter-menu flex-column" | "price-range justify-content-center";
 }
 
 export const FilterDropdown: React.FC<FilterDropdownProps> = ({
   title,
-  children
+  children,
+  classes,
+  childClass
 }) => {
   const { isActive, toggle } = useToggle(true);
   const { isActive: showMoreIsActive } = useToggle(true);
   return (
     <div
       onClick={toggle}
-      className={classnames("filter", { active: isActive })}
+      className={classnames("filter", classes, { active: isActive })}
     >
       <span className="filter-title d-flex align-items-center justify-content-between">
         {title}
@@ -27,7 +30,7 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({
       </span>
 
       <div
-        className={classnames("filter-menu d-flex flex-column", {
+        className={classnames("d-flex", childClass, {
           active: showMoreIsActive
         })}
       >

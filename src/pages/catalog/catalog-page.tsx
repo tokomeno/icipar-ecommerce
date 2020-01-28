@@ -38,7 +38,10 @@ export const CatalogPage: React.FC<CatalogPageProps> = props => {
                 <img src="images/close.svg" alt="close" />
               </button>
               <div className="list">
-                <FilterDropdown title={"კატეგორია"}>
+                <FilterDropdown
+                  childClass="filter-menu flex-column"
+                  title={"კატეგორია"}
+                >
                   {productCategories.map(ch => (
                     <label key={ch.id} className="filter-link">
                       {ch.title}
@@ -47,41 +50,38 @@ export const CatalogPage: React.FC<CatalogPageProps> = props => {
                     </label>
                   ))}
                 </FilterDropdown>
-                <div className="filter price-filter active">
-                  <span className="filter-title d-flex align-items-center justify-content-between">
-                    ფასი
-                    <div className="toggle-btn">
-                      <i className="fas fa-angle-down" />
-                      <i className="fas fa-angle-right" />
-                    </div>
-                  </span>
-                  <div className="price-range d-flex justify-content-center">
-                    <div className="money_range">
-                      <div className="input_blocks d-flex">
-                        <div className="inps_bl">
-                          <input
-                            type="text"
-                            className="price"
-                            id="min_value"
-                            name="priceFrom"
-                            defaultValue={0}
-                          />
-                        </div>
-                        <div className="inps_bl">
-                          <input
-                            type="text"
-                            className="price"
-                            id="max_value"
-                            name="priceEnd"
-                            defaultValue={500.0}
-                          />
-                        </div>
-                        <button className="ok-btn">OK</button>
+
+                <FilterDropdown
+                  classes="price-filter"
+                  childClass="price-range justify-content-center"
+                  title={"ფასი"}
+                >
+                  <div className="money_range">
+                    <div className="input_blocks d-flex">
+                      <div className="inps_bl">
+                        <input
+                          type="text"
+                          className="price"
+                          id="min_value"
+                          name="priceFrom"
+                          defaultValue={0}
+                        />
                       </div>
-                      <div id="slider-range" />
+                      <div className="inps_bl">
+                        <input
+                          type="text"
+                          className="price"
+                          id="max_value"
+                          name="priceEnd"
+                          defaultValue={500.0}
+                        />
+                      </div>
+                      <button className="ok-btn">OK</button>
                     </div>
+                    <div id="slider-range" />
                   </div>
-                </div>
+                </FilterDropdown>
+
                 <CatBanner to={"#!"} image={"/assets/uploads/images/ban.png"} />
               </div>
             </div>

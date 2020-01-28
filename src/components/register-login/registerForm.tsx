@@ -4,7 +4,7 @@ import { useInput } from "../../hooks/common/useInput";
 import { AuthInput } from "./authInput";
 import { connect } from "react-redux";
 import { registerUser } from "../../redux/auth/authActions";
-import { StoreState } from "../../redux/mainReducer";
+import { IStoreState } from "../../redux/mainReducer";
 import { AuthState } from "../../redux/auth/authTypes";
 import { useTranslation } from "react-i18next";
 
@@ -107,7 +107,7 @@ const _RegisterForm: React.FC<RegisterFormProps> = ({
   );
 };
 
-const mapStateToProps = ({ auth }: StoreState) => {
+const mapStateToProps = ({ auth }: IStoreState) => {
   return { errors: auth.errors };
 };
 

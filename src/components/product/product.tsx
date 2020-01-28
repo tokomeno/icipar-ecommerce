@@ -16,10 +16,10 @@ export const Product: React.FC<ProductProps> = ({ wrapperClass, product }) => {
       <div className={wrapperClass}>
         <div className="image">
           <Link to={`/product/${product.id}`} className="img">
-            <img src={product.image} alt="" />
+            <img src={product.thumbnail} alt="" />
           </Link>
           <div className="option d-flex justify-content-between align-items-center">
-            <ProductRaiting rateNum={product.rate} starRate={1} />
+            <ProductRaiting rateNum={product.rating} starRate={1} />
             <div className="d-flex">
               <ProductHeartBtn productId={product.id} />
               <ProductCartBtn productId={product.id} />
@@ -30,7 +30,7 @@ export const Product: React.FC<ProductProps> = ({ wrapperClass, product }) => {
           {product.title}
         </Link>
         <div className="price">
-          {product.price}
+          {product.price_min}
           <sub>D</sub>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import axios from "axios";
-// import { useHistory } from "react-router";
+import { useHistory } from "react-router";
 import { AuthActionTypes, IUser, AuthState } from "./authTypes";
 import { Dispatch } from "redux";
 import { API_LOGIN_URL, API_REGISTER_URL } from "../../api/endpoints";
@@ -46,9 +46,19 @@ export const loginUser = ({
     axios
       .post(API_LOGIN_URL, userData)
       .then(res => {
+        if (res.data.error) {
+          dispatch<SetAuthErrorAction>({
+            type: AuthActionTypes.setAuthErrors,
+            payload: { msg: "credentials_not_match" }
+          });
+          return;
+        }
         dispatch<SetCurrentUserAction>({
           type: AuthActionTypes.setCurrentUser,
-          payload: res.data.user
+          payload: {
+            user: res.data.user as IUser,
+            token: res.data.token as string
+          }
         });
         hideModal();
       })

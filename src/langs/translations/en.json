@@ -24,6 +24,14 @@
     "logout": "გამოსვლა",
     "frogot_password": "დაგავიწყდა პაროლი",
     "remember": "დამახსოვრება",
-    "hello": "გამარჯობა"
+    "hello": "გამარჯობა",
+    "credentials_not_match": "მონაცემები არასწორია",
+    "start_search": "დაიწყე ძიება",
+    "catalog": "catalog",
+    "login": "login",
+    "brands": "brands",
+    "more": "more",
+    "ascending": "ascending",
+    "descending": "descending"
   }
 }

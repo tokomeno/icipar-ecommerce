@@ -1,13 +1,33 @@
-import React from "react";
+import React, { useCallback, useMemo } from "react";
 import { Layout } from "../../layout";
 import { Product } from "../../components/product/product";
-import { dummyProductData } from "../../data/product";
+import { dummyProductData, IProduct } from "../../data/product";
 import { FilterDropdown } from "../../components/fliter-dropdown/filter-dropdown";
 import { productCategories } from "../../data/categories";
+import { useProducts, IProductFilter } from "../../hooks/useProducts";
+import { useTranslation } from "react-i18next";
+import { CatBanner } from "../../components/cat-banner";
+import { PriceSorter } from "../../components/product-filters/price-sorter";
 
 interface CatalogPageProps {}
 
 export const CatalogPage: React.FC<CatalogPageProps> = props => {
+  const { t } = useTranslation();
+  const productFilter = useMemo<IProductFilter>(() => {
+    console.log("in");
+    if (Math.random() > 1.6) {
+      return {};
+    }
+    return { age_range: { max: 12, min: 12 } };
+  }, []);
+  console.log(productFilter);
+  const {
+    products,
+    nextPage,
+    haveNextPage,
+    sortByPrice,
+    sortedBy
+  } = useProducts(productFilter);
   return (
     <Layout>
       <div className="container">
@@ -62,11 +82,7 @@ export const CatalogPage: React.FC<CatalogPageProps> = props => {
                     </div>
                   </div>
                 </div>
-                <div className="cat-banner">
-                  <a href="#!" className="d-block">
-                    <img src="/assets/uploads/images/ban.png" alt="" />
-                  </a>
-                </div>
+                <CatBanner to={"#!"} image={"/assets/uploads/images/ban.png"} />
               </div>
             </div>
             <div className="catalog">
@@ -82,47 +98,21 @@ export const CatalogPage: React.FC<CatalogPageProps> = props => {
                   <div className="right"> &gt; </div>
                   <span className="cat-menu_item">ქალი</span>
                 </div>
-                <div className="d-flex">
-                  <button className="filter-btn d-block d-lg-none">
-                    ფილტრები
-                  </button>
-                  <div className="d-flex sort-price">
-                    <div className="dropdown">
-                      <button
-                        className="btn btn-secondary dropdown-toggle d-flex align-items-center"
-                        type="button"
-                        id="dropdownMenuButton"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                        ფასი: ზრდადობით
-                        <i className="fas fa-chevron-down" />
-                        <i className="fas fa-chevron-up" />
-                      </button>
-                      <div
-                        className="dropdown-menu"
-                        aria-labelledby="dropdownMenuButton"
-                      >
-                        <a className="dropdown-item" href="#!">
-                          კლებადობით
-                        </a>
-                        <a className="dropdown-item" href="#!">
-                          ზრდადობით
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+
+                <PriceSorter sortByPrice={sortByPrice} sortedBy={sortedBy} />
               </div>
               <div className="d-flex flex-wrap justify-content-sm-start justify-content-center">
-                {dummyProductData.map(p => (
-                  <Product product={p} wrapperClass="catalog-item" />
+                {products.map(p => (
+                  <Product key={p.id} product={p} wrapperClass="catalog-item" />
                 ))}
               </div>
-              <div className="d-flex justify-content-center">
-                <button className="more-btn">მეტი</button>
-              </div>
+              {haveNextPage && (
+                <div className="d-flex justify-content-center">
+                  <button onClick={nextPage} className="more-btn">
+                    {t("more")}
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>

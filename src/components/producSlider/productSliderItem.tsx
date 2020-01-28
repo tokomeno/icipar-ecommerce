@@ -12,7 +12,7 @@ export const ProductSliderItem: React.FC<ProductSliderItemProps> = ({
     <div className="swiper-slide">
       <div className="image">
         <a href="#!" className="img">
-          <img src={product.image} alt="photo1" />
+          <img src={product.thumbnail} alt="photo1" />
         </a>
         <div className="option d-flex justify-content-between align-items-center">
           <div className="d-flex">

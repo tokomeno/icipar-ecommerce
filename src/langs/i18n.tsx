@@ -14,7 +14,7 @@ i18n
     },
     lng: "ka",
     fallbackLng: "en",
-    debug: true,
+    debug: false,
     nonExplicitWhitelist: true,
     load: "languageOnly",
     whitelist: ["ka", "en"],
@@ -28,7 +28,7 @@ i18n
     keySeparator: false // we use content as keys
   })
   .then(function(t) {
-    console.log("initialized and ready to go!");
+    // console.log("initialized and ready to go!");
     // // initialized and ready to go!
     // console.log(i18n.t("hey"));
   })

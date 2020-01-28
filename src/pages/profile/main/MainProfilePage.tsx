@@ -26,7 +26,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ name }) => {
               alt="bestsellers"
               className="grid-image"
             />
-            <h2 className="title">ბესტსელერები</h2>
+            <h2 className="title">{t("bestsellers")}</h2>
             <img
               src="/assets/images/arrow-right.svg"
               alt="right arrow"
@@ -93,7 +93,6 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ name }) => {
           </div>
         </div>
       </div>
-      ;
     </ProfileBasePage>
   );
 };

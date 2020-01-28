@@ -1,16 +1,19 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useHistory } from "react-router-dom";
+import { logoutUser } from "../../redux/auth/authActions";
 
 interface ProfileLeftProps {
   name?: string;
+  logout: typeof logoutUser;
 }
 
-export const ProfileLeft: React.FC<ProfileLeftProps> = ({ name }) => {
+export const ProfileLeft: React.FC<ProfileLeftProps> = ({ name, logout }) => {
   const { t } = useTranslation();
-
+  const history = useHistory();
   return (
-    <div className="profile-left profile-side d-lg-block d-none">
+    <div className="profile-left profile-side d-lg-block">
       <div className="username text-center d-lg-none d-block">
         {t("hello")} <span>{name}</span>
       </div>
@@ -66,7 +69,14 @@ export const ProfileLeft: React.FC<ProfileLeftProps> = ({ name }) => {
         </NavItem>
       </div>
       <div className="profile-menu">
-        <a href="#!" className="mypage-link logout d-flex">
+        <a
+          href="#!"
+          onClick={() => {
+            logout();
+            history.push("/");
+          }}
+          className="mypage-link logout d-flex"
+        >
           <div className="image-b d-flex align-items-center justify-content-center">
             <img src="/assets/images/logout.svg" alt="info" />
           </div>

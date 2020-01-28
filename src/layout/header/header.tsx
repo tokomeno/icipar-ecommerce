@@ -7,23 +7,30 @@ import {
 } from "../../contexts/modalContex";
 import { ChangeLang } from "../../components/change-lang";
 import { useTranslation } from "react-i18next";
-import { StoreState } from "../../redux/mainReducer";
+import { IStoreState } from "../../redux/mainReducer";
 import { connect } from "react-redux";
 import { DEFAULT_AVATAR_PATH } from "../../consts";
+import classnames from "classnames";
 
 interface HeaderProps {
-  user: StoreState["auth"]["user"];
+  user: IStoreState["auth"]["user"];
 }
 
 const _Header: React.FC<HeaderProps> = ({ user }) => {
   const { t } = useTranslation();
 
-  const { setActiveModal } = useContext<IActiveModalContext>(
-    ActiveModalContext
-  );
+  const { setActiveModal, activeModal, hideModal } = useContext<
+    IActiveModalContext
+  >(ActiveModalContext);
+
   return (
     <React.Fragment>
-      <div className="bg__site"></div>
+      <div
+        className={classnames("bg__site", {
+          active: activeModal === "search-modal"
+        })}
+        onClick={hideModal}
+      ></div>
       <header className="site__header">
         <div className="header d-flex flex-md-column flex-column-reverse">
           <div className="header-sale text-center">
@@ -309,7 +316,12 @@ const _Header: React.FC<HeaderProps> = ({ user }) => {
 
               <div className="header-menu_item">
                 <Link to="/all-brands" className="link">
-                  ბრენდები
+                  {t("brands")}
+                </Link>
+              </div>
+              <div className="header-menu_item">
+                <Link to="/catalog" className="link">
+                  {t("catalog")}
                 </Link>
               </div>
             </div>
@@ -327,7 +339,10 @@ const _Header: React.FC<HeaderProps> = ({ user }) => {
                 </Link>
               </div>
               <div className="d-flex">
-                <div className="xs-hdr_btn btn-search">
+                <div
+                  onClick={() => setActiveModal("search-modal")}
+                  className="xs-hdr_btn btn-search"
+                >
                   <i className="fas fa-search" />
                 </div>
                 <div className="xs-hdr_btn btn-cart active">
@@ -349,7 +364,7 @@ const _Header: React.FC<HeaderProps> = ({ user }) => {
   );
 };
 
-const mapStateToProps = ({ auth }: StoreState) => {
+const mapStateToProps = ({ auth }: IStoreState) => {
   return {
     user: auth.user
   };

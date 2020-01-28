@@ -4,23 +4,25 @@ import { AuthInput } from "./authInput";
 import { useInput } from "../../hooks/common/useInput";
 import { useToggle } from "../../hooks/common/useToggle";
 import { FbLoginBtn } from "./fbLoginBtn.js";
-import { GoogleLoginBtn } from "./GoogleLoginButton";
+import { GoogleLoginBtn } from "./GoogleLoginButton.js";
 import { useTranslation } from "react-i18next";
 import { loginUser } from "../../redux/auth/authActions";
-import { StoreState } from "../../redux/mainReducer";
+import { IStoreState } from "../../redux/mainReducer";
 import { connect } from "react-redux";
 
 interface LoginFormProps {
   isActive: boolean;
   showRegisterForm: () => void;
   hideModal: () => void;
-  errors: StoreState["auth"]["errors"];
+  errors: IStoreState["auth"]["errors"];
+  loginUser: typeof loginUser;
 }
 const _LoginForm: React.FC<LoginFormProps> = ({
   isActive,
   showRegisterForm,
   hideModal,
-  errors
+  errors,
+  loginUser
 }) => {
   const { t } = useTranslation();
 
@@ -28,6 +30,7 @@ const _LoginForm: React.FC<LoginFormProps> = ({
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     event.preventDefault();
+    console.log("login");
     const userData = { email, password, isRemeber };
     loginUser({ userData, hideModal });
   };
@@ -48,7 +51,9 @@ const _LoginForm: React.FC<LoginFormProps> = ({
         value={email}
         type="email"
         placeholder="იმეილი"
-        errorMessage={errors && errors.email && errors.email[0]}
+        errorMessage={
+          errors && ((errors.email && errors.email[0]) || t(errors.msg))
+        }
       ></AuthInput>
 
       <AuthInput
@@ -92,7 +97,7 @@ const _LoginForm: React.FC<LoginFormProps> = ({
   );
 };
 
-const mapStateToProps = ({ auth }: StoreState) => {
+const mapStateToProps = ({ auth }: IStoreState) => {
   return { errors: auth.errors };
 };
 

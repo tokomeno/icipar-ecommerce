@@ -4,12 +4,12 @@ import { Todo } from "./todos/todoActions";
 import { AuthState } from "./auth/authTypes";
 import { authReducer } from "./auth/authReducer";
 
-export interface StoreState {
+export interface IStoreState {
   todos: Todo[];
   auth: AuthState;
 }
 
-export const reducers = combineReducers<StoreState>({
+export const reducers = combineReducers<IStoreState>({
   todos: todosReducer,
   auth: authReducer
 });

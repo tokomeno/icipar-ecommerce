@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Todo, deleteTodo, fetchTodos } from "../redux/todos/todoActions";
-import { StoreState } from "../redux/mainReducer";
+import { IStoreState } from "../redux/mainReducer";
 
 interface AppProps {
   todos: Todo[];
@@ -30,7 +30,7 @@ const _Todo: React.FC<AppProps> = ({ todos, fetchTodos, deleteTodo }) => {
 
 // export const App = connect({todos}, {})(_Todo);
 
-const mapStateToProps = ({ todos }: StoreState): { todos: Todo[] } => {
+const mapStateToProps = ({ todos }: IStoreState): { todos: Todo[] } => {
   return { todos };
 };
 

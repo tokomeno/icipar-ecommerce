@@ -4,32 +4,10 @@ export const API_LOGIN_URL = AUTH_BASE_URL + "/login";
 export const API_REGISTER_URL = AUTH_BASE_URL + "/register";
 
 export const API_FB_LOGIN_URL =
-  AUTH_BASE_URL + "/api/sociallogin/facebook/callback";
-export const API_GA_LOGIN_URL = AUTH_BASE_URL + "/auth/provider/google";
-// api/sociallogin/facebook/callback
-interface login_endpointParams {
-  email: string;
-  phone: string;
-}
-export const login_endpoint = ({ email, phone }: login_endpointParams) => {
-  return {
-    path: `${AUTH_BASE_URL}/login`,
-    method: "POST"
-  };
-};
+  AUTH_BASE_URL + "/social-login/login-user-by-token/facebook";
+export const API_GA_LOGIN_URL =
+  AUTH_BASE_URL + "/social-login/login-user-by-token/google";
 
-interface register_endpointParams {
-  email: string;
-  phone: string;
-  password: string;
-  password_confirmation: string;
-}
-export const register_endpoint = ({
-  email,
-  phone
-}: register_endpointParams) => {
-  return {
-    path: `${AUTH_BASE_URL}/register`,
-    method: "POST"
-  };
-};
+export const PRODUCT_BASE_URL = "http://3.18.107.107/api";
+
+export const FETCH_PRODUCTS_URL = PRODUCT_BASE_URL + "/products";

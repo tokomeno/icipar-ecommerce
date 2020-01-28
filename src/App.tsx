@@ -1,12 +1,12 @@
 import React from "react";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
-import { HomePage } from "./pages/home/home";
+import { HomePage } from "./pages/home/home-page";
 import { TodoApp } from "./pages/Todo";
-import { AboutUsPage } from "./pages/about-us/aboutUsPage";
-import { ContactPage } from "./pages/contact/contact";
-import { HowItWorksPage } from "./pages/how-it-works/how-it-works";
-import { ShopPage } from "./pages/shops/shopPage";
-import { FaqPage } from "./pages/faq/faqPage";
+import { AboutUsPage } from "./pages/about-us/about-us-page";
+import { ContactPage } from "./pages/contact/contact-page";
+import { HowItWorksPage } from "./pages/how-it-works/how-it-works-page";
+import { ShopPage } from "./pages/shops/shop-page";
+import { FaqPage } from "./pages/faq/faq-page";
 import { AboutBrandPage } from "./pages/about-brand/about-brand-page";
 import { AllBrandsPage } from "./pages/all-brands/all-brands";
 import { CatalogPage } from "./pages/catalog/catalog-page";

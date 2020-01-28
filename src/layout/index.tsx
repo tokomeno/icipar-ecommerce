@@ -6,17 +6,22 @@ import { Footer } from "./footer/footer";
 import { MapComponent } from "./map/map";
 import { RegisterLogin } from "../components/register-login";
 import { ActiveModalProvider } from "../contexts/modalContex";
+import { connect } from "react-redux";
+import { IStoreState } from "../redux/mainReducer";
+import { AuthState } from "../redux/auth/authTypes";
+
 interface LayoutProps {
   children: React.ReactNode;
+  auth: AuthState;
 }
 
-export const Layout: React.FC<LayoutProps> = ({ children }) => {
+const _Layout: React.FC<LayoutProps> = ({ children, auth }) => {
   return (
     <React.Fragment>
       <ActiveModalProvider>
         <SearchNav />
         <BurgerNav />
-        <Header />
+        <Header user={auth.user} />
         <main className="site__content">
           <div className="content">
             {children}
@@ -24,8 +29,13 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           </div>
         </main>
         <Footer />
-        <RegisterLogin />
+        {!auth.isAuth && <RegisterLogin />}
       </ActiveModalProvider>
     </React.Fragment>
   );
 };
+
+const mapStateToProps = ({ auth }: IStoreState) => ({
+  auth: auth
+});
+export const Layout = connect(mapStateToProps)(_Layout);

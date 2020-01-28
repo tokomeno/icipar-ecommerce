@@ -8,7 +8,7 @@ import {
 import { ChangeLang } from "../../components/change-lang";
 import { useTranslation } from "react-i18next";
 import { IStoreState } from "../../redux/mainReducer";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 import { DEFAULT_AVATAR_PATH } from "../../consts";
 import classnames from "classnames";
 
@@ -16,7 +16,7 @@ interface HeaderProps {
   user: IStoreState["auth"]["user"];
 }
 
-const _Header: React.FC<HeaderProps> = ({ user }) => {
+export const Header: React.FC<HeaderProps> = ({ user }) => {
   const { t } = useTranslation();
 
   const { setActiveModal, activeModal, hideModal } = useContext<
@@ -364,12 +364,12 @@ const _Header: React.FC<HeaderProps> = ({ user }) => {
   );
 };
 
-const mapStateToProps = ({ auth }: IStoreState) => {
-  return {
-    user: auth.user
-  };
-};
-export const Header = connect(mapStateToProps)(_Header);
+// const mapStateToProps = ({ auth }: IStoreState) => {
+//   return {
+//     user: auth.user
+//   };
+// };
+// export const Header = connect(mapStateToProps)(_Header);
 
 type HeaderMenuItemProps = {
   title: string;

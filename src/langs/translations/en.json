@@ -32,6 +32,7 @@
     "brands": "brands",
     "more": "more",
     "ascending": "ascending",
-    "descending": "descending"
+    "descending": "descending",
+    "error_occured": "error_occured"
   }
 }

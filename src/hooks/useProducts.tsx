@@ -3,6 +3,25 @@ import { IProduct } from "../data/product";
 import axios from "axios";
 import { FETCH_PRODUCTS_URL } from "../api/endpoints";
 
+interface FetchProductResponse {
+  links: {
+    first: string;
+    last: string;
+    prev?: null | string;
+    next?: null | string;
+  };
+  meta: {
+    from: number;
+    to: number;
+    current_page: number;
+    last_page: number;
+    total: number;
+    path: string;
+    per_page: number;
+  };
+  data: IProduct[];
+}
+
 export type IProductFilter = {
   keyword?: string;
   category_ids?: number[];
@@ -25,23 +44,6 @@ export type IProductFilter = {
   order?: "-price";
 };
 
-type ILinks = {
-  first: string;
-  last: string;
-  prev?: null | string;
-  next?: null | string;
-};
-
-type IMeta = {
-  from: number;
-  to: number;
-  current_page: number;
-  last_page: number;
-  total: number;
-  path: string;
-  per_page: number;
-};
-
 export enum ascOrDesc {
   asc = "asc",
   desc = "desc"
@@ -49,13 +51,26 @@ export enum ascOrDesc {
 
 export type ISortByPrice = (ascOrDesc: ascOrDesc) => void;
 
-//  (ascDesc: "asc" | "desc") => {};
+const fetchProducts = (
+  url: string,
+  filtes: IProductFilter,
+  callback: Function
+): void => {
+  axios
+    .post<FetchProductResponse>(url, filtes)
+    .then(res => {
+      callback(res.data);
+    })
+    .catch(err => {
+      console.log(err);
+      alert("error_occured");
+    });
+};
 
 export const useProducts = (productFilter: IProductFilter = {}) => {
   const [products, setProducts] = useState<IProduct[]>([]);
-  const [links, setLinks] = useState<ILinks>();
+  const [links, setLinks] = useState<FetchProductResponse["links"]>();
   const [sortedBy, setSortedBy] = useState<ascOrDesc>(ascOrDesc.asc);
-  // const [meta, setMeta] = useState<IMeta[]>();
 
   const sortByPrice: ISortByPrice = asc_or_desc => {
     console.log(asc_or_desc);
@@ -70,22 +85,28 @@ export const useProducts = (productFilter: IProductFilter = {}) => {
 
   const nextPage = () => {
     if (links && links.next) {
-      axios.post(links.next, productFilter).then(res => {
-        console.log(res.data);
-        setProducts(prevState => {
-          return [...prevState, ...res.data.data];
-        });
-        setLinks(res.data.links);
-      });
+      fetchProducts(
+        links.next,
+        productFilter,
+        ({ links, data }: FetchProductResponse) => {
+          setProducts(prevState => {
+            return [...prevState, ...data];
+          });
+          setLinks(links);
+        }
+      );
     }
   };
 
   useEffect(() => {
-    axios.post(FETCH_PRODUCTS_URL, productFilter).then(res => {
-      console.log(res.data);
-      setProducts(res.data.data);
-      setLinks(res.data.links);
-    });
+    fetchProducts(
+      FETCH_PRODUCTS_URL,
+      productFilter,
+      ({ links, data }: FetchProductResponse) => {
+        setProducts(data);
+        setLinks(links);
+      }
+    );
   }, [productFilter]);
 
   return {

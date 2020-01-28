@@ -40,7 +40,7 @@ export const CatalogPage: React.FC<CatalogPageProps> = props => {
               <div className="list">
                 <FilterDropdown title={"კატეგორია"}>
                   {productCategories.map(ch => (
-                    <label className="filter-link">
+                    <label key={ch.id} className="filter-link">
                       {ch.title}
                       <input type="checkbox" />
                       <span className="checkmark" />

@@ -21,8 +21,7 @@ export const HomePage: React.FC<HomePageProps> = () => {
     windowM.grid1();
     windowM.grid2();
     windowM.menuSort();
-    // windowM.commentSlider();
-    windowM.searchDrop();
+    // windowM.searchDrop();
   }, []);
   return (
     <Layout>

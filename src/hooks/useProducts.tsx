@@ -41,7 +41,7 @@ export type IProductFilter = {
     max: number;
   };
   gender_ids?: number[];
-  order?: "-price";
+  order?: "-price" | "price";
 };
 
 export enum ascOrDesc {
@@ -70,18 +70,6 @@ const fetchProducts = (
 export const useProducts = (productFilter: IProductFilter = {}) => {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [links, setLinks] = useState<FetchProductResponse["links"]>();
-  const [sortedBy, setSortedBy] = useState<ascOrDesc>(ascOrDesc.asc);
-
-  const sortByPrice: ISortByPrice = asc_or_desc => {
-    console.log(asc_or_desc);
-    setSortedBy(asc_or_desc);
-    setProducts(prevState => {
-      return [...prevState].sort((a, b) => {
-        if (asc_or_desc === ascOrDesc.asc) return a.price_min - b.price_min;
-        else return b.price_min - a.price_min;
-      });
-    });
-  };
 
   const nextPage = () => {
     if (links && links.next) {
@@ -111,8 +99,6 @@ export const useProducts = (productFilter: IProductFilter = {}) => {
 
   return {
     products,
-    sortByPrice,
-    sortedBy,
     links,
     nextPage,
     haveNextPage: (links && links.next) || null

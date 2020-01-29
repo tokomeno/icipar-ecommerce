@@ -1,10 +1,14 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { Layout } from "../../layout";
 import { Product } from "../../components/product/product";
-import { dummyProductData, IProduct } from "../../data/product";
 import { FilterDropdown } from "../../components/fliter-dropdown/filter-dropdown";
 import { productCategories } from "../../data/categories";
-import { useProducts, IProductFilter } from "../../hooks/useProducts";
+import {
+  useProducts,
+  IProductFilter,
+  ISortByPrice,
+  ascOrDesc
+} from "../../hooks/useProducts";
 import { useTranslation } from "react-i18next";
 import { CatBanner } from "../../components/cat-banner";
 import { PriceSorter } from "../../components/product-filters/price-sorter";
@@ -13,21 +17,14 @@ interface CatalogPageProps {}
 
 export const CatalogPage: React.FC<CatalogPageProps> = props => {
   const { t } = useTranslation();
-  const productFilter = useMemo<IProductFilter>(() => {
-    console.log("in");
-    if (Math.random() > 1.6) {
-      return {};
-    }
-    return { age_range: { max: 12, min: 12 } };
-  }, []);
-  console.log(productFilter);
-  const {
-    products,
-    nextPage,
-    haveNextPage,
-    sortByPrice,
-    sortedBy
-  } = useProducts(productFilter);
+  const [productFilter, setProductFilter] = useState<IProductFilter>({});
+  const sortByPrice: ISortByPrice = asc_or_desc => {
+    setProductFilter(prevState => ({
+      ...prevState,
+      order: ascOrDesc.asc === asc_or_desc ? "price" : "-price"
+    }));
+  };
+  const { products, nextPage, haveNextPage } = useProducts(productFilter);
   return (
     <Layout>
       <div className="container">
@@ -99,7 +96,10 @@ export const CatalogPage: React.FC<CatalogPageProps> = props => {
                   <span className="cat-menu_item">ქალი</span>
                 </div>
 
-                <PriceSorter sortByPrice={sortByPrice} sortedBy={sortedBy} />
+                <PriceSorter
+                  sortByPrice={sortByPrice}
+                  ordering={productFilter.order}
+                />
               </div>
               <div className="d-flex flex-wrap justify-content-sm-start justify-content-center">
                 {products.map(p => (

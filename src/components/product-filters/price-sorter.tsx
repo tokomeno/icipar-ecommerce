@@ -4,12 +4,12 @@ import { ISortByPrice, ascOrDesc } from "../../hooks/useProducts";
 
 interface PriceSorterProps {
   sortByPrice: ISortByPrice;
-  sortedBy: ascOrDesc;
+  ordering?: "price" | "-price";
 }
 
 export const PriceSorter: React.FC<PriceSorterProps> = ({
   sortByPrice,
-  sortedBy
+  ordering
 }) => {
   const { t } = useTranslation();
   return (
@@ -25,8 +25,11 @@ export const PriceSorter: React.FC<PriceSorterProps> = ({
             aria-haspopup="true"
             aria-expanded="false"
           >
-            {t("price")}:{" "}
-            {sortedBy === ascOrDesc.asc ? t("ascending") : t("descending")}
+            {t("price")}: {ordering === "-price" && t("descending")}
+            {ordering === "price" && t("ascending")}
+            {ordering !== "price" &&
+              ordering !== "-price" &&
+              t("choose_price_filter")}
             <i className="fas fa-chevron-down" />
             <i className="fas fa-chevron-up" />
           </button>

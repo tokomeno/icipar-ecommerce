@@ -11,6 +11,7 @@ import { IStoreState } from "../../redux/mainReducer";
 // import { connect } from "react-redux";
 import { DEFAULT_AVATAR_PATH } from "../../consts";
 import classnames from "classnames";
+import { Search } from "./search";
 
 interface HeaderProps {
   user: IStoreState["auth"]["user"];
@@ -118,59 +119,7 @@ export const Header: React.FC<HeaderProps> = ({ user }) => {
                 <Link to="/" className="logo col-md-3">
                   <img src="/assets/images/logo.svg" alt="logo" />
                 </Link>
-                <div className="col-md-7">
-                  <form className="search d-flex justify-content-between">
-                    <div className="search-dropdown dropdown d-flex">
-                      <button
-                        className="btn btn-secondary dropdown-toggle"
-                        type="button"
-                        id="categories"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                        <img
-                          src="/assets/images/squares.svg"
-                          alt="squares icon"
-                        />
-                        <span>კატეგორიები</span>
-                        <i className="fas fa-angle-down" />
-                        <i className="fas fa-angle-up" />
-                      </button>
-                      <div
-                        className="dropdown-menu search-menu"
-                        aria-labelledby="categories"
-                      >
-                        <a className="dropdown-item" href="#!">
-                          სუნამოები
-                        </a>
-                        <a className="dropdown-item" href="#!">
-                          კანის მოვლა
-                        </a>
-                        <a className="dropdown-item" href="#!">
-                          თმის მოვლა
-                        </a>
-                        <a className="dropdown-item" href="#!">
-                          მაკიაჟი
-                        </a>
-                        <a className="dropdown-item" href="#!">
-                          ფრჩხილის მოვლა
-                        </a>
-                        <a className="dropdown-item" href="#!">
-                          პარაფარმაცია
-                        </a>
-                      </div>
-                    </div>
-                    <input
-                      type="text"
-                      className="search-input"
-                      placeholder="შეიყვანეთ საძიებო სიტყვა…"
-                    />
-                    <button type="submit" className="search-btn">
-                      <i className="fas fa-search" />
-                    </button>
-                  </form>
-                </div>
+                <Search />
                 <div className="col-md-2 d-flex align-items-center justify-content-end">
                   <div className="hdr-cart">
                     <div className="dropdown">

@@ -19,9 +19,9 @@ const _Layout: React.FC<LayoutProps> = ({ children, auth }) => {
   return (
     <React.Fragment>
       <ActiveModalProvider>
-        <SearchNav />
+        {/* <SearchNav />
         <BurgerNav />
-        <Header user={auth.user} />
+        <Header user={auth.user} /> */}
         <main className="site__content">
           <div className="content">
             {children}

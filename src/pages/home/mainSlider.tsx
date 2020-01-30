@@ -1,8 +1,21 @@
 import React, { useEffect } from "react";
 import Swiper from "react-id-swiper";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 interface MainSliderProps {}
 
+const params = {
+  speed: 800,
+  autoplay: {
+    delay: 2500,
+    disableOnInteraction: false
+  },
+  pagination: {
+    el: ".main-slider-lg .swiper-pagination",
+    clickable: true
+  }
+};
 export const MainSlider: React.FC<MainSliderProps> = props => {
   return (
     <div className="main-slider">
@@ -10,16 +23,19 @@ export const MainSlider: React.FC<MainSliderProps> = props => {
         <Swiper
           wrapperClass="swiper-wrapper"
           containerClass="swiper-container main-slider-lg"
+          {...params}
         >
           <Item />
         </Swiper>
-        <div className="swiper-pagination" />
+        {/* <div className="swiper-pagination" /> */}
+        {/* <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span></div> */}
       </div>
     </div>
   );
 };
 
 const Item = () => {
+  const { t } = useTranslation();
   return (
     <div className="swiper-slide d-flex align-items-center justify-content-center">
       <div className="container swiper-slide-content flex-sm-row flex-column">
@@ -40,15 +56,15 @@ const Item = () => {
               <span>მოდური ქალბატონებისთვის</span>
             </h2>
           </a>
-          <a href="#!" className="desc_link d-none d-md-inline-block">
-            შეძენა
+          <Link to="#!" className="desc_link d-none d-md-inline-block">
+            {t("shedena")}
             <img src="/assets/images/arrow-right.svg" alt="arrow" />
             <img
               src="/assets/images/arrow-right_red.svg"
               alt="arrow"
               className="red"
             />
-          </a>
+          </Link>
         </div>
       </div>
     </div>

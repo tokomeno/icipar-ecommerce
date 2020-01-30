@@ -1,8 +1,6 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useState, useCallback } from "react";
 import { Layout } from "../../layout";
 import { Product } from "../../components/product/product";
-import { FilterDropdown } from "../../components/fliter-dropdown/filter-dropdown";
-import { productCategories } from "../../data/categories";
 import {
   useProducts,
   IProductFilter,
@@ -10,20 +8,38 @@ import {
   ascOrDesc
 } from "../../hooks/useProducts";
 import { useTranslation } from "react-i18next";
-import { CatBanner } from "../../components/cat-banner";
 import { PriceSorter } from "../../components/product-filters/price-sorter";
+import { useProductFilterData } from "../../hooks/useProductFilterData";
+import { CatalogFilters, IChekedFilters } from "./catalog-filters";
+
+import queryString from "query-string";
 
 interface CatalogPageProps {}
 
-export const CatalogPage: React.FC<CatalogPageProps> = props => {
+export type FOnFilterChange = (d: IChekedFilters) => void;
+
+export const CatalogPage: React.FC<CatalogPageProps> = () => {
   const { t } = useTranslation();
+
   const [productFilter, setProductFilter] = useState<IProductFilter>({});
+
   const sortByPrice: ISortByPrice = asc_or_desc => {
+    console.log("sortByPrice");
     setProductFilter(prevState => ({
       ...prevState,
       order: ascOrDesc.asc === asc_or_desc ? "price" : "-price"
     }));
   };
+
+  const onFilterChange: FOnFilterChange = useCallback(
+    filter => {
+      const qF = queryString.stringify(filter);
+      setProductFilter(prevState => ({ ...prevState, ...filter }));
+      console.log(qF, filter);
+    },
+    [setProductFilter]
+  );
+
   const { products, nextPage, haveNextPage } = useProducts(productFilter);
   return (
     <Layout>
@@ -34,58 +50,12 @@ export const CatalogPage: React.FC<CatalogPageProps> = props => {
               <button className="burger-close d-block d-lg-none">
                 <img src="images/close.svg" alt="close" />
               </button>
-              <div className="list">
-                <FilterDropdown
-                  childClass="filter-menu flex-column"
-                  title={"კატეგორია"}
-                >
-                  {productCategories.map(ch => (
-                    <label key={ch.id} className="filter-link">
-                      {ch.title}
-                      <input type="checkbox" />
-                      <span className="checkmark" />
-                    </label>
-                  ))}
-                </FilterDropdown>
-
-                <FilterDropdown
-                  classes="price-filter"
-                  childClass="price-range justify-content-center"
-                  title={"ფასი"}
-                >
-                  <div className="money_range">
-                    <div className="input_blocks d-flex">
-                      <div className="inps_bl">
-                        <input
-                          type="text"
-                          className="price"
-                          id="min_value"
-                          name="priceFrom"
-                          defaultValue={0}
-                        />
-                      </div>
-                      <div className="inps_bl">
-                        <input
-                          type="text"
-                          className="price"
-                          id="max_value"
-                          name="priceEnd"
-                          defaultValue={500.0}
-                        />
-                      </div>
-                      <button className="ok-btn">OK</button>
-                    </div>
-                    <div id="slider-range" />
-                  </div>
-                </FilterDropdown>
-
-                <CatBanner to={"#!"} image={"/assets/uploads/images/ban.png"} />
-              </div>
+              <CatalogFilters onFilterChange={onFilterChange} />
             </div>
             <div className="catalog">
               <div className="catalog_top d-flex justify-content-between align-items-center flex-column flex-lg-row">
                 <div className="cat-menu d-flex">
-                  <a href="#!" className="cat-menu_item">
+                  {/* <a href="#!" className="cat-menu_item">
                     მთავარი
                   </a>
                   <div className="right"> &gt; </div>
@@ -93,7 +63,7 @@ export const CatalogPage: React.FC<CatalogPageProps> = props => {
                     სუნამოები
                   </a>
                   <div className="right"> &gt; </div>
-                  <span className="cat-menu_item">ქალი</span>
+                  <span className="cat-menu_item">ქალი</span> */}
                 </div>
 
                 <PriceSorter
@@ -117,7 +87,6 @@ export const CatalogPage: React.FC<CatalogPageProps> = props => {
           </div>
         </div>
       </div>
-      ;
     </Layout>
   );
 };

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { IProduct } from "../data/product";
 import axios from "axios";
 import { FETCH_PRODUCTS_URL } from "../api/endpoints";
+import { useHistory, useParams } from "react-router-dom";
 
 interface FetchProductResponse {
   links: {
@@ -70,6 +71,8 @@ const fetchProducts = (
 export const useProducts = (productFilter: IProductFilter = {}) => {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [links, setLinks] = useState<FetchProductResponse["links"]>();
+  const history = useHistory();
+  const params = useParams();
 
   const nextPage = () => {
     if (links && links.next) {
@@ -91,6 +94,7 @@ export const useProducts = (productFilter: IProductFilter = {}) => {
       FETCH_PRODUCTS_URL,
       productFilter,
       ({ links, data }: FetchProductResponse) => {
+        console.log(productFilter, "aaaaaaaaaaaaaaaaaaaa");
         setProducts(data);
         setLinks(links);
       }

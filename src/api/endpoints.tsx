@@ -11,3 +11,4 @@ export const API_GA_LOGIN_URL =
 export const PRODUCT_BASE_URL = "http://3.18.107.107/api";
 
 export const FETCH_PRODUCTS_URL = PRODUCT_BASE_URL + "/products";
+export const FETCH_PRODUCTS_FILTER_DATA = PRODUCT_BASE_URL + "/product-filters";

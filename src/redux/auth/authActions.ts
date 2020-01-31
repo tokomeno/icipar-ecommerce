@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useHistory } from "react-router";
 import { AuthActionTypes, IUser, AuthState } from "./authTypes";
 import { Dispatch } from "redux";
 import { API_LOGIN_URL, API_REGISTER_URL } from "../../api/endpoints";

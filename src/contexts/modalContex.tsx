@@ -1,7 +1,7 @@
 import React, { createContext, useState } from "react";
 
 export type IActiveModalContext = {
-  activeModal: "login-register" | "search-modal" | null;
+  activeModal: "login-register" | "search-modal" | "burger-menu" | null;
   setActiveModal: (n: IActiveModalContext["activeModal"]) => void;
   hideModal: () => void;
 };
@@ -29,7 +29,7 @@ export const ActiveModalProvider: React.FC<{}> = ({ children }) => {
   };
 
   const setActiveModal: IActiveModalContext["setActiveModal"] = name => {
-    if (name === "search-modal") {
+    if (name === "search-modal" || name === "burger-menu") {
       document.body.style.overflowY = "hidden";
       document.body.style.overflowX = "hidden";
     }

@@ -10,9 +10,8 @@ interface FilterCheckboxesProps {
   checkboxes: { title: string; id: number | string }[];
   type?: "colors";
 }
-
-// type ICheckbox = { [key in string | number]: boolean };
 type ICheckbox = (number | string)[];
+
 export const FilterCheckboxes: React.FC<FilterCheckboxesProps> = React.memo(
   ({ checkboxes, type, filterName }) => {
     const { setNewFilter, productFilterData } = useContext(
@@ -21,7 +20,6 @@ export const FilterCheckboxes: React.FC<FilterCheckboxesProps> = React.memo(
     const [checkedIds, setCheckedIds] = useState<ICheckbox>(
       productFilterData[filterName] || []
     );
-    console.log(productFilterData[filterName]);
 
     const handleChange = (ch: { title: string; id: number | string }) => {
       if (isChecked(ch.id)) {

@@ -5,11 +5,9 @@ import { Header } from "./header/header";
 import { Footer } from "./footer/footer";
 import { MapComponent } from "./map/map";
 import { RegisterLogin } from "../components/register-login";
-import { ActiveModalProvider } from "../contexts/modalContex";
 import { connect } from "react-redux";
 import { IStoreState } from "../redux/mainReducer";
 import { AuthState } from "../redux/auth/authTypes";
-import { PorductFilterProvider } from "../contexts/productFilterContext";
 
 interface LayoutProps {
   children: React.ReactNode;

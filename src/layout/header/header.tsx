@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useCallback } from "react";
 import { productCategories } from "../../data/categories";
 import { Link, NavLink } from "react-router-dom";
 import {
@@ -12,6 +12,7 @@ import { IStoreState } from "../../redux/mainReducer";
 import { DEFAULT_AVATAR_PATH } from "../../consts";
 import classnames from "classnames";
 import { Search } from "./search";
+import { useToggle } from "../../hooks/common/useToggle";
 
 interface HeaderProps {
   user: IStoreState["auth"]["user"];
@@ -24,15 +25,37 @@ export const Header: React.FC<HeaderProps> = ({ user }) => {
     IActiveModalContext
   >(ActiveModalContext);
 
+  const { isActive, toggle, setActive, setInActive } = useToggle(false);
+
+  // TODO: CHECK PERFOMANCE ISSUE
+  const handleScroll = useCallback(
+    (event: any) => {
+      if (window.scrollY > 80) {
+        setActive();
+      } else {
+        setInActive();
+      }
+    },
+    [setInActive, setActive]
+  );
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [toggle, handleScroll]);
+
   return (
     <React.Fragment>
       <div
         className={classnames("bg__site", {
-          active: activeModal === "search-modal"
+          active:
+            activeModal === "search-modal" || activeModal === "burger-menu"
         })}
         onClick={hideModal}
       ></div>
-      <header className="site__header">
+      <header className={classnames("site__header", { active: isActive })}>
         <div className="header d-flex flex-md-column flex-column-reverse">
           <div className="header-sale text-center">
             <p className="header-sale_txt d-none d-md-block">
@@ -80,7 +103,10 @@ export const Header: React.FC<HeaderProps> = ({ user }) => {
                       </Link>
                     </li>
                   </ul>
-                  <div className="burger-btn d-lg-none d-block">
+                  <div
+                    onClick={() => setActiveModal("burger-menu")}
+                    className="burger-btn d-lg-none d-block"
+                  >
                     <span />
                     <span />
                     <span />
@@ -278,7 +304,10 @@ export const Header: React.FC<HeaderProps> = ({ user }) => {
           <div className="container d-block d-md-none">
             <div className="xs-header d-flex align-items-center justify-content-around">
               <div className="d-flex align-items-center">
-                <div className="burger-btn d-lg-none d-block">
+                <div
+                  onClick={() => setActiveModal("burger-menu")}
+                  className="burger-btn d-lg-none d-block"
+                >
                   <span />
                   <span />
                   <span />

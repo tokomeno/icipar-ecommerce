@@ -7,5 +7,13 @@ export const useToggle = (defaultValue: boolean) => {
     setToggle(prevState => !prevState);
   };
 
-  return { isActive, toggle };
+  const setActive = () => {
+    setToggle(true);
+  };
+
+  const setInActive = () => {
+    setToggle(false);
+  };
+
+  return { isActive, toggle, setActive, setInActive };
 };

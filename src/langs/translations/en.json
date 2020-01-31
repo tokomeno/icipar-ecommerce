@@ -34,6 +34,18 @@
     "ascending": "ascending",
     "descending": "descending",
     "error_occured": "error_occured",
-    "shedena": "შეძენა"
+    "shedena": "შეძენა",
+    "aromas": "aromas",
+    "genders": "genders",
+    "collections": "collections",
+    "usages": "usages",
+    "smells": "smells",
+    "countries": "countries",
+    "color_groups": "color_groups",
+    "filters": "filters",
+    "price": "price",
+    "filters": "filters",
+    "price": "price",
+    "categories": "categories"
   }
 }

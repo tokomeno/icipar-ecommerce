@@ -1,11 +1,7 @@
 import React, { useContext } from "react";
 import { Layout } from "../../layout";
 import { Product } from "../../components/product/product";
-import {
-  useProducts,
-  ISortByPrice,
-  ascOrDesc
-} from "../../hooks/useProducts/useProducts";
+import { useProducts } from "../../hooks/useProducts/useProducts";
 import { useTranslation } from "react-i18next";
 import { PriceSorter } from "../../components/product-filters/price-sorter";
 import { CatalogFilters } from "./catalog-filters";
@@ -15,19 +11,8 @@ interface CatalogPageProps {}
 
 export const CatalogPage: React.FC<CatalogPageProps> = () => {
   const { t } = useTranslation();
-  const { productFilterData, setProductFilterData } = useContext(
-    PorductFilterContext
-  );
+  const { productFilterData } = useContext(PorductFilterContext);
   const { products, nextPage, haveNextPage } = useProducts(productFilterData);
-
-  const sortByPrice: ISortByPrice = asc_or_desc => {
-    setProductFilterData(prevState => ({
-      ...prevState,
-      order: ascOrDesc.asc === asc_or_desc ? "price" : "-price"
-    }));
-  };
-
-  console.log(productFilterData);
 
   if (!productFilterData) return <div></div>;
   return (
@@ -55,10 +40,7 @@ export const CatalogPage: React.FC<CatalogPageProps> = () => {
                   <span className="cat-menu_item">ქალი</span> */}
                 </div>
 
-                <PriceSorter
-                  sortByPrice={sortByPrice}
-                  ordering={productFilterData.order || "price"}
-                />
+                <PriceSorter ordering={productFilterData.order || "price"} />
               </div>
               <div className="d-flex flex-wrap justify-content-sm-start justify-content-center">
                 {products.map(p => (

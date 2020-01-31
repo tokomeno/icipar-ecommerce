@@ -12,10 +12,10 @@ interface ProductSliderProps {
   title: string;
   showMoreNumber: number;
   menuCetegories: IProductCetegory[];
-  initSlider?: () => void;
   classes: {
     sectionClasses?: string[];
   };
+  isHot?: boolean;
 }
 
 const params = {
@@ -53,7 +53,8 @@ export const ProductSlider: React.FC<ProductSliderProps> = ({
   showMoreNumber,
   menuCetegories,
   products,
-  classes
+  classes,
+  isHot
 }) => {
   const { sliderNav, currentSliderIndex } = useSliderNav(products.length, 0);
 
@@ -87,6 +88,7 @@ export const ProductSlider: React.FC<ProductSliderProps> = ({
                 wrapperClass={"swiper-slide"}
                 key={index}
                 product={product}
+                isHot={isHot}
               />
             ))}
           </Swiper>

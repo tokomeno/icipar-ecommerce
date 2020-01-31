@@ -1,12 +1,3 @@
-// categories
-// genders
-// brands
-// collections
-// aromas
-// smells
-// usages
-// color_groups
-// countries
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import { FETCH_PRODUCTS_FILTER_DATA } from "../api/endpoints";

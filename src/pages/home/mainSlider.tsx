@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Swiper from "react-id-swiper";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";

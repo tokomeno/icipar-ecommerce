@@ -1,8 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Layout } from "../../layout";
 import { MainSlider } from "./mainSlider";
-import { HotSlider } from "./hotSlider";
-
 import { ProductSlider } from "../../components/sliders/producSlider/productSlider";
 import { productCategories } from "../../data/categories";
 import { dummyProductData } from "../../data/product";
@@ -16,13 +14,12 @@ interface HomePageProps {}
 
 export const HomePage: React.FC<HomePageProps> = () => {
   const { t } = useTranslation();
-  let windowM: any = window;
-  useEffect(() => {
-    windowM.grid1();
-    windowM.grid2();
-    windowM.menuSort();
-    // windowM.searchDrop();
-  }, []);
+  // let windowM: any = window;
+  // useEffect(() => {
+  //   windowM.grid1();
+  //   windowM.grid2();
+  //   // windowM.menuSort();
+  // }, []);
   return (
     <Layout>
       <MainSlider />
@@ -186,17 +183,23 @@ export const HomePage: React.FC<HomePageProps> = () => {
           </div>
         </div>
       </div>
-      <HotSlider />
+
+      <ProductSlider
+        title={t("hotOffer")}
+        menuCetegories={productCategories}
+        showMoreNumber={123}
+        products={dummyProductData}
+        classes={{ sectionClasses: ["hot__slide"] }}
+        isHot={true}
+      />
       <ProductSlider
         title={t("news")}
         menuCetegories={productCategories}
         showMoreNumber={123}
         products={dummyProductData}
-        initSlider={windowM.newsSlider}
         classes={{ sectionClasses: ["news__slide"] }}
       />
       <ProductSlider
-        initSlider={() => {}}
         classes={{ sectionClasses: ["saleslider"] }}
         title={t("sales")}
         menuCetegories={productCategories}
@@ -204,7 +207,6 @@ export const HomePage: React.FC<HomePageProps> = () => {
         products={dummyProductData}
       />
       <ProductSlider
-        initSlider={() => {}}
         classes={{ sectionClasses: ["bestsellerslider"] }}
         title={t("bestsellers")}
         menuCetegories={productCategories}
@@ -212,7 +214,6 @@ export const HomePage: React.FC<HomePageProps> = () => {
         products={dummyProductData}
       />
       <ProductSlider
-        initSlider={() => {}}
         classes={{ sectionClasses: ["recommendedslider"] }}
         title={t("recomendations")}
         menuCetegories={productCategories}

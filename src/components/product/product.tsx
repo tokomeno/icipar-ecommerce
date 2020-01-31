@@ -4,13 +4,19 @@ import { ProductRaiting } from "./product-raiting";
 import { ProductCartBtn } from "./product-cart-btn";
 import { ProductHeartBtn } from "./product-heart-btn";
 import { Link } from "react-router-dom";
+import { Hot } from "../hot/hot";
 
 interface ProductProps {
   product: IProduct;
   wrapperClass: "catalog-item" | "swiper-slide" | "product";
+  isHot?: boolean;
 }
 
-export const Product: React.FC<ProductProps> = ({ wrapperClass, product }) => {
+export const Product: React.FC<ProductProps> = ({
+  wrapperClass,
+  product,
+  isHot
+}) => {
   return (
     <React.Fragment>
       <div className={wrapperClass}>
@@ -26,6 +32,7 @@ export const Product: React.FC<ProductProps> = ({ wrapperClass, product }) => {
             </div>
           </div>
         </div>
+        {isHot && <Hot />}
         <Link to={`/product/${product.id}`} className="news_link">
           {product.title}
         </Link>

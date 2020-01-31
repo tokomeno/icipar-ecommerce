@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ActiveModalContext } from "../../contexts/modalContex";
+import classnames from "classnames";
 
 interface BurgerNavProps {}
 
 export const BurgerNav: React.FC<BurgerNavProps> = props => {
+  const { activeModal, hideModal } = useContext(ActiveModalContext);
   return (
     <React.Fragment>
-      <div className="burger-nav">
-        <button className="burger-close">
+      <div
+        className={classnames("burger-nav", {
+          active: activeModal === "burger-menu"
+        })}
+      >
+        <button className="burger-close" onClick={hideModal}>
           <img src="/assets/images/close.svg" alt="close" />
         </button>
         <div className="burger-nav_block">

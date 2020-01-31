@@ -4,7 +4,7 @@ import { ProductRaiting } from "./product-raiting";
 import { ProductCartBtn } from "./product-cart-btn";
 import { ProductHeartBtn } from "./product-heart-btn";
 import { Link } from "react-router-dom";
-import { Hot } from "../hot/hot";
+import { ProductHot } from "./product-hot";
 
 interface ProductProps {
   product: IProduct;
@@ -32,7 +32,7 @@ export const Product: React.FC<ProductProps> = ({
             </div>
           </div>
         </div>
-        {isHot && <Hot />}
+        {isHot && <ProductHot />}
         <Link to={`/product/${product.id}`} className="news_link">
           {product.title}
         </Link>

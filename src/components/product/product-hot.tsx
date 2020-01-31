@@ -1,8 +1,8 @@
 import React from "react";
 
-interface HotProps {}
+interface ProductHotProps {}
 
-export const Hot: React.FC<HotProps> = props => {
+export const ProductHot: React.FC<ProductHotProps> = props => {
   return (
     <div className="hot-block d-flex">
       <div className="timer d-flex flex-column align-items-center justify-content-center">

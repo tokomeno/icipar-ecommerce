@@ -6,10 +6,16 @@ import { Provider } from "react-redux";
 import { App } from "./App";
 import "swiper/swiper.scss";
 import { store } from "./redux/store";
+import { PorductFilterProvider } from "./contexts/productFilterContext";
+import { ActiveModalProvider } from "./contexts/modalContex";
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <PorductFilterProvider>
+      <ActiveModalProvider>
+        <App />
+      </ActiveModalProvider>
+    </PorductFilterProvider>
   </Provider>,
   document.getElementById("root")
 );

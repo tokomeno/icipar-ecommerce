@@ -1,45 +1,35 @@
-import React, { useState, useCallback } from "react";
+import React, { useContext } from "react";
 import { Layout } from "../../layout";
 import { Product } from "../../components/product/product";
-import { useProducts, ISortByPrice, ascOrDesc } from "../../hooks/useProducts";
+import {
+  useProducts,
+  ISortByPrice,
+  ascOrDesc
+} from "../../hooks/useProducts/useProducts";
 import { useTranslation } from "react-i18next";
 import { PriceSorter } from "../../components/product-filters/price-sorter";
 import { CatalogFilters } from "./catalog-filters";
-import { IChekedFilters } from "../../contexts/productFilterContext";
-import queryString from "query-string";
+import { PorductFilterContext } from "../../contexts/productFilterContext";
 
 interface CatalogPageProps {}
 
-export type FOnFilterChange = (
-  ids: (number | string)[],
-  filterName: keyof IChekedFilters
-) => void;
-
-export type IProductFilterObject = Partial<IChekedFilters> & {
-  order?: "price" | "-price";
-};
-
 export const CatalogPage: React.FC<CatalogPageProps> = () => {
   const { t } = useTranslation();
-
-  const [productFilter, setProductFilter] = useState<IProductFilterObject>(
-    () => {
-      return queryString.parse(window.location.search);
-    }
+  const { productFilterData, setProductFilterData } = useContext(
+    PorductFilterContext
   );
+  const { products, nextPage, haveNextPage } = useProducts(productFilterData);
 
   const sortByPrice: ISortByPrice = asc_or_desc => {
-    setProductFilter(prevState => ({
+    setProductFilterData(prevState => ({
       ...prevState,
       order: ascOrDesc.asc === asc_or_desc ? "price" : "-price"
     }));
   };
 
-  const handleFilterChange: FOnFilterChange = useCallback((ids, filterName) => {
-    setProductFilter(prevState => ({ ...prevState, [filterName]: ids }));
-  }, []);
+  console.log(productFilterData);
 
-  const { products, nextPage, haveNextPage } = useProducts(productFilter);
+  if (!productFilterData) return <div></div>;
   return (
     <Layout>
       <div className="container">
@@ -49,7 +39,7 @@ export const CatalogPage: React.FC<CatalogPageProps> = () => {
               <button className="burger-close d-block d-lg-none">
                 <img src="images/close.svg" alt="close" />
               </button>
-              <CatalogFilters onFilterChange={handleFilterChange} />
+              <CatalogFilters />
             </div>
             <div className="catalog">
               <div className="catalog_top d-flex justify-content-between align-items-center flex-column flex-lg-row">
@@ -67,7 +57,7 @@ export const CatalogPage: React.FC<CatalogPageProps> = () => {
 
                 <PriceSorter
                   sortByPrice={sortByPrice}
-                  ordering={productFilter.order || "price"}
+                  ordering={productFilterData.order || "price"}
                 />
               </div>
               <div className="d-flex flex-wrap justify-content-sm-start justify-content-center">

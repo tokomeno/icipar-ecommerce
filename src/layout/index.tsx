@@ -9,6 +9,7 @@ import { ActiveModalProvider } from "../contexts/modalContex";
 import { connect } from "react-redux";
 import { IStoreState } from "../redux/mainReducer";
 import { AuthState } from "../redux/auth/authTypes";
+import { PorductFilterProvider } from "../contexts/productFilterContext";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -18,19 +19,17 @@ interface LayoutProps {
 const _Layout: React.FC<LayoutProps> = ({ children, auth }) => {
   return (
     <React.Fragment>
-      <ActiveModalProvider>
-        {/* <SearchNav />
-        <BurgerNav />
-        <Header user={auth.user} /> */}
-        <main className="site__content">
-          <div className="content">
-            {children}
-            <MapComponent />
-          </div>
-        </main>
-        <Footer />
-        {!auth.isAuth && <RegisterLogin />}
-      </ActiveModalProvider>
+      <SearchNav />
+      <BurgerNav />
+      <Header user={auth.user} />
+      <main className="site__content">
+        <div className="content">
+          {children}
+          <MapComponent />
+        </div>
+      </main>
+      <Footer />
+      {!auth.isAuth && <RegisterLogin />}
     </React.Fragment>
   );
 };

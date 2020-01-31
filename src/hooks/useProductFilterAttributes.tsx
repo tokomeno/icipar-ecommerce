@@ -76,19 +76,19 @@ interface Child {
   title: string;
 }
 
-export const useProductFilterData = () => {
-  const [productFilterData, setProductFilterData] = useState<
+export const useProductFilterAttributes = () => {
+  const [productFilterAttributes, setProductFilterAttributes] = useState<
     IProductFilterData
   >();
   useEffect(() => {
     Axios.get<{ data: IProductFilterData }>(FETCH_PRODUCTS_FILTER_DATA).then(
       res => {
         const data = addTitlePropertoesToFilterData(res.data.data);
-        setProductFilterData(data);
+        setProductFilterAttributes(data);
       }
     );
   }, []);
-  return { productFilterData };
+  return { productFilterAttributes };
 };
 
 const addTitlePropertoesToFilterData = (data: IProductFilterData) => {

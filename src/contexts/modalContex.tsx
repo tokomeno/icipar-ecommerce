@@ -5,11 +5,15 @@ export type IActiveModalContext = {
   setActiveModal: (n: IActiveModalContext["activeModal"]) => void;
   hideModal: () => void;
 };
-export const ActiveModalContext = createContext<IActiveModalContext>({
-  activeModal: null,
-  setActiveModal: () => {},
-  hideModal: () => {}
-});
+export const ActiveModalContext = createContext<IActiveModalContext>(
+  {} as IActiveModalContext
+);
+
+// {
+//   activeModal: null,
+//   setActiveModal: () => {},
+//   hideModal: () => {}
+// }
 
 export const ActiveModalProvider: React.FC<{}> = ({ children }) => {
   const [state, setState] = useState<{
@@ -18,8 +22,17 @@ export const ActiveModalProvider: React.FC<{}> = ({ children }) => {
     activeModal: null
   });
 
-  const hideModal = () => setState({ ...state, activeModal: null });
+  const hideModal = () => {
+    document.body.style.overflowY = "initial";
+    document.body.style.overflowX = "initial";
+    setState({ ...state, activeModal: null });
+  };
+
   const setActiveModal: IActiveModalContext["setActiveModal"] = name => {
+    if (name === "search-modal") {
+      document.body.style.overflowY = "hidden";
+      document.body.style.overflowX = "hidden";
+    }
     setState({ ...state, activeModal: name });
   };
 

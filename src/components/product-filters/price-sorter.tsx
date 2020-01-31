@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { ISortByPrice, ascOrDesc } from "../../hooks/useProducts";
+import { ISortByPrice, ascOrDesc } from "../../hooks/useProducts/useProducts";
 
 interface PriceSorterProps {
   sortByPrice: ISortByPrice;

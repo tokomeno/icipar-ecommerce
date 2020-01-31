@@ -1,22 +1,27 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import classnames from "classnames";
-import { IChekedFilters } from "../../contexts/productFilterContext";
+import {
+  IChekedFilters,
+  PorductFilterContext
+} from "../../contexts/productFilterContext";
 
 interface FilterCheckboxesProps {
   filterName: keyof IChekedFilters;
   checkboxes: { title: string; id: number | string }[];
-  onCheckBoxChange: (
-    checkedIds: (string | number)[],
-    filterName: keyof IChekedFilters
-  ) => void;
   type?: "colors";
 }
 
 // type ICheckbox = { [key in string | number]: boolean };
 type ICheckbox = (number | string)[];
 export const FilterCheckboxes: React.FC<FilterCheckboxesProps> = React.memo(
-  ({ checkboxes, onCheckBoxChange, type, filterName }) => {
-    const [checkedIds, setCheckedIds] = useState<ICheckbox>([]);
+  ({ checkboxes, type, filterName }) => {
+    const { setNewFilter, productFilterData } = useContext(
+      PorductFilterContext
+    );
+    const [checkedIds, setCheckedIds] = useState<ICheckbox>(
+      productFilterData[filterName] || []
+    );
+    console.log(productFilterData[filterName]);
 
     const handleChange = (ch: { title: string; id: number | string }) => {
       if (isChecked(ch.id)) {
@@ -29,13 +34,13 @@ export const FilterCheckboxes: React.FC<FilterCheckboxesProps> = React.memo(
       return checkedIds.indexOf(id) > -1;
     };
 
-    const hasMounted = useRef(false);
+    const isFirstMount = useRef(true);
     useEffect(() => {
-      if (hasMounted.current) {
-        onCheckBoxChange(checkedIds, filterName);
+      if (!isFirstMount.current) {
+        setNewFilter(checkedIds, filterName);
       }
-      hasMounted.current = true;
-    }, [checkedIds, onCheckBoxChange, hasMounted, filterName]);
+      isFirstMount.current = false;
+    }, [checkedIds, setNewFilter, isFirstMount, filterName]);
 
     return (
       <React.Fragment>

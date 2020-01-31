@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 
 interface ProducShowPageProps {}
 
-export const ProducShowPage: React.FC<ProducShowPageProps> = props => {
+export const ProducShowPage: React.FC<ProducShowPageProps> = () => {
   const { t } = useTranslation();
 
   return (

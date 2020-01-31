@@ -1,5 +1,7 @@
 import React from "react";
 import { IProduct } from "../../data/product";
+import classnames from "classnames";
+import { NavLink } from "react-router-dom";
 
 interface ProductSliderItemProps {
   product: IProduct;
@@ -17,11 +19,13 @@ export const ProductSliderItem: React.FC<ProductSliderItemProps> = ({
         <div className="option d-flex justify-content-between align-items-center">
           <div className="d-flex">
             <div className="rating">
-              <span className="fa fa-star checked" />
-              <span className="fa fa-star checked" />
-              <span className="fa fa-star" />
-              <span className="fa fa-star" />
-              <span className="fa fa-star" />
+              {[1, 2, 3, 4, 5].map(i => (
+                <span
+                  className={classnames("fa fa-star", {
+                    checked: i < product.rating
+                  })}
+                />
+              ))}
             </div>
             <span className="rateNum">(123)</span>
           </div>
@@ -43,9 +47,9 @@ export const ProductSliderItem: React.FC<ProductSliderItemProps> = ({
           </div>
         </div>
       </div>
-      <a href="#!" className="news_link">
+      <NavLink to={`/product/${product.id}`} className="news_link">
         {product.title}
-      </a>
+      </NavLink>
       <div className="price">
         {product.price}
         <sub>D</sub>

@@ -1,55 +1,23 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import { FilterDropdown } from "../../components/fliter-dropdown/filter-dropdown";
 import { FilterCheckboxes } from "../../components/fliter-dropdown/filter-checkboxes";
 import { CatBanner } from "../../components/cat-banner";
 import { useProductFilterData } from "../../hooks/useProductFilterData";
 import { useTranslation } from "react-i18next";
-import { FOnFilterChange } from "./catalog-page";
+import { FOnFilterChange, IProductFilterObject } from "./catalog-page";
+import { IChekedFilters } from "../../contexts/productFilterContext";
 
 interface CatalogFiltersProps {
   onFilterChange: FOnFilterChange;
 }
 
-export interface IChekedFilters {
-  categories: (string | number)[];
-  aromas: (string | number)[];
-  genders: (string | number)[];
-  brands: (string | number)[];
-  collections: (string | number)[];
-  usages: (string | number)[];
-  smells: (string | number)[];
-  color_groups: (string | number)[];
-  countries: (string | number)[];
-}
-const defaultData: IChekedFilters = {
-  categories: [],
-  aromas: [],
-  genders: [],
-  brands: [],
-  collections: [],
-  usages: [],
-  smells: [],
-  color_groups: [],
-  countries: []
-};
-
 export const CatalogFilters: React.FC<CatalogFiltersProps> = ({
   onFilterChange
 }) => {
   const { t } = useTranslation();
-  const [filter, setFilter] = useState<IChekedFilters>(defaultData);
   const { productFilterData } = useProductFilterData();
 
-  const onCheckBoxChange = useCallback(
-    (ids: (number | string)[], filterName: keyof IChekedFilters) => {
-      setFilter(prevState => ({ ...prevState, [filterName]: ids }));
-    },
-    [setFilter]
-  );
-
-  useEffect(() => {
-    onFilterChange(filter);
-  }, [filter, onFilterChange]);
+  // const checkedIds = useMemo(() => function() {}, []);
 
   if (!productFilterData) return <div className="list" />;
   return (
@@ -57,56 +25,56 @@ export const CatalogFilters: React.FC<CatalogFiltersProps> = ({
       <FilterDropdown type="default" title={t("categories")}>
         <FilterCheckboxes
           filterName="categories"
-          onCheckBoxChange={onCheckBoxChange}
+          onCheckBoxChange={onFilterChange}
           checkboxes={productFilterData["categories"]}
         />
       </FilterDropdown>
       <FilterDropdown type="default" title={t("aromas")}>
         <FilterCheckboxes
           filterName="aromas"
-          onCheckBoxChange={onCheckBoxChange}
+          onCheckBoxChange={onFilterChange}
           checkboxes={productFilterData["aromas"]}
         />
       </FilterDropdown>
       <FilterDropdown type="default" title={t("genders")}>
         <FilterCheckboxes
           filterName="genders"
-          onCheckBoxChange={onCheckBoxChange}
+          onCheckBoxChange={onFilterChange}
           checkboxes={productFilterData["genders"]}
         />
       </FilterDropdown>
       <FilterDropdown type="default" title={t("brands")}>
         <FilterCheckboxes
           filterName="brands"
-          onCheckBoxChange={onCheckBoxChange}
+          onCheckBoxChange={onFilterChange}
           checkboxes={productFilterData["brands"]}
         />
       </FilterDropdown>
       <FilterDropdown type="default" title={t("collections")}>
         <FilterCheckboxes
           filterName="collections"
-          onCheckBoxChange={onCheckBoxChange}
+          onCheckBoxChange={onFilterChange}
           checkboxes={productFilterData["collections"]}
         />
       </FilterDropdown>
       <FilterDropdown type="default" title={t("usages")}>
         <FilterCheckboxes
           filterName="usages"
-          onCheckBoxChange={onCheckBoxChange}
+          onCheckBoxChange={onFilterChange}
           checkboxes={productFilterData["usages"]}
         />
       </FilterDropdown>
       <FilterDropdown type="default" title={t("smells")}>
         <FilterCheckboxes
           filterName="smells"
-          onCheckBoxChange={onCheckBoxChange}
+          onCheckBoxChange={onFilterChange}
           checkboxes={productFilterData["smells"]}
         />
       </FilterDropdown>
       <FilterDropdown type="default" title={t("countries")}>
         <FilterCheckboxes
           filterName="countries"
-          onCheckBoxChange={onCheckBoxChange}
+          onCheckBoxChange={onFilterChange}
           checkboxes={productFilterData["countries"]}
         />
       </FilterDropdown>
@@ -114,7 +82,7 @@ export const CatalogFilters: React.FC<CatalogFiltersProps> = ({
         <FilterCheckboxes
           type="colors"
           filterName="color_groups"
-          onCheckBoxChange={onCheckBoxChange}
+          onCheckBoxChange={onFilterChange}
           checkboxes={productFilterData["color_groups"]}
         />
       </FilterDropdown>

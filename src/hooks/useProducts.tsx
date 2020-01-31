@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { IProduct } from "../data/product";
 import axios from "axios";
 import { FETCH_PRODUCTS_URL } from "../api/endpoints";
-import { useHistory, useParams } from "react-router-dom";
+import { IProductFilterObject } from "../pages/catalog/catalog-page";
+import queryString from "query-string";
 
 interface FetchProductResponse {
   links: {
@@ -23,7 +24,7 @@ interface FetchProductResponse {
   data: IProduct[];
 }
 
-export type IProductFilter = {
+export type IProductFilterRequestParam = {
   keyword?: string;
   category_ids?: number[];
   age_range?: {
@@ -54,11 +55,22 @@ export type ISortByPrice = (ascOrDesc: ascOrDesc) => void;
 
 const fetchProducts = (
   url: string,
-  filtes: IProductFilter,
+  productFilterData: IProductFilterObject,
   callback: Function
 ): void => {
+  let a = queryString.stringify(productFilterData);
+  console.log(a, queryString.parse(a));
+
+  let newurl =
+    window.location.protocol +
+    "//" +
+    window.location.host +
+    window.location.pathname +
+    `?${a}`;
+  window.history.pushState({ path: newurl }, "", newurl);
+
   axios
-    .post<FetchProductResponse>(url, filtes)
+    .post<FetchProductResponse>(url, {})
     .then(res => {
       callback(res.data);
     })
@@ -68,17 +80,15 @@ const fetchProducts = (
     });
 };
 
-export const useProducts = (productFilter: IProductFilter = {}) => {
+export const useProducts = (productFilterData: IProductFilterObject) => {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [links, setLinks] = useState<FetchProductResponse["links"]>();
-  const history = useHistory();
-  const params = useParams();
 
   const nextPage = () => {
     if (links && links.next) {
       fetchProducts(
         links.next,
-        productFilter,
+        productFilterData,
         ({ links, data }: FetchProductResponse) => {
           setProducts(prevState => {
             return [...prevState, ...data];
@@ -92,14 +102,13 @@ export const useProducts = (productFilter: IProductFilter = {}) => {
   useEffect(() => {
     fetchProducts(
       FETCH_PRODUCTS_URL,
-      productFilter,
+      productFilterData,
       ({ links, data }: FetchProductResponse) => {
-        console.log(productFilter, "aaaaaaaaaaaaaaaaaaaa");
         setProducts(data);
         setLinks(links);
       }
     );
-  }, [productFilter]);
+  }, [productFilterData]);
 
   return {
     products,

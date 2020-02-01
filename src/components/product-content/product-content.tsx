@@ -1,125 +1,78 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
+import { IProductWithItems } from "../../data/product";
+import { useTranslation } from "react-i18next";
+import classnames from "classnames";
 
-interface ProductContentProps {}
+interface ProductContentProps {
+  details: IProductWithItems["details"];
+  brand: IProductWithItems["brand"];
+}
+type ITabNames = keyof IProductWithItems["details"] | "brand";
 
-export const ProductContent: React.FC<ProductContentProps> = props => {
+export const ProductContent: React.FC<ProductContentProps> = ({
+  details,
+  brand
+}) => {
+  const { t } = useTranslation();
+  const [activeTab, setActiveTab] = useState<ITabNames>("description");
+
+  if (typeof details !== "object" || typeof brand !== "object") return null;
   return (
     <div className="container">
       <div className="nav nav-tabs prod-menu d-flex justify-content-lg-center justify-content-start">
         <a
-          className="prod-menu_link nav-link active"
-          data-toggle="tab"
-          href="#home"
+          className={classnames("prod-menu_link nav-link", {
+            active: activeTab === "description"
+          })}
+          href="#!"
+          onClick={() => {
+            setActiveTab("description");
+          }}
         >
-          პროდუქტის აღწერა
+          {t("product_description")}
         </a>
         <a
-          className="prod-menu_link nav-link"
-          data-toggle="tab"
-          href="#profile"
+          className={classnames("prod-menu_link nav-link", {
+            active: activeTab === "ingredients"
+          })}
+          onClick={() => {
+            setActiveTab("ingredients");
+          }}
+          href="#!"
         >
-          შემადგენლობა
+          {t("ingredients")}
         </a>
-        <a className="prod-menu_link nav-link" data-toggle="tab" href="#mesame">
-          გამოყენების წესი
+        <a
+          className={classnames("prod-menu_link nav-link", {
+            active: activeTab === "usage"
+          })}
+          onClick={() => {
+            setActiveTab("usage");
+          }}
+          href="#!"
+        >
+          {t("usage")}
         </a>
-        <a className="prod-menu_link nav-link" data-toggle="tab" href="#meotxe">
-          ბრენდის შესახებ
+
+        <a
+          className={classnames("prod-menu_link nav-link", {
+            active: activeTab === "brand"
+          })}
+          onClick={() => {
+            setActiveTab("brand");
+          }}
+          href="#!"
+        >
+          {t("about_brand")}
         </a>
       </div>
       <div className="menu_desc tab-content">
-        <div className="txt-block tab-pane fade show active" id="home">
+        <div className="txt-block tab-pane fade active show">
           <div className="d-flex flex-column align-items-center">
             <p className="txt text-center">
-              ეს არის სინათლისა და სიცოცხლის სურნელი - კეთილშობილი და
-              ბრწყინვალე!მის ხილოვან და მერქნისებურ სურნელს თანაბრად აფასებენ
-              ქალებიც და მამაკაცებიც. ეს სუნამო აგრძელებს ბაღების სურნელებათა
-              თემას, რომელიც 2003 წლიდან იღებს სათავეს… სუნამო განკუთვნილია
-              როგორც ქალბატონებისთვის, ასევე მამაკაცებისთვის.
-            </p>
-            <button className="see-more">გაიგე მეტი</button>
-            <div className="more-block d-flex flex-column align-items-center">
-              <img
-                src="uploads/images/more1.png"
-                alt=""
-                className="main-photo"
-              />
-              <h2 className="title">პროდუქტის სრული სახელწოდება</h2>
-              <p className="txt text-center">
-                ეს არის სინათლისა და სიცოცხლის სურნელი - კეთილშობილი და
-                ბრწყინვალე!მის ხილოვან და მერქნისებურ სურნელს თანაბრად აფასებენ
-                ქალებიც და მამაკაცებიც. ეს სუნამო აგრძელებს ბაღების სურნელებათა
-                თემას, რომელიც 2003 წლიდან იღებს სათავეს… სუნამო განკუთვნილია
-                როგორც ქალბატონებისთვის, ასევე მამაკაცებისთვის.
-              </p>
-              <div className="more-content">
-                <div className="row">
-                  <div className="col-sm-5">
-                    <div className="image">
-                      <img src="uploads/images/more2.png" alt="eiffel" />
-                    </div>
-                  </div>
-                  <div className="col-sm-7">
-                    <div className="desc d-flex flex-column justify-content-center">
-                      <h2 className="desc_title">როგორ დაიწყო?</h2>
-                      <p className="txt">
-                        ეს არის სინათლისა და სიცოცხლის სურნელი - კეთილშობილი და
-                        ბრწყინვალე!მის ხილოვან და მერქნისებურ სურნელს თანაბრად
-                        აფასებენ ქალებიც და მამაკაცებიც. ეს სუნამო აგრძელებს
-                        ბაღების სურნელებათა თემას, რომელიც 2003 წლიდან იღებს
-                        სათავეს… სუნამო განკუთვნილია როგორც ქალბატონებისთვის,
-                        ასევე მამაკაცებისთვის.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="row flex-sm-row flex-column-reverse">
-                  <div className="col-sm-7">
-                    <div className="desc d-flex flex-column align-items-sm-end align-items-center justify-content-center">
-                      <h2 className="desc_title text-right">სად შეიქმნა</h2>
-                      <p className="txt text-right">
-                        ეს არის სინათლისა და სიცოცხლის სურნელი - კეთილშობილი და
-                        ბრწყინვალე!მის ხილოვან და მერქნისებურ სურნელს თანაბრად
-                        აფასებენ ქალებიც და მამაკაცებიც. ეს სუნამო აგრძელებს
-                        ბაღების სურნელებათა თემას, რომელიც 2003 წლიდან იღებს
-                        სათავეს… სუნამო განკუთვნილია როგორც ქალბატონებისთვის,
-                        ასევე მამაკაცებისთვის.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="col-sm-5">
-                    <div className="image">
-                      <img src="uploads/images/more3.png" alt="" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <button className="close-btn">დახურვა</button>
-            </div>
-          </div>
-        </div>
-        <div className="txt-block tab-pane fade" id="profile">
-          <div className="d-flex flex-column align-items-center">
-            <p className="txt text-center">
-              ეს არის სინათლისა და სიცოცხლის სურნელი
-            </p>
-          </div>
-        </div>
-        <div className="txt-block tab-pane fade" id="mesame">
-          <div className="d-flex flex-column align-items-center">
-            <p className="txt text-center">
-              ეს არის სინათლისა და სიცოცხლის სურნელი ეს არის სინათლისა და
-              სიცოცხლის სურნელი ეს არის სინათლისა და სიცოცხლის სურნელი ეს არის
-              სინათლისა და სიცოცხლის სურნელი ეს არის სინათლისა და სიცოცხლის
-              სურნელი ეს არის სინათლისა და სიცოცხლის სურნელი
-            </p>
-          </div>
-        </div>
-        <div className="txt-block tab-pane fade" id="meotxe">
-          <div className="d-flex flex-column align-items-center">
-            <p className="txt text-center">
-              ეს არის სინათლისა და სიცოცხლის სურნელი ეს არის სინათლისა და
-              სიცოცხლის სურნელი
+              {activeTab === "brand"
+                ? brand["description"]
+                : details[activeTab]}
             </p>
           </div>
         </div>

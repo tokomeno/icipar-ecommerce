@@ -46,6 +46,12 @@
     "price": "price",
     "filters": "filters",
     "price": "price",
-    "categories": "categories"
+    "categories": "categories",
+    "what_others_bought": " what_others_bought",
+    "ertad_iafi": " ertad_iafi",
+    "pages": " pages",
+    "similar_products": "similar_products",
+    "ingredients": "შემადგენლობა",
+    "product_description": "პროდუქტის აღწერა"
   }
 }

@@ -79,7 +79,7 @@ export const dummyProductData: IProduct[] = [
 export interface IProductWithItems {
   id: number;
   title: string;
-  rating: string;
+  rating: number;
   details: {
     description: string;
     usage: string;

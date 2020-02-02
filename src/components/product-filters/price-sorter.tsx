@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { ISortByPrice, ascOrDesc } from "../../hooks/useProducts/useProducts";
 import { PorductFilterContext } from "../../contexts/productFilterContext";
+import { useToggle } from "../../hooks/common/useToggle";
 
 interface PriceSorterProps {
   ordering?: "price" | "-price";
@@ -9,6 +10,8 @@ interface PriceSorterProps {
 
 export const PriceSorter: React.FC<PriceSorterProps> = ({ ordering }) => {
   const { t } = useTranslation();
+
+  const { toggle, isActive } = useToggle(false);
 
   const { setProductFilterData } = useContext(PorductFilterContext);
 

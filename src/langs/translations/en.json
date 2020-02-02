@@ -52,6 +52,15 @@
     "pages": " pages",
     "similar_products": "similar_products",
     "ingredients": "შემადგენლობა",
-    "product_description": "პროდუქტის აღწერა"
+    "product_description": "პროდუქტის აღწერა",
+    "usage": "usage",
+    "about_brand": "about_brand",
+    "maragshia_erteuli": "მარაგშია {{number}} ერთეული",
+    "In_which_branch": "In which branch",
+    "Delivery_Conditions": "Delivery Conditions",
+    "news": "news",
+    "recomendations": "recomendations",
+    "folow_on_instargam": "folow_on_instargam",
+    "ganxilva": "განხილვა"
   }
 }

@@ -9,6 +9,8 @@ import { store } from "./redux/store";
 import { PorductFilterProvider } from "./contexts/productFilterContext";
 import { ActiveModalProvider } from "./contexts/modalContex";
 
+import "react-image-lightbox/style.css";
+
 ReactDOM.render(
   <Provider store={store}>
     <PorductFilterProvider>

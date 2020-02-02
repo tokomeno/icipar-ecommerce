@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { IProduct } from "../../data/product";
 import { FETCH_PRODUCTS_URL } from "../../api/endpoints";
 import { IProductFilterObject } from "../../contexts/productFilterContext";
@@ -31,15 +31,27 @@ export const useProducts = (productFilterData: IProductFilterObject) => {
     }
   };
 
+  const firstRender = useRef(true);
+
   useEffect(() => {
-    fetchProducts(
-      FETCH_PRODUCTS_URL,
-      productFilterData,
-      ({ links, data }: FetchProductResponse) => {
-        setProducts(data);
-        setLinks(links);
-      }
-    );
+    let time = 1500;
+    if (firstRender.current) {
+      firstRender.current = false;
+      time = 0;
+    }
+    const fetching = setTimeout(() => {
+      fetchProducts(
+        FETCH_PRODUCTS_URL,
+        productFilterData,
+        ({ links, data }: FetchProductResponse) => {
+          setProducts(data);
+          setLinks(links);
+        }
+      );
+    }, time);
+    return () => {
+      clearTimeout(fetching);
+    };
   }, [productFilterData]);
 
   return {

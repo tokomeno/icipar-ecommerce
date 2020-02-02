@@ -16,7 +16,7 @@ import { GiftCardPage } from "./pages/gift-card/gift-card-page";
 import { ProfileCheckoutPage } from "./pages/profile/checkout-page/checkout-page";
 import { GiftCardProfilePage } from "./pages/profile/gift-cart/gift-card-profile";
 import { OrdersProfilePage } from "./pages/profile/orders/orders-profile";
-import { ProducShowPage } from "./pages/product-show/product-show-page";
+import { ProducShowPage } from "./pages/product-show-page/product-show-page";
 import { ScrollToTop } from "./scrollToTop";
 import { AddressProiflePage } from "./pages/profile/address/address-profile";
 import { WishlistProfilePage } from "./pages/profile/wishlist/wishlist-profile-page";

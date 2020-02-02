@@ -1,12 +1,14 @@
 import React from "react";
-import { Layout } from "../../layout";
+import classnames from "classnames";
 
-interface DemoPageProps {}
+interface DemoProps {
+  Demo: number;
+}
 
-export const DemoPage: React.FC<DemoPageProps> = props => {
+export const Demo: React.FC<DemoProps> = ({ Demo }) => {
   return (
-    <Layout>
-      <div>Demo</div>
-    </Layout>
+    <div className="Demo">
+      <div>123</div>
+    </div>
   );
 };

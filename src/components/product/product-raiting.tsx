@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import classnames from "classnames";
+import React from "react";
+import { Rating } from "../rating";
 
 interface ProductRaitingProps {
   rateNum: number;
@@ -10,20 +10,9 @@ export const ProductRaiting: React.FC<ProductRaitingProps> = ({
   rateNum,
   starRate
 }) => {
-  const [rate, setRate] = useState(rateNum);
   return (
     <div className="d-flex">
-      <div className="rating">
-        {[1, 2, 3, 4, 5].map(n => (
-          <span
-            key={n}
-            onClick={() => {
-              setRate(n);
-            }}
-            className={classnames("fa fa-star", { checked: rate >= n })}
-          />
-        ))}
-      </div>
+      <Rating rating={rateNum} />
       <span className="rateNum">({rateNum})</span>
     </div>
   );

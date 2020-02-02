@@ -43,8 +43,6 @@ export const ProducShowPage: React.FC<ProducShowPageProps> = ({ match }) => {
     }
   }, [setActiveItem, product]);
 
-  console.log(match.params.id);
-
   if (!product || !activeItem) return null;
   return (
     <Layout>

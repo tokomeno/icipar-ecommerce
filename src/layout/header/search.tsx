@@ -1,17 +1,24 @@
 import React from "react";
+import { useToggle } from "../../hooks/common/useToggle";
+import classnames from "classnames";
 
 interface SearchProps {}
 
 export const Search: React.FC<SearchProps> = props => {
+  const { toggle, isActive } = useToggle();
   return (
     <div className="col-md-7">
       <form className="search d-flex justify-content-between">
-        <div className="search-dropdown dropdown d-flex __show">
+        <div
+          className={classnames("search-dropdown dropdown d-flex", {
+            show: isActive
+          })}
+        >
           <button
             className="btn btn-secondary dropdown-toggle"
             type="button"
             id="categories"
-            data-toggle="dropdown"
+            onClick={toggle}
             aria-haspopup="true"
             aria-expanded="false"
           >
@@ -20,7 +27,11 @@ export const Search: React.FC<SearchProps> = props => {
             <i className="fas fa-angle-down" />
             <i className="fas fa-angle-up" />
           </button>
-          <div className="dropdown-menu search-menu __show">
+          <div
+            className={classnames("dropdown-menu search-menu", {
+              show: isActive
+            })}
+          >
             <a className="dropdown-item" href="#!">
               სუნამოები
             </a>

@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { ISortByPrice, ascOrDesc } from "../../hooks/useProducts/useProducts";
 import { PorductFilterContext } from "../../contexts/productFilterContext";
 import { useToggle } from "../../hooks/common/useToggle";
-
+import classnames from "classnames";
 interface PriceSorterProps {
   ordering?: "price" | "-price";
 }
@@ -25,12 +25,11 @@ export const PriceSorter: React.FC<PriceSorterProps> = ({ ordering }) => {
     <div className="d-flex">
       <button className="filter-btn d-block d-lg-none">{t("filters")}</button>
       <div className="d-flex sort-price">
-        <div className="dropdown">
+        <div className={classnames("dropdown show", { show: isActive })}>
           <button
+            onClick={toggle}
             className="btn btn-secondary dropdown-toggle d-flex align-items-center"
             type="button"
-            id="dropdownMenuButton"
-            data-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="false"
           >
@@ -42,7 +41,7 @@ export const PriceSorter: React.FC<PriceSorterProps> = ({ ordering }) => {
             <i className="fas fa-chevron-down" />
             <i className="fas fa-chevron-up" />
           </button>
-          <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <div className={classnames("dropdown-menu", { show: isActive })}>
             <button
               className="dropdown-item"
               onClick={() => sortByPrice(ascOrDesc.asc)}

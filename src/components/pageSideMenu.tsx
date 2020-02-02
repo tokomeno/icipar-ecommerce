@@ -7,7 +7,7 @@ interface PageSideMenuProps {}
 export const AboutPagesMenu = [
   { title: "about_us", to: "/about-us" },
   { title: "how_it_works", to: "/how-it-works" },
-  { title: "delivery_terms", to: "#!" },
+  // { title: "delivery_terms", to: "#!" },
   { title: "contact", to: "/contact" },
   { title: "faq", to: "/faq" }
 ];

@@ -13,6 +13,9 @@ import { DEFAULT_AVATAR_PATH } from "../../consts";
 import classnames from "classnames";
 import { Search } from "./search";
 import { useToggle } from "../../hooks/common/useToggle";
+import { MenuCartAndWishDropdown } from "./menuCartAndWishDropdown";
+import { dummyProductData } from "../../data/product";
+import { AboutPagesMenu } from "../../components/pageSideMenu";
 
 interface HeaderProps {
   user: IStoreState["auth"]["user"];
@@ -65,6 +68,7 @@ export const Header: React.FC<HeaderProps> = ({ user }) => {
               40%-იანი ფასდაკლება მხოლოდ შენთვის
             </p>
           </div>
+
           <div className="sup-hdr d-none d-md-block">
             <div className="container">
               <div className="row align-items-center justify-content-between">
@@ -79,29 +83,17 @@ export const Header: React.FC<HeaderProps> = ({ user }) => {
                     <li className="store">
                       <Link to="/shops" className="sup-hdr_link">
                         <img src="/assets/images/marker.svg" alt="map marker" />
-                        მაღაზიები
+                        {t("shops")}
                       </Link>
                     </li>
-                    <li>
-                      <Link to="/about-us" className="sup-hdr_link">
-                        ჩვენს შესახებ
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="/contact" className="sup-hdr_link">
-                        კონტაქტი
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="/how-it-works" className="sup-hdr_link">
-                        როგორ მუშაობს?
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="/faq" className="sup-hdr_link">
-                        FAQ
-                      </Link>
-                    </li>
+
+                    {AboutPagesMenu.map(menu => (
+                      <li key={menu.to}>
+                        <Link to={menu.to} className="sup-hdr_link">
+                          {menu.title}
+                        </Link>
+                      </li>
+                    ))}
                   </ul>
                   <div
                     onClick={() => setActiveModal("burger-menu")}
@@ -145,16 +137,9 @@ export const Header: React.FC<HeaderProps> = ({ user }) => {
                 </Link>
                 <Search />
                 <div className="col-md-2 d-flex align-items-center justify-content-end">
-                  <div className="hdr-cart">
-                    <div className="dropdown">
-                      <button
-                        className="btn btn-secondary dropdown-toggle"
-                        type="button"
-                        id="cart1"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
+                  <MenuCartAndWishDropdown
+                    buttonChildren={
+                      <>
                         <img src="/assets/images/bag.svg" alt="cart" />
                         <div className="d-none d-lg-block">
                           <div className="price">
@@ -163,115 +148,46 @@ export const Header: React.FC<HeaderProps> = ({ user }) => {
                           </div>
                           <div className="title">{t("cart")}</div>
                         </div>
-                      </button>
-                      <div className="dropdown-menu" aria-labelledby="cart1">
-                        <div className="d-flex align-items-center item">
-                          <div className="image d-flex align-items-center justify-content-center">
-                            <img
-                              src="/assets/uploads/images/cart-product.png"
-                              alt=""
-                            />
-                          </div>
-                          <div className="desc">
-                            <div className="item-title">
-                              Calvin Klein All, 100ml, Red
-                            </div>
-                            <div className="price">
-                              110
-                              <sub>D</sub>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="d-flex align-items-center item">
-                          <div className="image d-flex align-items-center justify-content-center">
-                            <img
-                              src="/assets/uploads/images/cart-product.png"
-                              alt=""
-                            />
-                          </div>
-                          <div className="desc">
-                            <div className="item-title">
-                              Calvin Klein All, 100ml, Red
-                            </div>
-                            <div className="price">
-                              110
-                              <sub>D</sub>
-                            </div>
-                          </div>
-                        </div>
-                        <a
-                          href="#!"
-                          target="_blank"
-                          className="d-flex justify-content-between cart-btn"
-                        >
-                          {t("cart")}
-                          <img
-                            src="/assets/images/arrow-right.svg"
-                            alt="right arrow"
-                          />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
+                      </>
+                    }
+                    navLink={
+                      <NavLink
+                        to="/profile/cart"
+                        target="_blank"
+                        className="d-flex justify-content-between cart-btn"
+                        rel="noopener noreferrer"
+                      >
+                        {t("cart")}
+                        <img
+                          src="/assets/images/arrow-right.svg"
+                          alt="right arrow"
+                        />
+                      </NavLink>
+                    }
+                    products={dummyProductData.slice(1, 3)}
+                  />
 
-                  <div className="hdr-cart hdr-fav">
-                    <div className="dropdown">
-                      <button
-                        className="btn btn-secondary dropdown-toggle"
-                        type="button"
-                        id="cart"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
+                  <MenuCartAndWishDropdown
+                    wrapperClassName="hdr-fav"
+                    buttonChildren={
+                      <img src="/assets/images/heart.svg" alt="favorite" />
+                    }
+                    navLink={
+                      <NavLink
+                        to="/profile/wishes"
+                        target="_blank"
+                        className="d-flex justify-content-between cart-btn"
+                        rel="noopener noreferrer"
                       >
-                        <img src="/assets/images/heart.svg" alt="favorite" />
-                      </button>
-                      <div
-                        className="dropdown-menu dropdown-menu-right"
-                        aria-labelledby="cart"
-                      >
-                        <div className="d-flex align-items-center item">
-                          <div className="image d-flex align-items-center justify-content-center">
-                            <img
-                              src="/assets/uploads/images/cart-product.png"
-                              alt=""
-                            />
-                          </div>
-                          <div className="desc">
-                            <div className="item-title">
-                              Calvin Klein All, 100ml, Red
-                            </div>
-                          </div>
-                        </div>
-                        <div className="d-flex align-items-center item">
-                          <div className="image d-flex align-items-center justify-content-center">
-                            <img
-                              src="/assets/uploads/images/cart-product.png"
-                              alt=""
-                            />
-                          </div>
-                          <div className="desc">
-                            <div className="item-title">
-                              Calvin Klein All, 100ml, Red
-                            </div>
-                          </div>
-                        </div>
-                        <NavLink
-                          to="https://www.facebook.com/"
-                          target="_blank"
-                          className="d-flex justify-content-between cart-btn"
-                          rel="noopener noreferrer"
-                        >
-                          {" "}
-                          {t("wishes")}
-                          <img
-                            src="/assets/images/arrow-right.svg"
-                            alt="right arrow"
-                          />
-                        </NavLink>
-                      </div>
-                    </div>
-                  </div>
+                        {t("wishes")}
+                        <img
+                          src="/assets/images/arrow-right.svg"
+                          alt="right arrow"
+                        />
+                      </NavLink>
+                    }
+                    products={dummyProductData.slice(1, 3)}
+                  />
                 </div>
               </div>
             </div>
@@ -321,7 +237,10 @@ export const Header: React.FC<HeaderProps> = ({ user }) => {
                 >
                   <i className="fas fa-search" />
                 </div>
-                <div className="xs-hdr_btn btn-cart active">
+                <div
+                  onClick={() => history.push("/profile/cart")}
+                  className="xs-hdr_btn btn-cart active"
+                >
                   <div className="ball" />
                   <img src="/assets/images/bag-dark.svg" alt="cart" />
                 </div>

@@ -106,7 +106,6 @@ export const WishlistProfilePage: React.FC<WishlistProfilePageProps> = props => 
           </div>
         </div>
       </div>
-      ;
     </ProfileBasePage>
   );
 };

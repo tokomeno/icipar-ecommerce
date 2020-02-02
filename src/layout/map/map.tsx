@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import classnames from "classnames";
+import { useTranslation } from "react-i18next";
 
 interface MapComponentProps {
   children?: React.ReactNode;
@@ -7,18 +8,19 @@ interface MapComponentProps {
 
 export const MapComponent: React.FC<MapComponentProps> = ({ children }) => {
   const [mapBlockActive, setMapBlockActive] = useState<boolean>(false);
-  let mW: any = window;
-  const mapIsLoaded = mW.mapIsLoaded;
+  const { t } = useTranslation();
+
+  let a: any = window;
   useEffect(() => {
-    if (mapIsLoaded) mW.initMap();
-  }, [mapIsLoaded]);
+    if (a.initMap) a.initMap();
+  }, []);
   return (
     <div className="map-content">
       <button
         onClick={() => setMapBlockActive(prevState => !prevState)}
         className="map-btn"
       >
-        ჩვენი მაღაზიები
+        {t("our_shops")}
       </button>
       <div className={classnames("map-block", { active: mapBlockActive })}>
         <div id="map"></div>

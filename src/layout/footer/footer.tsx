@@ -94,7 +94,7 @@ export const Footer: React.FC<FooterProps> = props => {
                   ))}
                 </div>
                 <div className="col-md-3 d-none d-md-block">
-                  <div className="title">პირადი პროფილი</div>
+                  <div className="title">{t("personal_profile")}</div>
                   <a href="#!" className="footer-link">
                     {t("my_cart")}
                   </a>

@@ -281,7 +281,7 @@ const HeaderMenuItem: React.FC<HeaderMenuItemProps> = ({ title }) => {
       <a href="#!" className="link">
         {title}
       </a>
-      <div className="inner-menu">
+      {/* <div className="inner-menu">
         <div className="container">
           <div className="d-flex">
             <div className="inner-menu_block categories">
@@ -401,6 +401,7 @@ const HeaderMenuItem: React.FC<HeaderMenuItemProps> = ({ title }) => {
           </div>
         </div>
       </div>
+     */}
     </div>
   );
 };

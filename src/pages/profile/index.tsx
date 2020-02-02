@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { IUser } from "../../redux/auth/authTypes";
 import { logoutUser } from "../../redux/auth/authActions";
 import { IStoreState } from "../../redux/mainReducer";
+import { useHistory, useRouteMatch, useLocation } from "react-router-dom";
+import classnames from "classnames";
 
 interface ProfileBasePageProps {
   children: React.ReactNode;
@@ -16,15 +18,22 @@ interface ProfileBasePageProps {
 const _ProfileBasePage: React.FC<ProfileBasePageProps> = ({
   children,
   modal,
-  logoutUser
+  logoutUser,
+  user
 }) => {
+  const location = useLocation();
+
   return (
     <Layout>
       {modal}
       <div className="container">
-        <div className="profile shoppingCart">
+        <div
+          className={classnames("profile", {
+            shoppingCart: location.pathname !== "/profile"
+          })}
+        >
           <div className="d-flex">
-            <ProfileLeft logout={logoutUser} />
+            <ProfileLeft user={user} logout={logoutUser} />
             {children}
           </div>
         </div>

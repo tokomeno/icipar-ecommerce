@@ -9,17 +9,21 @@ import { brandsSlider } from "../../data/brands";
 import { BlogSlider } from "../../components/sliders/blog-slider/blog-slider";
 import { CommentSlider } from "../../components/comment-slider/comment-slider";
 import { useTranslation } from "react-i18next";
+import Swiper from "react-id-swiper";
 
 interface HomePageProps {}
 
+const sliderParams = {
+  speed: 500,
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true
+  }
+};
+
 export const HomePage: React.FC<HomePageProps> = () => {
   const { t } = useTranslation();
-  // let windowM: any = window;
-  // useEffect(() => {
-  //   windowM.grid1();
-  //   windowM.grid2();
-  //   // windowM.menuSort();
-  // }, []);
+
   return (
     <Layout>
       <MainSlider />
@@ -28,91 +32,74 @@ export const HomePage: React.FC<HomePageProps> = () => {
           <div className="row">
             <div
               className="col-md-3"
-              data-aos="fade-right"
-              data-aos-duration={1200}
+              data-aos-r="fade-right"
+              data-aos-r-duration={1200}
             >
               <a href="#!" className="d-block">
-                <div className="swiper-container grid-item grid1-cont">
-                  <div className="swiper-wrapper">
-                    <div className="swiper-slide">
-                      <div className="grid1">
-                        <div className="title">სიახლე</div>
-                        <img
-                          src="/assets/uploads/images/grid1.png"
-                          alt="mexx"
-                          className="bg-photo"
-                        />
-                        <div className="descr text-center">
-                          <h4 className="prod-title">
-                            Calvin Klein All, 100ml
-                          </h4>
-                          <div className="price">
-                            110
-                            <sub>D</sub>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="swiper-slide">
-                      <div className="grid1">
-                        <div className="title">სიახლე</div>
-                        <img
-                          src="/assets/uploads/images/grid1.png"
-                          alt="mexx"
-                          className="bg-photo"
-                        />
-                        <div className="descr text-center">
-                          <h4 className="prod-title">
-                            Calvin Klein All, 100ml
-                          </h4>
-                          <div className="price">
-                            110
-                            <sub>D</sub>
-                          </div>
+                <Swiper
+                  {...sliderParams}
+                  wrapperClass="swiper-wrapper"
+                  containerClass="swiper-container grid-item grid1-cont"
+                >
+                  <div className="swiper-slide">
+                    <div className="grid1">
+                      <div className="title">სიახლე</div>
+                      <img
+                        src="/assets/uploads/images/grid1.png"
+                        alt="mexx"
+                        className="bg-photo"
+                      />
+                      <div className="descr text-center">
+                        <h4 className="prod-title">
+                          1111 Calvin Klein All, 100ml
+                        </h4>
+                        <div className="price">
+                          110
+                          <sub>D</sub>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="swiper-pagination" />
-                </div>
+                </Swiper>
               </a>
             </div>
             <div className="col-md-9">
               <div className="row">
                 <div
                   className="col-md-8"
-                  data-aos-off="fade-up"
-                  data-aos-duration={1200}
+                  data-aos-r-off="fade-up"
+                  data-aos-r-duration={1200}
                 >
                   <a href="#!" className="d-block">
-                    <div className="swiper-container grid-item row-item grid2-cont">
-                      <div className="swiper-wrapper">
-                        <div className="swiper-slide">
-                          <div className="grid2">
-                            <div className="title">ბანდლი</div>
-                            <img
-                              src="/assets/uploads/images/grid2.png"
-                              alt="bundle"
-                              className="bg-photo"
-                            />
-                            <div className="desc">
-                              <h4 className="prod-title">
-                                საგაზაფცულო კოსმეტიკის
-                                <br />
-                                ნაკრები
-                              </h4>
-                            </div>
+                    <Swiper
+                      {...sliderParams}
+                      wrapperClass="swiper-wrapper"
+                      containerClass="swiper-container grid-item row-item grid2-cont"
+                    >
+                      <div className="swiper-slide">
+                        <div className="grid2">
+                          <div className="title">ბანდლი</div>
+                          <img
+                            src="/assets/uploads/images/grid2.png"
+                            alt="bundle"
+                            className="bg-photo"
+                          />
+                          <div className="desc">
+                            <h4 className="prod-title">
+                              საგაზაფცულო კოსმეტიკის
+                              <br />
+                              ნაკრები
+                            </h4>
                           </div>
                         </div>
                       </div>
-                      <div className="swiper-pagination" />
-                    </div>
+                    </Swiper>
                   </a>
                 </div>
                 <div
                   className="col-md-4"
-                  data-aos="fade-left"
-                  data-aos-duration={1600}
+                  data-aos-r="fade-left"
+                  data-aos-r-duration={1600}
                 >
                   <a href="#!" className="grid3 grid-item row-item d-block">
                     <img
@@ -140,8 +127,8 @@ export const HomePage: React.FC<HomePageProps> = () => {
               <div className="row last-row">
                 <div
                   className="col-md-4"
-                  data-aos-off="fade-up"
-                  data-aos-duration={800}
+                  data-aos-r-off="fade-up"
+                  data-aos-r-duration={800}
                 >
                   <a href="#!" className="grid4 grid-item row-item d-block">
                     <img
@@ -160,8 +147,8 @@ export const HomePage: React.FC<HomePageProps> = () => {
                 </div>
                 <div
                   className="col-md-8"
-                  data-aos="fade-left"
-                  data-aos-duration={1200}
+                  data-aos-r="fade-left"
+                  data-aos-r-duration={1200}
                 >
                   <a href="#!" className="d-block grid5 grid-item row-item">
                     <img
@@ -225,7 +212,7 @@ export const HomePage: React.FC<HomePageProps> = () => {
 
       <CommentSlider />
 
-      <div className="container" data-aos="fade-down">
+      <div className="container" data-aos-r="fade-down">
         <div className="insta text-center">
           <img src="/assets/images/insta.svg" alt="instagram" />
           <div className="insta-block">

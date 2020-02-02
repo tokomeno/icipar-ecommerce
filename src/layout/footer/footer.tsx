@@ -1,6 +1,8 @@
 import React from "react";
 import { productCategories } from "../../data/categories";
 import { useTranslation } from "react-i18next";
+import { AboutPagesMenu } from "../../components/pageSideMenu";
+import { NavLink } from "react-router-dom";
 
 interface FooterProps {}
 
@@ -64,11 +66,11 @@ export const Footer: React.FC<FooterProps> = props => {
                   <form className="d-flex">
                     <input type="email" placeholder="შეიყვანეთ ელ. ფოსტა…" />
                     <button type="submit" className="sent">
-                      გაგზავნა
+                      {t("send")}
                     </button>
                   </form>
                   <a href="#!" className="lang">
-                    ENG{" "}
+                    ENG
                   </a>
                 </div>
               </div>
@@ -76,7 +78,7 @@ export const Footer: React.FC<FooterProps> = props => {
             <div className="sub-footer">
               <div className="row justify-content-center">
                 <div className="col-md-3 d-none d-md-block">
-                  <div className="title">პროდუქცია</div>
+                  <div className="title">{t("produkqcia")}</div>
                   {productCategories.map(c => (
                     <a key={c.id} href="#!" className="footer-link">
                       {c.title}
@@ -84,40 +86,30 @@ export const Footer: React.FC<FooterProps> = props => {
                   ))}
                 </div>
                 <div className="col-md-3 d-none d-md-block">
-                  <div className="title">კომპანიის შესახებ</div>
-                  <a href="#!" className="footer-link">
-                    ჩვებს შესახებ
-                  </a>
-                  <a href="#!" className="footer-link">
-                    კონტაქტი
-                  </a>
-                  <a href="#!" className="footer-link">
-                    როგორ მუშაობს
-                  </a>
-                  <a href="#!" className="footer-link">
-                    მაღაზიები
-                  </a>
-                  <a href="#!" className="footer-link">
-                    FAQ
-                  </a>
+                  <div className="title">{t("about_company")}</div>
+                  {AboutPagesMenu.map(menu => (
+                    <NavLink key={menu.to} to={menu.to} className="footer-link">
+                      {t(menu.title)}
+                    </NavLink>
+                  ))}
                 </div>
                 <div className="col-md-3 d-none d-md-block">
                   <div className="title">პირადი პროფილი</div>
                   <a href="#!" className="footer-link">
-                    ჩემი {t("cart")}
+                    {t("my_cart")}
                   </a>
                   <a href="#!" className="footer-link">
-                    ჩემი {t("wishes")}
+                    {t("my_wishes")}
                   </a>
                   <a href="#!" className="footer-link">
-                    პერსონალური ინფორმაცია
+                    {t("personal_info")}
                   </a>
                   <a href="#!" className="footer-link">
-                    საყიდლების ისტორია
+                    {t("sayidlebis_istoria")}
                   </a>
                 </div>
                 <div className="col-md-3 col-7 contact-block">
-                  <div className="title">კონტაქტი</div>
+                  <div className="title">{t("contact")}</div>
                   <a href="te:+995322201717" className="footer-link d-flex">
                     <img src="/assets/images/phone-w.svg" alt="call" />
                     +995 32 2 20 17 17
@@ -131,11 +123,11 @@ export const Footer: React.FC<FooterProps> = props => {
                   </a>
                   <a href="#!" className="footer-link d-flex">
                     <img src="/assets/images/marker-w.svg" alt="stores" />
-                    მაღაზიები
+                    {t("shops")}
                   </a>
                   <a href="#!" className="footer-link d-flex">
                     <img src="/assets/images/car-w.svg" alt="car" />
-                    მიტანის პირობები
+                    {t("delivery_terms")}
                   </a>
                 </div>
               </div>

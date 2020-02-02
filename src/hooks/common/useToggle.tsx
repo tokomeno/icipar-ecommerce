@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const useToggle = (defaultValue: boolean) => {
+export const useToggle = (defaultValue: boolean = false) => {
   const [isActive, setToggle] = useState(defaultValue);
 
   const toggle = () => {

@@ -1,24 +1,32 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import { logoutUser } from "../../redux/auth/authActions";
+import { IUser } from "../../redux/auth/authTypes";
+import classnames from "classnames";
 
 interface ProfileLeftProps {
-  name?: string;
   logout: typeof logoutUser;
+  user: IUser;
 }
 
-export const ProfileLeft: React.FC<ProfileLeftProps> = ({ name, logout }) => {
+export const ProfileLeft: React.FC<ProfileLeftProps> = ({ user, logout }) => {
   const { t } = useTranslation();
   const history = useHistory();
+  const location = useLocation();
+
   return (
-    <div className="profile-left profile-side d-lg-block">
+    <div
+      className={classnames("profile-left profile-side d-lg-block", {
+        "d-none": location.pathname !== "/profile"
+      })}
+    >
       <div className="username text-center d-lg-none d-block">
-        {t("hello")} <span>{name}</span>
+        {t("hello")} <span>{user.name}</span>
       </div>
       <div className="user-image">
-        <img src="/assets/uploads/images/user.png" alt="user" />
+        <img src={user.avatar} alt="user" />
       </div>
       <NavItem to={"/profile"} title={"ჩემი გვერდი"}>
         <img src="/assets/images/user-g.svg" alt="user" />

@@ -27,8 +27,6 @@ export const MainSlider: React.FC<MainSliderProps> = props => {
         >
           <Item />
         </Swiper>
-        {/* <div className="swiper-pagination" /> */}
-        {/* <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span></div> */}
       </div>
     </div>
   );

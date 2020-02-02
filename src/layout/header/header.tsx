@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useCallback } from "react";
 import { productCategories } from "../../data/categories";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useHistory } from "react-router-dom";
 import {
   IActiveModalContext,
   ActiveModalContext
@@ -20,7 +20,7 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ user }) => {
   const { t } = useTranslation();
-
+  const history = useHistory();
   const { setActiveModal, activeModal, hideModal } = useContext<
     IActiveModalContext
   >(ActiveModalContext);
@@ -126,8 +126,6 @@ export const Header: React.FC<HeaderProps> = ({ user }) => {
                       onClick={() => setActiveModal("login-register")}
                       href="#!"
                       className="sup-hdr_link"
-                      data-target=".login"
-                      data-toggle="modal"
                     >
                       <img src="/assets/images/user.svg" alt="user" />
                       {t("register")}/{t("login")}
@@ -329,7 +327,13 @@ export const Header: React.FC<HeaderProps> = ({ user }) => {
                 </div>
                 <div
                   className="xs-hdr_btn btn-user"
-                  onClick={() => setActiveModal("login-register")}
+                  onClick={() => {
+                    if (user) {
+                      history.push("/profile");
+                    } else {
+                      setActiveModal("login-register");
+                    }
+                  }}
                 >
                   <img src="/assets/images/user.svg" alt="user" />
                 </div>

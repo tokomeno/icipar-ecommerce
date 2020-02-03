@@ -12,7 +12,11 @@ export const MapComponent: React.FC<MapComponentProps> = ({ children }) => {
 
   let a: any = window;
   useEffect(() => {
-    if (a.initMap) a.initMap();
+    try {
+      if (a.initMap) a.initMap();
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
   return (
     <div className="map-content">

@@ -2,7 +2,8 @@ import { CartActions, CartActionsType, ICartState } from "./cartTypes";
 
 const cartInitState: ICartState = {
   items: [],
-  itemsByKeys: {}
+  itemsByKeys: {},
+  totalPrice: 0
 };
 
 export const cartReducer = (

@@ -3,6 +3,7 @@ import { IProductWithItems, ICartItem } from "../../data/product";
 export interface ICartState {
   items: ICartItem[];
   itemsByKeys: { [key: number]: ICartItem | null };
+  totalPrice: number;
 }
 
 export enum CartActionsType {
@@ -17,6 +18,7 @@ export interface SetCartAction {
   type: CartActionsType.setCart;
   payload: {
     items: ICartItem[];
+    totalPrice: number;
   };
 }
 

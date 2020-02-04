@@ -8,12 +8,13 @@ import { AxiosResponse } from "axios";
 export const fetchCart: Function = () => {
   return async (dispatch: Dispatch) => {
     axiosWithToken
-      .get<{ data: { items: ICartItem[] } }>(GET_CART)
+      .get<{ data: { items: ICartItem[]; original_amount: number } }>(GET_CART)
       .then(res => {
         dispatch<SetCartAction>({
           type: CartActionsType.setCart,
           payload: {
-            items: res.data.data.items
+            items: res.data.data.items,
+            totalPrice: res.data.data.original_amount
           }
         });
       })
@@ -34,7 +35,8 @@ export const changeQnty: (itemId: number, qnty: number) => void = (
       dispatch<SetCartAction>({
         type: CartActionsType.setCart,
         payload: {
-          items: res.data.data.items
+          items: res.data.data.items,
+          totalPrice: res.data.data.original_amount
         }
       });
     });
@@ -47,7 +49,8 @@ export const removeItem = (item: ICartItem) => {
       dispatch<SetCartAction>({
         type: CartActionsType.setCart,
         payload: {
-          items: res.data.data.items
+          items: res.data.data.items,
+          totalPrice: res.data.data.original_amount
         }
       });
     });
@@ -57,8 +60,10 @@ export const removeItem = (item: ICartItem) => {
 const toogleItemRequest = (
   itemId: number,
   items_count: number
-): Promise<AxiosResponse<{ data: { items: ICartItem[] } }>> => {
-  return axiosWithToken.post<{ data: { items: ICartItem[] } }>(
-    CART_TOGGLE + `?item_id=${itemId}&items_count=${items_count}`
-  );
+): Promise<AxiosResponse<{
+  data: { items: ICartItem[]; original_amount: number };
+}>> => {
+  return axiosWithToken.post<{
+    data: { items: ICartItem[]; original_amount: number };
+  }>(CART_TOGGLE + `?item_id=${itemId}&items_count=${items_count}`);
 };

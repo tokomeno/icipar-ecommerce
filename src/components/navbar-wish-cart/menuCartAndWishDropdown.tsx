@@ -1,13 +1,14 @@
 import React from "react";
 import classnames from "classnames";
 import { Dropdown } from "react-bootstrap";
+import { ICartItem } from "../../data/product.js";
 import { CustomToggleMenuCartAndWish } from "./customToggleMenuCartAndWish.jsx";
-import { IProduct } from "../../data/product.js";
+import { DropDownProductItem } from "./dropDownProductItem";
 
 interface MenuCartAndWishDropdownProps {
   buttonChildren: React.ReactNode;
   navLink: React.ReactNode;
-  products: IProduct[];
+  products: ICartItem[];
   wrapperClassName?: "hdr-fav";
 }
 
@@ -28,29 +29,12 @@ export const MenuCartAndWishDropdown: React.FC<MenuCartAndWishDropdownProps> = (
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          <DropDownProductItem />
+          {products.map(p => (
+            <DropDownProductItem product={p} key={p.item_id} />
+          ))}
           {navLink}
         </Dropdown.Menu>
       </Dropdown>
-    </div>
-  );
-};
-
-interface DropDownProductItemProps {}
-
-const DropDownProductItem: React.FC<DropDownProductItemProps> = () => {
-  return (
-    <div className="d-flex align-items-center item">
-      <div className="image d-flex align-items-center justify-content-center">
-        <img src="/assets/uploads/images/cart-product.png" alt="" />
-      </div>
-      <div className="desc">
-        <div className="item-title">Calvin Klein All, 100ml, Red</div>
-        <div className="price">
-          110
-          <sub>D</sub>
-        </div>
-      </div>
     </div>
   );
 };

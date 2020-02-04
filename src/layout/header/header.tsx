@@ -13,9 +13,9 @@ import { DEFAULT_AVATAR_PATH } from "../../consts";
 import classnames from "classnames";
 import { Search } from "./search";
 import { useToggle } from "../../hooks/common/useToggle";
-import { MenuCartAndWishDropdown } from "./menuCartAndWishDropdown";
-import { dummyProductData } from "../../data/product";
 import { AboutPagesMenu } from "../../components/pageSideMenu";
+import { CartNavbarDropdown } from "../../components/navbar-wish-cart/cartNavbarDropdown";
+import { WishNavbarDropdown } from "../../components/navbar-wish-cart/wishNavbarDropdown";
 
 interface HeaderProps {
   user: IStoreState["auth"]["user"];
@@ -137,57 +137,8 @@ export const Header: React.FC<HeaderProps> = ({ user }) => {
                 </Link>
                 <Search />
                 <div className="col-md-2 d-flex align-items-center justify-content-end">
-                  <MenuCartAndWishDropdown
-                    buttonChildren={
-                      <>
-                        <img src="/assets/images/bag.svg" alt="cart" />
-                        <div className="d-none d-lg-block">
-                          <div className="price">
-                            110
-                            <sub>D</sub>
-                          </div>
-                          <div className="title">{t("cart")}</div>
-                        </div>
-                      </>
-                    }
-                    navLink={
-                      <NavLink
-                        to="/profile/cart"
-                        target="_blank"
-                        className="d-flex justify-content-between cart-btn"
-                        rel="noopener noreferrer"
-                      >
-                        {t("cart")}
-                        <img
-                          src="/assets/images/arrow-right.svg"
-                          alt="right arrow"
-                        />
-                      </NavLink>
-                    }
-                    products={dummyProductData.slice(1, 3)}
-                  />
-
-                  <MenuCartAndWishDropdown
-                    wrapperClassName="hdr-fav"
-                    buttonChildren={
-                      <img src="/assets/images/heart.svg" alt="favorite" />
-                    }
-                    navLink={
-                      <NavLink
-                        to="/profile/wishes"
-                        target="_blank"
-                        className="d-flex justify-content-between cart-btn"
-                        rel="noopener noreferrer"
-                      >
-                        {t("wishes")}
-                        <img
-                          src="/assets/images/arrow-right.svg"
-                          alt="right arrow"
-                        />
-                      </NavLink>
-                    }
-                    products={dummyProductData.slice(1, 3)}
-                  />
+                  <CartNavbarDropdown />
+                  <WishNavbarDropdown />
                 </div>
               </div>
             </div>

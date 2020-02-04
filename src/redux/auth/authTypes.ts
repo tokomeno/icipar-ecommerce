@@ -29,7 +29,7 @@ export enum AuthActionTypes {
   setAuthErrors = "setAuthErrors"
 }
 
-// // TODO:
+// TODO:
 // export interface LoginUserAction {
 //   type: AuthActionTypes.loginUser;
 //   payload: any;

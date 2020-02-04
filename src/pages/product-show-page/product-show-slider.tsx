@@ -69,7 +69,7 @@ export class ProductShowSlider extends React.PureComponent<
           className="slider-for"
         >
           {this.props.activeItem.images.map(image => (
-            <div className="item">
+            <div key={image.image} className="item">
               <img src={image.image} alt="" draggable="false" />
             </div>
           ))}
@@ -82,7 +82,7 @@ export class ProductShowSlider extends React.PureComponent<
           className="slider-nav d-none d-lg-flex flex-column justify-content-center"
         >
           {this.props.activeItem.images.map(image => (
-            <div className="item">
+            <div key={image.image} className="item">
               <img src={image.image} alt="" />
             </div>
           ))}

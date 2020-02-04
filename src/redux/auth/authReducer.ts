@@ -1,21 +1,21 @@
-import { AuthState, AuthActions, AuthActionTypes } from "./authTypes";
+import {
+  AuthState as IAuthState,
+  AuthActions,
+  AuthActionTypes
+} from "./authTypes";
 
-const authStateFromStorage = localStorage.getItem("auth");
+let initState: IAuthState = {
+  isAuth: false,
+  token: null,
+  user: null,
+  loading: false,
+  errors: null
+};
 
-let initState: AuthState;
-if (authStateFromStorage) {
-  initState = JSON.parse(authStateFromStorage);
-} else {
-  initState = {
-    isAuth: false,
-    token: null,
-    user: null,
-    loading: false,
-    errors: null
-  };
-}
-
-export const authReducer = (state = initState, action: AuthActions) => {
+export const authReducer = (
+  state = initState,
+  action: AuthActions
+): IAuthState => {
   switch (action.type) {
     case AuthActionTypes.setCurrentUser:
       const { user, token } = action.payload;

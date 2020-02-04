@@ -1,10 +1,12 @@
 import { useState } from "react";
 
 export const useCounter = (
-  defaultValue: number = 0,
+  defaultValue: (() => number) | number = 0,
   minValue: number | null = null
 ) => {
-  const [counter, setState] = useState(defaultValue);
+  const [counter, setState] = useState(() => {
+    return typeof defaultValue === "function" ? defaultValue() : defaultValue;
+  });
   const decrease = () => {
     setState(prev => {
       if (minValue && prev <= minValue) return prev;

@@ -13,7 +13,7 @@ import { CatalogPage } from "./pages/catalog/catalog-page";
 
 import { CouponsPage } from "./pages/profile/coupons/coupons-page";
 import { GiftCardPage } from "./pages/gift-card/gift-card-page";
-import { ProfileCheckoutPage } from "./pages/profile/checkout-page/checkout-page";
+import { CartPage } from "./pages/profile/cart-page/cart-page";
 import { GiftCardProfilePage } from "./pages/profile/gift-cart/gift-card-profile";
 import { OrdersProfilePage } from "./pages/profile/orders/orders-profile";
 import { ProducShowPage } from "./pages/product-show-page/product-show-page";
@@ -28,10 +28,13 @@ import i18next from "i18next";
 import "./langs//i18n";
 import { routes } from "./routes/routes";
 import { PrivateRoute } from "./routes/privateRoute";
+import { tryLocalAuth } from "./tryLocalAuth";
 
 export const HistoryContext = React.createContext<History>(
   (null as any) as History
 );
+
+tryLocalAuth();
 
 const App: React.FC<{}> = props => {
   return (
@@ -56,12 +59,8 @@ const App: React.FC<{}> = props => {
           <PrivateRoute>
             <Route path="/profile" exact component={ProfilePage} />
             <Route path="/profile/coupons" exact component={CouponsPage} />
-            <Route
-              path="/profile/checkout"
-              exact
-              component={ProfileCheckoutPage}
-            />
-            <Route path="/profile/cart" exact component={ProfileCheckoutPage} />
+            <Route path="/profile/checkout" exact component={CartPage} />
+            <Route path="/profile/cart" exact component={CartPage} />
             <Route path="/profile/orders" exact component={OrdersProfilePage} />
             <Route
               path="/profile/address"

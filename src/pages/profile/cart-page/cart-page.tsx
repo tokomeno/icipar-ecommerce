@@ -1,111 +1,51 @@
 import React from "react";
 import { ProfileBasePage } from "../index";
-import { IProduct } from "../../../data/product";
+import { IProduct, ICartItem } from "../../../data/product";
 import { useTranslation } from "react-i18next";
+import { connect } from "react-redux";
+import { IStoreState } from "../../../redux/mainReducer";
+import { changeQnty } from "../../../redux/cart/cartActions";
+import { useToggle } from "../../../hooks/common/useToggle";
+import { useCounter } from "../../../hooks/common/useCounter";
 
-interface ProfileCheckoutPageProps {}
+interface CartPageProps {
+  cartItems: ICartItem[];
+  changeQntyById: typeof changeQnty;
+}
 
-export const ProfileCheckoutPage: React.FC<ProfileCheckoutPageProps> = props => {
+const _CartPage: React.FC<CartPageProps> = ({ cartItems, changeQntyById }) => {
   const { t } = useTranslation();
 
   return (
     <ProfileBasePage>
       <div className="checkout-cont">
         <div className="checkout-top d-md-none d-flex align-items-center justify-content-center">
-          <div className="top_cart show active">ჩემი {t("cart")}</div>
+          <div className="top_cart show active">{t("my_cart")}</div>
           <span>/</span>
-          <div className="top_buy">შეძენა</div>
+          <div className="top_buy">{t("shedena")}</div>
         </div>
         <div className="profile-right profile-side table-profile checkout-first">
           <div className="profile-top d-none d-md-block">
-            <h1 className="profile-top_title">ჩემი {t("cart")}</h1>
+            <h1 className="profile-top_title">{t("my_cart")}</h1>
           </div>
           <div className="table-responsive">
             <table className="table">
               <thead>
                 <tr>
                   <th>{t("products")}</th>
-                  <th className="text-right">რაოდენობა</th>
-                  <th className="text-right">ფასი</th>
-                  <th className="text-right">ჯამი</th>
+                  <th className="text-right">{t("quantity")}</th>
+                  <th className="text-right">{t("price")}</th>
+                  <th className="text-right">{t("sum")}</th>
                 </tr>
               </thead>
               <tbody>
-                {/* <CartItem /> */}
-                <tr>
-                  <td className="first-td">
-                    <a href="#!" className="d-flex align-items-center">
-                      <div className="image d-flex align-items-center justify-content-center">
-                        <img
-                          src="/assets/uploads/images/cart-product@2x.png"
-                          alt="cart"
-                        />
-                      </div>
-                      <div>
-                        <div className="name">
-                          Calvin Klein All, 100ml, Red Calvin Klein All, 100ml,
-                          Red Calvin Klein All, 100ml, Red Calvin Klein All,
-                          100ml, Red
-                        </div>
-                        <div className="profbtns d-flex">
-                          <button className="profbtns_btn">
-                            {t("delete")}
-                          </button>
-                          <button className="profbtns_btn d-none d-md-block">
-                            მოგვიანებით შევიძენ
-                          </button>
-                          <button className="heart profbtns_btn">
-                            <img
-                              src="/assets/images/heart-border.svg"
-                              alt="favorite"
-                            />
-                            <img
-                              src="/assets/images/loved.svg"
-                              alt="favorite"
-                              className="added"
-                            />
-                          </button>
-                        </div>
-                      </div>
-                    </a>
-                  </td>
-                  <td>
-                    <div className="quantity d-flex flex-column align-items-center">
-                      <span className="plus">
-                        <i className="fas fa-chevron-up" />
-                      </span>
-                      <span className="qty">
-                        <input type="number" min={1} defaultValue={1} />
-                      </span>
-                      <span className="min">
-                        <i className="fas fa-chevron-down" />
-                      </span>
-                    </div>
-                  </td>
-                  <td className="price-td hidden-price">
-                    <div className="price-block">
-                      <div className="price text-right">
-                        110
-                        <sub>D</sub>
-                      </div>
-                      <div className="d-flex align-items-center justify-content-end">
-                        <div className="sale">-70%</div>
-                        <div className="old-price">
-                          500
-                          <sub>D</sub>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="price-td text-right">
-                    <div className="price-block">
-                      <div className="price sum">
-                        110
-                        <sub>D</sub>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
+                {cartItems.map(cartItem => (
+                  <CartItem
+                    changeQntyById={changeQntyById}
+                    key={cartItem.item_id}
+                    cartItem={cartItem}
+                  />
+                ))}
               </tbody>
             </table>
           </div>
@@ -150,7 +90,9 @@ export const ProfileCheckoutPage: React.FC<ProfileCheckoutPageProps> = props => 
         </div>
         <div className="profile-right profile-side table-profile buy-cont checkout-buy">
           <div className="profile-top d-none d-md-block">
-            <h2 className="profile-top_title d-none d-sm-block">შეძენა</h2>
+            <h2 className="profile-top_title d-none d-sm-block">
+              {t("shedena")}
+            </h2>
           </div>
           <form className="info">
             <div className="dropdown info-item">
@@ -222,12 +164,21 @@ export const ProfileCheckoutPage: React.FC<ProfileCheckoutPageProps> = props => 
     </ProfileBasePage>
   );
 };
+const mapStateToProps = ({ cart }: IStoreState) => {
+  return { cartItems: cart.items };
+};
+
+export const CartPage = connect(mapStateToProps, {
+  changeQntyById: changeQnty
+})(_CartPage);
 
 export type CartItemProps = {
-  product: IProduct;
+  cartItem: ICartItem;
+  changeQntyById: typeof changeQnty;
 };
-export const CartItem: React.FC<CartItemProps> = ({ children }) => {
+export const CartItem: React.FC<CartItemProps> = ({ cartItem }) => {
   const { t } = useTranslation();
+  const { counter, increase, decrease } = useCounter(cartItem.items_count, 1);
 
   return (
     <tr>
@@ -237,11 +188,11 @@ export const CartItem: React.FC<CartItemProps> = ({ children }) => {
             <img src="/assets/uploads/images/cart-product@2x.png" alt="cart" />
           </div>
           <div>
-            <div className="name">Calvin Klein All, 100ml, Red</div>
+            <div className="name">{cartItem.title}</div>
             <div className="profbtns d-flex">
               <button className="profbtns_btn">{t("delete")}</button>
               <button className="profbtns_btn d-none d-md-block">
-                მოგვიანებით შევიძენ
+                {t("mogvianebit_sheviden")}
               </button>
               <button className="heart profbtns_btn">
                 <img src="/assets/images/heart-border.svg" alt="favorite" />
@@ -271,19 +222,19 @@ export const CartItem: React.FC<CartItemProps> = ({ children }) => {
       <td className="price-td hidden-price">
         <div className="price-block">
           <div className="price text-right">
-            110
+            {cartItem.price}
             <sub>D</sub>
           </div>
         </div>
       </td>
-      <td className="price-td text-right">
+      {/* <td className="price-td text-right">
         <div className="price-block">
           <div className="price sum">
             110
             <sub>D</sub>
           </div>
         </div>
-      </td>
+      </td> */}
     </tr>
   );
 };

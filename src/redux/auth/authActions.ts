@@ -2,6 +2,12 @@ import axios from "axios";
 import { AuthActionTypes, IUser, AuthState } from "./authTypes";
 import { Dispatch } from "redux";
 import { API_LOGIN_URL, API_REGISTER_URL } from "../../api/endpoints";
+import {
+  setAuthorizationToken,
+  setGenericTokenAsHeader
+} from "../../api/helpers";
+import { store } from "../store";
+import { fetchCart } from "../cart/cartActions";
 
 export interface SetAuthErrorAction {
   type: AuthActionTypes.setAuthErrors;
@@ -23,7 +29,8 @@ export const setCurrentUser = ({
   user: IUser;
   token: string;
 }): SetCurrentUserAction => {
-  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  setAuthorizationToken(token);
+  store.dispatch(fetchCart() as any);
   return {
     type: AuthActionTypes.setCurrentUser,
     payload: { user, token }
@@ -43,8 +50,9 @@ export const loginUser = ({
 }: LoginUserParams): Function => {
   return async (dispatch: Dispatch) => {
     axios
-      .post(API_LOGIN_URL, userData)
+      .post<IUser>(API_LOGIN_URL, userData)
       .then(res => {
+        const { user, token } = res.data;
         if (res.data.error) {
           dispatch<SetAuthErrorAction>({
             type: AuthActionTypes.setAuthErrors,
@@ -52,13 +60,7 @@ export const loginUser = ({
           });
           return;
         }
-        dispatch<SetCurrentUserAction>({
-          type: AuthActionTypes.setCurrentUser,
-          payload: {
-            user: res.data.user as IUser,
-            token: res.data.token as string
-          }
-        });
+        dispatch<SetCurrentUserAction>(setCurrentUser({ user, token }));
         hideModal();
       })
       .catch(err => {
@@ -88,13 +90,8 @@ export const registerUser = ({
         name: "asdf"
       })
       .then(res => {
-        dispatch<SetCurrentUserAction>({
-          type: AuthActionTypes.setCurrentUser,
-          payload: {
-            user: res.data.user,
-            token: res.data.token
-          }
-        });
+        const { user, token } = res.data;
+        dispatch<SetCurrentUserAction>(setCurrentUser({ user, token }));
         hideModal();
       })
       .catch(err => {
@@ -109,6 +106,7 @@ export interface LogoutUserAction {
 }
 
 export const logoutUser = (): LogoutUserAction => {
+  setGenericTokenAsHeader();
   return {
     type: AuthActionTypes.logoutUser
   };

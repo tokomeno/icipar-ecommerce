@@ -1,5 +1,5 @@
 import React from "react";
-import { IProduct } from "../../data/product";
+import { IProduct, ICartItem } from "../../data/product";
 import { ProductRaiting } from "./product-raiting";
 import { ProductCartBtn } from "./product-cart-btn";
 import { ProductHeartBtn } from "./product-heart-btn";
@@ -8,6 +8,7 @@ import { ProductHot } from "./product-hot";
 
 interface ProductProps {
   product: IProduct;
+  cartItem?: ICartItem;
   wrapperClass: "catalog-item" | "swiper-slide" | "product";
   isHot?: boolean;
 }
@@ -15,7 +16,8 @@ interface ProductProps {
 export const Product: React.FC<ProductProps> = ({
   wrapperClass,
   product,
-  isHot
+  isHot,
+  cartItem
 }) => {
   return (
     <React.Fragment>
@@ -28,7 +30,10 @@ export const Product: React.FC<ProductProps> = ({
             <ProductRaiting rateNum={product.rating} starRate={1} />
             <div className="d-flex">
               <ProductHeartBtn productId={product.id} />
-              <ProductCartBtn productId={product.id} />
+              <ProductCartBtn
+                mainItemId={product.main_item_id}
+                productId={product.id}
+              />
             </div>
           </div>
         </div>

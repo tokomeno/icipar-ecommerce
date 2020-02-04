@@ -1,15 +1,25 @@
-import React from "react";
-import { IProductWithItems } from "../../data/product";
+import React, { useCallback, useMemo } from "react";
+import { IProductWithItems, ICartItem } from "../../data/product";
 import { useTranslation } from "react-i18next";
 import { useCounter } from "../../hooks/common/useCounter";
+import { connect } from "react-redux";
+import { changeQnty } from "../../redux/cart/cartActions";
+import { IStoreState } from "../../redux/mainReducer";
 
 interface AddCartButtonProps {
   activeItem: IProductWithItems["items"][number];
+  changeQntyById: typeof changeQnty;
+  cartItem: ICartItem | null;
 }
 
-export const AddCartButton: React.FC<AddCartButtonProps> = ({ activeItem }) => {
+const _AddCartButton: React.FC<AddCartButtonProps> = ({
+  activeItem,
+  changeQntyById,
+  cartItem
+}) => {
   const { t } = useTranslation();
   const { counter: productQnty, decrease, increase } = useCounter(1, 1);
+
   return (
     <div className="price-block d-flex align-items-center justify-content-sm-start justify-content-center">
       <div className="price-cont">
@@ -45,7 +55,7 @@ export const AddCartButton: React.FC<AddCartButtonProps> = ({ activeItem }) => {
       </div>
       <a
         onClick={() => {
-          console.log("add to cart");
+          changeQntyById(activeItem.id, productQnty);
         }}
         href="#!"
         className="buy d-flex"
@@ -61,3 +71,16 @@ export const AddCartButton: React.FC<AddCartButtonProps> = ({ activeItem }) => {
     </div>
   );
 };
+
+const mapStateToProps = (
+  { cart }: IStoreState,
+  ownProps: Omit<AddCartButtonProps, "changeQntyById" | "cartItem">
+) => {
+  return {
+    cartItem: cart.itemsByKeys[ownProps.activeItem.id]
+  };
+};
+
+export const AddCartButton = connect(mapStateToProps, {
+  changeQntyById: changeQnty
+})(_AddCartButton);

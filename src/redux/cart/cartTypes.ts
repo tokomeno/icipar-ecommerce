@@ -4,6 +4,7 @@ export interface ICartState {
   items: ICartItem[];
   itemsByKeys: { [key: number]: ICartItem | null };
   totalPrice: number;
+  loadingItemId: number | null;
 }
 
 export enum CartActionsType {
@@ -11,7 +12,8 @@ export enum CartActionsType {
   fetchCart = "fetchCart",
   addItem = "addItem",
   removeItem = "removeItem",
-  changeQnty = "changeQnty"
+  changeQnty = "changeQnty",
+  loadingItemId = "loadingItemId"
 }
 
 export interface SetCartAction {
@@ -22,4 +24,9 @@ export interface SetCartAction {
   };
 }
 
-export type CartActions = SetCartAction;
+export interface SetLoadingItemIdAction {
+  type: CartActionsType.loadingItemId;
+  payload: number | null;
+}
+
+export type CartActions = SetCartAction | SetLoadingItemIdAction;

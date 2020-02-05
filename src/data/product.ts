@@ -16,7 +16,7 @@ export interface ICartItem {
   original_price: number;
   discount_rate: number;
   thumbnail: string;
-  title: string;
+  item_title: string;
 }
 
 export const dummyProductData: IProduct[] = [

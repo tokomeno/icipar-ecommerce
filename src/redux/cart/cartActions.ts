@@ -1,9 +1,14 @@
-import { CartActionsType, SetCartAction } from "./cartTypes";
+import {
+  CartActionsType,
+  SetCartAction,
+  SetLoadingItemIdAction
+} from "./cartTypes";
 import { ICartItem } from "../../data/product";
 import { Dispatch } from "redux";
 import { CART_TOGGLE, GET_CART } from "../../api/endpoints";
 import { axiosWithToken } from "../../api/axios-with-token";
 import { AxiosResponse } from "axios";
+import { store } from "../store";
 
 export const fetchCart: Function = () => {
   return async (dispatch: Dispatch) => {
@@ -20,17 +25,19 @@ export const fetchCart: Function = () => {
       })
       .catch(err => {
         console.log(err);
-        alert("დაფიქსირდა შეცდომა");
+        // alert("დაფიქსირდა შეცდომა");
       });
   };
 };
 
-export const changeQnty: (itemId: number, qnty: number) => void = (
-  itemId: number,
-  qnty: number
-) => {
+export const increaseItem: (itemId: number) => void = (itemId: number) => {
+  const item = store.getState().cart.itemsByKeys[itemId];
+  const qnty = item ? item.items_count + 1 : 1;
   return (dispatch: Dispatch) => {
-    console.log("in");
+    dispatch<SetLoadingItemIdAction>({
+      type: CartActionsType.loadingItemId,
+      payload: itemId
+    });
     toogleItemRequest(itemId, qnty).then(res => {
       dispatch<SetCartAction>({
         type: CartActionsType.setCart,
@@ -43,9 +50,34 @@ export const changeQnty: (itemId: number, qnty: number) => void = (
   };
 };
 
-export const removeItem = (item: ICartItem) => {
+export const changeQnty: (itemId: number, qnty: number) => void = (
+  itemId: number,
+  qnty: number
+) => {
   return (dispatch: Dispatch) => {
-    toogleItemRequest(item.item_id, 0).then(res => {
+    dispatch<SetLoadingItemIdAction>({
+      type: CartActionsType.loadingItemId,
+      payload: itemId
+    });
+    toogleItemRequest(itemId, qnty).then(res => {
+      dispatch<SetCartAction>({
+        type: CartActionsType.setCart,
+        payload: {
+          items: res.data.data.items,
+          totalPrice: res.data.data.original_amount
+        }
+      });
+    });
+  };
+};
+
+export const removeItem: (itemId: number) => void = (itemId: number) => {
+  return (dispatch: Dispatch) => {
+    dispatch<SetLoadingItemIdAction>({
+      type: CartActionsType.loadingItemId,
+      payload: itemId
+    });
+    toogleItemRequest(itemId, 0).then(res => {
       dispatch<SetCartAction>({
         type: CartActionsType.setCart,
         payload: {

@@ -3,7 +3,8 @@ import { CartActions, CartActionsType, ICartState } from "./cartTypes";
 const cartInitState: ICartState = {
   items: [],
   itemsByKeys: {},
-  totalPrice: 0
+  totalPrice: 0,
+  loadingItemId: null
 };
 
 export const cartReducer = (
@@ -19,8 +20,16 @@ export const cartReducer = (
       return {
         ...state,
         items: action.payload.items,
-        itemsByKeys: itemsByKeys
+        itemsByKeys: itemsByKeys,
+        totalPrice: action.payload.totalPrice,
+        loadingItemId: null
       };
+    case CartActionsType.loadingItemId:
+      return {
+        ...state,
+        loadingItemId: action.payload
+      };
+
     default:
       return state;
   }

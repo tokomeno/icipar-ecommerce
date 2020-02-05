@@ -14,7 +14,7 @@ export const DropDownProductItem: React.FC<DropDownProductItemProps> = ({
         <img src="/assets/uploads/images/cart-product.png" alt="" />
       </div>
       <div className="desc">
-        <div className="item-title">{product.title}</div>
+        <div className="item-title">{product.item_title}</div>
         <div className="price">
           {product.price}
           <sub>D</sub>

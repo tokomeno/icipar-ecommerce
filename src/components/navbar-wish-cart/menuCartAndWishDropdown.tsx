@@ -29,7 +29,7 @@ export const MenuCartAndWishDropdown: React.FC<MenuCartAndWishDropdownProps> = (
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          {products.map(p => (
+          {products.slice(0, 4).map(p => (
             <DropDownProductItem product={p} key={p.item_id} />
           ))}
           {navLink}

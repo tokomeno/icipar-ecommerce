@@ -1,41 +1,37 @@
-import React, { useEffect } from "react";
+import React from "react";
 import classnames from "classnames";
-import { useCounter } from "../../hooks/common/useCounter";
 import { ICartItem } from "../../data/product";
 import { connect } from "react-redux";
 import { IStoreState } from "../../redux/mainReducer";
-import { changeQnty } from "../../redux/cart/cartActions";
-import { useSkipFirstEffect } from "../../hooks/common/useSkipFirstEffect";
+import { increaseItem } from "../../redux/cart/cartActions";
 
 interface ProductCartBtnProps {
   productId: number;
   mainItemId: number;
   cartItem: ICartItem | null;
-  changeQntyById: typeof changeQnty;
+  increaseItem: typeof increaseItem;
+  loadingItemId: number | null;
 }
 
 const _ProductCartBtn: React.FC<ProductCartBtnProps> = ({
-  productId,
   cartItem,
   mainItemId,
-  changeQntyById
+  increaseItem,
+  loadingItemId
 }) => {
-  // TODO: first render
-  const { counter, increase } = useCounter(cartItem ? cartItem.items_count : 0);
-
-  useSkipFirstEffect(() => {
-    console.log("render first");
-    changeQntyById(mainItemId, counter);
-  }, [counter, mainItemId]);
-
   return (
     <button
-      className={classnames("cart", { active: counter > 0 })}
-      onClick={increase}
+      className={classnames("cart disableOpacity", {
+        active: cartItem && cartItem.items_count > 0
+      })}
+      disabled={mainItemId === loadingItemId}
+      onClick={() =>
+        mainItemId !== loadingItemId ? increaseItem(mainItemId) : null
+      }
     >
       <img src="/assets/images/bag-dark.svg" alt="cart" />
       <div className="qty">
-        <span className="num">{counter}</span>
+        <span className="num">{cartItem ? cartItem.items_count : null}</span>
       </div>
     </button>
   );
@@ -43,13 +39,19 @@ const _ProductCartBtn: React.FC<ProductCartBtnProps> = ({
 
 const mapStateToProps = (
   { cart }: IStoreState,
-  ownProps: Omit<ProductCartBtnProps, "cartItem" | "changeQntyById">
+  ownProps: Omit<
+    ProductCartBtnProps,
+    "cartItem" | "increaseItem" | "loadingItemId"
+  >
 ) => {
   const { mainItemId } = ownProps;
   const cartItem = cart.itemsByKeys[mainItemId];
-  return { cartItem };
+  return {
+    cartItem,
+    loadingItemId: cart.loadingItemId
+  };
 };
 
 export const ProductCartBtn = connect(mapStateToProps, {
-  changeQntyById: changeQnty
+  increaseItem: increaseItem
 })(_ProductCartBtn);

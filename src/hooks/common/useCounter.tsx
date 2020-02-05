@@ -17,5 +17,5 @@ export const useCounter = (
     setState(prev => prev + 1);
   };
 
-  return { counter, decrease, increase };
+  return { counter, decrease, increase, setCounter: setState };
 };

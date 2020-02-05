@@ -23,7 +23,6 @@ const _WishNavbarDropdown: React.FC<WishNavbarDropdownProps> = ({
       navLink={
         <NavLink
           to="/profile/wishes"
-          target="_blank"
           className="d-flex justify-content-between cart-btn"
           rel="noopener noreferrer"
         >

@@ -55,12 +55,12 @@ const App: React.FC<{}> = props => {
           <Route path={routes.giftCard} exact component={GiftCardPage} />
           <Route path={routes.productShow} exact component={ProducShowPage} />
 
+          <Route path="/profile/cart" exact component={CartPage} />
           {/* PROFILE PAGES */}
           <PrivateRoute>
             <Route path="/profile" exact component={ProfilePage} />
             <Route path="/profile/coupons" exact component={CouponsPage} />
             <Route path="/profile/checkout" exact component={CartPage} />
-            <Route path="/profile/cart" exact component={CartPage} />
             <Route path="/profile/orders" exact component={OrdersProfilePage} />
             <Route
               path="/profile/address"

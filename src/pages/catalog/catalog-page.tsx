@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { PriceSorter } from "../../components/product-filters/price-sorter";
 import { CatalogFilters } from "./catalog-filters";
 import { PorductFilterContext } from "../../contexts/productFilterContext";
+import { ProductContetnLoader } from "../../components/product/product-content-loader";
 
 interface CatalogPageProps {}
 
@@ -43,9 +44,17 @@ export const CatalogPage: React.FC<CatalogPageProps> = () => {
                 <PriceSorter ordering={productFilterData.order || "price"} />
               </div>
               <div className="d-flex flex-wrap justify-content-sm-start justify-content-center">
-                {products.map(p => (
-                  <Product key={p.id} product={p} wrapperClass="catalog-item" />
-                ))}
+                {products.length ? (
+                  products.map(p => (
+                    <Product
+                      key={p.id}
+                      product={p}
+                      wrapperClass="catalog-item"
+                    />
+                  ))
+                ) : (
+                  <ProductContetnLoader items={15} />
+                )}
               </div>
               {haveNextPage && (
                 <div className="d-flex justify-content-center">

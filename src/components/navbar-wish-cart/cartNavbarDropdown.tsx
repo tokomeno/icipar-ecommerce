@@ -33,7 +33,6 @@ const _CartNavbarDropdown: React.FC<CardNavbarDropdownProps> = ({
       navLink={
         <NavLink
           to="/profile/cart"
-          target="_blank"
           className="d-flex justify-content-between cart-btn"
           rel="noopener noreferrer"
         >

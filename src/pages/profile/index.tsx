@@ -33,7 +33,7 @@ const _ProfileBasePage: React.FC<ProfileBasePageProps> = ({
           })}
         >
           <div className="d-flex">
-            <ProfileLeft user={user} logout={logoutUser} />
+            {user && <ProfileLeft user={user} logout={logoutUser} />}
             {children}
           </div>
         </div>

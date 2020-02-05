@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useMemo, useEffect } from "react";
 import { IProductWithItems, ICartItem } from "../../data/product";
 import { useTranslation } from "react-i18next";
 import { useCounter } from "../../hooks/common/useCounter";
@@ -9,16 +9,21 @@ import { IStoreState } from "../../redux/mainReducer";
 interface AddCartButtonProps {
   activeItem: IProductWithItems["items"][number];
   changeQntyById: typeof changeQnty;
-  cartItem: ICartItem | null;
 }
 
 const _AddCartButton: React.FC<AddCartButtonProps> = ({
   activeItem,
-  changeQntyById,
-  cartItem
+  changeQntyById
 }) => {
   const { t } = useTranslation();
-  const { counter: productQnty, decrease, increase } = useCounter(1, 1);
+  const { counter: productQnty, decrease, increase, setCounter } = useCounter(
+    1,
+    1
+  );
+
+  useEffect(() => {
+    setCounter(1);
+  }, [activeItem, setCounter]);
 
   return (
     <div className="price-block d-flex align-items-center justify-content-sm-start justify-content-center">
@@ -72,15 +77,6 @@ const _AddCartButton: React.FC<AddCartButtonProps> = ({
   );
 };
 
-const mapStateToProps = (
-  { cart }: IStoreState,
-  ownProps: Omit<AddCartButtonProps, "changeQntyById" | "cartItem">
-) => {
-  return {
-    cartItem: cart.itemsByKeys[ownProps.activeItem.id]
-  };
-};
-
-export const AddCartButton = connect(mapStateToProps, {
+export const AddCartButton = connect(null, {
   changeQntyById: changeQnty
 })(_AddCartButton);

@@ -1,8 +1,12 @@
 import React from "react";
+import { connect } from "react-redux";
+import { IStoreState } from "../../redux/mainReducer";
 
-interface ProductHotProps {}
+interface ProductHotProps {
+  isAuth: boolean;
+}
 
-export const ProductHot: React.FC<ProductHotProps> = props => {
+const _ProductHot: React.FC<ProductHotProps> = ({ isAuth }) => {
   return (
     <div className="hot-block d-flex">
       <div className="timer d-flex flex-column align-items-center justify-content-center">
@@ -26,3 +30,11 @@ export const ProductHot: React.FC<ProductHotProps> = props => {
     </div>
   );
 };
+
+const mapStateToProps = ({ auth }: IStoreState) => {
+  return {
+    isAuth: !!auth.token
+  };
+};
+
+export const ProductHot = connect(mapStateToProps)(_ProductHot);

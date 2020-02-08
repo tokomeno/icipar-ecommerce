@@ -50,6 +50,26 @@ export const increaseItem: (itemId: number) => void = (itemId: number) => {
   };
 };
 
+export const decreaseItem: (itemId: number) => void = (itemId: number) => {
+  const item = store.getState().cart.itemsByKeys[itemId];
+  const qnty = item ? item.items_count - 1 : 0;
+  return (dispatch: Dispatch) => {
+    dispatch<SetLoadingItemIdAction>({
+      type: CartActionsType.loadingItemId,
+      payload: itemId
+    });
+    toogleItemRequest(itemId, qnty).then(res => {
+      dispatch<SetCartAction>({
+        type: CartActionsType.setCart,
+        payload: {
+          items: res.data.data.items,
+          totalPrice: res.data.data.original_amount
+        }
+      });
+    });
+  };
+};
+
 export const changeQnty: (itemId: number, qnty: number) => void = (
   itemId: number,
   qnty: number

@@ -1,25 +1,36 @@
 import React from "react";
 import classnames from "classnames";
 import { ICartItem } from "../../../data/product";
-import { changeQnty, removeItem } from "../../../redux/cart/cartActions";
+import {
+  removeItem,
+  increaseItem,
+  decreaseItem
+} from "../../../redux/cart/cartActions";
 import { useTranslation } from "react-i18next";
-import { useCounter } from "../../../hooks/common/useCounter";
+import { ICartState } from "../../../redux/cart/cartTypes";
 
 export type CartItemProps = {
   cartItem: ICartItem;
-  changeQntyById: typeof changeQnty;
   removeItem: typeof removeItem;
+  increaseItem: typeof increaseItem;
+  decreaseItem: typeof decreaseItem;
+  loadingItemId: ICartState["loadingItemId"];
 };
-export const CartItem: React.FC<CartItemProps> = ({ cartItem, removeItem }) => {
+export const CartItem: React.FC<CartItemProps> = ({
+  cartItem,
+  removeItem,
+  increaseItem,
+  decreaseItem,
+  loadingItemId
+}) => {
   const { t } = useTranslation();
-  const { counter, increase, decrease } = useCounter(cartItem.items_count, 1);
 
   return (
     <tr>
       <td className="first-td">
         <a href="#!" className="d-flex align-items-center">
           <div className="image d-flex align-items-center justify-content-center">
-            <img src="/assets/uploads/images/cart-product@2x.png" alt="cart" />
+            <img src={cartItem.thumbnail} alt="cart" />
           </div>
           <div>
             <div className="name">{cartItem.item_title}</div>
@@ -47,13 +58,25 @@ export const CartItem: React.FC<CartItemProps> = ({ cartItem, removeItem }) => {
       </td>
       <td>
         <div className="quantity d-flex flex-column align-items-center">
-          <span className="plus">
+          <span
+            className="plus "
+            onClick={() =>
+              loadingItemId !== cartItem.item_id &&
+              increaseItem(cartItem.item_id)
+            }
+          >
             <i className="fas fa-chevron-up" />
           </span>
           <span className="qty">
-            <input type="number" min={1} defaultValue={1} />
+            <input type="number" readOnly value={cartItem.items_count} />
           </span>
-          <span className="min">
+          <span
+            className="min"
+            onClick={() =>
+              loadingItemId !== cartItem.item_id &&
+              decreaseItem(cartItem.item_id)
+            }
+          >
             <i className="fas fa-chevron-down" />
           </span>
         </div>

@@ -1,10 +1,10 @@
 import React from "react";
 import { GoogleLogin } from "react-google-login";
 import { connect } from "react-redux";
-import { API_GA_LOGIN_URL } from "../../api/endpoints";
+// import { API_GA_LOGIN_URL } from "../../api/endpoints";
 import { GOOGLE_CLIENT_ID } from "../../consts";
 import { setCurrentUser } from "../../redux/auth/authActions";
-import Axios from "axios";
+// import Axios from "axios";
 
  
 

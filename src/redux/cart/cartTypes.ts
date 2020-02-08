@@ -1,4 +1,4 @@
-import { IProductWithItems, ICartItem } from "../../data/product";
+import { ICartItem } from "../../data/product";
 
 export interface ICartState {
   items: ICartItem[];

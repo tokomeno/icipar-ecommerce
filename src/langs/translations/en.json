@@ -94,6 +94,18 @@
     "coupons": "coupons",
     "cards": "cards",
     "inforamtion": "inforamtion",
-    "addresses": "addresses"
+    "addresses": "addresses",
+    "information": "information",
+    "name": "name",
+    "surname": "surname",
+    "id_number": "id_number",
+    "birth_date": "birth_date",
+    "old_password": "old_password",
+    "new_password": "new_password",
+    "confirm_password": "confirm_password",
+    "save": "save",
+    "gauqmeba": "gauqmeba",
+    "delete": "delete",
+    "products": "products"
   }
 }

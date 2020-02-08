@@ -1,10 +1,9 @@
-import React, { useCallback, useMemo, useEffect } from "react";
-import { IProductWithItems, ICartItem } from "../../data/product";
+import React, { useEffect } from "react";
+import { IProductWithItems } from "../../data/product";
 import { useTranslation } from "react-i18next";
 import { useCounter } from "../../hooks/common/useCounter";
 import { connect } from "react-redux";
 import { changeQnty } from "../../redux/cart/cartActions";
-import { IStoreState } from "../../redux/mainReducer";
 
 interface AddCartButtonProps {
   activeItem: IProductWithItems["items"][number];

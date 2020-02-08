@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { IUser } from "../../redux/auth/authTypes";
 import { logoutUser } from "../../redux/auth/authActions";
 import { IStoreState } from "../../redux/mainReducer";
-import { useHistory, useRouteMatch, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import classnames from "classnames";
 
 interface ProfileBasePageProps {

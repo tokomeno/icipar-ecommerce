@@ -1,26 +1,35 @@
 import React from "react";
-import classnames from "classnames";
 import { connect } from "react-redux";
 import { IStoreState } from "../../../redux/mainReducer";
-import { changeQnty, removeItem } from "../../../redux/cart/cartActions";
+import {
+  changeQnty,
+  removeItem,
+  decreaseItem,
+  increaseItem
+} from "../../../redux/cart/cartActions";
 import { CartItem } from "./cart-item";
 import { useTranslation } from "react-i18next";
 import { ICartItem } from "../../../data/product";
+import { ICartState } from "../../../redux/cart/cartTypes";
 
 interface CartContentProps {
   cartItems: ICartItem[];
   totalPrice: number;
-  changeQntyById: typeof changeQnty;
   removeItem: typeof removeItem;
   showCheckout: () => void;
+  increaseItem: typeof increaseItem;
+  decreaseItem: typeof decreaseItem;
+  loadingItemId: ICartState["loadingItemId"];
 }
 
 export const _CartContent: React.FC<CartContentProps> = ({
   cartItems,
   totalPrice,
-  changeQntyById,
+  increaseItem,
+  decreaseItem,
   removeItem,
-  showCheckout
+  showCheckout,
+  loadingItemId
 }) => {
   const { t } = useTranslation();
   return (
@@ -47,8 +56,10 @@ export const _CartContent: React.FC<CartContentProps> = ({
             <tbody>
               {cartItems.map(cartItem => (
                 <CartItem
+                  loadingItemId={loadingItemId}
                   removeItem={removeItem}
-                  changeQntyById={changeQntyById}
+                  increaseItem={increaseItem}
+                  decreaseItem={decreaseItem}
                   key={cartItem.item_id}
                   cartItem={cartItem}
                 />
@@ -87,10 +98,16 @@ export const _CartContent: React.FC<CartContentProps> = ({
 };
 
 const mapStateToProps = ({ cart }: IStoreState) => {
-  return { cartItems: cart.items, totalPrice: cart.totalPrice };
+  return {
+    cartItems: cart.items,
+    totalPrice: cart.totalPrice,
+    loadingItemId: cart.loadingItemId
+  };
 };
 
 export const CartContent = connect(mapStateToProps, {
   changeQntyById: changeQnty,
-  removeItem
+  removeItem,
+  increaseItem,
+  decreaseItem
 })(_CartContent);

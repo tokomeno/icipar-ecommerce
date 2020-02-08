@@ -67,15 +67,7 @@ export const BlogSlider: React.FC<BlogSliderProps> = () => {
             ))}
           </Swiper>
         </div>
-        {/* Add Arrows */}
         <SwiperCustomNavBtn sliderNav={sliderNav} />
-
-        {/* <div className="swiper-button-next d-flex align-items-center justify-content-center">
-          <i className="fas fa-angle-right" />
-        </div>
-        <div className="swiper-button-prev d-flex align-items-center justify-content-center">
-          <i className="fas fa-angle-left" />
-        </div> */}
       </div>
     </section>
   );

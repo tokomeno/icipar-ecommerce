@@ -29,6 +29,7 @@ import "./langs//i18n";
 import { routes } from "./routes/routes";
 import { PrivateRoute } from "./routes/privateRoute";
 import { tryLocalAuth } from "./tryLocalAuth";
+import { InfoProfilePage } from "./pages/profile/info/info-profile";
 
 export const HistoryContext = React.createContext<History>(
   (null as any) as History
@@ -62,6 +63,7 @@ const App: React.FC<{}> = props => {
             <Route path="/profile/coupons" exact component={CouponsPage} />
             <Route path="/profile/checkout" exact component={CartPage} />
             <Route path="/profile/orders" exact component={OrdersProfilePage} />
+            <Route path="/profile/info" exact component={InfoProfilePage} />
             <Route
               path="/profile/address"
               exact

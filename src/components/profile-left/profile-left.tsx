@@ -28,46 +28,58 @@ export const ProfileLeft: React.FC<ProfileLeftProps> = ({ user, logout }) => {
       <div className="user-image">
         <img src={user.avatar} alt="user" />
       </div>
-      <NavItem to={"/profile"} title={"ჩემი გვერდი"}>
+      <NavItem to={"/profile"} title={t("my_page")}>
         <img src="/assets/images/user-g.svg" alt="user" />
         <img src="/assets/images/user-red.svg" alt="user" className="active" />
       </NavItem>
 
       <div className="profile-menu">
         <NavItem to={"/profile/cart"} title={t("cart")}>
-          <img src="/assets/images/bag-g.svg" alt="cart" />
-          <img src="/assets/images/bag-r.svg" alt="cart" className="active" />
+          <img src="/assets/images/bag-g.svg" alt="bag" />
+          <img src="/assets/images/bag-r.svg" alt="bag" className="active" />
           <div className="ntfc" />
         </NavItem>
 
-        <NavItem to={"/profile/orders"} title={"შეკვეთები"}>
-          <img src="/assets/images/order-g.svg" alt="cart" />
-          <img src="/assets/images/order-r.svg" alt="cart" className="active" />
+        <NavItem to={"/profile/orders"} title={t("orders")}>
+          <img src="/assets/images/order-g.svg" alt="order" />
+          <img
+            src="/assets/images/order-r.svg"
+            alt="order"
+            className="active"
+          />
         </NavItem>
 
         <NavItem to={"/profile/wishlist"} title={t("wishes")}>
-          <img src="/assets/images/heart-g.svg" alt="cart" />
-          <img src="/assets/images/heart-r.svg" alt="cart" className="active" />
+          <img src="/assets/images/heart-g.svg" alt="heart" />
+          <img
+            src="/assets/images/heart-r.svg"
+            alt="heart"
+            className="active"
+          />
           <div className="ntfc" />
         </NavItem>
 
-        <NavItem to={"/profile/coupons"} title={"კუპონები"}>
-          <img src="/assets/images/price-g.svg" alt="cart" />
-          <img src="/assets/images/price-r.svg" alt="cart" className="active" />
+        <NavItem to={"/profile/coupons"} title={t("coupons")}>
+          <img src="/assets/images/price-g.svg" alt="price" />
+          <img
+            src="/assets/images/price-r.svg"
+            alt="price"
+            className="active"
+          />
         </NavItem>
 
-        <NavItem to={"/profile"} title={"ბარათები"}>
-          <img src="/assets/images/card-g.svg" alt="cart" />
-          <img src="/assets/images/card-4.svg" alt="cart" className="active" />
+        <NavItem to={"/profile/gift-cards"} title={t("cards")}>
+          <img src="/assets/images/card-g.svg" alt="card" />
+          <img src="/assets/images/card-4.svg" alt="card" className="active" />
         </NavItem>
       </div>
       <div className="profile-menu">
-        <NavItem to={"/profile/coupons"} title={"ინფორმაცია"}>
+        <NavItem to={"/profile/info"} title={t("inforamtion")}>
           <img src="/assets/images/i-g.svg" alt="info" />
           <img src="/assets/images/i-r.svg" alt="info" className="active" />
         </NavItem>
 
-        <NavItem to={"/profile/address"} title={"მისამართები"}>
+        <NavItem to={"/profile/address"} title={t("addresses")}>
           <img src="/assets/images/loc-g.svg" alt="locations" />
           <img
             src="/assets/images/loc-r.svg"

@@ -81,6 +81,19 @@
     "personal_profile": "პირადი პროფილი",
     "quantity": "quantity",
     "sum": "ჯამი",
-    "mogvianebit_sheviden": "მოგვიანებით შევიძენ"
+    "mogvianebit_sheviden": "მოგვიანებით შევიძენ",
+    "fasdakleba_vrceldeba": "ფასდაკლება ვრცელდება",
+    "code": "კოდი",
+    "sale": "ფასდაკლება",
+    "darchenilia": "დარჩენილია",
+    "used": "used",
+    "ammount_coupons": "Ammount Coupons",
+    "discount_coupons": "Discount Coupons",
+    "my_page": "ჩემი გვერდი",
+    "orders": "orders",
+    "coupons": "coupons",
+    "cards": "cards",
+    "inforamtion": "inforamtion",
+    "addresses": "addresses"
   }
 }

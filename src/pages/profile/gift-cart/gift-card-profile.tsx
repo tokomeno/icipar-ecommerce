@@ -1,76 +1,38 @@
 import React from "react";
 import { ProfileBasePage } from "../index";
+import { useTranslation } from "react-i18next";
+import { useGiftCards } from "../../../hooks/useGiftCards";
+import { CouponsTable } from "../../../components/coupons-table";
 
 interface GiftCardProfilePageProps {}
 
 export const GiftCardProfilePage: React.FC<GiftCardProfilePageProps> = props => {
+  const { t } = useTranslation();
+  const { discountGiftCard, giftCard } = useGiftCards();
   return (
     <ProfileBasePage>
       <div className="profile-right profile-side couples-table">
         <div className="profile-top">
-          <h1 className="profile-top_title">სასაჩუქრე ბარათები</h1>
-        </div>
-        <div className="table-responsive">
-          <table className="table table-striped">
-            <thead>
-              <tr>
-                <th>კოდი</th>
-                <th>ვრცელდება</th>
-                <th className="text-center">თანხა</th>
-                <th className="text-right">სტატუსი</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="coupons-tr ">
-                <td>
-                  <div className="code">KBF23KK12#</div>
-                </td>
-                <td>
-                  <div className="sale-item code">სრულ პროდუქციაზე</div>
-                </td>
-                <td className="text-center">
-                  <div className="gift-price">
-                    <span>200</span>GEL
-                  </div>
-                </td>
-                <td className="text-right">
-                  <div className="status">აქტიური</div>
-                </td>
-              </tr>
-              <tr className="coupons-tr ">
-                <td>
-                  <div className="code">KBF23KK12#</div>
-                </td>
-                <td>
-                  <div className="sale-item code">სრულ პროდუქციაზე</div>
-                </td>
-                <td className="text-center">
-                  <div className="gift-price">
-                    <span>50</span>GEL
-                  </div>
-                </td>
-                <td className="text-right">
-                  <div className="status">აქტიური</div>
-                </td>
-              </tr>
-              <tr className="coupons-tr used">
-                <td>
-                  <div className="code">KBF23KK12#</div>
-                </td>
-                <td>
-                  <div className="sale-item code">სრულ პროდუქციაზე</div>
-                </td>
-                <td className="text-center">
-                  <div className="gift-price">
-                    <span>5.95</span>GEL
-                  </div>
-                </td>
-                <td className="text-right">
-                  <div className="status">გამოყენებული</div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <h1 className="profile-top_title">{t("gift_card")}</h1>
+          <CouponsTable
+            items={giftCard.map(c => ({
+              isActive: c.status === "active",
+              code: c.code,
+              sale: c.amount_left,
+              valid_for: "",
+              validity_date: ""
+            }))}
+          />
+          <h1 className="profile-top_title">{t("discount_gift_card")}</h1>
+          <CouponsTable
+            items={discountGiftCard.map(c => ({
+              isActive: true,
+              code: "",
+              sale: c.discount_rate_earned,
+              valid_for: "",
+              validity_date: c.date
+            }))}
+          />
         </div>
       </div>
     </ProfileBasePage>

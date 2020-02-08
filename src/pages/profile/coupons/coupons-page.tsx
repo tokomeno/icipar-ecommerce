@@ -1,73 +1,40 @@
 import React from "react";
 import { ProfileBasePage } from "../index";
+import { useTranslation } from "react-i18next";
+import { useCoupons } from "../../../hooks/useCoupons";
+import { CouponsTable } from "../../../components/coupons-table";
 
 interface CouponsPageProps {}
 
 export const CouponsPage: React.FC<CouponsPageProps> = props => {
+  const { amountCoupons, discountCoupons } = useCoupons();
+  const { t } = useTranslation();
+
   return (
     <ProfileBasePage>
       <div className="profile-right profile-side couples-table">
         <div className="profile-top">
-          <h1 className="profile-top_title">კუპონები</h1>
-        </div>
-        <div className="table-responsive">
-          <table className="table table-striped">
-            <thead>
-              <tr>
-                <th>კოდი</th>
-                <th>ფასდაკლება ვრცელდება</th>
-                <th className="text-center">ფასდაკლება</th>
-                <th className="text-right">დარჩენილია</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="coupons-tr ">
-                <td>
-                  <div className="code">KBF23KK12#</div>
-                </td>
-                <td>
-                  <div className="sale-item code">
-                    Dior, Tom Ford Dior, Tom Ford Dior, Tom Ford Dior, Tom Ford
-                    Dior, Tom Ford
-                  </div>
-                </td>
-                <td className="text-center">
-                  <div className="sale-num">15%</div>
-                </td>
-                <td className="text-right">
-                  <div className="days">2 დღე, 23:12:59</div>
-                </td>
-              </tr>
-              <tr className="coupons-tr ">
-                <td>
-                  <div className="code">KBF23KK12#</div>
-                </td>
-                <td>
-                  <div className="sale-item code">Dior, Tom Ford</div>
-                </td>
-                <td className="text-center">
-                  <div className="sale-num">15%</div>
-                </td>
-                <td className="text-right">
-                  <div className="days">2 დღე, 23:12:59</div>
-                </td>
-              </tr>
-              <tr className="coupons-tr used">
-                <td>
-                  <div className="code">KBF23KK12#</div>
-                </td>
-                <td>
-                  <div className="sale-item code">Dior, Tom Ford</div>
-                </td>
-                <td className="text-center">
-                  <div className="sale-num">15%</div>
-                </td>
-                <td className="text-right">
-                  <div className="days used-txt">გამოყენებული</div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <h1 className="profile-top_title">{t("ammount_coupons")}</h1>
+          <CouponsTable
+            items={amountCoupons.map(c => ({
+              isActive: c.status === "active",
+              code: c.code,
+              sale: c.amount_left,
+              valid_for: c.valid_for,
+              validity_date: c.validity_date
+            }))}
+          />
+          <hr />
+          <h1 className="profile-top_title">{t("discount_coupons")}</h1>
+          <CouponsTable
+            items={discountCoupons.map(c => ({
+              isActive: c.status === "active",
+              code: c.code,
+              sale: c.rate,
+              valid_for: c.valid_for,
+              validity_date: c.validity_date
+            }))}
+          />
         </div>
       </div>
     </ProfileBasePage>

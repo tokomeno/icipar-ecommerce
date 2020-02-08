@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { ProfileBasePage } from "../index";
-import classnames from "classnames";
 import { useInput } from "../../../hooks/common/useInput";
 import { useTranslation } from "react-i18next";
-import { useToggle } from "../../../hooks/common/useToggle";
 import { axiosWithToken } from "../../../api/axios-with-token";
 import {
   UPDATE_CUSTOMER_INFO,
   GET_CUSTOMER_INFO
 } from "../../../api/endpoints";
+import { ProfileInput } from "./input";
 
 interface InfoProfilePageProps {}
 
@@ -73,11 +72,13 @@ export const InfoProfilePage: React.FC<InfoProfilePageProps> = props => {
         <div className="profile-top">
           <h1 className="profile-top_title">{t("information")}</h1>
         </div>
+
         {successMessage && <p className="text-success">{successMessage}</p>}
+
         <form className="info">
           <div className="row">
             <div className="col-sm-6">
-              <Input
+              <ProfileInput
                 label={t("name")}
                 name={"name"}
                 value={name}
@@ -85,7 +86,7 @@ export const InfoProfilePage: React.FC<InfoProfilePageProps> = props => {
                 errorMessage={errors && errors.name && errors.name[0]}
               />
 
-              <Input
+              <ProfileInput
                 label={t("surname")}
                 name={"surname"}
                 value={surname}
@@ -93,7 +94,7 @@ export const InfoProfilePage: React.FC<InfoProfilePageProps> = props => {
                 errorMessage={errors && errors.surname && errors.surname[0]}
               />
 
-              <Input
+              <ProfileInput
                 label={t("email")}
                 name={"email"}
                 value={email}
@@ -101,7 +102,7 @@ export const InfoProfilePage: React.FC<InfoProfilePageProps> = props => {
                 errorMessage={errors && errors.email && errors.email[0]}
               />
 
-              <Input
+              <ProfileInput
                 label={t("phone")}
                 name={"phone"}
                 value={phone}
@@ -109,7 +110,7 @@ export const InfoProfilePage: React.FC<InfoProfilePageProps> = props => {
                 errorMessage={errors && errors.phone && errors.phone[0]}
               />
 
-              <Input
+              <ProfileInput
                 label={t("id_number")}
                 name={"id_number"}
                 value={id_number}
@@ -117,7 +118,7 @@ export const InfoProfilePage: React.FC<InfoProfilePageProps> = props => {
                 errorMessage={errors && errors.id_number && errors.id_number[0]}
               />
 
-              <Input
+              <ProfileInput
                 label={t("birth_date")}
                 name={"birth_date"}
                 value={birth_date}
@@ -129,7 +130,7 @@ export const InfoProfilePage: React.FC<InfoProfilePageProps> = props => {
               />
             </div>
             <div className="col-sm-6">
-              <Input
+              <ProfileInput
                 label={t("old_password")}
                 name={"old_password"}
                 value={old_password}
@@ -138,8 +139,7 @@ export const InfoProfilePage: React.FC<InfoProfilePageProps> = props => {
                   errors && errors.old_password && errors.old_password[0]
                 }
               />
-
-              <Input
+              <ProfileInput
                 label={t("new_password")}
                 name={"new_password"}
                 value={new_password}
@@ -148,8 +148,7 @@ export const InfoProfilePage: React.FC<InfoProfilePageProps> = props => {
                   errors && errors.new_password && errors.new_password[0]
                 }
               />
-
-              <Input
+              <ProfileInput
                 label={t("confirm_password")}
                 name={"confirm_password"}
                 value={confirm_password}
@@ -184,39 +183,3 @@ export const InfoProfilePage: React.FC<InfoProfilePageProps> = props => {
     </ProfileBasePage>
   );
 };
-
-interface InputProps {
-  type?: "text" | "password" | "number" | "date";
-  name: string;
-  label: string;
-  value: string;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  errorMessage?: string;
-}
-
-export const Input: React.FC<InputProps> = React.memo(
-  ({ label, name, type = "text", value, onChange, errorMessage }) => {
-    const { isActive, toggle } = useToggle(false);
-    return (
-      <div className="d-flex flex-column info-item">
-        <label htmlFor={name}>{label}</label>
-        <input
-          onChange={onChange}
-          type={isActive ? "text" : type}
-          name={name}
-          id={name}
-          value={value}
-          className={type === "password" ? "pass-input password-eye-input" : ""}
-        />
-        {type === "password" && (
-          <span onClick={toggle} className="show-pass password-eye">
-            <img src="images/show-pass.svg" alt="show password" />
-          </span>
-        )}
-        {errorMessage && (
-          <span className="text-danger pl-5">{errorMessage}</span>
-        )}
-      </div>
-    );
-  }
-);

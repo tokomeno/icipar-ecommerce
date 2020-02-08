@@ -8,8 +8,6 @@ import {
 import { ChangeLang } from "../../components/change-lang";
 import { useTranslation } from "react-i18next";
 import { IStoreState } from "../../redux/mainReducer";
-// import { connect } from "react-redux";
-import { DEFAULT_AVATAR_PATH } from "../../consts";
 import classnames from "classnames";
 import { Search } from "./search";
 import { useToggle } from "../../hooks/common/useToggle";
@@ -30,7 +28,6 @@ export const Header: React.FC<HeaderProps> = ({ user }) => {
 
   const { isActive, toggle, setActive, setInActive } = useToggle(false);
 
-  // TODO: CHECK PERFOMANCE ISSUE
   const handleScroll = useCallback(
     (event: any) => {
       if (window.scrollY > 80) {
@@ -107,10 +104,7 @@ export const Header: React.FC<HeaderProps> = ({ user }) => {
                 <div className="col-lg-3 col-md-4 text-right">
                   {user ? (
                     <NavLink to="/profile" className="sup-hdr_link login-user">
-                      <img
-                        src={user.avatar || DEFAULT_AVATAR_PATH}
-                        alt="user"
-                      />
+                      <img src={user.avatar} alt="user" />
                       {user.name}
                     </NavLink>
                   ) : (
@@ -215,13 +209,6 @@ export const Header: React.FC<HeaderProps> = ({ user }) => {
     </React.Fragment>
   );
 };
-
-// const mapStateToProps = ({ auth }: IStoreState) => {
-//   return {
-//     user: auth.user
-//   };
-// };
-// export const Header = connect(mapStateToProps)(_Header);
 
 type HeaderMenuItemProps = {
   title: string;

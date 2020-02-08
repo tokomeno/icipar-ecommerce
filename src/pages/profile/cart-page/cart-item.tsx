@@ -1,5 +1,4 @@
 import React from "react";
-import classnames from "classnames";
 import { ICartItem } from "../../../data/product";
 import {
   removeItem,
@@ -89,14 +88,14 @@ export const CartItem: React.FC<CartItemProps> = ({
           </div>
         </div>
       </td>
-      {/* <td className="price-td text-right">
+      <td className="price-td text-right">
         <div className="price-block">
           <div className="price sum">
-            110
+            {cartItem.price * cartItem.items_count}
             <sub>D</sub>
           </div>
         </div>
-      </td> */}
+      </td>
     </tr>
   );
 };

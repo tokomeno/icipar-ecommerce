@@ -2,17 +2,14 @@ import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { ISortByPrice, ascOrDesc } from "../../hooks/useProducts/useProducts";
 import { PorductFilterContext } from "../../contexts/productFilterContext";
-import { useToggle } from "../../hooks/common/useToggle";
-import classnames from "classnames";
 import { ActiveModalContext } from "../../contexts/modalContex";
+import { Dropdown } from "react-bootstrap";
 interface PriceSorterProps {
   ordering?: "price" | "-price";
 }
 
 export const PriceSorter: React.FC<PriceSorterProps> = ({ ordering }) => {
   const { t } = useTranslation();
-
-  const { toggle, isActive } = useToggle(false);
 
   const { setProductFilterData } = useContext(PorductFilterContext);
   const { setActiveModal } = useContext(ActiveModalContext);
@@ -32,14 +29,8 @@ export const PriceSorter: React.FC<PriceSorterProps> = ({ ordering }) => {
         {t("filters")}
       </button>
       <div className="d-flex sort-price">
-        <div className={classnames("dropdown show", { show: isActive })}>
-          <button
-            onClick={toggle}
-            className="btn btn-secondary dropdown-toggle d-flex align-items-center"
-            type="button"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
+        <Dropdown>
+          <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
             {t("price")}: {ordering === "-price" && t("descending")}
             {ordering === "price" && t("ascending")}
             {ordering !== "price" &&
@@ -47,23 +38,40 @@ export const PriceSorter: React.FC<PriceSorterProps> = ({ ordering }) => {
               t("choose_price_filter")}
             <i className="fas fa-chevron-down" />
             <i className="fas fa-chevron-up" />
-          </button>
-          <div className={classnames("dropdown-menu", { show: isActive })}>
-            <button
-              className="dropdown-item"
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            <Dropdown.Item
               onClick={() => sortByPrice(ascOrDesc.asc)}
+              eventKey="1"
             >
               {t("ascending")}
-            </button>
-            <button
-              className="dropdown-item"
+            </Dropdown.Item>
+            <Dropdown.Item
               onClick={() => sortByPrice(ascOrDesc.desc)}
+              eventKey="2"
             >
               {t("descending")}
-            </button>
-          </div>
-        </div>
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
       </div>
     </div>
   );
 };
+
+const CustomToggle = React.forwardRef<any, any>(
+  ({ children, onClick }, ref) => (
+    <button
+      ref={ref}
+      onClick={e => {
+        e.preventDefault();
+        onClick(e);
+      }}
+      className="btn btn-secondary dropdown-toggle d-flex align-items-center"
+      type="button"
+    >
+      {children}
+    </button>
+  )
+);

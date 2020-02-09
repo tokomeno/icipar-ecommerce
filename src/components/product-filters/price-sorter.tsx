@@ -4,6 +4,7 @@ import { ISortByPrice, ascOrDesc } from "../../hooks/useProducts/useProducts";
 import { PorductFilterContext } from "../../contexts/productFilterContext";
 import { useToggle } from "../../hooks/common/useToggle";
 import classnames from "classnames";
+import { ActiveModalContext } from "../../contexts/modalContex";
 interface PriceSorterProps {
   ordering?: "price" | "-price";
 }
@@ -14,6 +15,7 @@ export const PriceSorter: React.FC<PriceSorterProps> = ({ ordering }) => {
   const { toggle, isActive } = useToggle(false);
 
   const { setProductFilterData } = useContext(PorductFilterContext);
+  const { setActiveModal } = useContext(ActiveModalContext);
 
   const sortByPrice: ISortByPrice = asc_or_desc => {
     setProductFilterData(prevState => ({
@@ -23,7 +25,12 @@ export const PriceSorter: React.FC<PriceSorterProps> = ({ ordering }) => {
   };
   return (
     <div className="d-flex">
-      <button className="filter-btn d-block d-lg-none">{t("filters")}</button>
+      <button
+        onClick={() => setActiveModal("filter")}
+        className="filter-btn d-block d-lg-none"
+      >
+        {t("filters")}
+      </button>
       <div className="d-flex sort-price">
         <div className={classnames("dropdown show", { show: isActive })}>
           <button

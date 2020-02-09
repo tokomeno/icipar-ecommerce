@@ -7,6 +7,8 @@ import { PriceSorter } from "../../components/product-filters/price-sorter";
 import { CatalogFilters } from "./catalog-filters";
 import { PorductFilterContext } from "../../contexts/productFilterContext";
 import { ProductContetnLoader } from "../../components/product/product-content-loader";
+import { ActiveModalContext } from "../../contexts/modalContex";
+import classnames from "classnames";
 
 interface CatalogPageProps {}
 
@@ -16,6 +18,7 @@ export const CatalogPage: React.FC<CatalogPageProps> = () => {
   const { products, nextPage, haveNextPage, isLoading } = useProducts(
     productFilterData
   );
+  const { activeModal, hideModal } = useContext(ActiveModalContext);
 
   if (!productFilterData) return <div></div>;
   return (
@@ -23,9 +26,16 @@ export const CatalogPage: React.FC<CatalogPageProps> = () => {
       <div className="container">
         <div className="catalog-page">
           <div className="d-flex">
-            <div className="filter-block">
-              <button className="burger-close d-block d-lg-none">
-                <img src="images/close.svg" alt="close" />
+            <div
+              className={classnames("filter-block", {
+                active: activeModal === "filter"
+              })}
+            >
+              <button
+                onClick={hideModal}
+                className="burger-close d-block d-lg-none"
+              >
+                <img src="/assets/images/close.svg" alt="close" />
               </button>
               <CatalogFilters />
             </div>

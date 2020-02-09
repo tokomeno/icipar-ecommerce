@@ -1,7 +1,12 @@
 import React, { createContext, useState } from "react";
 
 export type IActiveModalContext = {
-  activeModal: "login-register" | "search-modal" | "burger-menu" | null;
+  activeModal:
+    | "login-register"
+    | "search-modal"
+    | "burger-menu"
+    | "filter"
+    | null;
   setActiveModal: (n: IActiveModalContext["activeModal"]) => void;
   hideModal: () => void;
 };

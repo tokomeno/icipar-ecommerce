@@ -51,7 +51,9 @@ export const Header: React.FC<HeaderProps> = ({ user }) => {
       <div
         className={classnames("bg__site", {
           active:
-            activeModal === "search-modal" || activeModal === "burger-menu"
+            activeModal === "search-modal" ||
+            activeModal === "burger-menu" ||
+            activeModal === "filter"
         })}
         onClick={hideModal}
       ></div>

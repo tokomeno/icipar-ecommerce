@@ -6,8 +6,8 @@ export const ProductContetnLoader: React.FC<{ items: number | null }> = ({
 }) => {
   return (
     <>
-      {new Array(items).fill(1).map(a => (
-        <div className="catalog-item">
+      {new Array(items).fill(1).map((a, index) => (
+        <div className="catalog-item" key={index}>
           <div className="image" style={{ overflow: "hidden" }}>
             <ContentLoader
               speed={2}

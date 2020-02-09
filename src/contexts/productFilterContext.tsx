@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useState,
-  useEffect,
-  useCallback,
-  useRef
-} from "react";
+import React, { createContext, useState, useCallback } from "react";
 import queryString from "query-string";
 
 export interface IChekedFilters {
@@ -35,10 +29,7 @@ const defaultData: IProductFilterObject = {
 export type IProductFilterObject = Partial<IChekedFilters> & {
   order?: "price" | "-price";
   keyword?: string;
-  price_range?: {
-    min: number;
-    max: number;
-  };
+  price_range?: [number, number];
 };
 
 export type FOnFilterChange = (
@@ -54,33 +45,14 @@ interface IPorductFilterContext {
   setNewFilter: FOnFilterChange;
 }
 
-export const PorductFilterContext = createContext<IPorductFilterContext>({
-  // productFilterData: defaultData,
-  // setProductFilterData: () => {},
-  // setNewFilter: () => {
-  //   console.log("filter");
-  // }
-} as IPorductFilterContext);
+export const PorductFilterContext = createContext<IPorductFilterContext>(
+  {} as IPorductFilterContext
+);
 
 export const PorductFilterProvider: React.FC<{}> = ({ children }) => {
   const [productFilterData, setProductFilterData] = useState<
     IProductFilterObject
-  >(() => {
-    // SET FILTERS FROM URL QUERY PARAMS
-    try {
-      const q = window.location.search;
-      if (q.length) {
-        const filterData = queryString.parse(q, {
-          arrayFormat: "bracket",
-          parseNumbers: true
-        });
-        return filterData;
-      }
-    } catch (err) {
-      console.log(err);
-    }
-    return defaultData;
-  });
+  >(getQueryParamsFromUrl);
 
   const setNewFilter: FOnFilterChange = useCallback(
     (ids, filterName) => {
@@ -95,5 +67,34 @@ export const PorductFilterProvider: React.FC<{}> = ({ children }) => {
     >
       {children}
     </PorductFilterContext.Provider>
+  );
+};
+
+const getQueryParamsFromUrl = () => {
+  try {
+    const q = window.location.search;
+    if (q.length) {
+      const filterData = queryString.parse(q, {
+        arrayFormat: "bracket",
+        parseNumbers: true
+      });
+
+      if (!isValidPriceRange(filterData)) {
+        delete filterData.price_range;
+      }
+
+      return filterData;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+  return defaultData;
+};
+
+const isValidPriceRange = (filterData: any): boolean => {
+  return (
+    filterData.price_range &&
+    Array.isArray(filterData.price_range) &&
+    filterData.price_range.length === 2
   );
 };

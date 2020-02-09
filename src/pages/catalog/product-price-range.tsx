@@ -7,17 +7,29 @@ const STEP = 2;
 const MIN = 0;
 const MAX = 500;
 
-class PriceRange extends React.Component {
-  state = {
-    values: [0, 500]
-  };
+interface IStatePriceRange {
+  values: [number, number];
+}
+
+class PriceRange extends React.Component<{}, IStatePriceRange> {
   static contextType = PorductFilterContext;
   context!: React.ContextType<typeof PorductFilterContext>;
+
+  constructor(props: {}) {
+    super(props);
+    this.state = { values: [0, 500] };
+  }
+
+  componentDidMount = () => {
+    if (this.context.productFilterData.price_range) {
+      this.setState({ values: this.context.productFilterData.price_range });
+    }
+  };
   rangeChange = (values: number[]) => {
-    this.setState({ values }, () => {
+    this.setState({ values: [values[0], values[1]] }, () => {
       this.context.setProductFilterData(prevState => ({
         ...prevState,
-        price_range: { min: this.state.values[0], max: this.state.values[1] }
+        price_range: [this.state.values[0], this.state.values[1]]
       }));
     });
   };
@@ -35,7 +47,7 @@ class PriceRange extends React.Component {
               onChange={e => {
                 let newValue = e.target.value;
                 this.setState({
-                  values: [newValue, this.state.values[1]]
+                  values: [parseInt(newValue), this.state.values[1]]
                 });
               }}
             />
@@ -50,7 +62,7 @@ class PriceRange extends React.Component {
               onChange={e => {
                 let newValue = e.target.value;
                 this.setState({
-                  values: [this.state.values[0], newValue]
+                  values: [this.state.values[0], parseInt(newValue)]
                 });
               }}
             />

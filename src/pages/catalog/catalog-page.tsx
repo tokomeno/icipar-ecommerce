@@ -46,6 +46,9 @@ export const CatalogPage: React.FC<CatalogPageProps> = () => {
                 <PriceSorter ordering={productFilterData.order || "price"} />
               </div>
               <div className="d-flex flex-wrap justify-content-sm-start justify-content-center">
+                {!isLoading && products.length === 0 && (
+                  <h2 className="h2 text-center">{t("products_not_found")}</h2>
+                )}
                 {!isLoading ? (
                   products.map(p => (
                     <Product

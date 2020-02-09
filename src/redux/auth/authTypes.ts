@@ -7,6 +7,7 @@ import {
 // TODO: ADD User Type When ip will be rady
 export interface IUser {
   [key: string]: any;
+  avatar: string;
 }
 
 export interface AuthState {
@@ -28,12 +29,6 @@ export enum AuthActionTypes {
   logoutUser = "logoutUser",
   setAuthErrors = "setAuthErrors"
 }
-
-// TODO:
-// export interface LoginUserAction {
-//   type: AuthActionTypes.loginUser;
-//   payload: any;
-// }
 
 export type AuthActions =
   | SetCurrentUserAction

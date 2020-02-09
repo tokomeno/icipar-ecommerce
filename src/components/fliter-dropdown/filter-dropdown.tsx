@@ -32,19 +32,20 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({
 
   return (
     <div
-      onClick={toggle}
       className={classnames("filter", typeClasses[type].parentClass, {
         active: isActive
       })}
     >
-      <span className="filter-title d-flex align-items-center justify-content-between">
+      <span
+        onClick={toggle}
+        className="filter-title d-flex align-items-center justify-content-between"
+      >
         {title}
         <div className="toggle-btn">
           <i className="fas fa-angle-down" />
           <i className="fas fa-angle-right" />
         </div>
       </span>
-
       <div
         className={classnames("d-flex", typeClasses[type].childClass, {
           active: showMoreIsActive

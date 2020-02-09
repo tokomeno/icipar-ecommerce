@@ -70,5 +70,12 @@ const mapToRequestParams = (
   if (productFilter.usages && productFilter.usages.length)
     res.usage_ids = productFilter.usages;
 
+  if (
+    productFilter.price_range &&
+    typeof productFilter.price_range === "object" &&
+    productFilter.price_range["min"] &&
+    productFilter.price_range["max"]
+  )
+    res.price_range = { ...productFilter.price_range };
   return res;
 };

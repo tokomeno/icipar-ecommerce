@@ -13,7 +13,9 @@ interface CatalogPageProps {}
 export const CatalogPage: React.FC<CatalogPageProps> = () => {
   const { t } = useTranslation();
   const { productFilterData } = useContext(PorductFilterContext);
-  const { products, nextPage, haveNextPage } = useProducts(productFilterData);
+  const { products, nextPage, haveNextPage, isLoading } = useProducts(
+    productFilterData
+  );
 
   if (!productFilterData) return <div></div>;
   return (
@@ -44,7 +46,7 @@ export const CatalogPage: React.FC<CatalogPageProps> = () => {
                 <PriceSorter ordering={productFilterData.order || "price"} />
               </div>
               <div className="d-flex flex-wrap justify-content-sm-start justify-content-center">
-                {products.length ? (
+                {!isLoading ? (
                   products.map(p => (
                     <Product
                       key={p.id}

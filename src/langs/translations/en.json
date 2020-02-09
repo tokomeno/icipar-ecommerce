@@ -106,6 +106,7 @@
     "save": "save",
     "gauqmeba": "gauqmeba",
     "delete": "delete",
-    "products": "products"
+    "products": "products",
+    "price": "price"
   }
 }

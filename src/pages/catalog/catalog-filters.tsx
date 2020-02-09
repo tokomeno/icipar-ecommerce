@@ -4,6 +4,7 @@ import { FilterCheckboxes } from "../../components/fliter-dropdown/filter-checkb
 import { CatBanner } from "../../components/cat-banner";
 import { useProductFilterAttributes } from "../../hooks/useProductFilterAttributes";
 import { useTranslation } from "react-i18next";
+import { PriceRange } from "./product-price-range";
 
 interface CatalogFiltersProps {
   // onFilterChange: FOnFilterChange;
@@ -72,32 +73,10 @@ export const CatalogFilters: React.FC<CatalogFiltersProps> = React.memo(() => {
         />
       </FilterDropdown>
 
-      <FilterDropdown type="price" title={"ფასი"}>
-        <div className="money_range">
-          <div className="input_blocks d-flex">
-            <div className="inps_bl">
-              <input
-                type="text"
-                className="price"
-                id="min_value"
-                name="priceFrom"
-                defaultValue={0}
-              />
-            </div>
-            <div className="inps_bl">
-              <input
-                type="text"
-                className="price"
-                id="max_value"
-                name="priceEnd"
-                defaultValue={500.0}
-              />
-            </div>
-            <button className="ok-btn">OK</button>
-          </div>
-          <div id="slider-range" />
-        </div>
+      <FilterDropdown type="price" title={t("price")}>
+        <PriceRange></PriceRange>
       </FilterDropdown>
+
       <CatBanner to={"#!"} image={"/assets/uploads/images/ban.png"} />
     </div>
   );

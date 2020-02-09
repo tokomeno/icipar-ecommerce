@@ -5,7 +5,7 @@ import axios from "axios";
 import { connect } from "react-redux";
 import { setCurrentUser } from "../../redux/auth/authActions";
 import { useTranslation } from "react-i18next";
-import { AUTH_BASE_URL, API_FB_LOGIN_URL } from "../../api/endpoints";
+import { API_FB_LOGIN_URL } from "../../api/endpoints";
 import { ActiveModalContext } from "../../contexts/modalContex";
 import { FACEBOOK_CLIENT_ID } from "../../consts";
 

@@ -35,6 +35,10 @@ const defaultData: IProductFilterObject = {
 export type IProductFilterObject = Partial<IChekedFilters> & {
   order?: "price" | "-price";
   keyword?: string;
+  price_range?: {
+    min: number;
+    max: number;
+  };
 };
 
 export type FOnFilterChange = (
@@ -51,21 +55,18 @@ interface IPorductFilterContext {
 }
 
 export const PorductFilterContext = createContext<IPorductFilterContext>({
-  productFilterData: defaultData,
-  setProductFilterData: () => {},
-  setNewFilter: () => {
-    console.log("filter");
-  }
+  // productFilterData: defaultData,
+  // setProductFilterData: () => {},
+  // setNewFilter: () => {
+  //   console.log("filter");
+  // }
 } as IPorductFilterContext);
-
-// productFilterData: defaultData,
-// setProductFilterData: () => {},
-// setNewFilter: () => {}
 
 export const PorductFilterProvider: React.FC<{}> = ({ children }) => {
   const [productFilterData, setProductFilterData] = useState<
     IProductFilterObject
   >(() => {
+    // SET FILTERS FROM URL QUERY PARAMS
     try {
       const q = window.location.search;
       if (q.length) {
@@ -81,17 +82,8 @@ export const PorductFilterProvider: React.FC<{}> = ({ children }) => {
     return defaultData;
   });
 
-  const isFirstRender = useRef(true);
-  useEffect(() => {
-    if (isFirstRender) {
-      isFirstRender.current = false;
-      return;
-    }
-  }, [productFilterData]);
-
   const setNewFilter: FOnFilterChange = useCallback(
     (ids, filterName) => {
-      console.log("set new filter");
       setProductFilterData(prevState => ({ ...prevState, [filterName]: ids }));
     },
     [setProductFilterData]

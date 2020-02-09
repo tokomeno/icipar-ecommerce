@@ -1,9 +1,9 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import classnames from "classnames";
 import { useToggle } from "../../hooks/common/useToggle";
 import { IStoreState } from "../../redux/mainReducer";
 import { connect } from "react-redux";
-import { Overlay, Tooltip, OverlayTrigger, Button } from "react-bootstrap";
+import { Tooltip, OverlayTrigger } from "react-bootstrap";
 
 interface ProductHeartBtnProps {
   productId: number;

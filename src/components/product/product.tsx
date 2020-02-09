@@ -42,7 +42,7 @@ export const Product: React.FC<ProductProps> = ({
           {product.title}
         </Link>
         <div className="price">
-          {product.price_min}
+          {product.price_min} - {product.price_max}
           <sub>D</sub>
         </div>
       </div>

@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { ICartItem } from "../../data/product";
 import { useTranslation } from "react-i18next";
-import { MenuCartAndWishDropdown } from "./menuCartAndWishDropdown";
+import { MenuDropdown } from "./menu-dropdown";
 import { connect } from "react-redux";
 import { IStoreState } from "../../redux/mainReducer";
 
@@ -17,7 +17,7 @@ const _CartNavbarDropdown: React.FC<CardNavbarDropdownProps> = ({
 }) => {
   const { t } = useTranslation();
   return (
-    <MenuCartAndWishDropdown
+    <MenuDropdown
       buttonChildren={
         <>
           <img src="/assets/images/bag.svg" alt="cart" />

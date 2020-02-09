@@ -43,7 +43,12 @@ export const ProducShowPage: React.FC<ProducShowPageProps> = ({ match }) => {
     }
   }, [setActiveItem, product]);
 
-  if (!product || !activeItem) return null;
+  if (!product || !activeItem)
+    return (
+      <Layout>
+        <div style={{ height: "400px" }} className="product"></div>
+      </Layout>
+    );
   return (
     <Layout>
       <div className="product">

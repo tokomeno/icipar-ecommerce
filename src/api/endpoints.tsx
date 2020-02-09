@@ -11,6 +11,9 @@ export const API_GA_LOGIN_URL =
 export const GET_CUSTOMER_INFO = AUTH_BASE_URL + "/get-customer";
 export const UPDATE_CUSTOMER_INFO = AUTH_BASE_URL + "/update-user";
 
+export const GET_USER_ADDRESSES = AUTH_BASE_URL + "/user/addresses";
+export const SET_USER_ADDRESSES = AUTH_BASE_URL + "/user/add-address";
+
 /////////////////////////////////
 export const PRODUCT_BASE_URL = "http://3.18.107.107/api";
 export const FETCH_PRODUCTS_URL = PRODUCT_BASE_URL + "/products";

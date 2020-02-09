@@ -62,7 +62,7 @@ export const useProducts = (productFilterData: IProductFilterObject) => {
     return () => {
       clearTimeout(fetching);
     };
-  }, [productFilterData]);
+  }, [productFilterData, startLoading, stopLoading]);
 
   return {
     isLoading,

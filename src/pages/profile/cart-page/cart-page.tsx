@@ -1,6 +1,5 @@
 import React from "react";
 import { ProfileBasePage } from "../index";
-import { useTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { IStoreState } from "../../../redux/mainReducer";
 import { CartCheckoutForm } from "./cart-checkout-form";
@@ -12,7 +11,6 @@ interface CartPageProps {
 }
 
 const _CartPage: React.FC<CartPageProps> = ({ totalPrice }) => {
-  const { t } = useTranslation();
   const {
     isActive: FirstStep,
     setActive: showContent,

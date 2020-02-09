@@ -98,6 +98,7 @@
     "gauqmeba": "gauqmeba",
     "delete": "delete",
     "products": "products",
-    "products_not_found": "პროდუქტები ვერ მოიძებნა"
+    "products_not_found": "პროდუქტები ვერ მოიძებნა",
+    "profile_info_updated": "profile_info_updated"
   }
 }

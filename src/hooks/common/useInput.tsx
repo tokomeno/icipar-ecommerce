@@ -1,18 +1,28 @@
 import { useState, useCallback } from "react";
 
-export const useInput = (
-  defaultValue: string | number = "",
-  cb?: (e: React.ChangeEvent<HTMLInputElement>, value: string) => void
-) => {
+export const useInput = (defaultValue: string | number = "") => {
   const [value, setInputName] = useState(defaultValue + "");
   const onChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (cb) {
-        cb(e, e.target.value);
+    (
+      e:
+        | React.ChangeEvent<HTMLInputElement>
+        | React.ChangeEvent<HTMLSelectElement>
+        | string
+        | number
+        | undefined
+        | null
+    ) => {
+      if (typeof e === "string" || typeof e === "number") {
+        setInputName(e + "");
+        return;
+      }
+      if (typeof e === "undefined" || e === null) {
+        setInputName("");
+        return;
       }
       setInputName(e.target.value);
     },
-    [cb]
+    []
   );
   return { value, onChange };
 };

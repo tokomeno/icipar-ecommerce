@@ -10,14 +10,14 @@ export const MapComponent: React.FC<MapComponentProps> = ({ children }) => {
   const [mapBlockActive, setMapBlockActive] = useState<boolean>(false);
   const { t } = useTranslation();
 
-  let a: any = window;
-  useEffect(() => {
-    try {
-      if (a.initMap) a.initMap();
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
+  // let a: any = window;
+  // useEffect(() => {
+  //   try {
+  //     if (a.initMap) a.initMap();
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }, []);
   return (
     <div className="map-content">
       <button

@@ -1,5 +1,5 @@
 import React from "react";
-import { useToggle } from "../../../hooks/common/useToggle";
+import { useToggle } from "../hooks/common/useToggle";
 
 interface ProfileInputProps {
   type?: "text" | "password" | "number" | "date";
@@ -23,10 +23,12 @@ export const ProfileInput: React.FC<ProfileInputProps> = React.memo(
           id={name}
           value={value}
           className={type === "password" ? "pass-input password-eye-input" : ""}
+          // autoComplete="off"
+          autoComplete="new-password"
         />
         {type === "password" && (
           <span onClick={toggle} className="show-pass password-eye">
-            <img src="images/show-pass.svg" alt="show password" />
+            <img src="/assets/images/show-pass.svg" alt="show password" />
           </span>
         )}
         {errorMessage && (

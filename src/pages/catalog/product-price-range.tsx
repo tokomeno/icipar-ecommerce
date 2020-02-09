@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Range, getTrackBackground } from "react-range";
 import { PorductFilterContext } from "../../contexts/productFilterContext";
-import { ISortByPrice } from "../../hooks/useProducts/useProducts";
 
 const STEP = 2;
 const MIN = 0;

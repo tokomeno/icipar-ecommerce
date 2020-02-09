@@ -7,7 +7,7 @@ import {
   UPDATE_CUSTOMER_INFO,
   GET_CUSTOMER_INFO
 } from "../../../api/endpoints";
-import { ProfileInput } from "./input";
+import { ProfileInput } from "../../../components/profile-input";
 
 interface InfoProfilePageProps {}
 
@@ -22,7 +22,14 @@ export const InfoProfilePage: React.FC<InfoProfilePageProps> = props => {
   const { value: birth_date, onChange: setBirth_date } = useInput();
   const { value: old_password, onChange: setOld_password } = useInput();
   const { value: new_password, onChange: setNew_password } = useInput();
-  const { value: confirm_password, onChange: setConfirm_password } = useInput();
+  const {
+    value: new_password_confirmation,
+    onChange: setConfirm_password
+  } = useInput();
+
+  const [originalData, setOriginalData] = useState<{
+    [key: string]: string | undefined;
+  }>({});
 
   const [errors, setErrors] = useState<{ [key: string]: string[] }>({});
 
@@ -37,11 +44,10 @@ export const InfoProfilePage: React.FC<InfoProfilePageProps> = props => {
         birth_date,
         old_password,
         new_password,
-        confirm_password
+        new_password_confirmation
       })
       .then(res => {
-        console.log(res);
-        setSuccessMessage("info updated");
+        setSuccessMessage(t("profile_info_updated"));
       })
       .catch(err => {
         if (err.response && err.response.data && err.response.data.error) {
@@ -52,17 +58,30 @@ export const InfoProfilePage: React.FC<InfoProfilePageProps> = props => {
         console.log(err);
       });
   };
-  const cacnelSubmit = () => {
-    // axiosWithToken.post(UPDATE_CUSTOMER_INFO)
+  const setInputsFromOriginalData = () => {
+    setName(originalData.name);
+    setSurname(originalData.surname);
+    setEmail(originalData.email);
+    setPhone(originalData.phone);
+    setId_number(originalData.id_number);
+    setBirth_date(originalData.birth_date);
   };
+
+  useEffect(() => {
+    setInputsFromOriginalData();
+  }, [originalData]);
+
   useEffect(() => {
     axiosWithToken
       .get(GET_CUSTOMER_INFO)
       .then(res => {
-        console.log(res.data);
+        if (typeof res.data.data === "object") {
+          setOriginalData(res.data.data);
+        }
       })
       .catch(err => {
-        console.log(err.response);
+        console.log(err);
+        alert("დაფიქსირდა შედცომა");
       });
   }, []);
 
@@ -73,7 +92,9 @@ export const InfoProfilePage: React.FC<InfoProfilePageProps> = props => {
           <h1 className="profile-top_title">{t("information")}</h1>
         </div>
 
-        {successMessage && <p className="text-success">{successMessage}</p>}
+        {successMessage && (
+          <p className="text-success text-center mt-10">{successMessage}</p>
+        )}
 
         <form className="info">
           <div className="row">
@@ -132,6 +153,7 @@ export const InfoProfilePage: React.FC<InfoProfilePageProps> = props => {
             <div className="col-sm-6">
               <ProfileInput
                 label={t("old_password")}
+                type="password"
                 name={"old_password"}
                 value={old_password}
                 onChange={setOld_password}
@@ -141,6 +163,7 @@ export const InfoProfilePage: React.FC<InfoProfilePageProps> = props => {
               />
               <ProfileInput
                 label={t("new_password")}
+                type="password"
                 name={"new_password"}
                 value={new_password}
                 onChange={setNew_password}
@@ -149,14 +172,15 @@ export const InfoProfilePage: React.FC<InfoProfilePageProps> = props => {
                 }
               />
               <ProfileInput
-                label={t("confirm_password")}
-                name={"confirm_password"}
-                value={confirm_password}
+                label={t("new_password_confirmation")}
+                type="password"
+                name={"new_password_confirmation"}
+                value={new_password_confirmation}
                 onChange={setConfirm_password}
                 errorMessage={
                   errors &&
-                  errors.confirm_password &&
-                  errors.confirm_password[0]
+                  errors.new_password_confirmation &&
+                  errors.new_password_confirmation[0]
                 }
               />
             </div>
@@ -172,7 +196,7 @@ export const InfoProfilePage: React.FC<InfoProfilePageProps> = props => {
 
             <button
               type="button"
-              onClick={cacnelSubmit}
+              onClick={setInputsFromOriginalData}
               className="cancel info-btns_btn"
             >
               {t("gauqmeba")}

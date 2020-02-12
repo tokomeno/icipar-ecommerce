@@ -13,9 +13,9 @@ export const ProductSliderItem: React.FC<ProductSliderItemProps> = ({
   return (
     <div className="swiper-slide">
       <div className="image">
-        <a href="#!" className="img">
+        <NavLink className="img" to={`/product/${product.id}`}>
           <img src={product.thumbnail} alt="photo1" />
-        </a>
+        </NavLink>
         <div className="option d-flex justify-content-between align-items-center">
           <div className="d-flex">
             <div className="rating">

@@ -15,7 +15,14 @@ export const ChangeLang: React.FC<ChangeLangProps> = props => {
   return (
     <React.Fragment>
       {activeLang === "en" ? (
-        <a href="#!" onClick={() => changeLanguage("ka")} className="lang">
+        <a
+          href="#!"
+          onClick={e => {
+            e.preventDefault();
+            changeLanguage("ka");
+          }}
+          className="lang"
+        >
           <img
             style={{ width: "24px" }}
             src="/assets/images/ka.svg"
@@ -23,7 +30,14 @@ export const ChangeLang: React.FC<ChangeLangProps> = props => {
           />
         </a>
       ) : (
-        <a href="#!" onClick={() => changeLanguage("en")} className="lang">
+        <a
+          href="#!"
+          onClick={e => {
+            e.preventDefault();
+            changeLanguage("en");
+          }}
+          className="lang"
+        >
           <img
             style={{ width: "24px" }}
             src="/assets/images/en.svg"

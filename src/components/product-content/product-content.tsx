@@ -25,7 +25,8 @@ export const ProductContent: React.FC<ProductContentProps> = ({
             active: activeTab === "description"
           })}
           href="#!"
-          onClick={() => {
+          onClick={e => {
+            e.preventDefault();
             setActiveTab("description");
           }}
         >
@@ -35,7 +36,8 @@ export const ProductContent: React.FC<ProductContentProps> = ({
           className={classnames("prod-menu_link nav-link", {
             active: activeTab === "ingredients"
           })}
-          onClick={() => {
+          onClick={e => {
+            e.preventDefault();
             setActiveTab("ingredients");
           }}
           href="#!"
@@ -46,7 +48,8 @@ export const ProductContent: React.FC<ProductContentProps> = ({
           className={classnames("prod-menu_link nav-link", {
             active: activeTab === "usage"
           })}
-          onClick={() => {
+          onClick={e => {
+            e.preventDefault();
             setActiveTab("usage");
           }}
           href="#!"
@@ -58,7 +61,8 @@ export const ProductContent: React.FC<ProductContentProps> = ({
           className={classnames("prod-menu_link nav-link", {
             active: activeTab === "brand"
           })}
-          onClick={() => {
+          onClick={e => {
+            e.preventDefault();
             setActiveTab("brand");
           }}
           href="#!"

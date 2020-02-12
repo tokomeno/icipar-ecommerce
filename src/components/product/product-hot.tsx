@@ -22,6 +22,7 @@ const _ProductHot: React.FC<ProductHotProps> = ({ isAuth }) => {
       </div>
       <a
         href="#!"
+        onClick={e => e.preventDefault()}
         className="bag d-flex align-items-center justify-content-center"
       >
         <img src="/assets/images/bagwhite.svg" alt="bag" />

@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import classnames from "classnames";
 import Swiper from "react-id-swiper";
 import { IProduct } from "../../../data/product";
-import { IProductCetegory } from "../../../data/categories";
 import { useSliderNav } from "../../../hooks/common/useSliderNav";
 import { Product } from "../../product/product";
 import { SwiperCustomNavBtn } from "../../swiper/swiper-custom-nav-btn";
 import { axiosWithToken } from "../../../api/axios-with-token";
 import { useTranslation } from "react-i18next";
+import { NavLink } from "react-router-dom";
 
 interface ProductSliderProps {
   fetchUrl?: string;
@@ -103,10 +103,10 @@ export const ProductSlider: React.FC<ProductSliderProps> = ({
       <div className="slider-section-top">
         <div className=" d-flex align-items-center justify-content-sm-center justify-content-between xs-titlesblock">
           <h3 className="slider-section-top_title section-title">{title}</h3>
-          <a href="#!" className="slider-section-top_link">
+          <NavLink to="#!" className="slider-section-top_link">
             <span>/</span>
             {t("show_more")} ({showMoreNumber})
-          </a>
+          </NavLink>
         </div>
         <div className="line" />
         <div className="menu d-flex justify-content-center align-items-center">
@@ -117,7 +117,10 @@ export const ProductSlider: React.FC<ProductSliderProps> = ({
               className={classnames("menu_link", {
                 active: i.category_id === activeTabId
               })}
-              onClick={() => setActiveTab(i.category_id)}
+              onClick={e => {
+                e.preventDefault();
+                setActiveTab(i.category_id);
+              }}
             >
               {i.category_title}
             </a>
@@ -134,7 +137,7 @@ export const ProductSlider: React.FC<ProductSliderProps> = ({
             {products.map((product, index) => (
               <Product
                 wrapperClass={"swiper-slide"}
-                key={index}
+                key={product.id}
                 product={product}
                 isHot={isHot}
               />

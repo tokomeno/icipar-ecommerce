@@ -41,7 +41,8 @@ const params = {
     420: {
       slidesPerView: 1
     }
-  }
+  },
+  observer: true
 };
 
 export const CommentSlider: React.FC<CommentSliderProps> = () => {

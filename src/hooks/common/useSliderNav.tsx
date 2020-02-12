@@ -10,6 +10,8 @@ export const useSliderNav = (
     defaultCurrentIndex
   );
 
+  console.log(length, currentSliderIndex);
+
   const sliderNav: ISliderNav = (direction: "forward" | "backward") => {
     if (direction === "forward" && currentSliderIndex < length)
       setCurrentSliderIndex(currentSliderIndex + 1);

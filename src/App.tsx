@@ -30,10 +30,19 @@ import { routes } from "./routes/routes";
 import { PrivateRoute } from "./routes/privateRoute";
 import { tryLocalAuth } from "./tryLocalAuth";
 import { InfoProfilePage } from "./pages/profile/info/info-profile";
+import { BlogShowPage } from "./pages/blog-show/blog-show";
+import { BlogPage } from "./pages/blog/blog-page";
 
 export const HistoryContext = React.createContext<History>(
   (null as any) as History
 );
+
+export interface match<P> {
+  params: P;
+  isExact: boolean;
+  path: string;
+  url: string;
+}
 
 tryLocalAuth();
 
@@ -55,6 +64,9 @@ const App: React.FC<{}> = props => {
           <Route path={routes.catalog} exact component={CatalogPage} />
           <Route path={routes.giftCard} exact component={GiftCardPage} />
           <Route path={routes.productShow} exact component={ProducShowPage} />
+
+          <Route path={routes.blogShow} exact component={BlogShowPage} />
+          <Route path={routes.blogs} exact component={BlogPage} />
 
           <Route path="/profile/cart" exact component={CartPage} />
           {/* PROFILE PAGES */}

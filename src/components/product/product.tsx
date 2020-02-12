@@ -21,7 +21,7 @@ export const Product: React.FC<ProductProps> = ({
 }) => {
   return (
     <React.Fragment>
-      <div className={wrapperClass}>
+      <div className={wrapperClass + " fadeInOpacity"}>
         <div className="image">
           <Link to={`/product/${product.id}`} className="img">
             <img src={product.thumbnail} alt="" />

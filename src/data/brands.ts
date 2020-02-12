@@ -1,12 +1,12 @@
 export type IBrandSliderItem = {
-  id: number;
-  image: string;
+  slug: string;
+  logo: string;
 };
 
-export const brandsSlider = [
-  { id: 1, image: "/assets/uploads/images/brand1.png" },
-  { id: 2, image: "/assets/uploads/images/brand2.png" },
-  { id: 3, image: "/assets/uploads/images/brand3.png" },
-  { id: 4, image: "/assets/uploads/images/brand4.png" },
-  { id: 5, image: "/assets/uploads/images/brand5.png" }
+export const brandsSlider: IBrandSliderItem[] = [
+  { slug: "someslug-1", logo: "/assets/uploads/images/brand1.png" },
+  { slug: "someslug-2", logo: "/assets/uploads/images/brand2.png" },
+  { slug: "someslug-3", logo: "/assets/uploads/images/brand3.png" },
+  { slug: "someslug-4", logo: "/assets/uploads/images/brand4.png" },
+  { slug: "someslug-5", logo: "/assets/uploads/images/brand5.png" }
 ];

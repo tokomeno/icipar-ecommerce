@@ -7,6 +7,7 @@ import {
 } from "../../../redux/cart/cartActions";
 import { useTranslation } from "react-i18next";
 import { ICartState } from "../../../redux/cart/cartTypes";
+import classnames from "classnames";
 
 export type CartItemProps = {
   cartItem: ICartItem;
@@ -58,7 +59,9 @@ export const CartItem: React.FC<CartItemProps> = ({
       <td>
         <div className="quantity d-flex flex-column align-items-center">
           <span
-            className="plus "
+            className={classnames("plus", {
+              "opacity-03": loadingItemId === cartItem.item_id
+            })}
             onClick={() =>
               loadingItemId !== cartItem.item_id &&
               increaseItem(cartItem.item_id)
@@ -70,7 +73,9 @@ export const CartItem: React.FC<CartItemProps> = ({
             <input type="number" readOnly value={cartItem.items_count} />
           </span>
           <span
-            className="min"
+            className={classnames("min", {
+              "opacity-03": loadingItemId === cartItem.item_id
+            })}
             onClick={() =>
               loadingItemId !== cartItem.item_id &&
               decreaseItem(cartItem.item_id)

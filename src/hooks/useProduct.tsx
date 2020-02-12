@@ -3,7 +3,7 @@ import Axios from "axios";
 import { FETCH_PRODUCT_URL } from "../api/endpoints";
 import { IProductWithItems } from "../data/product";
 
-export const useProduct = (productId: number) => {
+export const useProduct = (productId: number | string) => {
   const [product, setProduct] = useState<IProductWithItems | null>(null);
 
   useEffect(() => {

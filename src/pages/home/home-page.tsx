@@ -2,14 +2,17 @@ import React from "react";
 import { Layout } from "../../layout";
 import { MainSlider } from "./mainSlider";
 import { ProductSlider } from "../../components/sliders/producSlider/productSlider";
-import { productCategories } from "../../data/categories";
-import { dummyProductData } from "../../data/product";
-import { BrandSlider } from "../../components/sliders/brandSlider/brandSlider";
-import { brandsSlider } from "../../data/brands";
 import { BlogSlider } from "../../components/sliders/blog-slider/blog-slider";
 import { CommentSlider } from "../../components/comment-slider/comment-slider";
 import { useTranslation } from "react-i18next";
 import Swiper from "react-id-swiper";
+import {
+  FETCH_BESTSELLER_PRODUCTS,
+  FETCH_NEWARRIVALS_PRODUCTS,
+  FETCH_HOTDEALS_PRODUCTS,
+  FETCH_DISCOUNTED_PRODUCTS
+} from "../../api/endpoints";
+import { BrandSlider } from "../../components/sliders/brandSlider/brandSlider";
 
 interface HomePageProps {}
 
@@ -27,6 +30,7 @@ export const HomePage: React.FC<HomePageProps> = () => {
   return (
     <Layout>
       <MainSlider />
+
       <div className="container d-none d-md-block">
         <div className="grid">
           <div className="row">
@@ -172,43 +176,45 @@ export const HomePage: React.FC<HomePageProps> = () => {
       </div>
 
       <ProductSlider
+        key={1}
         title={t("hotOffer")}
-        menuCetegories={productCategories}
         showMoreNumber={123}
-        products={dummyProductData}
         classes={{ sectionClasses: ["hot__slide"] }}
+        fetchUrl={FETCH_HOTDEALS_PRODUCTS}
         isHot={true}
       />
       <ProductSlider
+        key={2}
         title={t("news")}
-        menuCetegories={productCategories}
         showMoreNumber={123}
-        products={dummyProductData}
         classes={{ sectionClasses: ["news__slide"] }}
+        fetchUrl={FETCH_NEWARRIVALS_PRODUCTS}
       />
       <ProductSlider
+        key={3}
         classes={{ sectionClasses: ["saleslider"] }}
         title={t("sales")}
-        menuCetegories={productCategories}
         showMoreNumber={123}
-        products={dummyProductData}
+        fetchUrl={FETCH_DISCOUNTED_PRODUCTS}
       />
       <ProductSlider
+        key={4}
         classes={{ sectionClasses: ["bestsellerslider"] }}
         title={t("bestsellers")}
-        menuCetegories={productCategories}
         showMoreNumber={123}
-        products={dummyProductData}
+        fetchUrl={FETCH_BESTSELLER_PRODUCTS}
       />
-      <ProductSlider
+      {/* <ProductSlider
+       key={5}
         classes={{ sectionClasses: ["recommendedslider"] }}
         title={t("recomendations")}
         menuCetegories={productCategories}
         showMoreNumber={123}
         products={dummyProductData}
-      />
+      /> */}
       <BlogSlider />
-      <BrandSlider brands={brandsSlider} />
+
+      <BrandSlider />
 
       <CommentSlider />
 

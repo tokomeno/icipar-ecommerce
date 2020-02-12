@@ -46,7 +46,11 @@
     }
 
     .disableOpacity:disabled {
-      opacity: 0.6;
+      opacity: 0.6 !important;
+    }
+
+    .opacity-03 {
+      opacity: 0.3 !important;
     }
 
     .info-item select {
@@ -71,28 +75,31 @@
     .swiper-button-prev.d-flex.align-items-center.justify-content-center {
       z-index: 1;
     }
+
+    .blogSection .blogSlider .blog-container.blog-list .col-md-6 .swiper-slide {
+      background-color: white !important;
+      margin-bottom: 20px;
+    }
+
+    .fadeInOpacity {
+      animation: fadeInOpacity 600ms ease-in-out;
+    }
+
+    /* Chrome, Safari, Opera */
+    @keyframes fadeInOpacity {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
   </style>
 
 <body class="site">
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
-  <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-
-  <!--Plugins-->
-  <!-- <script src="/assets/plugins/jquery/jquery-3.3.1.min.js"></script>
-  <script src="/assets/plugins/bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>
-  <script src="/assets/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.concat.min.js"></script>
-  <script src="/assets/plugins/bootstrap-select/dist/js/bootstrap-select.js"></script>
-  <script src="/assets/plugins/aos/aos.js"></script> -->
 
   <!--Custom Scripts-->
   <script src="/assets/minJs/default.min.js"></script>

@@ -9,6 +9,10 @@ export const routes = {
   shops: "/shops",
   allBrands: "/all-brands",
   catalog: "/catalog",
+
   giftCard: "/gift-card",
-  productShow: "/product/:id"
+  productShow: "/product/:id",
+
+  blogs: "/blogs",
+  blogShow: "/blogs/:slug"
 };

@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Swiper from "react-id-swiper";
 import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import { axiosWithToken } from "../../api/axios-with-token";
+import { MAIN_CAROUSEL } from "../../api/endpoints";
+
+interface ISlider {
+  image: string;
+  title: string;
+  link_href: string;
+  link_title: string;
+}
 
 interface MainSliderProps {}
 
@@ -16,46 +24,73 @@ const params = {
     clickable: true
   }
 };
-export const MainSlider: React.FC<MainSliderProps> = props => {
+export const MainSlider: React.FC<MainSliderProps> = () => {
+  const [sliders, setSliders] = useState<ISlider[]>([]);
+
+  useEffect(() => {
+    axiosWithToken
+      .get<{ data: ISlider[] }>(MAIN_CAROUSEL)
+      .then(res => {
+        if (res.data.data) {
+          setSliders(res.data.data);
+        }
+      })
+      .catch(err => {
+        alert("დაფიქსირდა შეცდომა");
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div className="main-slider">
       <div className="swiper-container main-slider-lg">
-        <Swiper
-          wrapperClass="swiper-wrapper"
-          containerClass="swiper-container main-slider-lg"
-          {...params}
-        >
-          <Item />
-        </Swiper>
+        {sliders.length > 0 ? (
+          <Swiper
+            wrapperClass="swiper-wrapper"
+            containerClass="swiper-container main-slider-lg"
+            {...params}
+          >
+            {sliders.map((slider, i) => (
+              <Item slider={slider} key={i} />
+            ))}
+          </Swiper>
+        ) : null}
       </div>
     </div>
   );
 };
 
-const Item = () => {
-  const { t } = useTranslation();
+interface ItemProps {
+  slider: ISlider;
+}
+const Item: React.FC<ItemProps> = ({ slider }) => {
+  // const { t } = useTranslation();
   return (
     <div className="swiper-slide d-flex align-items-center justify-content-center">
       <div className="container swiper-slide-content flex-sm-row flex-column">
         <img
-          src="/assets/uploads/images/slide1.png"
+          src={slider.image}
+          // src="/assets/uploads/images/slide1.png"
           alt="chanel"
           className="main-photo d-none d-sm-block"
         />
+        {/* xs */}
         <img
-          src="/assets/uploads/images/slide1-xs.png"
+          src={slider.image}
+          // src="/assets/uploads/images/slide1-xs.png"
           alt="chanel"
           className="main-photo d-block d-sm-none"
         />
         <div className="desc text-center">
           <a href="#!" className="d-block">
-            <h2 className="desc_title">
-              <span>სუნამო ყველაზე</span>
-              <span>მოდური ქალბატონებისთვის</span>
-            </h2>
+            <h2 className="desc_title">{slider.title}</h2>
           </a>
-          <Link to="#!" className="desc_link d-none d-md-inline-block">
-            {t("shedena")}
+
+          <Link
+            to={slider.link_href}
+            className="desc_link d-none d-md-inline-block"
+          >
+            {slider.link_title}
             <img src="/assets/images/arrow-right.svg" alt="arrow" />
             <img
               src="/assets/images/arrow-right_red.svg"

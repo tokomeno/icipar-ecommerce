@@ -2,7 +2,6 @@ import React from "react";
 import { Layout } from "../../layout";
 import chunk from "lodash.chunk";
 import { BrandSlider } from "../../components/sliders/brandSlider/brandSlider";
-import { brandsSlider } from "../../data/brands";
 
 interface AllBrandsPageProps {}
 
@@ -13,7 +12,7 @@ export const AllBrandsPage: React.FC<AllBrandsPageProps> = props => {
     <Layout>
       <div className="container">
         <div className="allbrands">
-          <BrandSlider brands={brandsSlider} />
+          <BrandSlider />
           <div className="all">
             <div className="top row align-items-center justify-content-between">
               <div className="col-md-4" />

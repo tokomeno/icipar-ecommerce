@@ -21,6 +21,20 @@ export const FETCH_PRODUCTS_FILTER_DATA = PRODUCT_BASE_URL + "/product-filters";
 
 export const FETCH_PRODUCT_URL = PRODUCT_BASE_URL + "/product";
 
+export const FETCH_BESTSELLER_PRODUCTS =
+  PRODUCT_BASE_URL + "/featured-products/bestsellers";
+
+export const FETCH_HOTDEALS_PRODUCTS =
+  PRODUCT_BASE_URL + "/featured-products/hot-deals";
+
+export const FETCH_NEWARRIVALS_PRODUCTS =
+  PRODUCT_BASE_URL + "/featured-products/new-arrivals";
+
+export const FETCH_DISCOUNTED_PRODUCTS =
+  PRODUCT_BASE_URL + "/featured-products/discounted";
+
+export const FEATURED_BRANDS = PRODUCT_BASE_URL + "/featured-brands";
+
 /////////////////////////////////
 const CART_BATH_URL = "http://13.59.255.224/api";
 export const CART_TOGGLE = CART_BATH_URL + "/toggle-item";
@@ -35,6 +49,20 @@ export const DISCOUNT_CARD = DISCOUNT_BASE_URL + "/discount-card";
 export const AMOUNT_COUPONS = DISCOUNT_BASE_URL + "/amount-coupons";
 export const DISCOUNT_COUPONS = DISCOUNT_BASE_URL + "/discount-coupons";
 
+//////////////////////////
+const MAIN_BASE_URL = "http://18.188.27.23/api";
+
+export const BLOG_SHOW = MAIN_BASE_URL + "/blog/post/";
+export const FETCH_BLOGS = MAIN_BASE_URL + "/blog";
+
+export const LATEST_BLOG_POSTS = MAIN_BASE_URL + "/homepage/latest-blog-posts";
+
+export const FETCH_TESTIMONIALS = MAIN_BASE_URL + "/homepage/testimonials";
+
+export const MAIN_CAROUSEL = MAIN_BASE_URL + "/homepage/carousel-items";
+
+export const MAIN_SECITIONS = MAIN_BASE_URL + "/homepage/mainpage-sections";
+
 // Promotions
 // https://app.swaggerhub.com/apis-docs/badzaghua/iciparis-promotions/1.0
 
@@ -46,3 +74,6 @@ export const DISCOUNT_COUPONS = DISCOUNT_BASE_URL + "/discount-coupons";
 
 // Cart
 // https://app.swaggerhub.com/apis-docs/badzaghua/iciparis-cart/1.0.0
+
+// MAIN
+// https://app.swaggerhub.com/apis-docs/badzaghua/iciparis-main/1.0.0

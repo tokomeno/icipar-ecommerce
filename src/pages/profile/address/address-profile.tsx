@@ -57,10 +57,6 @@ export const AddressProiflePage: React.FC<AddressProiflePageProps> = props => {
       });
   };
 
-  useEffect(() => {
-    setInputsFromOriginalData();
-  }, [originalData]);
-
   const setInputsFromOriginalData = () => {
     setcity_id(originalData.city_id);
     setfull_address(originalData.full_address);
@@ -69,6 +65,10 @@ export const AddressProiflePage: React.FC<AddressProiflePageProps> = props => {
     setcontact_person_email(originalData.contact_person_email);
     setcontact_person_phone(originalData.contact_person_phone);
   };
+
+  useEffect(() => {
+    setInputsFromOriginalData();
+  }, [originalData]);
 
   useEffect(() => {
     axiosWithToken.get(GET_USER_ADDRESSES).then(res => {

@@ -8,16 +8,10 @@ import { ProductContent } from "../../components/product-content/product-content
 import { useTranslation } from "react-i18next";
 import { useProduct } from "../../hooks/useProduct";
 import { Item } from "./item";
-
-export interface match<P> {
-  params: P;
-  isExact: boolean;
-  path: string;
-  url: string;
-}
+import { match } from "react-router-dom";
 
 interface ProducShowPageProps {
-  match: match<{ id: number }>;
+  match: match<{ id: string }>;
 }
 
 export const ProducShowPage: React.FC<ProducShowPageProps> = ({ match }) => {

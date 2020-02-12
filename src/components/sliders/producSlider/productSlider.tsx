@@ -1,17 +1,18 @@
-import React from "react";
-import classNames from "classnames";
+import React, { useState, useEffect } from "react";
+import classnames from "classnames";
 import Swiper from "react-id-swiper";
 import { IProduct } from "../../../data/product";
 import { IProductCetegory } from "../../../data/categories";
 import { useSliderNav } from "../../../hooks/common/useSliderNav";
 import { Product } from "../../product/product";
 import { SwiperCustomNavBtn } from "../../swiper/swiper-custom-nav-btn";
+import { axiosWithToken } from "../../../api/axios-with-token";
+import { useTranslation } from "react-i18next";
 
 interface ProductSliderProps {
-  products: IProduct[];
+  fetchUrl?: string;
   title: string;
   showMoreNumber: number;
-  menuCetegories: IProductCetegory[];
   classes: {
     sectionClasses?: string[];
   };
@@ -45,43 +46,91 @@ const params = {
       slidesPerView: 1.5,
       spaceBetween: 20
     }
-  }
+  },
+  observer: true
 };
+
+interface IProductByCateogry {
+  category_id: number;
+  category_title: string;
+  products: IProduct[];
+}
 
 export const ProductSlider: React.FC<ProductSliderProps> = ({
   title,
   showMoreNumber,
-  menuCetegories,
-  products,
   classes,
-  isHot
+  isHot,
+  fetchUrl
 }) => {
+  const { t } = useTranslation();
+  const [productByCategory, setProductByCategory] = useState<
+    IProductByCateogry[]
+  >([]);
+
+  const [products, setProducts] = useState<IProduct[]>([]);
+  const [activeTabId, setActiveTabId] = useState<number | null>(null);
+
+  const setActiveTab = (category_id: number) => {
+    const p = productByCategory.find(item => item.category_id === category_id);
+    if (!p) return;
+    setProducts(p.products);
+    setActiveTabId(p.category_id);
+  };
+
+  useEffect(() => {
+    if (!fetchUrl) return;
+    axiosWithToken
+      .get<{ data: IProductByCateogry[] }>(fetchUrl)
+      .then(res => {
+        const { data } = res.data;
+        setProductByCategory(data);
+        setActiveTabId(data[0].category_id);
+        setProducts(data[0].products);
+      })
+      .catch(err => console.log(err));
+  }, [fetchUrl]);
+
   const { sliderNav, currentSliderIndex } = useSliderNav(products.length, 0);
 
+  if (!activeTabId) return null;
+  console.log("render :" + title);
   return (
     <section
-      className={classNames("slider-section", classes.sectionClasses)}
+      className={classnames("slider-section", classes.sectionClasses)}
       data-aos-off="fade-up"
     >
       <div className="slider-section-top">
         <div className=" d-flex align-items-center justify-content-sm-center justify-content-between xs-titlesblock">
           <h3 className="slider-section-top_title section-title">{title}</h3>
           <a href="#!" className="slider-section-top_link">
-            <span>/</span>მეტის ნახვა ({showMoreNumber})
+            <span>/</span>
+            {t("show_more")} ({showMoreNumber})
           </a>
         </div>
         <div className="line" />
         <div className="menu d-flex justify-content-center align-items-center">
-          {menuCetegories.map(i => (
-            <a href="#!" key={i.id} className="menu_link">
-              {i.title}
+          {productByCategory.map(i => (
+            <a
+              href="#!"
+              key={i.category_id}
+              className={classnames("menu_link", {
+                active: i.category_id === activeTabId
+              })}
+              onClick={() => setActiveTab(i.category_id)}
+            >
+              {i.category_title}
             </a>
           ))}
         </div>
       </div>
       <div className="slider news-slide">
         <div className="container">
-          <Swiper activeSlideKey={currentSliderIndex.toString()} {...params}>
+          <Swiper
+            // shouldSwiperUpdate
+            activeSlideKey={currentSliderIndex.toString()}
+            {...params}
+          >
             {products.map((product, index) => (
               <Product
                 wrapperClass={"swiper-slide"}
@@ -92,7 +141,6 @@ export const ProductSlider: React.FC<ProductSliderProps> = ({
             ))}
           </Swiper>
         </div>
-        {/* Add Arrows */}
         <SwiperCustomNavBtn sliderNav={sliderNav} />
       </div>
     </section>

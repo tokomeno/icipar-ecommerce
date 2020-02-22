@@ -5,17 +5,22 @@ import classnames from "classnames";
 import { AddCartButton } from "./AddCartButton";
 import { useTranslation } from "react-i18next";
 import { Rating } from "../../components/rating";
+import { Dropdown } from "react-bootstrap";
 
 interface ItemProps {
   product: IProductWithItems;
   setActiveItemFromId: (id: number) => void;
   activeItem: IProductWithItems["items"][number];
+  branches: { full_address: string }[];
+  delivery_terms: string;
 }
 
 export const Item: React.FC<ItemProps> = ({
   product,
   setActiveItemFromId,
-  activeItem
+  activeItem,
+  branches,
+  delivery_terms
 }) => {
   const { t } = useTranslation();
   return (
@@ -38,26 +43,7 @@ export const Item: React.FC<ItemProps> = ({
           </div>
           <div className="col-md-7">
             <div className="description">
-              <div className="social">
-                <a
-                  href="#!"
-                  className="fb social-item d-flex align-items-center justify-content-center"
-                >
-                  <i className="fab fa-facebook-f" />
-                </a>
-                <a
-                  href="#!"
-                  className="tw social-item d-flex align-items-center justify-content-center"
-                >
-                  <i className="fab fa-twitter" />
-                </a>
-                <a
-                  href="#!"
-                  className="p social-item d-flex align-items-center justify-content-center"
-                >
-                  <i className="fab fa-pinterest" />
-                </a>
-              </div>
+              <Social />
               <div className="d-flex align-items-center">
                 <Rating rating={product.rating} />
                 <div className="review">
@@ -92,22 +78,48 @@ export const Item: React.FC<ItemProps> = ({
               </div>
               <AddCartButton activeItem={activeItem} />
               <div className="d-lg-flex d-none">
-                <a href="#!" className="deliv d-flex">
-                  <div className="icon d-flex align-items-center justify-content-center">
-                    <img src="/assets/images/deliv.svg" alt="delivery" />
-                  </div>
-                  <div className="txt">{t("Delivery_Conditions")}</div>
-                </a>
-                <a href="#!" className="deliv d-flex">
-                  <div className="icon d-flex align-items-center justify-content-center">
-                    <img
-                      src="/assets/images/location.svg"
-                      alt="delivery"
-                      className="loc-icon"
-                    />
-                  </div>
-                  <div className="txt">{t("In_which_branch")}</div>
-                </a>
+                <Dropdown drop="down">
+                  <Dropdown.Toggle
+                    drop="down"
+                    as={CustomToggle}
+                    id="dropdown-custom-components"
+                  >
+                    <div className="icon d-flex align-items-center justify-content-center">
+                      <img src="/assets/images/deliv.svg" alt="delivery" />
+                    </div>
+                    <div className="txt">{t("Delivery_Conditions")}</div>
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    <Dropdown.Item>
+                      <p style={{ whiteSpace: "normal" }}>{delivery_terms}</p>
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+
+                <Dropdown>
+                  <Dropdown.Toggle
+                    as={CustomToggle}
+                    id="dropdown-custom-components"
+                  >
+                    <div className="icon d-flex align-items-center justify-content-center">
+                      <img
+                        src="/assets/images/location.svg"
+                        alt="delivery"
+                        className="loc-icon"
+                      />
+                    </div>
+                    <div className="txt">{t("In_which_branch")}</div>
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    {branches.map(b => (
+                      <Dropdown.Item key={b.full_address}>
+                        {b.full_address}
+                      </Dropdown.Item>
+                    ))}
+                  </Dropdown.Menu>
+                </Dropdown>
               </div>
             </div>
           </div>
@@ -146,4 +158,44 @@ export const Items: React.FC<ItemsProps> = React.memo(
       </div>
     );
   }
+);
+
+// Dropdown needs access to the DOM node in order to position the Menu
+const CustomToggle = React.forwardRef<any, any>(
+  ({ children, onClick }, ref) => (
+    <a
+      href="#!"
+      className="deliv d-flex"
+      ref={ref}
+      onClick={e => {
+        e.preventDefault();
+        onClick(e);
+      }}
+    >
+      {children}
+    </a>
+  )
+);
+
+const Social = () => (
+  <div className="social">
+    <a
+      href="#!"
+      className="fb social-item d-flex align-items-center justify-content-center"
+    >
+      <i className="fab fa-facebook-f" />
+    </a>
+    <a
+      href="#!"
+      className="tw social-item d-flex align-items-center justify-content-center"
+    >
+      <i className="fab fa-twitter" />
+    </a>
+    <a
+      href="#!"
+      className="p social-item d-flex align-items-center justify-content-center"
+    >
+      <i className="fab fa-pinterest" />
+    </a>
+  </div>
 );

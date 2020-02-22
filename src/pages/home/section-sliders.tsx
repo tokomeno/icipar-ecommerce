@@ -71,7 +71,7 @@ export const SectionSliders: React.FC<SectionSlidersProps> = () => {
             data-aos-r="fade-right"
             data-aos-r-duration={1200}
           >
-            <a href="#!" className="d-block">
+            <div className="d-block">
               <Swiper
                 {...sliderParams}
                 wrapperClass="swiper-wrapper"
@@ -95,7 +95,7 @@ export const SectionSliders: React.FC<SectionSlidersProps> = () => {
                   </div>
                 ))}
               </Swiper>
-            </a>
+            </div>
           </div>
           <div className="col-md-9">
             <div className="row">

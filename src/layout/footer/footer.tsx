@@ -3,12 +3,19 @@ import { productCategories } from "../../data/categories";
 import { useTranslation } from "react-i18next";
 import { AboutPagesMenu } from "../../components/pageSideMenu";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+import { IStoreState } from "../../redux/mainReducer";
 
-interface FooterProps {}
+interface FooterProps {
+  contact_info: IStoreState["info"]["contact_info"];
+  socials: IStoreState["info"]["socials"];
+}
 
-export const Footer: React.FC<FooterProps> = props => {
+const _Footer: React.FC<FooterProps> = ({ contact_info, socials }) => {
   const { t } = useTranslation();
-
+  const facebook = socials.find(i => i.social === "facebook");
+  const google = socials.find(i => i.social === "google");
+  const instagram = socials.find(i => i.social === "instagram");
   return (
     <React.Fragment>
       <footer className="site__footer">
@@ -38,7 +45,9 @@ export const Footer: React.FC<FooterProps> = props => {
                   <ul className="d-flex justify-content-center justify-content-lg-start card-block">
                     <li className="card-block_item">
                       <a
-                        href="#!"
+                        href={facebook && facebook.link}
+                        rel="noopener noreferrer"
+                        target="_blank"
                         className="soc d-flex align-items-center justify-content-center"
                       >
                         <i className="fab fa-facebook-f" />
@@ -46,7 +55,9 @@ export const Footer: React.FC<FooterProps> = props => {
                     </li>
                     <li className="card-block_item">
                       <a
-                        href="#!"
+                        href={instagram && instagram.link}
+                        rel="noopener noreferrer"
+                        target="_blank"
                         className="soc d-flex align-items-center justify-content-center"
                       >
                         <i className="fab fa-instagram" />
@@ -54,10 +65,12 @@ export const Footer: React.FC<FooterProps> = props => {
                     </li>
                     <li className="card-block_item">
                       <a
-                        href="#!"
+                        href={google && google.link}
+                        rel="noopener noreferrer"
+                        target="_blank"
                         className="soc d-flex align-items-center justify-content-center"
                       >
-                        <i className="fab fa-youtube" />
+                        <i className="fab fa-google" />
                       </a>
                     </li>
                   </ul>
@@ -110,16 +123,16 @@ export const Footer: React.FC<FooterProps> = props => {
                 </div>
                 <div className="col-md-3 col-7 contact-block">
                   <div className="title">{t("contact")}</div>
-                  <a href="te:+995322201717" className="footer-link d-flex">
-                    <img src="/assets/images/phone-w.svg" alt="call" />
-                    +995 32 2 20 17 17
-                  </a>
                   <a
-                    href="mailto:info@prestige.ge"
+                    href={"te:" + contact_info.phone}
                     className="footer-link d-flex"
                   >
+                    <img src="/assets/images/phone-w.svg" alt="call" />
+                    {contact_info.phone}
+                  </a>
+                  <a href={contact_info.email} className="footer-link d-flex">
                     <img src="/assets/images/email-w.svg" alt="email" />
-                    info@prestige.ge
+                    {contact_info.email}
                   </a>
                   <a href="#!" className="footer-link d-flex">
                     <img src="/assets/images/marker-w.svg" alt="stores" />
@@ -145,3 +158,12 @@ export const Footer: React.FC<FooterProps> = props => {
     </React.Fragment>
   );
 };
+
+const mapStateToProps = ({ info }: IStoreState) => {
+  return {
+    contact_info: info.contact_info,
+    socials: info.socials
+  };
+};
+
+export const Footer = connect(mapStateToProps)(_Footer);

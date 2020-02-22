@@ -6,7 +6,6 @@ import { setGenericTokenAsHeader } from "./api/helpers";
 import { fetchCart } from "./redux/cart/cartActions";
 
 export const tryLocalAuth = () => {
-  console.log("local autttttttth");
   const authStateFromStorage = localStorage.getItem("auth");
   let storageAuthState: any;
 

@@ -14,5 +14,6 @@ export const routes = {
   productShow: "/product/:id",
 
   blogs: "/blogs",
-  blogShow: "/blogs/:slug"
+  blogShow: "/blogs/:slug",
+  staticPages: "/page/:slug"
 };

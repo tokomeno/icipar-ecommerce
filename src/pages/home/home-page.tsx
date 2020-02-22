@@ -26,7 +26,6 @@ export const HomePage: React.FC<HomePageProps> = () => {
       <SectionSliders />
 
       <ProductSlider
-        key={1}
         title={t("hotOffer")}
         showMoreNumber={123}
         classes={{ sectionClasses: ["hot__slide"] }}
@@ -34,28 +33,25 @@ export const HomePage: React.FC<HomePageProps> = () => {
         isHot={true}
       />
       <ProductSlider
-        key={2}
         title={t("news")}
         showMoreNumber={123}
         classes={{ sectionClasses: ["news__slide"] }}
         fetchUrl={FETCH_NEWARRIVALS_PRODUCTS}
       />
       <ProductSlider
-        key={3}
         classes={{ sectionClasses: ["saleslider"] }}
         title={t("sales")}
         showMoreNumber={123}
         fetchUrl={FETCH_DISCOUNTED_PRODUCTS}
       />
       <ProductSlider
-        key={4}
         classes={{ sectionClasses: ["bestsellerslider"] }}
         title={t("bestsellers")}
         showMoreNumber={123}
         fetchUrl={FETCH_BESTSELLER_PRODUCTS}
       />
       {/* <ProductSlider
-       key={5}
+       
         classes={{ sectionClasses: ["recommendedslider"] }}
         title={t("recomendations")}
         menuCetegories={productCategories}

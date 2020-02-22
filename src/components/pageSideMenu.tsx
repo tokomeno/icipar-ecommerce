@@ -9,7 +9,7 @@ export const AboutPagesMenu = [
   { title: "how_it_works", to: "/how-it-works" },
   // { title: "delivery_terms", to: "#!" },
   { title: "contact", to: "/contact" },
-  { title: "faq", to: "/faq" }
+  { title: "faq", to: "/page/faq" }
 ];
 export const PageSideMenu: React.FC<PageSideMenuProps> = props => {
   const { t } = useTranslation();

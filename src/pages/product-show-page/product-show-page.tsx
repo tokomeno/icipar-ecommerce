@@ -9,15 +9,22 @@ import { useTranslation } from "react-i18next";
 import { useProduct } from "../../hooks/useProduct";
 import { Item } from "./item";
 import { match } from "react-router-dom";
+import Axios from "axios";
+import { PRODUCT_BRANCH } from "../../api/endpoints";
+import { connect } from "react-redux";
+import { IStoreState } from "../../redux/mainReducer";
 
 interface ProducShowPageProps {
   match: match<{ id: string }>;
+  product_delivery_terms: string;
 }
 
-export const ProducShowPage: React.FC<ProducShowPageProps> = ({ match }) => {
+const _ProducShowPage: React.FC<ProducShowPageProps> = ({
+  match,
+  product_delivery_terms
+}) => {
   const { t } = useTranslation();
   const { product } = useProduct(match.params.id);
-
   const [activeItem, setActiveItem] = useState<
     IProductWithItems["items"][number] | null
   >(null);
@@ -37,6 +44,19 @@ export const ProducShowPage: React.FC<ProducShowPageProps> = ({ match }) => {
     }
   }, [setActiveItem, product]);
 
+  const [branches, setBranches] = useState<{ full_address: string }[]>([]);
+
+  useEffect(() => {
+    if (!product) return;
+    Axios.get<{ data: { full_address: string }[] }>(PRODUCT_BRANCH, {
+      params: { product_id: product.id }
+    }).then(res => {
+      if (res.data && Array.isArray(res.data.data)) {
+        setBranches(res.data.data.filter(i => i.full_address));
+      }
+    });
+  }, [product]);
+
   if (!product || !activeItem)
     return (
       <Layout>
@@ -47,6 +67,8 @@ export const ProducShowPage: React.FC<ProducShowPageProps> = ({ match }) => {
     <Layout>
       <div className="product">
         <Item
+          delivery_terms={product_delivery_terms}
+          branches={branches}
           setActiveItemFromId={setActiveItemFromId}
           activeItem={activeItem}
           product={product}
@@ -73,3 +95,11 @@ export const ProducShowPage: React.FC<ProducShowPageProps> = ({ match }) => {
     </Layout>
   );
 };
+
+const mapStateToProps = ({ info }: IStoreState) => {
+  return {
+    product_delivery_terms: info.product_delivery_terms.content
+  };
+};
+
+export const ProducShowPage = connect(mapStateToProps)(_ProducShowPage);

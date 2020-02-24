@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Swiper from "react-id-swiper";
 import { Link } from "react-router-dom";
-import { axiosWithToken } from "../../api/axios-with-token";
-import { MAIN_CAROUSEL } from "../../api/endpoints";
-
-interface ISlider {
-  image: string;
-  title: string;
-  link_href: string;
-  link_title: string;
-}
+import { SliderService, ISlider } from "../../services/slider.http";
 
 interface MainSliderProps {}
 
@@ -28,8 +20,7 @@ export const MainSlider: React.FC<MainSliderProps> = () => {
   const [sliders, setSliders] = useState<ISlider[]>([]);
 
   useEffect(() => {
-    axiosWithToken
-      .get<{ data: ISlider[] }>(MAIN_CAROUSEL)
+    SliderService.getMainSlider()
       .then(res => {
         if (res.data.data) {
           setSliders(res.data.data);

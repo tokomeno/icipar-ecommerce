@@ -1,25 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Swiper from "react-id-swiper";
 import { useTranslation } from "react-i18next";
-import { axiosWithToken } from "../../api/axios-with-token";
-import { MAIN_SECITIONS } from "../../api/endpoints";
 import { useHistory, NavLink } from "react-router-dom";
-
-interface ISectionSliders {
-  latest_product: Latestproduct[];
-  bundle: Latestproduct[];
-  post_small: Latestproduct[];
-  post_large: Latestproduct[];
-  post_arrowed: Latestproduct[];
-}
-
-interface Latestproduct {
-  section_type: string;
-  image: string;
-  title: string;
-  subtitle: string;
-  link: string;
-}
+import { SliderService, ISectionSliders } from "../../services/slider.http";
 
 interface SectionSlidersProps {}
 const sliderParams = {
@@ -38,10 +21,8 @@ export const SectionSliders: React.FC<SectionSlidersProps> = () => {
     null
   );
   useEffect(() => {
-    axiosWithToken
-      .get<ISectionSliders>(MAIN_SECITIONS)
+    SliderService.getSection()
       .then(res => {
-        console.log(res.data);
         setSliderSections(res.data);
       })
       .catch(err => {

@@ -41,6 +41,7 @@ export const FETCH_DISCOUNTED_PRODUCTS =
   PRODUCT_BASE_URL + "/featured-products/discounted";
 
 export const FEATURED_BRANDS = PRODUCT_BASE_URL + "/featured-brands";
+export const ALL_BRANDS = PRODUCT_BASE_URL + "/brands";
 
 export const PRODUCT_BRANCH = PRODUCT_BASE_URL + "/product-branches";
 

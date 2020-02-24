@@ -133,6 +133,7 @@ export const Search: React.FC<SearchProps> = props => {
             )}
             {categories.map(c => (
               <Dropdown.Item
+                key={c.id}
                 className="dropdown-item"
                 onClick={() => {
                   setActiveTab(c);

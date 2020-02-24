@@ -6,6 +6,7 @@ import { axiosWithToken } from "../../api/axios-with-token";
 import { ALL_BRANDS } from "../../api/endpoints";
 import { useTranslation } from "react-i18next";
 import { Spinner } from "../../components/spinner";
+import { LayoutSpinner } from "../../components/layout-spinner";
 
 interface IAllBrandsResponse {
   [k: string]: {
@@ -34,7 +35,7 @@ export const AllBrandsPage: React.FC<AllBrandsPageProps> = props => {
   }, []);
   const { t } = useTranslation();
 
-  if (!brands) return <Spinner />;
+  if (!brands) return <LayoutSpinner />;
   return (
     <Layout>
       <div className="container">
@@ -90,36 +91,3 @@ export const AllBrandsPage: React.FC<AllBrandsPageProps> = props => {
     </Layout>
   );
 };
-
-// const brands = [
-//   "Acqua Di Parma",
-//   "AERIN",
-//   "Aether Beauty",
-//   "Algenist",
-//   "Alpha-H",
-//   "Acqua Di Parma",
-//   "AERIN",
-//   "Aether Beauty",
-//   "Algenist",
-//   "Alpha-H",
-//   "Acqua Di Parma",
-//   "AERIN",
-//   "Aether Beauty",
-//   "Algenist",
-//   "Alpha-H",
-//   "Acqua Di Parma",
-//   "AERIN",
-//   "Aether Beauty",
-//   "Algenist",
-//   "Alpha-H",
-//   "Acqua Di Parma",
-//   "AERIN",
-//   "Aether Beauty",
-//   "Algenist",
-//   "Alpha-H",
-//   "Acqua Di Parma",
-//   "AERIN",
-//   "Aether Beauty",
-//   "Algenist",
-//   "Alpha-H"
-// ];

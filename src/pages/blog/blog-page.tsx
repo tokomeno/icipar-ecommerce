@@ -1,24 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { dummyBlogData, IBlogList } from "../../data/blog";
+import { IBlogList } from "../../data/blog";
 import { useTranslation } from "react-i18next";
-import classnames from "classnames";
 import { BlogSliderItem } from "../../components/sliders/blog-slider/blog-slider-item";
 import { Layout } from "../../layout";
-import { axiosWithToken } from "../../api/axios-with-token";
-import { match } from "react-router-dom";
-import { FETCH_BLOGS } from "../../api/endpoints";
 import { BlogContetnLoader } from "../../components/blogs/blog-content-loader";
+import { BlogService } from "../../services/blog.http";
 
 interface BlogPageProps {}
 
 export const BlogPage: React.FC<BlogPageProps> = () => {
   const { t } = useTranslation();
-
   const [blogs, setBlogs] = useState<IBlogList[]>([]);
 
   useEffect(() => {
-    axiosWithToken
-      .get<{ data: IBlogList[] }>(FETCH_BLOGS)
+    BlogService.getAll()
       .then(res => {
         setBlogs(res.data.data);
       })

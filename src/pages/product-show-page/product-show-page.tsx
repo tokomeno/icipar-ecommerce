@@ -13,6 +13,7 @@ import Axios from "axios";
 import { PRODUCT_BRANCH } from "../../api/endpoints";
 import { connect } from "react-redux";
 import { IStoreState } from "../../redux/mainReducer";
+import { LayoutSpinner } from "../../components/layout-spinner";
 
 interface ProducShowPageProps {
   match: match<{ id: string }>;
@@ -57,12 +58,7 @@ const _ProducShowPage: React.FC<ProducShowPageProps> = ({
     });
   }, [product]);
 
-  if (!product || !activeItem)
-    return (
-      <Layout>
-        <div style={{ height: "400px" }} className="product"></div>
-      </Layout>
-    );
+  if (!product || !activeItem) return <LayoutSpinner />;
   return (
     <Layout>
       <div className="product">

@@ -2,7 +2,16 @@ import React from "react";
 import { ICartItem } from "../../data/product";
 
 interface DropdownItemProps {
-  product: ICartItem;
+  product: {
+    thumbnail: string;
+    price: number | string;
+    item_title: string;
+  };
+  // | {
+  //     thumbnail: string;
+  //     price: number | string;
+  //     item_title: string;
+  //   };
 }
 
 export const DropdownItem: React.FC<DropdownItemProps> = ({ product }) => {
@@ -12,7 +21,11 @@ export const DropdownItem: React.FC<DropdownItemProps> = ({ product }) => {
         <img src={product.thumbnail} alt="" />
       </div>
       <div className="desc">
-        <div className="item-title">{product.item_title}</div>
+        <div className="item-title">
+          {product.item_title}
+          {/* {product.title && product.title} */}
+          {/* {product.title ? product.title : product.item_title} */}
+        </div>
         <div className="price">
           {product.price}
           <sub>D</sub>

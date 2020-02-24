@@ -6,7 +6,7 @@ import axios from "axios";
 export const fetchProducts = (
   url: string,
   productFilterData: IProductFilterObject,
-  callback: Function
+  callback: (res: FetchProductResponse) => void
 ): void => {
   pushQueryParamsToUrl(productFilterData);
   const filterParams = mapToRequestParams(productFilterData);

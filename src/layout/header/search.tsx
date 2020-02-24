@@ -1,5 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useToggle } from "../../hooks/common/useToggle";
+import React, {
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+  useRef
+} from "react";
 import classnames from "classnames";
 import { PorductFilterContext } from "../../contexts/productFilterContext";
 import { useTranslation } from "react-i18next";
@@ -7,7 +12,12 @@ import { useLocation, useHistory } from "react-router-dom";
 import { routes } from "../../routes/routes";
 import { useInput } from "../../hooks/common/useInput";
 import { axiosWithToken } from "../../api/axios-with-token";
-import { PRODUCT_CATEGORIES } from "../../api/endpoints";
+import { PRODUCT_CATEGORIES, FETCH_PRODUCTS_URL } from "../../api/endpoints";
+import { IProduct } from "../../data/product";
+import { fetchProducts } from "../../hooks/useProducts/helper";
+import { NavLink } from "react-router-dom";
+import { Dropdown } from "react-bootstrap";
+import { useDeteckOutsideClick } from "../../hooks/common/useDeteckOutsideClick";
 
 interface ICategory {
   id: number;
@@ -20,11 +30,17 @@ export const Search: React.FC<SearchProps> = props => {
   const { t } = useTranslation();
   const location = useLocation();
   const history = useHistory();
-  const { toggle, isActive, setInActive: closeDropDown } = useToggle();
   const { setProductFilterData, productFilterData } = useContext(
     PorductFilterContext
   );
   const { value: keyword, onChange: setKeyword } = useInput("");
+  const [products, setProducts] = useState<IProduct[]>([]);
+  const [categories, setCategories] = useState<ICategory[]>([]);
+  const [activeTab, setActiveTab] = useState<ICategory | null>(null);
+
+  const reserProducts = useCallback(() => {
+    setProducts([]);
+  }, [setProducts]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (location.pathname === routes.catalog) {
@@ -39,6 +55,28 @@ export const Search: React.FC<SearchProps> = props => {
     }
   };
 
+  useEffect(() => {
+    if (!keyword || keyword.length === 0) {
+      setProducts([]);
+      return;
+    }
+    const fetching = setTimeout(() => {
+      fetchProducts(
+        FETCH_PRODUCTS_URL,
+        {
+          keyword: keyword,
+          categories: activeTab ? [activeTab.id] : []
+        },
+        res => {
+          setProducts(res.data);
+        }
+      );
+    }, 300);
+    return () => {
+      clearTimeout(fetching);
+    };
+  }, [keyword, activeTab]);
+
   const getKeywordValue = () => {
     return location.pathname === routes.catalog
       ? productFilterData.keyword
@@ -47,11 +85,12 @@ export const Search: React.FC<SearchProps> = props => {
 
   const handleSubmit = () => {
     if (location.pathname === routes.catalog) return;
-    history.push({ pathname: routes.catalog, search: `?keyword=${keyword}` });
+    setProductFilterData(prevState => ({
+      ...prevState,
+      keyword: keyword
+    }));
+    history.push({ pathname: routes.catalog });
   };
-
-  const [categories, setCategories] = useState<ICategory[]>([]);
-  const [activeTab, setActiveTab] = useState<ICategory | null>(null);
 
   useEffect(() => {
     axiosWithToken
@@ -64,58 +103,47 @@ export const Search: React.FC<SearchProps> = props => {
       });
   }, []);
 
+  const searchDropdownRef = useRef(null);
+  useDeteckOutsideClick(searchDropdownRef, () => {
+    setProducts([]);
+  });
+
   return (
-    <div className="col-md-7">
+    <div className="col-md-7" style={{ position: "relative" }}>
       <form className="search d-flex justify-content-between">
-        <div
-          className={classnames("search-dropdown dropdown d-flex", {
-            show: isActive
-          })}
-        >
-          <button
-            className="btn btn-secondary dropdown-toggle"
-            type="button"
-            id="categories"
-            onClick={toggle}
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
+        <Dropdown className={"search-dropdown dropdown d-flex"}>
+          <Dropdown.Toggle className="btn btn-secondary " id="categories">
             <img src="/assets/images/squares.svg" alt="squares icon" />
-            <span>{activeTab ? activeTab.title : t("categoriess")}</span>
+            <span>{activeTab ? activeTab.title : t("categories")}</span>
             <i className="fas fa-angle-down" />
             <i className="fas fa-angle-up" />
-          </button>
-          <div
-            className={classnames("dropdown-menu search-menu", {
-              show: isActive
-            })}
-          >
-            <a
-              onClick={e => {
-                e.preventDefault();
-                setActiveTab(null);
-                closeDropDown();
-              }}
-              href="#!"
-              className="dropdown-item"
-            >
-              {t("categories")}
-            </a>
-            {categories.map(c => (
+          </Dropdown.Toggle>
+          <Dropdown.Menu className="search-menu">
+            {!activeTab ? null : (
               <a
                 onClick={e => {
                   e.preventDefault();
-                  setActiveTab(c);
-                  closeDropDown();
+                  setActiveTab(null);
                 }}
-                href="#!"
                 className="dropdown-item"
+                href="#!"
+              >
+                {t("categories")}
+              </a>
+            )}
+            {categories.map(c => (
+              <Dropdown.Item
+                className="dropdown-item"
+                onClick={() => {
+                  setActiveTab(c);
+                }}
               >
                 {c.title}
-              </a>
+              </Dropdown.Item>
             ))}
-          </div>
-        </div>
+          </Dropdown.Menu>
+        </Dropdown>
+
         <input
           type="text"
           className="search-input"
@@ -127,6 +155,51 @@ export const Search: React.FC<SearchProps> = props => {
           <i className="fas fa-search" />
         </button>
       </form>
+      {products.length > 0 ? (
+        <div ref={searchDropdownRef} className="hdr-cart">
+          <div className="dropdown">
+            <div
+              className="dropdown-menu show"
+              style={{ overflowY: "auto", zIndex: 100 }}
+              aria-labelledby="cart1"
+            >
+              {products.map(p => (
+                <SearchItem
+                  reserProducts={reserProducts}
+                  key={p.id}
+                  product={p}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
+  );
+};
+
+interface SearchItemProps {
+  product: IProduct;
+  reserProducts: () => void;
+}
+const SearchItem: React.FC<SearchItemProps> = ({ product, reserProducts }) => {
+  return (
+    <NavLink
+      onClick={reserProducts}
+      to={`/product/${product.id}`}
+      className="d-flex align-items-center item"
+    >
+      <div className="image d-flex align-items-center justify-content-center">
+        <img src={product.thumbnail} alt="" />
+      </div>
+      <div className="desc">
+        <div className="item-title">{product.title}</div>
+        <div className="price">
+          {product.price_min}
+          {product.price_max ? " - " + product.price_max : ""}
+          <sub>D</sub>
+        </div>
+      </div>
+    </NavLink>
   );
 };

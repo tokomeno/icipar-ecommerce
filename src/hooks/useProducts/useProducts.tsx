@@ -42,7 +42,7 @@ export const useProducts = (productFilterData: IProductFilterObject) => {
   const firstRender = useRef(true);
 
   useEffect(() => {
-    let time = 1500;
+    let time = 1000;
     if (firstRender.current) {
       firstRender.current = false;
       time = 0;

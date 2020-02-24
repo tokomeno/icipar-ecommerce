@@ -1,5 +1,6 @@
 import React from "react";
 import classnames from "classnames";
+import { useToggle } from "../../hooks/common/useToggle";
 
 interface AuthInputProps {
   iconPath: string;
@@ -19,6 +20,7 @@ export const AuthInput: React.FC<AuthInputProps> = ({
   children,
   errorMessage
 }) => {
+  const { isActive, toggle } = useToggle(false);
   return (
     <div
       className={classnames("logForm-item d-flex", { error: !!errorMessage })}
@@ -29,12 +31,12 @@ export const AuthInput: React.FC<AuthInputProps> = ({
       <input
         onChange={onChange}
         value={value}
-        type={type}
+        type={isActive ? "text" : type}
         placeholder={placeholder}
         className="logForm-item_input"
       />
       {type === "password" && (
-        <div className="show-pass password-eye">
+        <div onClick={toggle} className="show-pass password-eye">
           <img src="/assets/images/show-pass.svg" alt="show password" />
         </div>
       )}

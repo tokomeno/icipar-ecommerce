@@ -5,7 +5,6 @@ import { AboutUsPage } from "./pages/about-us/about-us-page";
 import { ContactPage } from "./pages/contact/contact-page";
 import { HowItWorksPage } from "./pages/how-it-works/how-it-works-page";
 import { ShopPage } from "./pages/shops/shop-page";
-import { FaqPage } from "./pages/faq/faq-page";
 import { AboutBrandPage } from "./pages/about-brand/about-brand-page";
 import { AllBrandsPage } from "./pages/all-brands/all-brands";
 import { CatalogPage } from "./pages/catalog/catalog-page";
@@ -34,6 +33,7 @@ import { BlogPage } from "./pages/blog/blog-page";
 import { store } from "./redux/store";
 import { fetchSocialAndContactInfo } from "./redux/info/infoActions";
 import { StaticPage } from "./pages/static-page/static-page";
+import { Layout } from "./layout";
 
 export const HistoryContext = React.createContext<History>(
   (null as any) as History
@@ -54,50 +54,55 @@ const App: React.FC<{}> = props => {
     <I18nextProvider i18n={i18next}>
       <BrowserRouter>
         <ScrollToTop />
-        <Switch>
-          <Route path={routes.home} exact component={HomePage} />
-          {/* PAGES */}
-          <Route path={routes.aboutUs} exact component={AboutUsPage} />
-          <Route path={routes.aboutBrand} exact component={AboutBrandPage} />
-          <Route path={routes.contact} exact component={ContactPage} />
-          <Route path={routes.howItWorks} exact component={HowItWorksPage} />
-          <Route path={routes.faq} exact component={FaqPage} />
-          <Route path={routes.shops} exact component={ShopPage} />
-          <Route path={routes.allBrands} exact component={AllBrandsPage} />
-          <Route path={routes.catalog} exact component={CatalogPage} />
-          <Route path={routes.giftCard} exact component={GiftCardPage} />
-          <Route path={routes.productShow} exact component={ProducShowPage} />
+        <Layout>
+          <Switch>
+            <Route path={routes.home} exact component={HomePage} />
+            {/* PAGES */}
+            <Route path={routes.aboutUs} exact component={AboutUsPage} />
+            <Route path={routes.aboutBrand} exact component={AboutBrandPage} />
+            <Route path={routes.contact} exact component={ContactPage} />
+            <Route path={routes.howItWorks} exact component={HowItWorksPage} />
+            <Route path={routes.shops} exact component={ShopPage} />
+            <Route path={routes.allBrands} exact component={AllBrandsPage} />
+            <Route path={routes.catalog} exact component={CatalogPage} />
+            <Route path={routes.giftCard} exact component={GiftCardPage} />
+            <Route path={routes.productShow} exact component={ProducShowPage} />
 
-          <Route path={routes.blogShow} exact component={BlogShowPage} />
-          <Route path={routes.blogs} exact component={BlogPage} />
+            <Route path={routes.blogShow} exact component={BlogShowPage} />
+            <Route path={routes.blogs} exact component={BlogPage} />
 
-          <Route path={routes.staticPages} exact component={StaticPage} />
+            <Route path={routes.staticPages} exact component={StaticPage} />
 
-          <Route path="/profile/cart" exact component={CartPage} />
-          {/* PROFILE PAGES */}
-          <PrivateRoute>
-            <Route path="/profile" exact component={ProfilePage} />
-            <Route path="/profile/coupons" exact component={CouponsPage} />
-            <Route path="/profile/checkout" exact component={CartPage} />
-            <Route path="/profile/orders" exact component={OrdersProfilePage} />
-            <Route path="/profile/info" exact component={InfoProfilePage} />
-            <Route
-              path="/profile/address"
-              exact
-              component={AddressProiflePage}
-            />
-            <Route
-              path="/profile/wishlist"
-              exact
-              component={WishlistProfilePage}
-            />
-            <Route
-              path="/profile/gift-cards"
-              exact
-              component={GiftCardProfilePage}
-            />
-          </PrivateRoute>
-        </Switch>
+            <Route path="/profile/cart" exact component={CartPage} />
+            {/* PROFILE PAGES */}
+            <PrivateRoute>
+              <Route path="/profile" exact component={ProfilePage} />
+              <Route path="/profile/coupons" exact component={CouponsPage} />
+              <Route path="/profile/checkout" exact component={CartPage} />
+              <Route
+                path="/profile/orders"
+                exact
+                component={OrdersProfilePage}
+              />
+              <Route path="/profile/info" exact component={InfoProfilePage} />
+              <Route
+                path="/profile/address"
+                exact
+                component={AddressProiflePage}
+              />
+              <Route
+                path="/profile/wishlist"
+                exact
+                component={WishlistProfilePage}
+              />
+              <Route
+                path="/profile/gift-cards"
+                exact
+                component={GiftCardProfilePage}
+              />
+            </PrivateRoute>
+          </Switch>
+        </Layout>
       </BrowserRouter>
     </I18nextProvider>
   );

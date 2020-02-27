@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Layout } from "../../layout";
+
 import { BundleProduct } from "../../components/bundle-product/bundle-product";
 import { ProductSimpleSlider } from "../../components/sliders/product-simple-slider/product-simple-slider";
 import { dummyProductData, IProductWithItems } from "../../data/product";
@@ -60,35 +60,30 @@ const _ProducShowPage: React.FC<ProducShowPageProps> = ({
 
   if (!product || !activeItem) return <LayoutSpinner />;
   return (
-    <Layout>
-      <div className="product">
-        <Item
-          delivery_terms={product_delivery_terms}
-          branches={branches}
-          setActiveItemFromId={setActiveItemFromId}
-          activeItem={activeItem}
-          product={product}
+    <div className="product">
+      <Item
+        delivery_terms={product_delivery_terms}
+        branches={branches}
+        setActiveItemFromId={setActiveItemFromId}
+        activeItem={activeItem}
+        product={product}
+      />
+      <div className="prod-content">
+        <ProductContent details={product["details"]} brand={product["brand"]} />
+        <BundleProduct />
+        <ProductSimpleSlider
+          title={t("similar_products")}
+          products={dummyProductData}
         />
-        <div className="prod-content">
-          <ProductContent
-            details={product["details"]}
-            brand={product["brand"]}
-          />
-          <BundleProduct />
-          <ProductSimpleSlider
-            title={t("similar_products")}
-            products={dummyProductData}
-          />
-          <div className="line-sliders d-none d-sm-block" />
-          <ProductSimpleSlider
-            title={t("what_others_bought")}
-            products={dummyProductData}
-          />
-          <div className="line-sliders d-none d-sm-block" />
-          <Reviews />
-        </div>
+        <div className="line-sliders d-none d-sm-block" />
+        <ProductSimpleSlider
+          title={t("what_others_bought")}
+          products={dummyProductData}
+        />
+        <div className="line-sliders d-none d-sm-block" />
+        <Reviews />
       </div>
-    </Layout>
+    </div>
   );
 };
 

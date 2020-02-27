@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Layout } from "../../layout";
+
 import chunk from "lodash.chunk";
 import { BrandSlider } from "../../components/sliders/brandSlider/brandSlider";
 import { axiosWithToken } from "../../api/axios-with-token";
@@ -37,7 +37,7 @@ export const AllBrandsPage: React.FC<AllBrandsPageProps> = props => {
 
   if (!brands) return <LayoutSpinner />;
   return (
-    <Layout>
+    <>
       <div className="container">
         <div className="allbrands">
           <BrandSlider />
@@ -88,6 +88,6 @@ export const AllBrandsPage: React.FC<AllBrandsPageProps> = props => {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };

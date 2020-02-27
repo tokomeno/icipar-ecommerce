@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Layout } from "../../layout";
+
 import { PageSideMenu } from "../../components/pageSideMenu";
 import { match } from "react-router-dom";
 import Axios from "axios";
@@ -27,23 +27,21 @@ export const StaticPage: React.FC<StaticPageProps> = ({ match }) => {
   }, [match.params.slug]);
   if (!page) return <LayoutSpinner />;
   return (
-    <Layout>
-      <div className="container">
-        <div className="about row">
-          <PageSideMenu />
-          <div className="col-lg-9">
-            <div className="right iframe-block">
-              <div className="top">
-                <h1 className="title">{page.title}</h1>
-              </div>
-              <div
-                className="desc"
-                dangerouslySetInnerHTML={{ __html: page.body }}
-              />
+    <div className="container">
+      <div className="about row">
+        <PageSideMenu />
+        <div className="col-lg-9">
+          <div className="right iframe-block">
+            <div className="top">
+              <h1 className="title">{page.title}</h1>
             </div>
+            <div
+              className="desc"
+              dangerouslySetInnerHTML={{ __html: page.body }}
+            />
           </div>
         </div>
       </div>
-    </Layout>
+    </div>
   );
 };

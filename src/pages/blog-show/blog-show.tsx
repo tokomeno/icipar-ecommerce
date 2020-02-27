@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 // import classnames from "classnames";
-import { Layout } from "../../layout";
+
 // import { PageSideMenu } from "../../components/pageSideMenu";
 import { match } from "react-router-dom";
 import { BlogService, IBlogList } from "../../services/blog.http";
@@ -26,26 +26,24 @@ export const BlogShowPage: React.FC<BlogShowPageProps> = ({ match }) => {
 
   if (!blog) return <LayoutSpinner />;
   return (
-    <Layout>
-      <div className="container">
-        <div className="about">
-          <div className="row">
-            {/* <div className="col-md-3 d-none d-lg-block">
+    <div className="container">
+      <div className="about">
+        <div className="row">
+          {/* <div className="col-md-3 d-none d-lg-block">
             <div className="aboutmenu"></div>
           </div> */}
-            <div className="col-md-9">
-              <div className="top">
-                <h1 className="title mt-20">{blog.title}</h1>
-                <span className="badge badge-secondary">{blog.created_at}</span>
-                <div className="blog-image mt-20">
-                  <img src={blog.thumbnail} className="img-fluid" alt="blog" />
-                </div>
+          <div className="col-md-9">
+            <div className="top">
+              <h1 className="title mt-20">{blog.title}</h1>
+              <span className="badge badge-secondary">{blog.created_at}</span>
+              <div className="blog-image mt-20">
+                <img src={blog.thumbnail} className="img-fluid" alt="blog" />
               </div>
-              <div className="desc mt-20">{blog.excerpt}</div>}
             </div>
+            <div className="desc mt-20">{blog.excerpt}</div>}
           </div>
         </div>
       </div>
-    </Layout>
+    </div>
   );
 };

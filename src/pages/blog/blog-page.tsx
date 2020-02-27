@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { BlogSliderItem } from "../../components/sliders/blog-slider/blog-slider-item";
-import { Layout } from "../../layout";
+
 import { BlogContetnLoader } from "../../components/blogs/blog-content-loader";
 import { BlogService, IBlogList } from "../../services/blog.http";
 
@@ -22,7 +22,7 @@ export const BlogPage: React.FC<BlogPageProps> = () => {
       });
   }, []);
   return (
-    <Layout>
+    <>
       <div className="container">
         <div className="about row">
           {/* <div className="col-md-3 d-none d-lg-block"> */}
@@ -79,7 +79,7 @@ export const BlogPage: React.FC<BlogPageProps> = () => {
         </div>
       </div>
       {/* </div> */}
-    </Layout>
+    </>
   );
 };
 

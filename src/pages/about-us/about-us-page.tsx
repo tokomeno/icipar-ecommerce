@@ -1,12 +1,12 @@
 import React from "react";
-import { Layout } from "../../layout";
+
 import { PageSideMenu } from "../../components/pageSideMenu";
 
 interface AboutUsPageProps {}
 
 export const AboutUsPage: React.FC<AboutUsPageProps> = props => {
   return (
-    <Layout>
+    <>
       <div className="container">
         <div className="about row">
           <PageSideMenu />
@@ -67,6 +67,6 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = props => {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };

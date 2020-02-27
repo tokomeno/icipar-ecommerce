@@ -86,7 +86,7 @@ const getQueryParamsFromUrl = () => {
       return filterData;
     }
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
   return defaultData;
 };

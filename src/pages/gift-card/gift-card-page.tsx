@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout } from "../../layout";
+
 import { useTranslation } from "react-i18next";
 
 interface GiftCardPageProps {}
@@ -8,7 +8,7 @@ export const GiftCardPage: React.FC<GiftCardPageProps> = props => {
   const { t } = useTranslation();
 
   return (
-    <Layout>
+    <>
       <div className="container">
         <form className="giftCard d-flex flex-column align-items-center justify-content-center">
           <input
@@ -32,6 +32,6 @@ export const GiftCardPage: React.FC<GiftCardPageProps> = props => {
           <button className="add">{t("add_to_cart")}</button>
         </form>
       </div>
-    </Layout>
+    </>
   );
 };

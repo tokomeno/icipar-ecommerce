@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout } from "../../layout";
+
 import { ProfileLeft } from "../../components/profile-left/profile-left";
 import { connect } from "react-redux";
 import { IUser } from "../../redux/auth/authTypes";
@@ -24,7 +24,7 @@ const _ProfileBasePage: React.FC<ProfileBasePageProps> = ({
   const location = useLocation();
 
   return (
-    <Layout>
+    <>
       {modal}
       <div className="container">
         <div
@@ -38,7 +38,7 @@ const _ProfileBasePage: React.FC<ProfileBasePageProps> = ({
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
 const mapStateToProps = ({ auth }: IStoreState) => ({

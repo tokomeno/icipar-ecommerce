@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout } from "../../layout";
+
 import Spinner from "react-bootstrap/Spinner";
 import { BounceLoader } from "react-spinners";
 
@@ -7,7 +7,7 @@ interface LayoutSpinnerProps {}
 
 export const LayoutSpinner: React.FC<LayoutSpinnerProps> = () => {
   return (
-    <Layout>
+    <>
       <div
         className="container"
         style={{
@@ -19,6 +19,6 @@ export const LayoutSpinner: React.FC<LayoutSpinnerProps> = () => {
       >
         <BounceLoader size={40} color={"#fa7268"} loading={true} />
       </div>
-    </Layout>
+    </>
   );
 };

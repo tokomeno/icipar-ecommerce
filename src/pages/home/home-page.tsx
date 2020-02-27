@@ -1,5 +1,4 @@
 import React from "react";
-import { Layout } from "../../layout";
 import { MainSlider } from "./mainSlider";
 import { ProductSlider } from "../../components/sliders/producSlider/productSlider";
 import { BlogSlider } from "../../components/sliders/blog-slider/blog-slider";
@@ -20,7 +19,7 @@ export const HomePage: React.FC<HomePageProps> = () => {
   const { t } = useTranslation();
 
   return (
-    <Layout>
+    <>
       <MainSlider />
 
       <SectionSliders />
@@ -76,6 +75,6 @@ export const HomePage: React.FC<HomePageProps> = () => {
         </div>
       </div>
       <div className="stores" />
-    </Layout>
+    </>
   );
 };

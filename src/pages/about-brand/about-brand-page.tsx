@@ -1,11 +1,10 @@
 import React from "react";
-import { Layout } from "../../layout";
 
 interface AboutBrandPageProps {}
 
 export const AboutBrandPage: React.FC<AboutBrandPageProps> = props => {
   return (
-    <Layout>
+    <>
       <div className="container">
         <div className="about-brand">
           <h1 className="brand-title text-center">
@@ -114,6 +113,6 @@ export const AboutBrandPage: React.FC<AboutBrandPageProps> = props => {
         </div>
       </div>
       ;
-    </Layout>
+    </>
   );
 };

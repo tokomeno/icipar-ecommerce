@@ -5,10 +5,20 @@ import { CatBanner } from "../../components/cat-banner";
 import { useProductFilterAttributes } from "../../hooks/useProductFilterAttributes";
 import { useTranslation } from "react-i18next";
 import { PriceRange } from "./product-price-range";
+import { IChekedFilters } from "../../contexts/productFilterContext";
 
-interface CatalogFiltersProps {
-  // onFilterChange: FOnFilterChange;
-}
+interface CatalogFiltersProps {}
+
+const Filters: Partial<keyof IChekedFilters>[] = [
+  "categories",
+  "aromas",
+  "genders",
+  "brands",
+  "collections",
+  "usages",
+  "smells",
+  "countries"
+];
 
 export const CatalogFilters: React.FC<CatalogFiltersProps> = React.memo(() => {
   const { t } = useTranslation();
@@ -17,54 +27,15 @@ export const CatalogFilters: React.FC<CatalogFiltersProps> = React.memo(() => {
   if (!productFilterAttributes) return <div className="list" />;
   return (
     <div className="list">
-      <FilterDropdown type="default" title={t("categories")}>
-        <FilterCheckboxes
-          filterName="categories"
-          checkboxes={productFilterAttributes["categories"]}
-        />
-      </FilterDropdown>
-      <FilterDropdown type="default" title={t("aromas")}>
-        <FilterCheckboxes
-          filterName="aromas"
-          checkboxes={productFilterAttributes["aromas"]}
-        />
-      </FilterDropdown>
-      <FilterDropdown type="default" title={t("genders")}>
-        <FilterCheckboxes
-          filterName="genders"
-          checkboxes={productFilterAttributes["genders"]}
-        />
-      </FilterDropdown>
-      <FilterDropdown type="default" title={t("brands")}>
-        <FilterCheckboxes
-          filterName="brands"
-          checkboxes={productFilterAttributes["brands"]}
-        />
-      </FilterDropdown>
-      <FilterDropdown type="default" title={t("collections")}>
-        <FilterCheckboxes
-          filterName="collections"
-          checkboxes={productFilterAttributes["collections"]}
-        />
-      </FilterDropdown>
-      <FilterDropdown type="default" title={t("usages")}>
-        <FilterCheckboxes
-          filterName="usages"
-          checkboxes={productFilterAttributes["usages"]}
-        />
-      </FilterDropdown>
-      <FilterDropdown type="default" title={t("smells")}>
-        <FilterCheckboxes
-          filterName="smells"
-          checkboxes={productFilterAttributes["smells"]}
-        />
-      </FilterDropdown>
-      <FilterDropdown type="default" title={t("countries")}>
-        <FilterCheckboxes
-          filterName="countries"
-          checkboxes={productFilterAttributes["countries"]}
-        />
-      </FilterDropdown>
+      {Filters.map(name => (
+        <FilterDropdown type="default" title={t(name)}>
+          <FilterCheckboxes
+            filterName={name}
+            checkboxes={productFilterAttributes[name]}
+          />
+        </FilterDropdown>
+      ))}
+
       <FilterDropdown type="color" title={t("color_groups")}>
         <FilterCheckboxes
           type="colors"

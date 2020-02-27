@@ -1,11 +1,11 @@
-import { IProductFilterObject } from "../../contexts/productFilterContext";
+import { IProductFilterRequestParameter } from "../../contexts/productFilterContext";
 import { FetchProductResponse, IProductFilterRequestParam } from "./types";
 import queryString from "query-string";
 import axios from "axios";
 
 export const fetchProducts = (
   url: string,
-  productFilterData: IProductFilterObject,
+  productFilterData: IProductFilterRequestParameter,
   callback: (res: FetchProductResponse) => void
 ): void => {
   pushQueryParamsToUrl(productFilterData);
@@ -33,7 +33,7 @@ const pushQueryParamsToUrl = (data: any[] | object) => {
 };
 
 const mapToRequestParams = (
-  productFilter: IProductFilterObject
+  productFilter: IProductFilterRequestParameter
 ): IProductFilterRequestParam => {
   const res: IProductFilterRequestParam = {};
 

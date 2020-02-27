@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { IProduct } from "../../data/product";
 import { FETCH_PRODUCTS_URL } from "../../api/endpoints";
-import { IProductFilterObject } from "../../contexts/productFilterContext";
+import { IProductFilterRequestParameter } from "../../contexts/productFilterContext";
 import { FetchProductResponse } from "./types";
 import { fetchProducts } from "./helper";
 import { useToggle } from "../common/useToggle";
@@ -13,7 +13,9 @@ export enum ascOrDesc {
 
 export type ISortByPrice = (ascOrDesc: ascOrDesc) => void;
 
-export const useProducts = (productFilterData: IProductFilterObject) => {
+export const useProducts = (
+  productFilterData: IProductFilterRequestParameter
+) => {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [links, setLinks] = useState<FetchProductResponse["links"]>();
   const {

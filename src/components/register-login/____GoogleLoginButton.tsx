@@ -36,7 +36,7 @@ class GoogleLoginButton extends React.Component<GoogleLoginButtonProps> {
   render() {
     return (
       <GoogleLogin
-        clientId={GOOGLE_CLIENT_ID}
+        clientId={GOOGLE_CLIENT_ID as string}
         render={renderProps => (
           <a
             onClick={renderProps.onClick}

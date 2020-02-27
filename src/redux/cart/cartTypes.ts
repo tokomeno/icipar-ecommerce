@@ -5,6 +5,8 @@ export interface ICartState {
   itemsByKeys: { [key: number]: ICartItem | null };
   totalPrice: number;
   loadingItemId: number | null;
+  bundles: [];
+  new_gift_cards: [];
 }
 
 export enum CartActionsType {

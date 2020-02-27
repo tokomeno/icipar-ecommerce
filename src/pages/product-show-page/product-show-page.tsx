@@ -9,11 +9,10 @@ import { useTranslation } from "react-i18next";
 import { useProduct } from "../../hooks/useProduct";
 import { Item } from "./item";
 import { match } from "react-router-dom";
-import Axios from "axios";
-import { PRODUCT_BRANCH } from "../../api/endpoints";
 import { connect } from "react-redux";
 import { IStoreState } from "../../redux/mainReducer";
-import { LayoutSpinner } from "../../components/layout-spinner";
+import { LayoutSpinner } from "../../components/spinners/layout-spinner";
+import { ProductService } from "../../services/product.http";
 
 interface ProducShowPageProps {
   match: match<{ id: string }>;
@@ -32,7 +31,8 @@ const _ProducShowPage: React.FC<ProducShowPageProps> = ({
 
   const setActiveItemFromId = useCallback(
     (id: number) => {
-      const item = product?.items.find(i => i.id === id);
+      if (!product) return;
+      const item = product.items.find(i => i.id === id);
       if (item) setActiveItem(item);
     },
     [product]
@@ -49,13 +49,13 @@ const _ProducShowPage: React.FC<ProducShowPageProps> = ({
 
   useEffect(() => {
     if (!product) return;
-    Axios.get<{ data: { full_address: string }[] }>(PRODUCT_BRANCH, {
-      params: { product_id: product.id }
-    }).then(res => {
-      if (res.data && Array.isArray(res.data.data)) {
-        setBranches(res.data.data.filter(i => i.full_address));
-      }
-    });
+    ProductService.getBranchesForProduct(product.id)
+      .then(res => {
+        if (res.data && Array.isArray(res.data.data)) {
+          setBranches(res.data.data.filter(i => i.full_address));
+        }
+      })
+      .catch(res => console.error(res));
   }, [product]);
 
   if (!product || !activeItem) return <LayoutSpinner />;

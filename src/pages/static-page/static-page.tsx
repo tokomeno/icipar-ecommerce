@@ -4,6 +4,7 @@ import { PageSideMenu } from "../../components/pageSideMenu";
 import { match } from "react-router-dom";
 import Axios from "axios";
 import { STATIC_PAGE } from "../../api/endpoints";
+import { LayoutSpinner } from "../../components/spinners/layout-spinner";
 
 interface StaticPageProps {
   match: match<{ slug: string }>;
@@ -24,6 +25,7 @@ export const StaticPage: React.FC<StaticPageProps> = ({ match }) => {
         console.log(err);
       });
   }, [match.params.slug]);
+  if (!page) return <LayoutSpinner />;
   return (
     <Layout>
       <div className="container">
@@ -31,17 +33,13 @@ export const StaticPage: React.FC<StaticPageProps> = ({ match }) => {
           <PageSideMenu />
           <div className="col-lg-9">
             <div className="right iframe-block">
-              {page ? (
-                <>
-                  <div className="top">
-                    <h1 className="title">{page.title}</h1>
-                  </div>
-                  <div
-                    className="desc"
-                    dangerouslySetInnerHTML={{ __html: page.body }}
-                  />
-                </>
-              ) : null}
+              <div className="top">
+                <h1 className="title">{page.title}</h1>
+              </div>
+              <div
+                className="desc"
+                dangerouslySetInnerHTML={{ __html: page.body }}
+              />
             </div>
           </div>
         </div>

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { IBlogList } from "../../data/blog";
 import { useTranslation } from "react-i18next";
 import { BlogSliderItem } from "../../components/sliders/blog-slider/blog-slider-item";
 import { Layout } from "../../layout";
 import { BlogContetnLoader } from "../../components/blogs/blog-content-loader";
-import { BlogService } from "../../services/blog.http";
+import { BlogService, IBlogList } from "../../services/blog.http";
 
 interface BlogPageProps {}
 

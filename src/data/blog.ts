@@ -1,18 +1,4 @@
-export interface IBlogList {
-  slug: string;
-  title: string;
-  thumbnail: string;
-  created_at: string;
-  excerpt: string;
-}
-
-export interface IBlogShow {
-  slug: string;
-  title: string;
-  thumbnail: string;
-  created_at: string;
-  excerpt: string;
-}
+import { IBlogList } from "../services/blog.http";
 
 // "slug": "quasi",
 // "title": "quasi",

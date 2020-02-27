@@ -4,7 +4,6 @@ import Swiper from "react-id-swiper";
 import { useSliderNav } from "../../hooks/common/useSliderNav";
 import { CommentSliderItem } from "./comment-slider-item";
 import { axiosWithToken } from "../../api/axios-with-token";
-import { IBlogList } from "../../data/blog";
 import { FETCH_TESTIMONIALS } from "../../api/endpoints";
 
 export interface IComment {

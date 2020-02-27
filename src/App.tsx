@@ -1,7 +1,6 @@
 import React from "react";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import { HomePage } from "./pages/home/home-page";
-import { TodoApp } from "./pages/Todo";
 import { AboutUsPage } from "./pages/about-us/about-us-page";
 import { ContactPage } from "./pages/contact/contact-page";
 import { HowItWorksPage } from "./pages/how-it-works/how-it-works-page";
@@ -98,8 +97,6 @@ const App: React.FC<{}> = props => {
               component={GiftCardProfilePage}
             />
           </PrivateRoute>
-
-          <Route path="/todos" exact component={TodoApp} />
         </Switch>
       </BrowserRouter>
     </I18nextProvider>

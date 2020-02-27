@@ -1,7 +1,7 @@
 import React from "react";
-import { IBlogList } from "../../../data/blog";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { IBlogList } from "../../../services/blog.http";
 
 interface BlogSliderItemProps {
   blog: IBlogList;

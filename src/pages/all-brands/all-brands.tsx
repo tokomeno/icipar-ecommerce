@@ -6,7 +6,7 @@ import { axiosWithToken } from "../../api/axios-with-token";
 import { ALL_BRANDS } from "../../api/endpoints";
 import { useTranslation } from "react-i18next";
 import { Spinner } from "../../components/spinner";
-import { LayoutSpinner } from "../../components/layout-spinner";
+import { LayoutSpinner } from "../../components/spinners/layout-spinner";
 
 interface IAllBrandsResponse {
   [k: string]: {

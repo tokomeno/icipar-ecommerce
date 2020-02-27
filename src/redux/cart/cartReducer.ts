@@ -4,7 +4,9 @@ const cartInitState: ICartState = {
   items: [],
   itemsByKeys: {},
   totalPrice: 0,
-  loadingItemId: null
+  loadingItemId: null,
+  bundles: [],
+  new_gift_cards: []
 };
 
 export const cartReducer = (

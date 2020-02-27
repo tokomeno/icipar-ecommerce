@@ -1,29 +1,44 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { ProfileBasePage } from "../index";
+import { ProfileSpinner } from "../../../components/spinners/profile-spiner";
+import { useTranslation } from "react-i18next";
+import { OrderService } from "../../../services/order.http";
 
 interface OrdersProfilePageProps {}
 
 export const OrdersProfilePage: React.FC<OrdersProfilePageProps> = props => {
+  const [orders, setOrders] = useState<null | []>(null);
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    OrderService.getAll()
+      .then(res => setOrders(res.data.data as any))
+      .catch(err => {
+        console.error(err);
+      });
+  }, []);
+
+  if (!orders) return <ProfileSpinner />;
   return (
     <ProfileBasePage>
       <div className="checkout-cont">
         <div className="md-btns d-md-none d-flex align-items-center justify-content-center">
-          <div className="order-btn active">შეკვეთები</div>
+          <div className="order-btn active">{t("orders")}</div>
           <span>/</span>
-          <div className="history-btn">ისტორია</div>
+          <div className="history-btn">{t("history")}</div>
         </div>
         <div className="profile-right profile-side table-profile orders active">
           <div className="profile-top">
-            <h2 className="profile-top_title">შეკვეთები</h2>
+            <h2 className="profile-top_title">{t("orders")}</h2>
           </div>
           <div className="table-responsive order-t">
             <table className="table">
               <thead>
                 <tr>
-                  <th>შეკვეთის ნომერი</th>
+                  <th>{t("order_number")}</th>
                   <th className="text-right" />
-                  <th className="text-right">სტატუსი</th>
-                  <th className="text-right">ფასი</th>
+                  <th className="text-right">{t("status")}</th>
+                  <th className="text-right">{t("price")}</th>
                 </tr>
               </thead>
               <tbody>

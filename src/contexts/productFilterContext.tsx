@@ -1,7 +1,7 @@
 import React, { createContext, useState, useCallback } from "react";
 import queryString from "query-string";
 
-export interface IChekedFilters {
+export interface IFilterCheckboxes {
   categories: (string | number)[];
   aromas: (string | number)[];
   genders: (string | number)[];
@@ -13,7 +13,7 @@ export interface IChekedFilters {
   countries: (string | number)[];
 }
 
-const defaultData: IProductFilterObject = {
+const defaultData: IProductFilterRequestParameter = {
   categories: [],
   aromas: [],
   genders: [],
@@ -26,7 +26,7 @@ const defaultData: IProductFilterObject = {
   order: "-price"
 };
 
-export type IProductFilterObject = Partial<IChekedFilters> & {
+export type IProductFilterRequestParameter = Partial<IFilterCheckboxes> & {
   order?: "price" | "-price";
   keyword?: string;
   price_range?: [number, number];
@@ -34,15 +34,15 @@ export type IProductFilterObject = Partial<IChekedFilters> & {
 
 export type FOnFilterChange = (
   ids: (number | string)[],
-  filterName: keyof IChekedFilters
+  filterName: keyof IFilterCheckboxes
 ) => void;
 
 interface IPorductFilterContext {
-  productFilterData: IProductFilterObject;
+  productFilterData: IProductFilterRequestParameter;
   setProductFilterData: React.Dispatch<
-    React.SetStateAction<IProductFilterObject>
+    React.SetStateAction<IProductFilterRequestParameter>
   >;
-  setNewFilter: FOnFilterChange;
+  setFilterOnKey: FOnFilterChange;
 }
 
 export const PorductFilterContext = createContext<IPorductFilterContext>(
@@ -51,19 +51,23 @@ export const PorductFilterContext = createContext<IPorductFilterContext>(
 
 export const PorductFilterProvider: React.FC<{}> = ({ children }) => {
   const [productFilterData, setProductFilterData] = useState<
-    IProductFilterObject
+    IProductFilterRequestParameter
   >(getQueryParamsFromUrl);
 
-  const setNewFilter: FOnFilterChange = useCallback(
-    (ids, filterName) => {
-      setProductFilterData(prevState => ({ ...prevState, [filterName]: ids }));
+  const setFilterOnKey: FOnFilterChange = useCallback(
+    (ids, filterKey) => {
+      setProductFilterData(prevState => ({ ...prevState, [filterKey]: ids }));
     },
     [setProductFilterData]
   );
 
   return (
     <PorductFilterContext.Provider
-      value={{ productFilterData, setNewFilter, setProductFilterData }}
+      value={{
+        productFilterData,
+        setFilterOnKey,
+        setProductFilterData
+      }}
     >
       {children}
     </PorductFilterContext.Provider>

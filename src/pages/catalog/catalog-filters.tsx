@@ -5,11 +5,11 @@ import { CatBanner } from "../../components/cat-banner";
 import { useProductFilterAttributes } from "../../hooks/useProductFilterAttributes";
 import { useTranslation } from "react-i18next";
 import { PriceRange } from "./product-price-range";
-import { IChekedFilters } from "../../contexts/productFilterContext";
+import { IFilterCheckboxes } from "../../contexts/productFilterContext";
 
 interface CatalogFiltersProps {}
 
-const Filters: Partial<keyof IChekedFilters>[] = [
+const Filters: Partial<keyof IFilterCheckboxes>[] = [
   "categories",
   "aromas",
   "genders",
@@ -28,7 +28,7 @@ export const CatalogFilters: React.FC<CatalogFiltersProps> = React.memo(() => {
   return (
     <div className="list">
       {Filters.map(name => (
-        <FilterDropdown type="default" title={t(name)}>
+        <FilterDropdown key={name} type="default" title={t(name)}>
           <FilterCheckboxes
             filterName={name}
             checkboxes={productFilterAttributes[name]}

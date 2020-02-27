@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import Axios from "axios";
-import { FETCH_PRODUCTS_FILTER_DATA } from "../api/endpoints";
+import { ProductService } from "../services/product.http";
 
 export interface IProductFilterData {
   categories: Category[];
@@ -72,12 +71,10 @@ export const useProductFilterAttributes = () => {
     IProductFilterData
   >();
   useEffect(() => {
-    Axios.get<{ data: IProductFilterData }>(FETCH_PRODUCTS_FILTER_DATA).then(
-      res => {
-        const data = addTitlePropertoesToFilterData(res.data.data);
-        setProductFilterAttributes(data);
-      }
-    );
+    ProductService.getFilterAttributes().then(res => {
+      const data = addTitlePropertoesToFilterData(res.data.data);
+      setProductFilterAttributes(data);
+    });
   }, []);
   return { productFilterAttributes };
 };

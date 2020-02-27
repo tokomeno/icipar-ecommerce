@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
 import classnames from "classnames";
 import {
-  IChekedFilters,
+  IFilterCheckboxes,
   PorductFilterContext
 } from "../../contexts/productFilterContext";
 
 interface FilterCheckboxesProps {
-  filterName: keyof IChekedFilters;
+  filterName: keyof IFilterCheckboxes;
   checkboxes: { title: string; id: number | string }[];
   type?: "colors";
 }
@@ -14,7 +14,7 @@ type ICheckbox = (number | string)[];
 
 export const FilterCheckboxes: React.FC<FilterCheckboxesProps> = React.memo(
   ({ checkboxes, type, filterName }) => {
-    const { setNewFilter, productFilterData } = useContext(
+    const { setFilterOnKey, productFilterData } = useContext(
       PorductFilterContext
     );
     const [checkedIds, setCheckedIds] = useState<ICheckbox>(
@@ -35,10 +35,10 @@ export const FilterCheckboxes: React.FC<FilterCheckboxesProps> = React.memo(
     const isFirstMount = useRef(true);
     useEffect(() => {
       if (!isFirstMount.current) {
-        setNewFilter(checkedIds, filterName);
+        setFilterOnKey(checkedIds, filterName);
       }
       isFirstMount.current = false;
-    }, [checkedIds, setNewFilter, isFirstMount, filterName]);
+    }, [checkedIds, setFilterOnKey, isFirstMount, filterName]);
 
     return (
       <React.Fragment>

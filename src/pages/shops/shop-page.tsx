@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
+import { IBranch } from "../../services/branch.http";
+import { LayoutSpinner } from "../../components/spinners/layout-spinner";
+import classnames from "classnames";
+import { BranchMap } from "../../components/branch-map";
+import { IStoreState } from "../../redux/mainReducer";
+import { connect } from "react-redux";
 
-interface ShopPageProps {}
+interface ShopPageProps {
+  branches: IBranch[];
+}
 
-export const ShopPage: React.FC<ShopPageProps> = props => {
+export const _ShopPage: React.FC<ShopPageProps> = ({ branches }) => {
+  const [activeId, setActiveId] = useState<null | number>(null);
+
+  if (!branches) return <LayoutSpinner></LayoutSpinner>;
   return (
     <div className="content">
       <div className="container">
@@ -15,86 +26,54 @@ export const ShopPage: React.FC<ShopPageProps> = props => {
               </button>
             </form>
             <div className="shops">
-              <div
-                data-geo-lat="41.7347367"
-                data-geo-long="44.7811929"
-                className="shops-item"
-              >
-                <div className="top d-flex align-items-center justify-content-between">
-                  <div className="location">
-                    თბილისი, ც. დადიანი ქ. სუპერმარკეტი
+              {branches.map(shop => (
+                <div
+                  key={shop.id}
+                  data-geo-lat={shop.lat}
+                  data-geo-long={shop.lng}
+                  className={classnames("shops-item", {
+                    "hover active": shop.id === activeId
+                  })}
+                  onClick={() =>
+                    setActiveId(shop.id === activeId ? null : shop.id)
+                  }
+                >
+                  <div className="top d-flex align-items-center justify-content-between">
+                    <div className="location">{shop.full_address}</div>
+                    <i className="fas fa-minus" />
+                    <i className="fas fa-plus" />
                   </div>
-                  <i className="fas fa-minus" />
-                  <i className="fas fa-plus" />
-                </div>
-                <div className="desc">
-                  <div className="d-flex map-item">
-                    <i className="fas fa-phone" />
-                    <a href="tel:+995322201717" className="time">
-                      +995 32 2 20 17 17
-                    </a>
-                  </div>
-                  <div className="d-flex map-item">
-                    <i className="fas fa-clock" />
-                    <div className="time">ორშაბათი - კვირა: 10:00 - 20:00</div>
-                  </div>
-                </div>
-              </div>
-              <div
-                data-geo-lat="41.7337078"
-                data-geo-long="44.7947667"
-                className="shops-item"
-              >
-                <div className="top d-flex align-items-center justify-content-between">
-                  <div className="location">თბილისი, წერეთლის გამზირი, N69</div>
-                  <i className="fas fa-minus" />
-                  <i className="fas fa-plus" />
-                </div>
-                <div className="desc">
-                  <div className="d-flex map-item">
-                    <i className="fas fa-phone" />
-                    <a href="tel:+995322201717" className="time">
-                      +995 32 2 20 17 17
-                    </a>
-                  </div>
-                  <div className="d-flex map-item">
-                    <i className="fas fa-clock" />
-                    <div className="time">ორშაბათი - კვირა: 10:00 - 20:00</div>
+                  <div className="desc">
+                    <div className="d-flex map-item">
+                      <i className="fas fa-phone" />
+                      <a href="tel:+995322201717" className="time">
+                        {shop.phone}
+                      </a>
+                    </div>
+                    <div className="d-flex map-item">
+                      <i className="fas fa-clock" />
+                      <div className="time">{shop.opening_hours}</div>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div
-                data-geo-lat="41.7109307"
-                data-geo-long="44.7563481"
-                className="shops-item"
-              >
-                <div className="top d-flex align-items-center justify-content-between">
-                  <div className="location">
-                    თბილისი, ჭავჭავაძის გამზირი, N69
-                  </div>
-                  <i className="fas fa-minus" />
-                  <i className="fas fa-plus" />
-                </div>
-                <div className="desc">
-                  <div className="d-flex map-item">
-                    <i className="fas fa-phone" />
-                    <a href="tel:+995322201717" className="time">
-                      +995 32 2 20 17 17
-                    </a>
-                  </div>
-                  <div className="d-flex map-item">
-                    <i className="fas fa-clock" />
-                    <div className="time">ორშაბათი - კვირა: 10:00 - 20:00</div>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
           <div className="col-md-8">
-            <div id="map_canvas" />
+            <div id="map_canvas" style={{ width: "100%" }}>
+              <BranchMap shops={branches} />
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
 };
+
+const mapStateToProps = ({ info }: IStoreState) => {
+  return {
+    branches: info.branches
+  };
+};
+
+export const ShopPage = connect(mapStateToProps)(_ShopPage);

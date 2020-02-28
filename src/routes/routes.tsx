@@ -1,11 +1,11 @@
 export const routes = {
   home: "/",
-  aboutUs: "/about-us",
+  aboutUs: "/page/about-us",
+  howItWorks: "/page/how-it-works",
+  faq: "/page/faq",
 
   aboutBrand: "/about-brand",
   contact: "/contact",
-  howItWorks: "/how-it-works",
-  faq: "/faq",
   shops: "/shops",
   allBrands: "/all-brands",
   catalog: "/catalog",

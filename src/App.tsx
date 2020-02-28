@@ -31,7 +31,7 @@ import { InfoProfilePage } from "./pages/profile/info/info-profile";
 import { BlogShowPage } from "./pages/blog-show/blog-show";
 import { BlogPage } from "./pages/blog/blog-page";
 import { store } from "./redux/store";
-import { fetchSocialAndContactInfo } from "./redux/info/infoActions";
+import { fetch_Social_ContactInfo_Branches } from "./redux/info/infoActions";
 import { StaticPage } from "./pages/static-page/static-page";
 import { Layout } from "./layout";
 
@@ -47,7 +47,7 @@ export interface match<P> {
 }
 
 tryLocalAuth();
-store.dispatch(fetchSocialAndContactInfo() as any);
+store.dispatch(fetch_Social_ContactInfo_Branches() as any);
 
 const App: React.FC<{}> = props => {
   return (

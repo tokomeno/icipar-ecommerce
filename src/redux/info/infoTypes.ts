@@ -1,6 +1,8 @@
+import { IBranch } from "../../services/branch.http";
 import {
   SetSocialAndContactInfoAction,
-  SetPorductDeliveryTermsAction
+  SetPorductDeliveryTermsAction,
+  SetBrnachesAction
 } from "./infoActions";
 
 export interface IInfoState {
@@ -12,6 +14,7 @@ export interface IInfoState {
   product_delivery_terms: {
     content: string;
   };
+  branches: IBranch[];
 }
 
 export interface ISocial {
@@ -20,10 +23,12 @@ export interface ISocial {
 }
 
 export enum InfoActionTypes {
-  setSocialAndContactInfo,
-  SetPorductDeliveryTerms
+  SetSocialAndContactInfo,
+  SetPorductDeliveryTerms,
+  SetBrnaches
 }
 
 export type InfoActions =
   | SetSocialAndContactInfoAction
-  | SetPorductDeliveryTermsAction;
+  | SetPorductDeliveryTermsAction
+  | SetBrnachesAction;

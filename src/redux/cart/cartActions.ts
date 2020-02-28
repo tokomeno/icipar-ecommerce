@@ -5,7 +5,11 @@ import {
 } from "./cartTypes";
 import { ICartItem } from "../../data/product";
 import { Dispatch } from "redux";
-import { CART_TOGGLE, GET_CART } from "../../api/endpoints";
+import {
+  CART_TOGGLE,
+  GET_CART,
+  ADD_GIFT_CART_TO_CART
+} from "../../api/endpoints";
 import { axiosWithToken } from "../../api/axios-with-token";
 import { AxiosResponse } from "axios";
 import { store } from "../store";
@@ -106,6 +110,19 @@ export const removeItem: (itemId: number) => void = (itemId: number) => {
         }
       });
     });
+  };
+};
+
+export const addGiftCart: (amount: number) => void = (amount: number) => {
+  return (dispatch: Dispatch) => {
+    axiosWithToken
+      .post(ADD_GIFT_CART_TO_CART, {
+        amount
+      })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => console.error(err));
   };
 };
 

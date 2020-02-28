@@ -8,7 +8,8 @@ let initState: IInfoState = {
   socials: [],
   product_delivery_terms: {
     content: ""
-  }
+  },
+  branches: []
 };
 
 export const infoReducer = (
@@ -16,7 +17,7 @@ export const infoReducer = (
   action: InfoActions
 ): IInfoState => {
   switch (action.type) {
-    case InfoActionTypes.setSocialAndContactInfo:
+    case InfoActionTypes.SetSocialAndContactInfo:
       return {
         ...state,
         ...action.payload
@@ -25,6 +26,11 @@ export const infoReducer = (
       return {
         ...state,
         product_delivery_terms: action.payload
+      };
+    case InfoActionTypes.SetBrnaches:
+      return {
+        ...state,
+        branches: action.payload
       };
     default:
       return state;

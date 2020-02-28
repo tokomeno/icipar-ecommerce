@@ -14,12 +14,14 @@ import { useToggle } from "../../hooks/common/useToggle";
 import { AboutPagesMenu } from "../../components/pageSideMenu";
 import { CartNavbarDropdown } from "../../components/navbar-wish-cart/cartNavbarDropdown";
 import { WishNavbarDropdown } from "../../components/navbar-wish-cart/wishNavbarDropdown";
+import { connect } from "react-redux";
 
 interface HeaderProps {
   user: IStoreState["auth"]["user"];
+  phone: string;
 }
 
-export const Header: React.FC<HeaderProps> = ({ user }) => {
+export const _Header: React.FC<HeaderProps> = ({ user, phone }) => {
   const { t } = useTranslation();
   const history = useHistory();
   const { setActiveModal, activeModal, hideModal } = useContext<
@@ -74,9 +76,9 @@ export const Header: React.FC<HeaderProps> = ({ user }) => {
                 <div className="col-lg-9 col-md-8">
                   <ul className="d-none d-lg-flex">
                     <li>
-                      <a href="tel:+995322201717" className="sup-hdr_link">
+                      <a href={"tel:" + phone} className="sup-hdr_link">
                         <img src="/assets/images/phone.svg" alt="call" />
-                        +995322201717
+                        {phone}
                       </a>
                     </li>
                     <li className="store">
@@ -211,6 +213,14 @@ export const Header: React.FC<HeaderProps> = ({ user }) => {
     </React.Fragment>
   );
 };
+
+const mapStateToProps = ({ info }: IStoreState) => {
+  return {
+    phone: info.contact_info.phone
+  };
+};
+
+export const Header = connect(mapStateToProps)(_Header);
 
 type HeaderMenuItemProps = {
   title: string;

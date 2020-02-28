@@ -4,6 +4,8 @@ import { addGiftCart } from "../../redux/cart/cartActions";
 import { connect } from "react-redux";
 import { useInput } from "../../hooks/common/useInput";
 import { IStoreState } from "../../redux/mainReducer";
+import { useActiveState } from "../../hooks/common/useActiveState";
+import classnames from "classnames";
 
 interface GiftCardPageProps {
   addGiftCart: typeof addGiftCart;
@@ -16,6 +18,9 @@ const _GiftCardPage: React.FC<GiftCardPageProps> = ({
 }) => {
   const { t } = useTranslation();
   const { onChange, value: amount } = useInput();
+  const { activeState, setActiveState } = useActiveState<
+    "online_coupon" | "adgilze_mitanit" | null
+  >(null);
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
@@ -52,10 +57,22 @@ const _GiftCardPage: React.FC<GiftCardPageProps> = ({
             <div className="txt">{t("or")}</div>
             <span />
           </div>
-          <button type="button" className="select-btn online">
+          <button
+            type="button"
+            className={classnames("select-btn online", {
+              active: "online_coupon" === activeState
+            })}
+            onClick={() => setActiveState("online_coupon")}
+          >
             {t("online_coupon")}
           </button>
-          <button type="button" className="select-btn deliv">
+          <button
+            type="button"
+            className={classnames("select-btn deliv", {
+              active: "adgilze_mitanit" === activeState
+            })}
+            onClick={() => setActiveState("adgilze_mitanit")}
+          >
             {t("adgilze_mitanit")}
           </button>
         </div>

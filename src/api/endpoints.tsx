@@ -100,3 +100,7 @@ export const STATIC_PAGE = MAIN_BASE_URL + "/static-page/";
 // Orders
 const ORDER_BASE_URL = "http://3.15.172.11/api";
 export const GET_ORDERS = ORDER_BASE_URL + "/orders";
+
+// EMAIL
+const BASE_EMAIL_URL = "http://18.222.249.167/api";
+export const SUBSCRIBE_EMAIL = BASE_EMAIL_URL + "/subscribe";

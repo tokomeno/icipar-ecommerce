@@ -45,6 +45,7 @@ export const ALL_BRANDS = PRODUCT_BASE_URL + "/brands";
 
 export const PRODUCT_BRANCH = PRODUCT_BASE_URL + "/product-branches";
 export const GET_BRANCHES = PRODUCT_BASE_URL + "/branches-map";
+export const PRODUCT_REVIEW = PRODUCT_BASE_URL + "/product-reviews/store";
 
 // Cart
 // https://app.swaggerhub.com/apis-docs/badzaghua/iciparis-cart/1.0.0

@@ -109,6 +109,11 @@
     "history": "history",
     "status": "status",
     "all_brands": "all_brands",
-    "continiue": "continiue"
+    "continiue": "continiue",
+    "type_amount": "type_amount",
+    "online_coupon": "online_coupon",
+    "adgilze_mitanit": "adgilze_mitanit",
+    "add_to_cart": "add_to_cart",
+    "gift_card_added_in_cart": "gift_card_added_in_cart"
   }
 }

@@ -6,7 +6,11 @@ export interface ICartState {
   totalPrice: number;
   loadingItemId: number | null;
   bundles: [];
-  new_gift_cards: [];
+  original_amount: number | null;
+  new_gift_cards: { amount: number }[];
+  errors: {
+    new_gift_cards?: string | null;
+  };
 }
 
 export enum CartActionsType {
@@ -15,15 +19,13 @@ export enum CartActionsType {
   addItem = "addItem",
   removeItem = "removeItem",
   changeQnty = "changeQnty",
-  loadingItemId = "loadingItemId"
+  loadingItemId = "loadingItemId",
+  setErrors = "setErrors"
 }
 
 export interface SetCartAction {
   type: CartActionsType.setCart;
-  payload: {
-    items: ICartItem[];
-    totalPrice: number;
-  };
+  payload: Omit<ICartState, "errors" | "totalPrice">;
 }
 
 export interface SetLoadingItemIdAction {
@@ -31,4 +33,12 @@ export interface SetLoadingItemIdAction {
   payload: number | null;
 }
 
-export type CartActions = SetCartAction | SetLoadingItemIdAction;
+export interface SetErrorAction {
+  type: CartActionsType.setErrors;
+  payload: ICartState["errors"];
+}
+
+export type CartActions =
+  | SetCartAction
+  | SetLoadingItemIdAction
+  | SetErrorAction;

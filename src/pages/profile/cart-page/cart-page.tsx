@@ -14,13 +14,13 @@ const _CartPage: React.FC<CartPageProps> = ({ totalPrice }) => {
   const {
     isActive: FirstStep,
     setActive: showContent,
-    setInActive: showCheckout
+    setInActive: goToCheckout
   } = useToggle(true);
 
   return (
     <ProfileBasePage>
       <div className="checkout-cont">
-        {FirstStep && <CartContent showCheckout={showCheckout} />}
+        {FirstStep && <CartContent goToCheckout={goToCheckout} />}
         {!FirstStep && (
           <CartCheckoutForm showContent={showContent} totalPrice={totalPrice} />
         )}

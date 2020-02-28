@@ -1,14 +1,17 @@
 import {
   CartActionsType,
   SetCartAction,
-  SetLoadingItemIdAction
+  SetLoadingItemIdAction,
+  ICartState,
+  SetErrorAction
 } from "./cartTypes";
 import { ICartItem } from "../../data/product";
 import { Dispatch } from "redux";
 import {
   CART_TOGGLE,
   GET_CART,
-  ADD_GIFT_CART_TO_CART
+  ADD_GIFT_CART_TO_CART,
+  REMOVE_GIFT_CART_TO_CART
 } from "../../api/endpoints";
 import { axiosWithToken } from "../../api/axios-with-token";
 import { AxiosResponse } from "axios";
@@ -17,14 +20,13 @@ import { store } from "../store";
 export const fetchCart: Function = () => {
   return async (dispatch: Dispatch) => {
     axiosWithToken
-      .get<{ data: { items: ICartItem[]; original_amount: number } }>(GET_CART)
+      .get<{ data: { items: ICartItem[]; original_amount: number } & any }>(
+        GET_CART
+      )
       .then(res => {
         dispatch<SetCartAction>({
           type: CartActionsType.setCart,
-          payload: {
-            items: res.data.data.items,
-            totalPrice: res.data.data.original_amount
-          }
+          payload: res.data.data
         });
       })
       .catch(err => {
@@ -45,10 +47,7 @@ export const increaseItem: (itemId: number) => void = (itemId: number) => {
     toogleItemRequest(itemId, qnty).then(res => {
       dispatch<SetCartAction>({
         type: CartActionsType.setCart,
-        payload: {
-          items: res.data.data.items,
-          totalPrice: res.data.data.original_amount
-        }
+        payload: res.data.data
       });
     });
   };
@@ -65,10 +64,7 @@ export const decreaseItem: (itemId: number) => void = (itemId: number) => {
     toogleItemRequest(itemId, qnty).then(res => {
       dispatch<SetCartAction>({
         type: CartActionsType.setCart,
-        payload: {
-          items: res.data.data.items,
-          totalPrice: res.data.data.original_amount
-        }
+        payload: res.data.data
       });
     });
   };
@@ -86,10 +82,7 @@ export const changeQnty: (itemId: number, qnty: number) => void = (
     toogleItemRequest(itemId, qnty).then(res => {
       dispatch<SetCartAction>({
         type: CartActionsType.setCart,
-        payload: {
-          items: res.data.data.items,
-          totalPrice: res.data.data.original_amount
-        }
+        payload: res.data.data
       });
     });
   };
@@ -104,23 +97,49 @@ export const removeItem: (itemId: number) => void = (itemId: number) => {
     toogleItemRequest(itemId, 0).then(res => {
       dispatch<SetCartAction>({
         type: CartActionsType.setCart,
-        payload: {
-          items: res.data.data.items,
-          totalPrice: res.data.data.original_amount
-        }
+        payload: res.data.data
       });
     });
   };
 };
 
-export const addGiftCart: (amount: number) => void = (amount: number) => {
+export const addGiftCart: (
+  amount: number,
+  success_cb: Function,
+  error_cb: (m: string) => void
+) => void = (amount, success_cb, error_cb) => {
   return (dispatch: Dispatch) => {
+    dispatch(setCartErrors({}));
     axiosWithToken
       .post(ADD_GIFT_CART_TO_CART, {
         amount
       })
       .then(res => {
-        console.log(res);
+        dispatch<SetCartAction>({
+          type: CartActionsType.setCart,
+          payload: res.data.data
+        });
+        success_cb();
+      })
+      .catch(err => {
+        console.error(err.response.data);
+        if (Array.isArray(err.response.data.amount)) {
+          error_cb(err.response.data.amount.join(" "));
+        }
+      });
+  };
+};
+
+export const removeGiftCart: () => void = () => {
+  return (dispatch: Dispatch) => {
+    dispatch(setCartErrors({}));
+    axiosWithToken
+      .post(REMOVE_GIFT_CART_TO_CART)
+      .then(res => {
+        dispatch<SetCartAction>({
+          type: CartActionsType.setCart,
+          payload: res.data.data
+        });
       })
       .catch(err => console.error(err));
   };
@@ -130,9 +149,16 @@ const toogleItemRequest = (
   itemId: number,
   items_count: number
 ): Promise<AxiosResponse<{
-  data: { items: ICartItem[]; original_amount: number };
+  data: { items: ICartItem[]; original_amount: number } & any;
 }>> => {
   return axiosWithToken.post<{
     data: { items: ICartItem[]; original_amount: number };
   }>(CART_TOGGLE + `?item_id=${itemId}&items_count=${items_count}`);
 };
+
+export const setCartErrors = (
+  errors: ICartState["errors"]
+): SetErrorAction => ({
+  type: CartActionsType.setErrors,
+  payload: errors
+});

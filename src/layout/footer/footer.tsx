@@ -5,6 +5,7 @@ import { AboutPagesMenu } from "../../components/pageSideMenu";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { IStoreState } from "../../redux/mainReducer";
+import { ChangeLang } from "../../components/change-lang";
 
 interface FooterProps {
   contact_info: IStoreState["info"]["contact_info"];
@@ -77,14 +78,12 @@ const _Footer: React.FC<FooterProps> = ({ contact_info, socials }) => {
                 </div>
                 <div className="col-lg-6 d-none d-lg-flex align-items-center justify-content-end">
                   <form className="d-flex">
-                    <input type="email" placeholder="შეიყვანეთ ელ. ფოსტა…" />
-                    <button type="submit" className="sent">
+                    <input type="email" placeholder={t("enter_your_email")} />
+                    <button type="button" className="sent">
                       {t("send")}
                     </button>
                   </form>
-                  <a href="#!" className="lang">
-                    ENG
-                  </a>
+                  <ChangeLang />
                 </div>
               </div>
             </div>

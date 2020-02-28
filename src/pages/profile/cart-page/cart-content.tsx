@@ -5,21 +5,25 @@ import {
   changeQnty,
   removeItem,
   decreaseItem,
-  increaseItem
+  increaseItem,
+  removeGiftCart
 } from "../../../redux/cart/cartActions";
 import { CartItem } from "./cart-item";
 import { useTranslation } from "react-i18next";
 import { ICartItem } from "../../../data/product";
 import { ICartState } from "../../../redux/cart/cartTypes";
+import { CartCoupon } from "./cart-coupon";
 
 interface CartContentProps {
   cartItems: ICartItem[];
   totalPrice: number;
   removeItem: typeof removeItem;
-  showCheckout: () => void;
+  goToCheckout: () => void;
   increaseItem: typeof increaseItem;
   decreaseItem: typeof decreaseItem;
   loadingItemId: ICartState["loadingItemId"];
+  new_gift_cards: ICartState["new_gift_cards"];
+  removeGiftCart: typeof removeGiftCart;
 }
 
 export const _CartContent: React.FC<CartContentProps> = ({
@@ -28,9 +32,12 @@ export const _CartContent: React.FC<CartContentProps> = ({
   increaseItem,
   decreaseItem,
   removeItem,
-  showCheckout,
-  loadingItemId
+  goToCheckout,
+  loadingItemId,
+  new_gift_cards,
+  removeGiftCart
 }) => {
+  console.log(new_gift_cards);
   const { t } = useTranslation();
   return (
     <>
@@ -64,6 +71,12 @@ export const _CartContent: React.FC<CartContentProps> = ({
                   cartItem={cartItem}
                 />
               ))}
+              {new_gift_cards.map(giftcard => (
+                <CartCoupon
+                  removeGiftCart={removeGiftCart}
+                  amount={giftcard.amount}
+                />
+              ))}
             </tbody>
           </table>
         </div>
@@ -81,7 +94,7 @@ export const _CartContent: React.FC<CartContentProps> = ({
               {totalPrice}
               <sub>D</sub>
             </div>
-            <a href="#!" onClick={showCheckout} className="buy-btn">
+            <a href="#!" onClick={goToCheckout} className="buy-btn">
               {t("shedena")}
               <img src="/assets/images/arrow-right.svg" alt="arrow" />
               <img
@@ -101,7 +114,8 @@ const mapStateToProps = ({ cart }: IStoreState) => {
   return {
     cartItems: cart.items,
     totalPrice: cart.totalPrice,
-    loadingItemId: cart.loadingItemId
+    loadingItemId: cart.loadingItemId,
+    new_gift_cards: cart.new_gift_cards
   };
 };
 
@@ -109,5 +123,6 @@ export const CartContent = connect(mapStateToProps, {
   changeQntyById: changeQnty,
   removeItem,
   increaseItem,
-  decreaseItem
+  decreaseItem,
+  removeGiftCart
 })(_CartContent);

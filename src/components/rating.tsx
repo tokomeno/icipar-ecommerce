@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import classnames from "classnames";
 
 interface RatingProps {
-  rating: number;
+  rating?: number;
   ratable?: boolean;
+  onRateChange?: (rate: number) => void;
 }
 
-export const Rating: React.FC<RatingProps> = ({ rating, ratable = true }) => {
+export const Rating: React.FC<RatingProps> = ({
+  rating = 0,
+  ratable = true,
+  onRateChange
+}) => {
   const [rate, setRate] = useState(rating);
   return (
     <div className="rating">
@@ -16,6 +21,7 @@ export const Rating: React.FC<RatingProps> = ({ rating, ratable = true }) => {
           onClick={() => {
             if (ratable) {
               setRate(n);
+              if (onRateChange) onRateChange(n);
             }
           }}
           className={classnames("fas fa-star", { checked: rate >= n })}

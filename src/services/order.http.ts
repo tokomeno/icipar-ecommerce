@@ -14,11 +14,14 @@ interface Item {
   original_price: number;
   paid_amount: number;
   is_preorder: number;
+  id: number;
+  product_id: number;
 }
 export interface IOrder {
+  id: number;
   paid_amount: number;
   estimated_delivery_date: string;
-  delivery_status: "processing" | "taken_by_post" | "delivered";
+  delivery_status: "PROCESSING" | "TAKEN_BY_POST" | "FINISHED";
   items: Item[];
   bundles: Bundle[];
   gift_cards: { amount: number };

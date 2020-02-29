@@ -1,15 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { ProfileBasePage } from "../index";
 import { ProfileSpinner } from "../../../components/spinners/profile-spiner";
 import { useTranslation } from "react-i18next";
 import { OrderService, IOrder } from "../../../services/order.http";
 import classnames from "classnames";
+import { useActiveState } from "../../../hooks/common/useActiveState";
+import {
+  IActiveModalContext,
+  ActiveModalContext
+} from "../../../contexts/modalContex";
+import { ChooseRateProductModal } from "./choose-rate-product-modal";
 
 interface OrdersProfilePageProps {}
 
 export const OrdersProfilePage: React.FC<OrdersProfilePageProps> = props => {
+  const { setActiveModal } = useContext<IActiveModalContext>(
+    ActiveModalContext
+  );
   const [orders, setOrders] = useState<null | IOrder[]>(null);
+  const [rateOrder, setRateOrder] = useState<null | IOrder>(null);
   const { t } = useTranslation();
+  const { activeState, setActiveState } = useActiveState<"orders" | "history">(
+    "orders"
+  );
 
   useEffect(() => {
     OrderService.getAll()
@@ -19,121 +32,136 @@ export const OrdersProfilePage: React.FC<OrdersProfilePageProps> = props => {
       });
   }, []);
 
+  const showRateProductModal = (order: IOrder) => {
+    setActiveModal("choose-rate-product");
+    setRateOrder(order);
+  };
   if (!orders) return <ProfileSpinner />;
   return (
-    <ProfileBasePage>
-      <div className="checkout-cont">
-        <div className="md-btns d-md-none d-flex align-items-center justify-content-center">
-          <div className="order-btn active">{t("orders")}</div>
-          <span>/</span>
-          <div className="history-btn">{t("history")}</div>
-        </div>
-        <div className="profile-right profile-side table-profile orders active">
-          <div className="profile-top">
-            <h2 className="profile-top_title">{t("orders")}</h2>
+    <>
+      <ProfileBasePage>
+        <div className="checkout-cont">
+          <div className="md-btns d-md-none d-flex align-items-center justify-content-center">
+            <div
+              onClick={() => setActiveState("orders")}
+              className={classnames("order-btn", {
+                active: activeState === "orders"
+              })}
+            >
+              {t("orders")}
+            </div>
+            <span>/</span>
+            <div
+              onClick={() => setActiveState("history")}
+              className={classnames("history-btn", {
+                active: activeState === "history"
+              })}
+            >
+              {t("history")}
+            </div>
           </div>
-          <div className="table-responsive order-t">
-            <OrderTable>
-              {orders
-                .filter(order => order.delivery_status !== "delivered")
-                .map(order => (
-                  <tr>
-                    <td className="td1">
-                      <div className="order-code">
-                        ID123FGD345
-                        <OrderItems items={order.items} />
-                      </div>
-                    </td>
-                    <td className="td2"></td>
-                    <td className="progress-td td3">
-                      <ProgressBar order={order} />
-                    </td>
-                    <td className="price-td text-right td4">
-                      <div className="price-block">
-                        <div className="price sum">
-                          {order.paid_amount}
-                          <sub>D</sub>
+          <div
+            className={classnames(
+              "profile-right profile-side table-profile orders",
+              {
+                active: activeState === "orders"
+              }
+            )}
+          >
+            <div className="profile-top">
+              <h2 className="profile-top_title">{t("orders")}</h2>
+            </div>
+            <div className="table-responsive order-t">
+              <OrderTable>
+                {orders
+                  .filter(order => order.delivery_status !== "FINISHED")
+                  .map(order => (
+                    <tr key={order.id}>
+                      <td className="td1">
+                        <div className="order-code">
+                          {order.id}
+                          <OrderItems items={order.items} />
                         </div>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-            </OrderTable>
-          </div>
-        </div>
-        <div className="profile-right profile-side table-profile buy-cont orders-history">
-          <div className="profile-top">
-            <h2 className="profile-top_title">შეკვეთების ისტორია</h2>
-          </div>
-          <div className="table-responsive order-t">
-            <OrderTable>
-              {orders
-                .filter(order => order.delivery_status === "delivered")
-                .map(order => (
-                  <tr>
-                    <td className="td1">
-                      <div className="order-code">
-                        <span className="d-flex d-sm-none">
-                          {order.estimated_delivery_date} <div>-</div>
-                        </span>
-                        ID123FGD345
-                        <OrderItems items={order.items} />
-                      </div>
-                    </td>
-                    <td className="show-xs d-sm-none d-flex flex-column">
-                      <div className="show-xs_item d-flex align-items-center justify-content-between">
-                        <div className="name">Chanel N5, 10ML</div>
+                      </td>
+                      <td className="td2"></td>
+                      <td className="progress-td td3">
+                        <ProgressBar order={order} />
+                      </td>
+                      <td className="price-td text-right td4">
                         <div className="price-block">
                           <div className="price sum">
-                            110
-                            <sub>GEL</sub>
+                            {order.paid_amount}
+                            <sub>D</sub>
                           </div>
                         </div>
-                      </div>
-                      <div className="show-xs_item d-flex align-items-center justify-content-between">
-                        <div className="name">Tom Ford, Black Star, 30ML</div>
+                      </td>
+                    </tr>
+                  ))}
+              </OrderTable>
+            </div>
+          </div>
+          <div
+            className={classnames(
+              "profile-right profile-side table-profile buy-cont orders-history",
+              {
+                active: activeState === "history"
+              }
+            )}
+          >
+            <div className="profile-top">
+              <h2 className="profile-top_title">{t("order_history")}</h2>
+            </div>
+            <div className="table-responsive order-t">
+              <OrderTable>
+                {orders
+                  .filter(order => order.delivery_status === "FINISHED")
+                  .map(order => (
+                    <tr key={order.id}>
+                      <td className="td1">
+                        <div className="order-code">
+                          <span className="d-flex d-sm-none">
+                            {order.estimated_delivery_date} <div>-</div>
+                          </span>
+                          {order.id}
+                          <OrderItems items={order.items} />
+                        </div>
+                      </td>
+                      <td className="show-xs d-sm-none d-flex flex-column"></td>
+                      <td className="td2">
+                        <button
+                          className="vote"
+                          onClick={() => showRateProductModal(order)}
+                        >
+                          {t("rate")}
+                        </button>
+                        <button
+                          className="complain"
+                          data-toggle="modal"
+                          data-target="#complaint"
+                        >
+                          {t("appeal")}
+                        </button>
+                      </td>
+                      <td className="progress-td td3">
+                        <ProgressBar order={order} />
+                      </td>
+                      <td className="price-td text-right td4">
                         <div className="price-block">
                           <div className="price sum">
-                            110
-                            <sub>GEL</sub>
+                            {order.paid_amount}
+                            <sub>D</sub>
                           </div>
                         </div>
-                      </div>
-                    </td>
-                    <td className="td2">
-                      <button
-                        className="vote"
-                        data-toggle="modal"
-                        data-target="#choose"
-                      >
-                        შეფასება
-                      </button>
-                      <button
-                        className="complain"
-                        data-toggle="modal"
-                        data-target="#complaint"
-                      >
-                        გასაჩივრება
-                      </button>
-                    </td>
-                    <td className="progress-td td3">
-                      <ProgressBar order={order} />
-                    </td>
-                    <td className="price-td text-right td4">
-                      <div className="price-block">
-                        <div className="price sum">
-                          {order.paid_amount}
-                          <sub>D</sub>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-            </OrderTable>
+                      </td>
+                    </tr>
+                  ))}
+              </OrderTable>
+            </div>
           </div>
         </div>
-      </div>
-    </ProfileBasePage>
+      </ProfileBasePage>
+      {rateOrder && <ChooseRateProductModal order={rateOrder} />}
+    </>
   );
 };
 
@@ -178,20 +206,20 @@ const ProgressBar: React.FC<{ order: IOrder }> = ({ order }) => {
   return (
     <div className="progress">
       <div
-        className={classnames("progress-bar", {
-          active: order.delivery_status === "processing"
-        })}
+        className={classnames("progress-bar active")}
         role="progressbar"
         style={{ width: "calc(100% / 3)" }}
         aria-valuenow={15}
         aria-valuemin={0}
         aria-valuemax={100}
       >
-        <div className="status">{t("processing")}</div>
+        {order.delivery_status === "PROCESSING" && (
+          <div className="status">{t("processing")}</div>
+        )}
       </div>
       <div
         className={classnames("progress-bar", {
-          active: order.delivery_status === "taken_by_post"
+          active: order.delivery_status !== "PROCESSING"
         })}
         role="progressbar"
         style={{ width: "calc(100% / 3)" }}
@@ -199,11 +227,13 @@ const ProgressBar: React.FC<{ order: IOrder }> = ({ order }) => {
         aria-valuemin={0}
         aria-valuemax={100}
       >
-        <div className="status">{t("taken_by_post")}</div>
+        {order.delivery_status === "TAKEN_BY_POST" && (
+          <div className="status">{t("taken_by_post")}</div>
+        )}
       </div>
       <div
         className={classnames("progress-bar", {
-          active: order.delivery_status === "delivered"
+          active: order.delivery_status === "FINISHED"
         })}
         role="progressbar"
         style={{ width: "calc(100% / 3)" }}
@@ -211,7 +241,9 @@ const ProgressBar: React.FC<{ order: IOrder }> = ({ order }) => {
         aria-valuemin={0}
         aria-valuemax={100}
       >
-        <div className="status">{t("delivered")}</div>
+        {order.delivery_status === "FINISHED" && (
+          <div className="status">{t("delivered")}</div>
+        )}
         <div className="deliv-date">{order.estimated_delivery_date}</div>
       </div>
     </div>

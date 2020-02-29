@@ -7,6 +7,7 @@ export const useInput = (defaultValue: string | number = "") => {
       e:
         | React.ChangeEvent<HTMLInputElement>
         | React.ChangeEvent<HTMLSelectElement>
+        | React.ChangeEvent<HTMLTextAreaElement>
         | string
         | number
         | undefined

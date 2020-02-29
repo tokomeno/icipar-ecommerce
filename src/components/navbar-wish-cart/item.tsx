@@ -1,5 +1,4 @@
 import React from "react";
-import { ICartItem } from "../../data/product";
 
 interface DropdownItemProps {
   product: {

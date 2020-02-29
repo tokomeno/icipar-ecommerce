@@ -1,5 +1,4 @@
 import React from "react";
-import classnames from "classnames";
 import { IComment } from "./comment-slider";
 import { Rating } from "../rating";
 

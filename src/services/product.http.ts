@@ -3,9 +3,11 @@ import { IProductWithItems } from "../data/product";
 import {
   FETCH_PRODUCT_URL,
   PRODUCT_BRANCH,
-  FETCH_PRODUCTS_FILTER_DATA
+  FETCH_PRODUCTS_FILTER_DATA,
+  PRODUCT_REVIEW
 } from "../api/endpoints";
 import { IProductFilterData } from "../hooks/useProductFilterAttributes";
+import { axiosWithToken } from "../api/axios-with-token";
 
 export class ProductService {
   static getById(productId: number | string) {
@@ -22,5 +24,13 @@ export class ProductService {
 
   static getFilterAttributes() {
     return Axios.get<{ data: IProductFilterData }>(FETCH_PRODUCTS_FILTER_DATA);
+  }
+
+  static reviewProduct(data: {
+    product_id: number;
+    comment: string;
+    rate: number;
+  }) {
+    return axiosWithToken.post(PRODUCT_REVIEW, data);
   }
 }

@@ -6,6 +6,8 @@ export type IActiveModalContext = {
     | "search-modal"
     | "burger-menu"
     | "filter"
+    | "choose-rate-product"
+    | "rate-product"
     | null;
   setActiveModal: (n: IActiveModalContext["activeModal"]) => void;
   hideModal: () => void;
@@ -13,12 +15,6 @@ export type IActiveModalContext = {
 export const ActiveModalContext = createContext<IActiveModalContext>(
   {} as IActiveModalContext
 );
-
-// {
-//   activeModal: null,
-//   setActiveModal: () => {},
-//   hideModal: () => {}
-// }
 
 export const ActiveModalProvider: React.FC<{}> = ({ children }) => {
   const [state, setState] = useState<{

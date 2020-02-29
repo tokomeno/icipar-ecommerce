@@ -95,7 +95,7 @@ export const STATIC_PAGE = MAIN_BASE_URL + "/static-page/";
 
 // https://app.swaggerhub.com/apis-docs/badzaghua/iciparis-emails/1.0.0#/default/post_unsubscribe
 
-// https://app.swaggerhub.com/apis-docs/badzaghua/iciparis-orders/1.0.0?fbclid=IwAR1DwhigqS6yN4neWDGpmKrtQYDz6G1w1dJ2fp9_6ooQtbVuoxDrCo9n6WM
+// https://app.swaggerhub.com/apis-docs/badzaghua/iciparis-orders/1.0.0
 
 // Orders
 const ORDER_BASE_URL = "http://3.15.172.11/api";

@@ -10,11 +10,12 @@ import {
   ActiveModalContext
 } from "../../../contexts/modalContex";
 import { ChooseRateProductModal } from "./choose-rate-product-modal";
+import { OrderComplaintModal } from "./order-complaint-modal";
 
 interface OrdersProfilePageProps {}
 
 export const OrdersProfilePage: React.FC<OrdersProfilePageProps> = props => {
-  const { setActiveModal } = useContext<IActiveModalContext>(
+  const { setActiveModal, activeModal } = useContext<IActiveModalContext>(
     ActiveModalContext
   );
   const [orders, setOrders] = useState<null | IOrder[]>(null);
@@ -33,8 +34,12 @@ export const OrdersProfilePage: React.FC<OrdersProfilePageProps> = props => {
   }, []);
 
   const showRateProductModal = (order: IOrder) => {
-    setActiveModal("choose-rate-product");
     setRateOrder(order);
+    setActiveModal("choose-rate-product");
+  };
+  const showComplaintOrderModal = (order: IOrder) => {
+    setRateOrder(order);
+    setActiveModal("order-complaint");
   };
   if (!orders) return <ProfileSpinner />;
   return (
@@ -136,8 +141,7 @@ export const OrdersProfilePage: React.FC<OrdersProfilePageProps> = props => {
                         </button>
                         <button
                           className="complain"
-                          data-toggle="modal"
-                          data-target="#complaint"
+                          onClick={() => showComplaintOrderModal(order)}
                         >
                           {t("appeal")}
                         </button>
@@ -160,7 +164,12 @@ export const OrdersProfilePage: React.FC<OrdersProfilePageProps> = props => {
           </div>
         </div>
       </ProfileBasePage>
-      {rateOrder && <ChooseRateProductModal order={rateOrder} />}
+      {rateOrder && activeModal === "choose-rate-product" && (
+        <ChooseRateProductModal order={rateOrder} />
+      )}
+      {rateOrder && activeModal === "order-complaint" && (
+        <OrderComplaintModal order={rateOrder} />
+      )}
     </>
   );
 };

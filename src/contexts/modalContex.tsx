@@ -8,6 +8,7 @@ export type IActiveModalContext = {
     | "filter"
     | "choose-rate-product"
     | "rate-product"
+    | "order-complaint"
     | null;
   setActiveModal: (n: IActiveModalContext["activeModal"]) => void;
   hideModal: () => void;

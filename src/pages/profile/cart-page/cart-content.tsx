@@ -6,23 +6,27 @@ import {
   removeItem,
   decreaseItem,
   increaseItem,
-  removeGiftCart
+  removeGiftCart,
+  setBundleQntyToCart
 } from "../../../redux/cart/cartActions";
 import { CartItem } from "./cart-item";
 import { useTranslation } from "react-i18next";
 import { ICartState, ICartItem } from "../../../redux/cart/cartTypes";
 import { CartCoupon } from "./cart-coupon";
+import { CartBundel } from "./cart-bundel";
 
 interface CartContentProps {
   cartItems: ICartItem[];
   totalPrice: number;
-  removeItem: typeof removeItem;
   goToCheckout: () => void;
+  removeItem: typeof removeItem;
   increaseItem: typeof increaseItem;
   decreaseItem: typeof decreaseItem;
   loadingItemId: ICartState["loadingItemId"];
   new_gift_cards: ICartState["new_gift_cards"];
+  bundles: ICartState["bundles"];
   removeGiftCart: typeof removeGiftCart;
+  setBundleQntyToCart: typeof setBundleQntyToCart;
 }
 
 export const _CartContent: React.FC<CartContentProps> = ({
@@ -34,7 +38,9 @@ export const _CartContent: React.FC<CartContentProps> = ({
   goToCheckout,
   loadingItemId,
   new_gift_cards,
-  removeGiftCart
+  removeGiftCart,
+  bundles,
+  setBundleQntyToCart
 }) => {
   console.log(new_gift_cards);
   const { t } = useTranslation();
@@ -77,6 +83,12 @@ export const _CartContent: React.FC<CartContentProps> = ({
                   giftCard={giftcard}
                 />
               ))}
+              {bundles.map(bundle => (
+                <CartBundel
+                  setBundleQntyToCart={setBundleQntyToCart}
+                  bundle={bundle}
+                />
+              ))}
             </tbody>
           </table>
         </div>
@@ -115,7 +127,8 @@ const mapStateToProps = ({ cart }: IStoreState) => {
     cartItems: cart.items,
     totalPrice: cart.totalPrice,
     loadingItemId: cart.loadingItemId,
-    new_gift_cards: cart.new_gift_cards
+    new_gift_cards: cart.new_gift_cards,
+    bundles: cart.bundles
   };
 };
 
@@ -124,5 +137,6 @@ export const CartContent = connect(mapStateToProps, {
   removeItem,
   increaseItem,
   decreaseItem,
-  removeGiftCart
+  removeGiftCart,
+  setBundleQntyToCart
 })(_CartContent);

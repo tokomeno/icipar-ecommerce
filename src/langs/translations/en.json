@@ -114,6 +114,9 @@
     "online_coupon": "online_coupon",
     "adgilze_mitanit": "adgilze_mitanit",
     "add_to_cart": "add_to_cart",
-    "gift_card_added_in_cart": "gift_card_added_in_cart"
+    "gift_card_added_in_cart": "gift_card_added_in_cart",
+    "complaint_reason": "გასაჩივრების მიზეზი",
+    "please_explain_reason_in_details": "გთხოვთ დეტალურად აგვიხსნათ მიზეზი",
+    "share_your_mind": "გაგვიზიარე შენი აზრი"
   }
 }

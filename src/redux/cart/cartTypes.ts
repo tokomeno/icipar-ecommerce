@@ -14,12 +14,26 @@ export interface ICartState {
   itemsByKeys: { [key: number]: ICartItem | null };
   totalPrice: number;
   loadingItemId: number | null;
-  bundles: [];
+  bundles: ICartBundle[];
   original_amount: number | null;
   new_gift_cards: { amount: number; card_type: "DIGITAL" | "PHYSICAL" }[];
   errors: {
     new_gift_cards?: string | null;
   };
+}
+
+export interface ICartBundle {
+  title: null | string; //TODO: BACKEND
+  thumbnail: null | string; //TODO: BACKEND
+  bundle_id: number; //TODO: BACKEND
+  bundles_count: number;
+  bundle_price: number;
+  amount_payable: number;
+  items: {
+    title: string;
+    thumbnail: string;
+    original_price: number;
+  }[];
 }
 
 export enum CartActionsType {

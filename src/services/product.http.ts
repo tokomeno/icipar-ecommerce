@@ -4,7 +4,8 @@ import {
   FETCH_PRODUCT_URL,
   PRODUCT_BRANCH,
   FETCH_PRODUCTS_FILTER_DATA,
-  PRODUCT_REVIEW
+  PRODUCT_REVIEW,
+  FETCH_BUNDLE_FOR_ITEM
 } from "../api/endpoints";
 import { IProductFilterData } from "../hooks/useProductFilterAttributes";
 import { axiosWithToken } from "../api/axios-with-token";
@@ -19,6 +20,16 @@ export interface IProduct {
   price_min: number;
   price_max?: number;
   main_item_id: number;
+}
+
+export interface IProductBundle {
+  id: number;
+  price: number;
+  items: {
+    title: string;
+    thumbnail: string;
+    price: number;
+  }[];
 }
 
 export class ProductService {
@@ -44,5 +55,11 @@ export class ProductService {
     rate: number;
   }) {
     return axiosWithToken.post(PRODUCT_REVIEW, data);
+  }
+
+  static getBundleForItem(item_id: number) {
+    return axiosWithToken.get<{ data: IProductBundle }>(
+      FETCH_BUNDLE_FOR_ITEM + item_id
+    );
   }
 }

@@ -1,84 +1,85 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { ProductService, IProductBundle } from "../../services/product.http";
+import { diffInPercentage } from "../../utils";
+import { connect } from "react-redux";
+import { setBundleQntyToCart } from "../../redux/cart/cartActions";
+import { useLoader } from "../../hooks/common/useLoader";
 
-interface BundleProductProps {}
+interface BundleProductProps {
+  item_id: number;
+  toogleBundleToCart: typeof setBundleQntyToCart;
+}
 
-export const BundleProduct: React.FC<BundleProductProps> = props => {
+const _BundleProduct: React.FC<BundleProductProps> = ({
+  item_id,
+  toogleBundleToCart
+}) => {
   const { t } = useTranslation();
+  const { isLoading, startLoading, stopLoading } = useLoader();
+  const [bundle, setBundle] = useState<IProductBundle | null>(null);
+  useEffect(() => {
+    ProductService.getBundleForItem(item_id)
+      .then(res => setBundle(res.data.data))
+      .catch(err => {});
+  }, [item_id]);
+
+  if (!bundle) return null;
+  const oldTotalSum = bundle.items.reduce<number>((acc, b) => acc + b.price, 0);
   return (
     <div className="bundle-prod">
       <h3 className="title text-center">{t("ertad_iafi")}</h3>
       <div className="bundle-prod_cont d-flex align-items-center justify-content-md-center justify-content-start">
-        <div className="bundle-item d-flex flex-column align-items-center">
-          <div className="image d-flex align-items-center justify-content-center">
-            <img src="/assets/uploads/images/bundle1.png" alt="bundle" />
-          </div>
-          <div className="name">Calvin Klein All, 100ml</div>
-          <div className="bundle-price d-flex">
-            <div className="price old">
-              110
-              <sub>D</sub>
+        {bundle.items.map(item => (
+          <>
+            <div className="bundle-item d-flex flex-column align-items-center">
+              <div className="image d-flex align-items-center justify-content-center">
+                <img src={item.thumbnail} alt="bundle" />
+              </div>
+              <div className="name">{item.title}</div>
+              <div className="bundle-price d-flex">
+                {/* <div className="price old">
+                  {item.price}
+                  <sub>D</sub>
+                </div> */}
+                <div className="price">
+                  {item.price}
+                  <sub>D</sub>
+                </div>
+              </div>
             </div>
-            <div className="price">
-              110
-              <sub>D</sub>
+            <div className="plus">
+              <img src="/assets/images/plus.png" alt="" />
             </div>
-          </div>
-        </div>
-        <div className="plus">
-          <img src="/assets/images/plus.png" alt="" />
-        </div>
-        <div className="bundle-item d-flex flex-column align-items-center">
-          <div className="image d-flex align-items-center justify-content-center">
-            <img src="/assets/uploads/images/bundle2.png" alt="bundle" />
-          </div>
-          <div className="name">Calvin Klein All, 100ml</div>
-          <div className="bundle-price d-flex">
-            <div className="price old">
-              110
-              <sub>D</sub>
-            </div>
-            <div className="price">
-              110
-              <sub>D</sub>
-            </div>
-          </div>
-        </div>
-        <div className="plus">
-          <img src="/assets/images/plus.png" alt="" />
-        </div>
-        <div className="bundle-item d-flex flex-column align-items-center">
-          <div className="image d-flex align-items-center justify-content-center">
-            <img src="/assets/uploads/images/bundle3.png" alt="bundle" />
-          </div>
-          <div className="name">Calvin</div>
-          <div className="bundle-price d-flex">
-            <div className="price old">
-              110
-              <sub>D</sub>
-            </div>
-            <div className="price">
-              110
-              <sub>D</sub>
-            </div>
-          </div>
-        </div>
-        <div className="plus">
-          <img src="/assets/images/equal.png" alt="" />
-        </div>
+          </>
+        ))}
         <div className="equal-block">
           <div className="sum">
-            110
+            {bundle.price}
             <sub>D</sub>
           </div>
           <div className="sale-block d-flex">
-            <div className="sale">-70%</div>
+            <div className="sale">
+              -{Math.ceil(diffInPercentage(bundle.price, oldTotalSum))}%
+            </div>
             <div className="old-sum">
-              110
+              {oldTotalSum}
               <sub>D</sub>
             </div>
           </div>
-          <a href="#!" className="bag-btn d-flex">
+          <button
+            disabled={isLoading}
+            onClick={e => {
+              e.preventDefault();
+              startLoading();
+              toogleBundleToCart(
+                bundle.id || 1,
+                { action: "encrease" },
+                stopLoading
+              ); // TODO: bundle_id
+            }}
+            className="bag-btn d-flex disableOpacity"
+          >
             {t("cart")}
             <img src="/assets/images/arrow-right.svg" alt="arrow" />
             <img
@@ -86,9 +87,13 @@ export const BundleProduct: React.FC<BundleProductProps> = props => {
               alt="arrow"
               className="red"
             />
-          </a>
+          </button>
         </div>
       </div>
     </div>
   );
 };
+
+export const BundleProduct = connect(null, {
+  toogleBundleToCart: setBundleQntyToCart
+})(_BundleProduct);

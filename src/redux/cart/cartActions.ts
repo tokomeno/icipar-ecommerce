@@ -11,7 +11,8 @@ import {
   CART_TOGGLE,
   GET_CART,
   ADD_GIFT_CART_TO_CART,
-  REMOVE_GIFT_CART_TO_CART
+  REMOVE_GIFT_CART_TO_CART,
+  TOGGLE_BUNDLE_CART
 } from "../../api/endpoints";
 import { axiosWithToken } from "../../api/axios-with-token";
 import { AxiosResponse } from "axios";
@@ -110,7 +111,6 @@ export const addGiftCart: (
   error_cb: (m: IGiftCardErrors) => void
 ) => void = (requestData, success_cb, error_cb) => {
   return (dispatch: Dispatch) => {
-    dispatch(setCartErrors({}));
     axiosWithToken
       .post(ADD_GIFT_CART_TO_CART, requestData)
       .then(res => {
@@ -131,7 +131,6 @@ export const addGiftCart: (
 
 export const removeGiftCart: () => void = () => {
   return (dispatch: Dispatch) => {
-    dispatch(setCartErrors({}));
     axiosWithToken
       .post(REMOVE_GIFT_CART_TO_CART)
       .then(res => {
@@ -141,6 +140,40 @@ export const removeGiftCart: () => void = () => {
         });
       })
       .catch(err => console.error(err));
+  };
+};
+
+export const setBundleQntyToCart: (
+  bundle_id: number,
+  actionData: { action: "encrease" | "decrease" | "setNewQnty"; qnty?: number },
+  success_cb?: () => void
+) => void = (bundle_id, actionData, success_cb) => {
+  let qnty: number = actionData.qnty || 0;
+
+  if (actionData.action !== "setNewQnty") {
+    const currentBundle = store
+      .getState()
+      .cart.bundles.find(b => b.bundle_id === bundle_id);
+
+    qnty = currentBundle ? currentBundle.bundles_count : 0;
+    if (actionData.action === "encrease") qnty += 1;
+    if (actionData.action === "decrease") qnty -= 1;
+  }
+
+  return (dispatch: Dispatch) => {
+    axiosWithToken
+      .post(TOGGLE_BUNDLE_CART, {
+        bundle_id,
+        bundles_count: !qnty || qnty < 0 ? 0 : qnty
+      })
+      .then(res => {
+        dispatch<SetCartAction>({
+          type: CartActionsType.setCart,
+          payload: res.data.data
+        });
+        if (success_cb) success_cb();
+      })
+      .catch(err => {});
   };
 };
 

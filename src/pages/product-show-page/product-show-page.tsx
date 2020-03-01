@@ -70,7 +70,7 @@ const _ProducShowPage: React.FC<ProducShowPageProps> = ({
       />
       <div className="prod-content">
         <ProductContent details={product["details"]} brand={product["brand"]} />
-        <BundleProduct />
+        <BundleProduct item_id={activeItem.id} />
         <ProductSimpleSlider
           title={t("similar_products")}
           products={dummyProductData}

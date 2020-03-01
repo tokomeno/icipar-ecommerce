@@ -5,5 +5,6 @@ export const useSkipFirstEffect = (fn: Function, inputs: any[]) => {
   useEffect(() => {
     if (didMountRef.current) fn();
     else didMountRef.current = true;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, inputs);
 };

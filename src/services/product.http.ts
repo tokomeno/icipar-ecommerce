@@ -9,6 +9,18 @@ import {
 import { IProductFilterData } from "../hooks/useProductFilterAttributes";
 import { axiosWithToken } from "../api/axios-with-token";
 
+export interface IProduct {
+  id: number;
+  title: string;
+  qty: number;
+  thumbnail: string;
+  rating: number;
+  price?: number;
+  price_min: number;
+  price_max?: number;
+  main_item_id: number;
+}
+
 export class ProductService {
   static getById(productId: number | string) {
     return Axios.get<{ data: IProductWithItems }>(

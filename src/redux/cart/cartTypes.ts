@@ -1,4 +1,13 @@
-import { ICartItem } from "../../data/product";
+export interface ICartItem {
+  item_id: number;
+  items_count: number;
+  price: number;
+  original_price: number;
+  discount_rate: number;
+  thumbnail: string;
+  item_title: string;
+  amount_payable: number;
+}
 
 export interface ICartState {
   items: ICartItem[];
@@ -7,7 +16,7 @@ export interface ICartState {
   loadingItemId: number | null;
   bundles: [];
   original_amount: number | null;
-  new_gift_cards: { amount: number }[];
+  new_gift_cards: { amount: number; card_type: "DIGITAL" | "PHYSICAL" }[];
   errors: {
     new_gift_cards?: string | null;
   };

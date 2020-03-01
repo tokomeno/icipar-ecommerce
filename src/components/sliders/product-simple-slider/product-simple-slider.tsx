@@ -3,7 +3,7 @@ import { Product } from "../../product/product";
 import { SwiperCustomNavBtn } from "../../swiper/swiper-custom-nav-btn";
 import { useSliderNav } from "../../../hooks/common/useSliderNav";
 import Swiper from "react-id-swiper";
-import { IProduct } from "../../../data/product";
+import { IProduct } from "../../../services/product.http";
 
 interface ProductSimpleSliderProps {
   title: string;

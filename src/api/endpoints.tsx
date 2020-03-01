@@ -46,13 +46,15 @@ export const ALL_BRANDS = PRODUCT_BASE_URL + "/brands";
 export const PRODUCT_BRANCH = PRODUCT_BASE_URL + "/product-branches";
 export const GET_BRANCHES = PRODUCT_BASE_URL + "/branches-map";
 export const PRODUCT_REVIEW = PRODUCT_BASE_URL + "/product-reviews/store";
+export const FETCH_BUNDLE_FOR_ITEM = PRODUCT_BASE_URL + "/item-bundle?item_id=";
 
 // Cart
 // https://app.swaggerhub.com/apis-docs/badzaghua/iciparis-cart/1.0.0
 /////////////////////////////////
 const CART_BATH_URL = "http://13.59.255.224/api";
-export const CART_TOGGLE = CART_BATH_URL + "/toggle-item";
 export const GET_CART = CART_BATH_URL + "/get-cart";
+export const CART_TOGGLE = CART_BATH_URL + "/toggle-item";
+export const TOGGLE_BUNDLE_CART = CART_BATH_URL + "/toggle-bundle";
 
 export const ADD_GIFT_CART_TO_CART = CART_BATH_URL + "/new-gift-card/add";
 export const REMOVE_GIFT_CART_TO_CART = CART_BATH_URL + "/new-gift-card/remove";
@@ -100,6 +102,7 @@ export const STATIC_PAGE = MAIN_BASE_URL + "/static-page/";
 // Orders
 const ORDER_BASE_URL = "http://3.15.172.11/api";
 export const GET_ORDERS = ORDER_BASE_URL + "/orders";
+export const COMPLAINT_ORDER = ORDER_BASE_URL + "/complaint/store";
 
 // EMAIL
 const BASE_EMAIL_URL = "http://18.222.249.167/api";

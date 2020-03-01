@@ -1,7 +1,7 @@
 import React from "react";
-import { IProduct } from "../../data/product";
 import classnames from "classnames";
 import { NavLink } from "react-router-dom";
+import { IProduct } from "../../services/product.http";
 
 interface ProductSliderItemProps {
   product: IProduct;

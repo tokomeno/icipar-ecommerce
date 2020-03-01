@@ -1,12 +1,11 @@
 import React from "react";
-import { ICartItem } from "../../../data/product";
 import {
   removeItem,
   increaseItem,
   decreaseItem
 } from "../../../redux/cart/cartActions";
 import { useTranslation } from "react-i18next";
-import { ICartState } from "../../../redux/cart/cartTypes";
+import { ICartState, ICartItem } from "../../../redux/cart/cartTypes";
 import classnames from "classnames";
 
 export type CartItemProps = {
@@ -83,6 +82,14 @@ export const CartItem: React.FC<CartItemProps> = ({
           >
             <i className="fas fa-chevron-down" />
           </span>
+        </div>
+      </td>
+      <td className="price-td hidden-price">
+        <div className="price-block">
+          <div className="price text-right">
+            {cartItem.amount_payable}
+            <sub>D</sub>
+          </div>
         </div>
       </td>
       <td className="price-td hidden-price">

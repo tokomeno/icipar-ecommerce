@@ -1,23 +1,4 @@
-export interface IProduct {
-  id: number;
-  title: string;
-  qty: number;
-  thumbnail: string;
-  rating: number;
-  price?: number;
-  price_min: number;
-  price_max?: number;
-  main_item_id: number;
-}
-export interface ICartItem {
-  item_id: number;
-  items_count: number;
-  price: number;
-  original_price: number;
-  discount_rate: number;
-  thumbnail: string;
-  item_title: string;
-}
+import { IProduct } from "../services/product.http";
 
 export const dummyProductData: IProduct[] = [
   {

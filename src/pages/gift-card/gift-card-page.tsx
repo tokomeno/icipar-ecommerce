@@ -4,32 +4,33 @@ import { addGiftCart } from "../../redux/cart/cartActions";
 import { connect } from "react-redux";
 import { useInput } from "../../hooks/common/useInput";
 import { IStoreState } from "../../redux/mainReducer";
-import { useActiveState } from "../../hooks/common/useActiveState";
 import classnames from "classnames";
+import { ICartState } from "../../redux/cart/cartTypes";
 
+export interface IGiftCardErrors {
+  amount?: string[];
+  card_type?: string[];
+}
 interface GiftCardPageProps {
   addGiftCart: typeof addGiftCart;
   gift_cart_error: IStoreState["cart"]["errors"]["new_gift_cards"];
 }
 
-const _GiftCardPage: React.FC<GiftCardPageProps> = ({
-  addGiftCart,
-  gift_cart_error
-}) => {
+const _GiftCardPage: React.FC<GiftCardPageProps> = ({ addGiftCart }) => {
   const { t } = useTranslation();
   const { onChange, value: amount } = useInput();
-  const { activeState, setActiveState } = useActiveState<
-    "online_coupon" | "adgilze_mitanit" | null
-  >(null);
+  const [cartType, setCartType] = useState<
+    ICartState["new_gift_cards"][number]["card_type"]
+  >("DIGITAL");
 
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<IGiftCardErrors>({});
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const handleSubmit = () => {
-    if (!amount) return setErrorMessage(t("amount_filed_is_reqiured"));
-    setErrorMessage(null);
+    setErrorMessage({});
     addGiftCart(
-      parseInt(amount),
+      { amount: parseInt(amount), card_type: cartType as string },
+
       () => {
         setSuccessMessage(t("gift_card_added_in_cart"));
       },
@@ -49,8 +50,9 @@ const _GiftCardPage: React.FC<GiftCardPageProps> = ({
           onChange={onChange}
         />
         {successMessage && <p className="text-success">{successMessage}</p>}
-        {gift_cart_error && <p className="text-danger">{gift_cart_error}</p>}
-        {errorMessage && <p className="text-danger">{errorMessage}</p>}
+        {errorMessage.amount && (
+          <p className="text-danger">{errorMessage.amount}</p>
+        )}
         <div className="select">
           <div className="or-reg d-flex flex-column align-items-center justify-content-between">
             <span />
@@ -60,21 +62,24 @@ const _GiftCardPage: React.FC<GiftCardPageProps> = ({
           <button
             type="button"
             className={classnames("select-btn online", {
-              active: "online_coupon" === activeState
+              active: "DIGITAL" === cartType
             })}
-            onClick={() => setActiveState("online_coupon")}
+            onClick={() => setCartType("DIGITAL")}
           >
             {t("online_coupon")}
           </button>
           <button
             type="button"
             className={classnames("select-btn deliv", {
-              active: "adgilze_mitanit" === activeState
+              active: "PHYSICAL" === cartType
             })}
-            onClick={() => setActiveState("adgilze_mitanit")}
+            onClick={() => setCartType("PHYSICAL")}
           >
             {t("adgilze_mitanit")}
           </button>
+          {errorMessage.card_type && (
+            <p className="text-danger">{errorMessage.card_type}</p>
+          )}
         </div>
         <button type="button" onClick={handleSubmit} className="add">
           {t("add_to_cart")}
@@ -84,12 +89,4 @@ const _GiftCardPage: React.FC<GiftCardPageProps> = ({
   );
 };
 
-const mapStateToProps = ({ cart }: IStoreState) => {
-  return {
-    gift_cart_error: cart.errors.new_gift_cards
-  };
-};
-
-export const GiftCardPage = connect(mapStateToProps, { addGiftCart })(
-  _GiftCardPage
-);
+export const GiftCardPage = connect(null, { addGiftCart })(_GiftCardPage);

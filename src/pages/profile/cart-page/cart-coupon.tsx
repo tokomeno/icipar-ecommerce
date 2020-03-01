@@ -1,15 +1,16 @@
 import React from "react";
 import { removeGiftCart } from "../../../redux/cart/cartActions";
 import { useTranslation } from "react-i18next";
+import { ICartState } from "../../../redux/cart/cartTypes";
 
 export type CartItemProps = {
   removeGiftCart: typeof removeGiftCart;
-  amount: number;
+  giftCard: ICartState["new_gift_cards"][number];
 };
 
 export const CartCoupon: React.FC<CartItemProps> = ({
   removeGiftCart,
-  amount
+  giftCard
 }) => {
   const { t } = useTranslation();
 
@@ -21,7 +22,9 @@ export const CartCoupon: React.FC<CartItemProps> = ({
             {/* <img src={cartItem.thumbnail} alt="cart" /> */}
           </div>
           <div>
-            <div className="name">{t("gift_cart")}</div>
+            <div className="name">
+              {t(giftCard.card_type)} {t("gift_cart")}
+            </div>
             <div className="profbtns d-flex">
               <button onClick={() => removeGiftCart()} className="profbtns_btn">
                 {t("delete")}
@@ -43,7 +46,7 @@ export const CartCoupon: React.FC<CartItemProps> = ({
       <td className="price-td text-right">
         <div className="price-block">
           <div className="price sum">
-            {amount}
+            {giftCard.amount}
             <sub>D</sub>
           </div>
         </div>

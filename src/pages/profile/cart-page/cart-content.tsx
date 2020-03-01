@@ -10,8 +10,7 @@ import {
 } from "../../../redux/cart/cartActions";
 import { CartItem } from "./cart-item";
 import { useTranslation } from "react-i18next";
-import { ICartItem } from "../../../data/product";
-import { ICartState } from "../../../redux/cart/cartTypes";
+import { ICartState, ICartItem } from "../../../redux/cart/cartTypes";
 import { CartCoupon } from "./cart-coupon";
 
 interface CartContentProps {
@@ -56,6 +55,7 @@ export const _CartContent: React.FC<CartContentProps> = ({
               <tr>
                 <th>{t("products")}</th>
                 <th className="text-right">{t("quantity")}</th>
+                <th className="text-right">{t("amount_payble")}</th>
                 <th className="text-right">{t("price")}</th>
                 <th className="text-right">{t("sum")}</th>
               </tr>
@@ -74,7 +74,7 @@ export const _CartContent: React.FC<CartContentProps> = ({
               {new_gift_cards.map(giftcard => (
                 <CartCoupon
                   removeGiftCart={removeGiftCart}
-                  amount={giftcard.amount}
+                  giftCard={giftcard}
                 />
               ))}
             </tbody>

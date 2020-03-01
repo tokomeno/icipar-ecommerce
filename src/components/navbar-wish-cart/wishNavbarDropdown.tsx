@@ -1,10 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { ICartItem } from "../../data/product";
 import { useTranslation } from "react-i18next";
 import { MenuDropdown } from "./menu-dropdown";
 import { connect } from "react-redux";
 import { IStoreState } from "../../redux/mainReducer";
+import { ICartItem } from "../../redux/cart/cartTypes";
 
 interface WishNavbarDropdownProps {
   totalPrice: number;

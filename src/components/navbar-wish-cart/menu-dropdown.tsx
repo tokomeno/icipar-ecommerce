@@ -1,8 +1,8 @@
 import React from "react";
 import classnames from "classnames";
 import { Dropdown } from "react-bootstrap";
-import { ICartItem } from "../../data/product.js";
 import { DropdownItem } from "./item";
+import { ICartItem } from "../../redux/cart/cartTypes";
 
 interface IMenuDropdownProps {
   buttonChildren: React.ReactNode;

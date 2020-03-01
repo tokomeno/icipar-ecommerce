@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import classnames from "classnames";
 import Swiper from "react-id-swiper";
-import { IProduct } from "../../../data/product";
 import { useSliderNav } from "../../../hooks/common/useSliderNav";
 import { Product } from "../../product/product";
 import { SwiperCustomNavBtn } from "../../swiper/swiper-custom-nav-btn";
 import { axiosWithToken } from "../../../api/axios-with-token";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
+import { IProduct } from "../../../services/product.http";
 
 interface ProductSliderProps {
   fetchUrl?: string;

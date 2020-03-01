@@ -5,7 +5,6 @@ import React, {
   useCallback,
   useRef
 } from "react";
-import classnames from "classnames";
 import { PorductFilterContext } from "../../contexts/productFilterContext";
 import { useTranslation } from "react-i18next";
 import { useLocation, useHistory } from "react-router-dom";
@@ -13,11 +12,11 @@ import { routes } from "../../routes/routes";
 import { useInput } from "../../hooks/common/useInput";
 import { axiosWithToken } from "../../api/axios-with-token";
 import { PRODUCT_CATEGORIES, FETCH_PRODUCTS_URL } from "../../api/endpoints";
-import { IProduct } from "../../data/product";
 import { fetchProducts } from "../../hooks/useProducts/helper";
 import { NavLink } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
 import { useDeteckOutsideClick } from "../../hooks/common/useDeteckOutsideClick";
+import { IProduct } from "../../services/product.http";
 
 interface ICategory {
   id: number;

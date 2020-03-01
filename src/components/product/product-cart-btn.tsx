@@ -1,9 +1,9 @@
 import React from "react";
 import classnames from "classnames";
-import { ICartItem } from "../../data/product";
 import { connect } from "react-redux";
 import { IStoreState } from "../../redux/mainReducer";
 import { increaseItem } from "../../redux/cart/cartActions";
+import { ICartItem } from "../../redux/cart/cartTypes";
 
 interface ProductCartBtnProps {
   productId: number;

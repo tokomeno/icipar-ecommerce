@@ -3,9 +3,9 @@ import {
   SetCartAction,
   SetLoadingItemIdAction,
   ICartState,
-  SetErrorAction
+  SetErrorAction,
+  ICartItem
 } from "./cartTypes";
-import { ICartItem } from "../../data/product";
 import { Dispatch } from "redux";
 import {
   CART_TOGGLE,
@@ -16,6 +16,7 @@ import {
 import { axiosWithToken } from "../../api/axios-with-token";
 import { AxiosResponse } from "axios";
 import { store } from "../store";
+import { IGiftCardErrors } from "../../pages/gift-card/gift-card-page";
 
 export const fetchCart: Function = () => {
   return async (dispatch: Dispatch) => {
@@ -104,16 +105,14 @@ export const removeItem: (itemId: number) => void = (itemId: number) => {
 };
 
 export const addGiftCart: (
-  amount: number,
+  requestData: { amount: number; card_type: string },
   success_cb: Function,
-  error_cb: (m: string) => void
-) => void = (amount, success_cb, error_cb) => {
+  error_cb: (m: IGiftCardErrors) => void
+) => void = (requestData, success_cb, error_cb) => {
   return (dispatch: Dispatch) => {
     dispatch(setCartErrors({}));
     axiosWithToken
-      .post(ADD_GIFT_CART_TO_CART, {
-        amount
-      })
+      .post(ADD_GIFT_CART_TO_CART, requestData)
       .then(res => {
         dispatch<SetCartAction>({
           type: CartActionsType.setCart,
@@ -123,8 +122,8 @@ export const addGiftCart: (
       })
       .catch(err => {
         console.error(err.response.data);
-        if (Array.isArray(err.response.data.amount)) {
-          error_cb(err.response.data.amount.join(" "));
+        if (err.response.data) {
+          error_cb(err.response.data);
         }
       });
   };

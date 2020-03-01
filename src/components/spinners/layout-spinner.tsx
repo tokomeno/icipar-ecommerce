@@ -1,6 +1,5 @@
 import React from "react";
 
-import Spinner from "react-bootstrap/Spinner";
 import { BounceLoader } from "react-spinners";
 
 interface LayoutSpinnerProps {}

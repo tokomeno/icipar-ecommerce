@@ -1,4 +1,4 @@
-import { IProduct } from "../../data/product";
+import { IProduct } from "../../services/product.http";
 
 export interface FetchProductResponse {
   links: {

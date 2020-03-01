@@ -40,7 +40,7 @@ export const BlogShowPage: React.FC<BlogShowPageProps> = ({ match }) => {
                 <img src={blog.thumbnail} className="img-fluid" alt="blog" />
               </div>
             </div>
-            <div className="desc mt-20">{blog.excerpt}</div>}
+            <div className="desc mt-20">{blog.excerpt}</div>
           </div>
         </div>
       </div>

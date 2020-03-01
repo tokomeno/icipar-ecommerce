@@ -10,7 +10,10 @@ import { PorductFilterProvider } from "./contexts/productFilterContext";
 import { ActiveModalProvider } from "./contexts/modalContex";
 
 import "react-image-lightbox/style.css";
+import { setDefaultLang } from "./langsUtil";
 // import "bootstrap/dist/css/bootstrap.min.css";
+
+setDefaultLang();
 
 ReactDOM.render(
   <Provider store={store}>

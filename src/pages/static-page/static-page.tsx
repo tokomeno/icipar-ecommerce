@@ -22,7 +22,7 @@ export const StaticPage: React.FC<StaticPageProps> = ({ match }) => {
       .then(res => setPage(res.data.data))
       .catch(err => {
         alert("404");
-        console.log(err);
+        console.error(err);
       });
   }, [match.params.slug]);
   if (!page) return <LayoutSpinner />;

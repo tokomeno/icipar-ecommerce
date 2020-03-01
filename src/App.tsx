@@ -23,7 +23,7 @@ import { ProfilePage } from "./pages/profile/main/MainProfilePage";
 import { I18nextProvider } from "react-i18next";
 import i18next from "i18next";
 
-import "./langs//i18n";
+import "./langs/i18n";
 import { routes } from "./routes/routes";
 import { PrivateRoute } from "./routes/privateRoute";
 import { tryLocalAuth } from "./tryLocalAuth";

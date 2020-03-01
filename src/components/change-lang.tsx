@@ -1,16 +1,11 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 import i18next from "i18next";
+import { changeLanguage } from "../langsUtil";
 
 interface ChangeLangProps {}
 
 export const ChangeLang: React.FC<ChangeLangProps> = props => {
   const activeLang = i18next.languages ? i18next.languages[0] : "ka";
-  const { i18n } = useTranslation();
-  const changeLanguage = (lng: "ka" | "en") => {
-    i18n.changeLanguage(lng);
-    console.log("change lang", lng);
-  };
 
   return (
     <React.Fragment>

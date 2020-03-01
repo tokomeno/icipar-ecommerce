@@ -18,7 +18,6 @@ export const SET_USER_ADDRESSES = AUTH_BASE_URL + "/user/add-address";
 
 // Products
 // https://app.swaggerhub.com/apis-docs/badzaghua/iciparis-products/1.0.0
-/////////////////////////////////
 export const PRODUCT_BASE_URL = "http://3.18.107.107/api";
 export const FETCH_PRODUCTS_URL = PRODUCT_BASE_URL + "/products";
 export const FETCH_PRODUCTS_FILTER_DATA = PRODUCT_BASE_URL + "/product-filters";
@@ -50,7 +49,6 @@ export const FETCH_BUNDLE_FOR_ITEM = PRODUCT_BASE_URL + "/item-bundle?item_id=";
 
 // Cart
 // https://app.swaggerhub.com/apis-docs/badzaghua/iciparis-cart/1.0.0
-/////////////////////////////////
 const CART_BATH_URL = "http://13.59.255.224/api";
 export const GET_CART = CART_BATH_URL + "/get-cart";
 export const CART_TOGGLE = CART_BATH_URL + "/toggle-item";
@@ -59,12 +57,11 @@ export const TOGGLE_BUNDLE_CART = CART_BATH_URL + "/toggle-bundle";
 export const ADD_GIFT_CART_TO_CART = CART_BATH_URL + "/new-gift-card/add";
 export const REMOVE_GIFT_CART_TO_CART = CART_BATH_URL + "/new-gift-card/remove";
 
-/////////////////////////////////
+// Promotions
+// https://app.swaggerhub.com/apis-docs/badzaghua/iciparis-promotions/1.0
 const DISCOUNT_BASE_URL = "http://3.19.28.160/api";
-
 export const GIFT_CARD = DISCOUNT_BASE_URL + "/gift-cards";
 export const DISCOUNT_CARD = DISCOUNT_BASE_URL + "/discount-card";
-
 export const AMOUNT_COUPONS = DISCOUNT_BASE_URL + "/amount-coupons";
 export const DISCOUNT_COUPONS = DISCOUNT_BASE_URL + "/discount-coupons";
 
@@ -90,20 +87,14 @@ export const PRODUCT_DELIVERY_TERMS = MAIN_BASE_URL + "/term/delivery_terms";
 
 export const STATIC_PAGE = MAIN_BASE_URL + "/static-page/";
 
-// Promotions
-// https://app.swaggerhub.com/apis-docs/badzaghua/iciparis-promotions/1.0
-
-// https://app.swaggerhub.com/apis-docs/badzaghua/iciparis-emails/1.0.0#/default/post_unsubscribe
-
-// https://app.swaggerhub.com/apis-docs/badzaghua/iciparis-emails/1.0.0#/default/post_unsubscribe
-
-// https://app.swaggerhub.com/apis-docs/badzaghua/iciparis-orders/1.0.0
-
 // Orders
+// https://app.swaggerhub.com/apis-docs/badzaghua/iciparis-orders/1.0.0
 const ORDER_BASE_URL = "http://3.15.172.11/api";
 export const GET_ORDERS = ORDER_BASE_URL + "/orders";
 export const COMPLAINT_ORDER = ORDER_BASE_URL + "/complaint/store";
 
 // EMAIL
+// https://app.swaggerhub.com/apis-docs/badzaghua/iciparis-emails/1.0.0
 const BASE_EMAIL_URL = "http://18.222.249.167/api";
 export const SUBSCRIBE_EMAIL = BASE_EMAIL_URL + "/subscribe";
+export const SAVE_CONTACT = BASE_EMAIL_URL + "/contact";

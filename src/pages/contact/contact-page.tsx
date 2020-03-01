@@ -1,10 +1,64 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { PageSideMenu } from "../../components/pageSideMenu";
+import { EmailService } from "../../services/email.http";
+import { useInput } from "../../hooks/common/useInput";
+import { useErrors } from "../../hooks/common/useErrors";
+import { useTranslation } from "react-i18next";
+import { connect } from "react-redux";
+import { IStoreState } from "../../redux/mainReducer";
 
-interface ContactPageProps {}
+interface ContactPageProps {
+  contact_info: IStoreState["info"]["contact_info"];
+  socials: IStoreState["info"]["socials"];
+}
 
-export const ContactPage: React.FC<ContactPageProps> = props => {
+const _ContactPage: React.FC<ContactPageProps> = ({
+  contact_info,
+  socials
+}) => {
+  const { t } = useTranslation();
+  const facebook = socials.find(i => i.social === "facebook");
+  const google = socials.find(i => i.social === "google");
+  const instagram = socials.find(i => i.social === "instagram");
+  const [successMessage, setSuccessMessage] = useState<boolean>(false);
+
+  const emailHandler = useInput("");
+  const messageHandler = useInput("");
+  const phoneHandler = useInput("");
+  const nameHandler = useInput("");
+
+  const { errors, setErrors } = useErrors<{
+    email?: string[];
+    message?: string[];
+    name?: string[];
+    phone?: string[];
+  }>({});
+
+  const handleSubmit = () => {
+    EmailService.saveContact({
+      email: emailHandler.value,
+      message: messageHandler.value,
+      phone: phoneHandler.value,
+      name: nameHandler.value
+    })
+      .then(res => {
+        setErrors({});
+        emailHandler.onChange("");
+        messageHandler.onChange("");
+        phoneHandler.onChange("");
+        nameHandler.onChange("");
+        setSuccessMessage(true);
+      })
+      .catch(err => {
+        setSuccessMessage(false);
+        if (err.response.data && typeof err.response.data === "object") {
+          setErrors(err.response.data);
+        } else {
+          console.error(err);
+        }
+      });
+  };
   return (
     <>
       <div className="container">
@@ -13,60 +67,109 @@ export const ContactPage: React.FC<ContactPageProps> = props => {
           <div className="col-lg-9">
             <div className="right">
               <div className="top">
-                <h1 className="title">კონტაქტი</h1>
+                <h1 className="title">{t("contact")}</h1>
               </div>
               <div className="desc">
                 <div className="contact row">
                   <div className="col-md-6">
                     <form>
-                      <label htmlFor="name">სახელი</label>
-                      <input type="text" id="name" placeholder="დაიწყე წერა" />
-                      <label htmlFor="email">ელ. ფოსტა</label>
-                      <input type="text" id="email" placeholder="დაიწყე წერა" />
-                      <label htmlFor="mobile">ტელეფონი</label>
+                      <label htmlFor="name">{t("name")}</label>
                       <input
                         type="text"
-                        id="mobile"
-                        placeholder="დაიწყე წერა"
+                        id="name"
+                        {...nameHandler}
+                        placeholder=""
                       />
-                      <label htmlFor="text">ტექსტი</label>
-                      <textarea id="text" defaultValue={"დაიწყე წერა…"} />
+                      {errors.name && Array.isArray(errors.name) && (
+                        <p className="text-danger">{errors.name}</p>
+                      )}
+                      <label htmlFor="email">{t("email")}</label>
+                      <input
+                        {...emailHandler}
+                        type="text"
+                        id="email"
+                        placeholder=""
+                      />
+                      {errors.email && Array.isArray(errors.email) && (
+                        <p className="text-danger">{errors.email}</p>
+                      )}
+                      <label htmlFor="mobile">{t("phone")}</label>
+                      <input
+                        {...phoneHandler}
+                        type="text"
+                        id="mobile"
+                        placeholder=""
+                      />
+                      {errors.phone && Array.isArray(errors.phone) && (
+                        <p className="text-danger">{errors.phone}</p>
+                      )}
+                      <label htmlFor="text">{t("message")}</label>
+                      <textarea {...messageHandler} id="text" />
+                      {errors.message && Array.isArray(errors.message) && (
+                        <p className="text-danger">{errors.message}</p>
+                      )}
                       <div className="d-flex btns">
-                        <button className="send btn">გამოქვეყნება</button>
-                        <button className="cancel btn">გაუქმება</button>
+                        <button
+                          type="button"
+                          onClick={handleSubmit}
+                          className="send btn"
+                        >
+                          {t("submit")}
+                        </button>
+                        {/* <button
+                          type="button"
+                          onClick={handleSubmit}
+                          className="cancel btn"
+                        >
+                          გაუქმება
+                        </button> */}
                       </div>
+                      {successMessage && (
+                        <p className="text-success">
+                          {t("contact_success_message")}
+                        </p>
+                      )}
                     </form>
                   </div>
                   <div className="col-md-6 d-flex align-items-center flex-column">
-                    <a href="tel:+995322201717" className="contact-btn d-flex">
-                      <img src="images/contact-btn.svg" alt="" />+ 995 32 2 20
-                      17 17
+                    <a
+                      href={"tel:" + contact_info.phone}
+                      className="contact-btn d-flex"
+                    >
+                      <img src="images/contact-btn.svg" alt="" />
+                      {contact_info.phone}
                     </a>
                     <a
                       href="mailto:info@prestige.ge "
                       className="contact-btn d-flex"
                     >
                       <img src="images/email.svg" alt="" />
-                      info@prestige.ge
+                      {contact_info.email}
                     </a>
                     <div className="soc d-flex">
                       <a
-                        href="#!"
+                        href={facebook && facebook.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="soc-item d-flex align-items-center justify-content-center"
                       >
                         <i className="fab fa-facebook-f" />
                       </a>
                       <a
-                        href="#!"
+                        href={instagram && instagram.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="soc-item d-flex align-items-center justify-content-center"
                       >
                         <i className="fab fa-instagram" />
                       </a>
                       <a
-                        href="#!"
+                        href={google && google.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="soc-item d-flex align-items-center justify-content-center"
                       >
-                        <i className="fab fa-youtube" />
+                        <i className="fab fa-google" />
                       </a>
                     </div>
                   </div>
@@ -79,3 +182,11 @@ export const ContactPage: React.FC<ContactPageProps> = props => {
     </>
   );
 };
+const mapStateToProps = ({ info }: IStoreState) => {
+  return {
+    contact_info: info.contact_info,
+    socials: info.socials
+  };
+};
+
+export const ContactPage = connect(mapStateToProps)(_ContactPage);

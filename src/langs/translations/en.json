@@ -128,6 +128,13 @@
     "choose_product": "choose_product",
     "which_one_you_want_to_rate": "which_one_you_want_to_rate",
     "submit": "submit",
-    "cancel": "cancel"
+    "cancel": "cancel",
+    "amount_payble": "amount_payble",
+    "DIGITAL": "DIGITAL",
+    "gift_cart": "gift_cart",
+    "delivery": "delivery",
+    "free": "free",
+    "gadasaxdeli": "gadasaxdeli",
+    "coniniue_shopping": "coniniue shopping"
   }
 }

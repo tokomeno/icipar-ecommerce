@@ -54,7 +54,7 @@ export const RateProductModal: React.FC<RateProductModalProps> = ({ item }) => {
       </button>
 
       <div className="title">{t("rate")}</div>
-      <Rating onRateChange={r => setRate(r)} />
+      <Rating ratable={true} onRateChange={r => setRate(r)} />
       {errors.rate && <p className="text-danger">{errors.rate}</p>}
       <div className="line" />
       <form className="d-flex flex-column">

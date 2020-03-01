@@ -1,5 +1,5 @@
 import { axiosWithToken } from "../api/axios-with-token";
-import { GET_ORDERS, COMPLAINT_ORDER } from "../api/endpoints";
+import { GET_ORDERS, COMPLAINT_ORDER, CONFIRM_ORDER } from "../api/endpoints";
 
 interface Bundle {
   title: string;
@@ -36,5 +36,9 @@ export class OrderService {
     order_id: number;
   }) {
     return axiosWithToken.post(COMPLAINT_ORDER, requestData);
+  }
+
+  static complete() {
+    return axiosWithToken.post(CONFIRM_ORDER);
   }
 }

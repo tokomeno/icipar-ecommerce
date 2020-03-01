@@ -1,5 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { OrderService } from "../../../services/order.http";
 
 interface CartCheckoutForm {
   totalPrice: number;
@@ -10,6 +11,9 @@ export const CartCheckoutForm: React.FC<CartCheckoutForm> = ({
   showContent
 }) => {
   const { t } = useTranslation();
+  const handleSubmit = () => {
+    OrderService.complete();
+  };
   return (
     <div className="profile-right profile-side table-profile buy-cont checkout-buy active">
       <div className="profile-top d-none d-md-block">
@@ -73,7 +77,7 @@ export const CartCheckoutForm: React.FC<CartCheckoutForm> = ({
               110
               <sub>D</sub>
             </div> */}
-          <a href="#!" className="buy-btn">
+          <button onClick={handleSubmit} className="buy-btn">
             გადახდა
             <img src="/assets/images/arrow-right.svg" alt="arrow" />
             <img
@@ -81,7 +85,7 @@ export const CartCheckoutForm: React.FC<CartCheckoutForm> = ({
               alt="arrow"
               className="red-arrow"
             />
-          </a>
+          </button>
         </div>
       </div>
     </div>

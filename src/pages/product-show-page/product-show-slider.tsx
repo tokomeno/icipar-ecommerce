@@ -9,7 +9,7 @@ interface ProductShowSliderProps {
 
 const params = {
   slidesToShow: 1,
-  slidesToScroll: 3,
+  slidesToScroll: 1,
   arrows: false,
   fade: true,
   infinite: true

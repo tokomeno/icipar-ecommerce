@@ -18,11 +18,11 @@ export const BranchMap: React.FC<{ shops: IBranch[] }> = ({ shops }) => {
         }}
         defaultZoom={14}
       >
-        {shops.map((shop: any) => {
+        {shops.map((shop, index) => {
           return (
             <MyMarker
               shop={shop}
-              key={shop.id}
+              key={index}
               lat={parseFloat(shop.lat)}
               lng={parseFloat(shop.lng)}
             />

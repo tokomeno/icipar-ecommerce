@@ -9,7 +9,7 @@ interface RatingProps {
 
 export const Rating: React.FC<RatingProps> = ({
   rating = 0,
-  ratable = true,
+  ratable = false,
   onRateChange
 }) => {
   const [rate, setRate] = useState(rating);

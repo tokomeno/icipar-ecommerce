@@ -58,17 +58,8 @@ export const SectionSliders: React.FC<SectionSlidersProps> = () => {
                 wrapperClass="swiper-wrapper"
                 containerClass="swiper-container grid-item grid1-cont"
               >
-                {sliderSections.latest_product.map(sl => (
-                  <div
-                    key={
-                      sl.link +
-                      sl.title +
-                      sl.section_type +
-                      sl.subtitle +
-                      sl.image
-                    }
-                    className="swiper-slide"
-                  >
+                {sliderSections.latest_product.map((sl, i) => (
+                  <div key={i} className="swiper-slide">
                     <div
                       className="grid1"
                       onClick={() => {
@@ -100,11 +91,8 @@ export const SectionSliders: React.FC<SectionSlidersProps> = () => {
                     wrapperClass="swiper-wrapper"
                     containerClass="swiper-container grid-item row-item grid2-cont"
                   >
-                    {sliderSections.bundle.map(sl => (
-                      <div
-                        key={sl.link + sl.title + sl.image}
-                        className="swiper-slide"
-                      >
+                    {sliderSections.bundle.map((sl, i) => (
+                      <div key={i} className="swiper-slide">
                         <div
                           className="grid2"
                           onClick={() => {

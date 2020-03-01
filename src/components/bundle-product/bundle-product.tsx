@@ -30,8 +30,8 @@ const _BundleProduct: React.FC<BundleProductProps> = ({
     <div className="bundle-prod">
       <h3 className="title text-center">{t("ertad_iafi")}</h3>
       <div className="bundle-prod_cont d-flex align-items-center justify-content-md-center justify-content-start">
-        {bundle.items.map(item => (
-          <>
+        {bundle.items.map((item, index) => (
+          <React.Fragment key={index}>
             <div className="bundle-item d-flex flex-column align-items-center">
               <div className="image d-flex align-items-center justify-content-center">
                 <img src={item.thumbnail} alt="bundle" />
@@ -51,7 +51,7 @@ const _BundleProduct: React.FC<BundleProductProps> = ({
             <div className="plus">
               <img src="/assets/images/plus.png" alt="" />
             </div>
-          </>
+          </React.Fragment>
         ))}
         <div className="equal-block">
           <div className="sum">

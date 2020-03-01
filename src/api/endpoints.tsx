@@ -93,6 +93,8 @@ const ORDER_BASE_URL = "http://3.15.172.11/api";
 export const GET_ORDERS = ORDER_BASE_URL + "/orders";
 export const COMPLAINT_ORDER = ORDER_BASE_URL + "/complaint/store";
 
+export const CONFIRM_ORDER = ORDER_BASE_URL + "/confirm-order";
+
 // EMAIL
 // https://app.swaggerhub.com/apis-docs/badzaghua/iciparis-emails/1.0.0
 const BASE_EMAIL_URL = "http://18.222.249.167/api";

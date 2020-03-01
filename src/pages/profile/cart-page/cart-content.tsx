@@ -79,6 +79,7 @@ export const _CartContent: React.FC<CartContentProps> = ({
               ))}
               {new_gift_cards.map(giftcard => (
                 <CartCoupon
+                  key={giftcard.card_type}
                   removeGiftCart={removeGiftCart}
                   giftCard={giftcard}
                 />

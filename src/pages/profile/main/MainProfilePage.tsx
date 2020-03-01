@@ -88,7 +88,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ name }) => {
         <div>
           <div className="products d-flex flex-wrap">
             {dummyProductData.slice(1, 3).map(p => (
-              <Product wrapperClass="product" product={p} />
+              <Product key={p.id} wrapperClass="product" product={p} />
             ))}
           </div>
         </div>

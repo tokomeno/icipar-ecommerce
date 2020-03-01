@@ -164,9 +164,7 @@ export const OrdersProfilePage: React.FC<OrdersProfilePageProps> = props => {
           </div>
         </div>
       </ProfileBasePage>
-      {rateOrder && activeModal === "choose-rate-product" && (
-        <ChooseRateProductModal order={rateOrder} />
-      )}
+      {rateOrder && <ChooseRateProductModal order={rateOrder} />}
       {rateOrder && activeModal === "order-complaint" && (
         <OrderComplaintModal order={rateOrder} />
       )}

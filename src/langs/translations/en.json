@@ -117,6 +117,17 @@
     "gift_card_added_in_cart": "gift_card_added_in_cart",
     "complaint_reason": "გასაჩივრების მიზეზი",
     "please_explain_reason_in_details": "გთხოვთ დეტალურად აგვიხსნათ მიზეზი",
-    "share_your_mind": "გაგვიზიარე შენი აზრი"
+    "share_your_mind": "გაგვიზიარე შენი აზრი",
+    "appeal": "appeal",
+    "order_number": "order_number",
+    "processing": "processing",
+    "delivered": "delivered",
+    "order_history": "order_history",
+    "rate": "rate",
+    "enter_your_email": "enter_your_email",
+    "choose_product": "choose_product",
+    "which_one_you_want_to_rate": "which_one_you_want_to_rate",
+    "submit": "submit",
+    "cancel": "cancel"
   }
 }

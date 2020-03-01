@@ -15,7 +15,7 @@ export const CartBundel: React.FC<CartBundelProps> = ({
   setBundleQntyToCart
 }) => {
   const { t } = useTranslation();
-  const { isLoading, isNotLoading, startLoading, stopLoading } = useLoader();
+  const { isLoading, startLoading, stopLoading } = useLoader();
 
   return (
     <tr>

@@ -69,6 +69,7 @@ export const InfoProfilePage: React.FC<InfoProfilePageProps> = props => {
 
   useEffect(() => {
     setInputsFromOriginalData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [originalData]);
 
   useEffect(() => {

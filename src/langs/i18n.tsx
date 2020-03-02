@@ -14,7 +14,7 @@ i18n
     },
     lng: "ka",
     fallbackLng: "en",
-    debug: true,
+    debug: false,
     nonExplicitWhitelist: true,
     load: "languageOnly",
     whitelist: ["ka", "en"],

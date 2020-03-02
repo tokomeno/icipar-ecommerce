@@ -93,8 +93,8 @@ export const ProductSlider: React.FC<ProductSliderProps> = ({
 
   const { sliderNav, currentSliderIndex } = useSliderNav(products.length, 0);
 
-  if (!activeTabId) return null;
   console.log("render :" + title);
+  if (!activeTabId) return null;
   return (
     <section
       className={classnames("slider-section", classes.sectionClasses)}

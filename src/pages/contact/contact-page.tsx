@@ -21,19 +21,38 @@ const _ContactPage: React.FC<ContactPageProps> = ({
   const facebook = socials.find(i => i.social === "facebook");
   const google = socials.find(i => i.social === "google");
   const instagram = socials.find(i => i.social === "instagram");
-  const [successMessage, setSuccessMessage] = useState<boolean>(false);
-
-  const emailHandler = useInput("");
-  const messageHandler = useInput("");
-  const phoneHandler = useInput("");
-  const nameHandler = useInput("");
-
   const { errors, setErrors } = useErrors<{
     email?: string[];
     message?: string[];
     name?: string[];
     phone?: string[];
   }>({});
+  const [successMessage, setSuccessMessage] = useState<boolean>(false);
+
+  const emailHandler = useInput("", () => {
+    setErrors(prev => {
+      const { email, ...restPrev } = prev;
+      return restPrev;
+    });
+  });
+  const messageHandler = useInput("", () => {
+    setErrors(prev => {
+      const { message, ...restPrev } = prev;
+      return restPrev;
+    });
+  });
+  const phoneHandler = useInput("", () => {
+    setErrors(prev => {
+      const { phone, ...restPrev } = prev;
+      return restPrev;
+    });
+  });
+  const nameHandler = useInput("", () => {
+    setErrors(prev => {
+      const { name, ...restPrev } = prev;
+      return restPrev;
+    });
+  });
 
   const handleSubmit = () => {
     EmailService.saveContact({

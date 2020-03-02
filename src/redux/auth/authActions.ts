@@ -54,10 +54,7 @@ export const loginUser = ({
       .then(res => {
         const { user, token } = res.data;
         if (res.data.error) {
-          dispatch<SetAuthErrorAction>({
-            type: AuthActionTypes.setAuthErrors,
-            payload: { msg: "credentials_not_match" }
-          });
+          dispatch(setAuthErrors({ msg: "credentials_not_match" }));
           return;
         }
         dispatch<SetCurrentUserAction>(setCurrentUser({ user, token }));
@@ -84,10 +81,10 @@ export const registerUser = ({
   hideModal
 }: RegisterUserParams): Function => {
   return async (dispatch: Dispatch) => {
+    dispatch(setAuthErrors(null));
     axios
       .post<IUser>(API_REGISTER_URL, {
-        ...userData,
-        name: "asdf"
+        ...userData
       })
       .then(res => {
         const { user, token } = res.data;
@@ -100,6 +97,13 @@ export const registerUser = ({
       });
   };
 };
+
+export const setAuthErrors = (
+  errors: AuthState["errors"]
+): SetAuthErrorAction => ({
+  payload: errors,
+  type: AuthActionTypes.setAuthErrors
+});
 
 export interface LogoutUserAction {
   type: AuthActionTypes.logoutUser;
@@ -114,10 +118,7 @@ export const logoutUser = (): LogoutUserAction => {
 
 const catchLoginRegisterError = (err: any, dispatch: Dispatch) => {
   if (err.response && err.response.data && err.response.data.error) {
-    dispatch<SetAuthErrorAction>({
-      type: AuthActionTypes.setAuthErrors,
-      payload: err.response.data.error
-    });
+    dispatch(setAuthErrors(err.response.data.error));
   } else {
     alert("დაფიქსირდა შეცდომა");
   }

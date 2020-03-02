@@ -91,7 +91,7 @@ export const _Header: React.FC<HeaderProps> = ({ user, phone }) => {
                     {AboutPagesMenu.map(menu => (
                       <li key={menu.to}>
                         <Link to={menu.to} className="sup-hdr_link">
-                          {menu.title}
+                          {t(menu.title)}
                         </Link>
                       </li>
                     ))}

@@ -25,7 +25,7 @@ export const Product: React.FC<ProductProps> = ({
       <div className={wrapperClass + " fadeInOpacity"}>
         <div className="image">
           <Link to={`/product/${product.id}`} className="img">
-            <img src={product.thumbnail} alt="" />
+            <img style={{ maxHeight: "100%" }} src={product.thumbnail} alt="" />
           </Link>
           <div className="option d-flex justify-content-between align-items-center">
             <ProductRaiting rateNum={product.rating} starRate={1} />

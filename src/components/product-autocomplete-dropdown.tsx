@@ -33,7 +33,11 @@ export const ProductAutocompleteDropdown: React.FC<ProductAutocompleteDropdownPr
               className="d-flex align-items-center item"
             >
               <div className="image d-flex align-items-center justify-content-center">
-                <img src={product.thumbnail} alt="" />
+                <img
+                  style={{ maxHeight: "100%" }}
+                  src={product.thumbnail}
+                  alt=""
+                />
               </div>
               <div className="desc">
                 <div className="item-title">{product.title}</div>

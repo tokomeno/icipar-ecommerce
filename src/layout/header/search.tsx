@@ -11,11 +11,10 @@ import { useLocation, useHistory } from "react-router-dom";
 import { routes } from "../../routes/routes";
 import { useInput } from "../../hooks/common/useInput";
 import { FETCH_PRODUCTS_URL } from "../../api/endpoints";
-import { fetchProducts } from "../../hooks/useProducts/helper";
 import { NavLink } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
 import { useDeteckOutsideClick } from "../../hooks/common/useDeteckOutsideClick";
-import { IProduct } from "../../services/product.http";
+import { IProduct, ProductService } from "../../services/product.http";
 import { LayoutService, ICategory } from "../../services/layout.http";
 
 interface SearchProps {}
@@ -40,7 +39,7 @@ export const Search: React.FC<SearchProps> = props => {
       return;
     }
     const fetching = setTimeout(() => {
-      fetchProducts(
+      ProductService.fetchProducts(
         FETCH_PRODUCTS_URL,
         {
           keyword: keyword,

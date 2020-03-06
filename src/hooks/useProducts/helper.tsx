@@ -1,27 +1,8 @@
 import { IProductFilterRequestParameter } from "../../contexts/productFilterContext";
-import { FetchProductResponse, IProductFilterRequestParam } from "./types";
+import { IProductFilterRequestParam } from "./types";
 import queryString from "query-string";
-import axios from "axios";
 
-export const fetchProducts = (
-  url: string,
-  productFilterData: IProductFilterRequestParameter,
-  callback: (res: FetchProductResponse) => void
-): void => {
-  pushQueryParamsToUrl(productFilterData);
-  const filterParams = mapToRequestParams(productFilterData);
-  axios
-    .post<FetchProductResponse>(url, filterParams)
-    .then(res => {
-      callback(res.data);
-    })
-    .catch(err => {
-      console.log(err);
-      alert("error_occured");
-    });
-};
-
-const pushQueryParamsToUrl = (data: any[] | object) => {
+export const pushQueryParamsToUrl = (data: any[] | object) => {
   const q = queryString.stringify(data, { arrayFormat: "bracket" });
   let newurl =
     window.location.protocol +
@@ -32,7 +13,7 @@ const pushQueryParamsToUrl = (data: any[] | object) => {
   window.history.pushState({ path: newurl }, "", newurl);
 };
 
-const mapToRequestParams = (
+export const mapToRequestParams = (
   productFilter: IProductFilterRequestParameter
 ): IProductFilterRequestParam => {
   const res: IProductFilterRequestParam = {};

@@ -9,6 +9,12 @@ import {
 } from "../api/endpoints";
 import { IProductFilterData } from "../hooks/useProductFilterAttributes";
 import { axiosWithToken } from "../api/axios-with-token";
+import { IProductFilterRequestParameter } from "../contexts/productFilterContext";
+import { FetchProductResponse } from "../hooks/useProducts/types";
+import {
+  pushQueryParamsToUrl,
+  mapToRequestParams
+} from "../hooks/useProducts/helper";
 
 export interface IProduct {
   id: number;
@@ -61,5 +67,23 @@ export class ProductService {
     return axiosWithToken.get<{ data: IProductBundle }>(
       FETCH_BUNDLE_FOR_ITEM + item_id
     );
+  }
+
+  static fetchProducts(
+    url: string,
+    productFilterData: IProductFilterRequestParameter,
+    callback: (res: FetchProductResponse) => void
+  ): void {
+    pushQueryParamsToUrl(productFilterData);
+    const filterParams = mapToRequestParams(productFilterData);
+    axiosWithToken
+      .post<FetchProductResponse>(url, filterParams)
+      .then(res => {
+        callback(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+        alert("error_occured");
+      });
   }
 }

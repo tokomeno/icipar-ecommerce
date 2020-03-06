@@ -2,9 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { FETCH_PRODUCTS_URL } from "../../api/endpoints";
 import { IProductFilterRequestParameter } from "../../contexts/productFilterContext";
 import { FetchProductResponse } from "./types";
-import { fetchProducts } from "./helper";
 import { useToggle } from "../common/useToggle";
-import { IProduct } from "../../services/product.http";
+import { IProduct, ProductService } from "../../services/product.http";
 
 export enum ascOrDesc {
   asc = "asc",
@@ -27,7 +26,7 @@ export const useProducts = (
   const nextPage = () => {
     if (links && links.next) {
       startLoading();
-      fetchProducts(
+      ProductService.fetchProducts(
         links.next,
         productFilterData,
         ({ links, data }: FetchProductResponse) => {
@@ -51,7 +50,7 @@ export const useProducts = (
     }
     const fetching = setTimeout(() => {
       startLoading();
-      fetchProducts(
+      ProductService.fetchProducts(
         FETCH_PRODUCTS_URL,
         productFilterData,
         ({ links, data }: FetchProductResponse) => {

@@ -148,7 +148,7 @@ export const _Header: React.FC<HeaderProps> = ({ user, phone }) => {
               ))}
               <div className="header-menu_item">
                 <Link to="/gift-card" className="link">
-                  სასაჩუქრე ბარათი
+                  {t("gift_cart")}
                 </Link>
               </div>
 

@@ -5,7 +5,7 @@ import Swiper from "react-id-swiper";
 import { BlogSliderItem } from "./blog-slider-item";
 import { SwiperCustomNavBtn } from "../../swiper/swiper-custom-nav-btn";
 import { axiosWithToken } from "../../../api/axios-with-token";
-import { LATEST_BLOG_POSTS } from "../../../api/endpoints";
+import { HOMEPAGE_BLOG_POSTS } from "../../../api/endpoints";
 import { useTranslation } from "react-i18next";
 import { IBlogList } from "../../../services/blog.http";
 
@@ -40,7 +40,7 @@ export const BlogSlider: React.FC<BlogSliderProps> = () => {
 
   useEffect(() => {
     axiosWithToken
-      .get<{ data: IBlogList[] }>(LATEST_BLOG_POSTS)
+      .get<{ data: IBlogList[] }>(HOMEPAGE_BLOG_POSTS)
       .then(res => {
         setBlogs(res.data.data);
       })

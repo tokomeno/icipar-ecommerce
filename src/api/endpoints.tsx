@@ -22,9 +22,6 @@ export const PRODUCT_BASE_URL = "http://3.18.107.107/api";
 export const FETCH_PRODUCTS_URL = PRODUCT_BASE_URL + "/products";
 export const FETCH_PRODUCTS_FILTER_DATA = PRODUCT_BASE_URL + "/product-filters";
 
-export const PRODUCT_CATEGORIES =
-  PRODUCT_BASE_URL + "/layout/product-categories";
-
 export const FETCH_PRODUCT_URL = PRODUCT_BASE_URL + "/product";
 
 export const FETCH_BESTSELLER_PRODUCTS =
@@ -46,6 +43,13 @@ export const PRODUCT_BRANCH = PRODUCT_BASE_URL + "/product-branches";
 export const GET_BRANCHES = PRODUCT_BASE_URL + "/branches-map";
 export const PRODUCT_REVIEW = PRODUCT_BASE_URL + "/product-reviews/store";
 export const FETCH_BUNDLE_FOR_ITEM = PRODUCT_BASE_URL + "/item-bundle?item_id=";
+export const PRODUCT_OTHERS_BOUGHT =
+  PRODUCT_BASE_URL + "/featured-products/others-bought";
+
+// LAYOUT
+export const PRODUCT_CATEGORIES =
+  PRODUCT_BASE_URL + "/layout/product-categories";
+export const LAYOUT_BRNADS = PRODUCT_BASE_URL + "layout/brands?category_id=";
 
 // Cart
 // https://app.swaggerhub.com/apis-docs/badzaghua/iciparis-cart/1.0.0
@@ -73,7 +77,8 @@ const MAIN_BASE_URL = "http://18.188.27.23/api";
 export const BLOG_SHOW = MAIN_BASE_URL + "/blog/post/";
 export const FETCH_BLOGS = MAIN_BASE_URL + "/blog";
 
-export const LATEST_BLOG_POSTS = MAIN_BASE_URL + "/homepage/latest-blog-posts";
+export const HOMEPAGE_BLOG_POSTS =
+  MAIN_BASE_URL + "/homepage/latest-blog-posts";
 
 export const FETCH_TESTIMONIALS = MAIN_BASE_URL + "/homepage/testimonials";
 
@@ -81,11 +86,13 @@ export const MAIN_CAROUSEL = MAIN_BASE_URL + "/homepage/carousel-items";
 
 export const MAIN_SECITIONS = MAIN_BASE_URL + "/homepage/mainpage-sections";
 
-export const ADDITIONAL_INFO = MAIN_BASE_URL + "/layout/additional-info";
-
 export const PRODUCT_DELIVERY_TERMS = MAIN_BASE_URL + "/term/delivery_terms";
 
 export const STATIC_PAGE = MAIN_BASE_URL + "/static-page/";
+
+// LAYOUT
+export const ADDITIONAL_INFO = MAIN_BASE_URL + "/layout/additional-info";
+export const LAYTEST_BLOG_POST = MAIN_BASE_URL + "/layout/latest-blog-post";
 
 // Orders
 // https://app.swaggerhub.com/apis-docs/badzaghua/iciparis-orders/1.0.0

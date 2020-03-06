@@ -10,18 +10,13 @@ import { useTranslation } from "react-i18next";
 import { useLocation, useHistory } from "react-router-dom";
 import { routes } from "../../routes/routes";
 import { useInput } from "../../hooks/common/useInput";
-import { axiosWithToken } from "../../api/axios-with-token";
-import { PRODUCT_CATEGORIES, FETCH_PRODUCTS_URL } from "../../api/endpoints";
+import { FETCH_PRODUCTS_URL } from "../../api/endpoints";
 import { fetchProducts } from "../../hooks/useProducts/helper";
 import { NavLink } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
 import { useDeteckOutsideClick } from "../../hooks/common/useDeteckOutsideClick";
 import { IProduct } from "../../services/product.http";
-
-interface ICategory {
-  id: number;
-  title: string;
-}
+import { LayoutService, ICategory } from "../../services/layout.http";
 
 interface SearchProps {}
 
@@ -29,9 +24,7 @@ export const Search: React.FC<SearchProps> = props => {
   const { t } = useTranslation();
   const location = useLocation();
   const history = useHistory();
-  const { setProductFilterData, productFilterData } = useContext(
-    PorductFilterContext
-  );
+  const { setProductFilterData } = useContext(PorductFilterContext);
   const { value: keyword, onChange: setKeyword } = useInput("");
   const [products, setProducts] = useState<IProduct[]>([]);
   const [categories, setCategories] = useState<ICategory[]>([]);
@@ -40,19 +33,6 @@ export const Search: React.FC<SearchProps> = props => {
   const reserProducts = useCallback(() => {
     setProducts([]);
   }, [setProducts]);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (location.pathname === routes.catalog) {
-      const value = e.target.value;
-      setProductFilterData(prevState => ({
-        ...prevState,
-        keyword: value
-      }));
-    }
-    if (location.pathname !== routes.catalog) {
-      setKeyword(e.target.value);
-    }
-  };
 
   useEffect(() => {
     if (!keyword || keyword.length === 0) {
@@ -76,12 +56,6 @@ export const Search: React.FC<SearchProps> = props => {
     };
   }, [keyword, activeTab]);
 
-  const getKeywordValue = () => {
-    return location.pathname === routes.catalog
-      ? productFilterData.keyword
-      : keyword;
-  };
-
   const handleSubmit = () => {
     if (location.pathname === routes.catalog) return;
     setProductFilterData(prevState => ({
@@ -92,8 +66,7 @@ export const Search: React.FC<SearchProps> = props => {
   };
 
   useEffect(() => {
-    axiosWithToken
-      .get<{ data: ICategory[] }>(PRODUCT_CATEGORIES)
+    LayoutService.productCategories()
       .then(res => {
         setCategories(res.data.data);
       })
@@ -148,8 +121,8 @@ export const Search: React.FC<SearchProps> = props => {
           type="text"
           className="search-input"
           placeholder={t("enter_search_word")}
-          value={getKeywordValue()}
-          onChange={handleChange}
+          value={keyword}
+          onChange={setKeyword}
         />
         <button onClick={handleSubmit} type="button" className="search-btn">
           <i className="fas fa-search" />

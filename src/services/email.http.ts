@@ -11,7 +11,12 @@ export class EmailService {
     message: string;
     phone: string;
     name: string;
+    recaptcha_token: string;
   }) {
-    return Axios.post(SAVE_CONTACT, requestData);
+    console.log(requestData);
+    return Axios.post(SAVE_CONTACT, {
+      ...requestData,
+      "g-recaptcha-response": requestData.recaptcha_token
+    });
   }
 }

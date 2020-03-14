@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useCallback } from "react";
-import { productCategories } from "../../data/categories";
+import React, { useContext, useEffect, useCallback, useState } from "react";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import {
   IActiveModalContext,
@@ -15,6 +14,11 @@ import { AboutPagesMenu } from "../../components/pageSideMenu";
 import { CartNavbarDropdown } from "../../components/navbar-wish-cart/cartNavbarDropdown";
 import { WishNavbarDropdown } from "../../components/navbar-wish-cart/wishNavbarDropdown";
 import { connect } from "react-redux";
+import {
+  LayoutService,
+  ICategory,
+  IMenuCatrogy
+} from "../../services/layout.http";
 
 interface HeaderProps {
   user: IStoreState["auth"]["user"];
@@ -27,6 +31,9 @@ export const _Header: React.FC<HeaderProps> = ({ user, phone }) => {
   const { setActiveModal, activeModal, hideModal } = useContext<
     IActiveModalContext
   >(ActiveModalContext);
+  const [menu, setMenu] = useState<IMenuCatrogy[]>([]);
+  const [dailyOffer, setDailyOffer] = useState<any>({});
+  const [latestBlogPost, setLatestBlogPost] = useState<any>({});
 
   const { isActive, toggle, setActive, setInActive } = useToggle(false);
 
@@ -47,6 +54,18 @@ export const _Header: React.FC<HeaderProps> = ({ user, phone }) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [toggle, handleScroll]);
+
+  useEffect(() => {
+    LayoutService.productCategories().then(res => {
+      setMenu(res.data.data);
+    });
+    LayoutService.dailyOffer().then(res => {
+      setDailyOffer(res.data.data);
+    });
+    LayoutService.latestBlog().then(res => {
+      setLatestBlogPost(res.data.data);
+    });
+  }, []);
 
   return (
     <React.Fragment>
@@ -121,7 +140,6 @@ export const _Header: React.FC<HeaderProps> = ({ user, phone }) => {
                       {t("register")}/{t("login")}
                     </a>
                   )}
-
                   <ChangeLang />
                 </div>
               </div>
@@ -136,15 +154,20 @@ export const _Header: React.FC<HeaderProps> = ({ user, phone }) => {
                 <Search />
                 <div className="col-md-2 d-flex align-items-center justify-content-end">
                   <CartNavbarDropdown />
-                  <WishNavbarDropdown />
+                  {/* <WishNavbarDropdown /> */}
                 </div>
               </div>
             </div>
           </div>
           <div className="container d-none d-lg-block">
             <div className="header-menu d-flex justify-content-between">
-              {productCategories.map(item => (
-                <HeaderMenuItem key={item.id} title={item.title} />
+              {menu.map(item => (
+                <HeaderMenuItem
+                  latestBlogPost={latestBlogPost}
+                  dailyOffer={dailyOffer}
+                  key={item.id}
+                  item={item}
+                />
               ))}
               <div className="header-menu_item">
                 <Link to="/gift-card" className="link">
@@ -223,96 +246,51 @@ const mapStateToProps = ({ info }: IStoreState) => {
 export const Header = connect(mapStateToProps)(_Header);
 
 type HeaderMenuItemProps = {
-  title: string;
+  item: IMenuCatrogy;
+  dailyOffer: any;
+  latestBlogPost: any;
+  // brands: IBrandSliderItem[];
 };
-const HeaderMenuItem: React.FC<HeaderMenuItemProps> = ({ title }) => {
+const HeaderMenuItem: React.FC<HeaderMenuItemProps> = ({
+  item,
+  dailyOffer,
+  latestBlogPost
+}) => {
+  const { t } = useTranslation();
   return (
     <div className="header-menu_item">
       <a href="#!" className="link">
-        {title}
+        {item.title}
       </a>
-      {/* <div className="inner-menu">
+      <div className="inner-menu">
         <div className="container">
           <div className="d-flex">
             <div className="inner-menu_block categories">
-              <div className="title">კატეგორიები</div>
+              <div className="title">{t("categories")}</div>
               <div className="items">
-                <a href="#!" className="items-link">
-                  მამაკაცი
-                </a>
-                <a href="#!" className="items-link">
-                  ქალი
-                </a>
-                <a href="#!" className="items-link">
-                  სიახლე
-                </a>
+                <NavLink to="#!" className="items-link">
+                  {t("man")}
+                </NavLink>
+                <NavLink to="#!" className="items-link">
+                  {t("women")}
+                </NavLink>
+                <NavLink to="#!" className="items-link">
+                  {t("news")}
+                </NavLink>
               </div>
             </div>
             <div className="inner-menu_block categories">
-              <div className="title">ბრენდები</div>
-              <div className="items">
-                <div className="letter">A</div>
-                <a href="#!" className="letter-link">
-                  Aguilera
-                </a>
-                <a href="#!" className="letter-link">
-                  Armani
-                </a>
-                <a href="#!" className="letter-link">
-                  Antonio Banderas
-                </a>
-                <a href="#!" className="letter-link">
-                  Arno Sorel
-                </a>
-                <a href="#!" className="letter-link">
-                  Avene
-                </a>
-                <div className="letter">B</div>
-                <a href="#!" className="letter-link">
-                  Barbara Gould
-                </a>
-                <a href="#!" className="letter-link">
-                  Beneton
-                </a>
-                <a href="#!" className="letter-link">
-                  Bruno Banani
-                </a>
-                <a href="#!" className="letter-link">
-                  Burberry
-                </a>
-                <a href="#!" className="letter-link">
-                  Bvlgari
-                </a>
-                <div className="letter">C</div>
-                <a href="#!" className="letter-link">
-                  Chanel
-                </a>
-                <a href="#!" className="letter-link">
-                  Calvin Klein
-                </a>
-                <a href="#!" className="letter-link">
-                  Chanel
-                </a>
-                <a href="#!" className="letter-link">
-                  Calvin Klein
-                </a>
-                <div className="letter">A</div>
-                <a href="#!" className="letter-link">
-                  Aguilera
-                </a>
-                <a href="#!" className="letter-link">
-                  Armani
-                </a>
-                <a href="#!" className="letter-link">
-                  Antonio Banderas
-                </a>
-                <a href="#!" className="letter-link">
-                  Arno Sorel
-                </a>
-                <a href="#!" className="letter-link">
-                  Avene
-                </a>
-              </div>
+              <div className="title">{t("brands")}</div>
+              {Object.keys(item.brands).map(brandLatter => (
+                <div className="items">
+                  <div className="letter">{brandLatter}</div>
+                  {item.brands[brandLatter].map(b => (
+                    <NavLink to={"/all-brands#" + brandLatter} className="letter-link">
+                      {b.name}
+                    </NavLink>
+                  ))}
+                </div>
+              ))}
             </div>
             <div className="suggestion left">
               <div className="title">დღის შეთავაზება</div>
@@ -337,8 +315,11 @@ const HeaderMenuItem: React.FC<HeaderMenuItemProps> = ({ title }) => {
               </a>
             </div>
             <div className="suggestion">
-              <div className="title">ბლოგ ბოსტი</div>
-              <a href="#!" className="d-flex align-items-center flex-column">
+              <div className="title">{t("blog_post")}</div>
+              <NavLink
+                to="#!"
+                className="d-flex align-items-center flex-column"
+              >
                 <div className="image">
                   <img
                     src="/assets/uploads/images/suggestion2.png"
@@ -346,12 +327,11 @@ const HeaderMenuItem: React.FC<HeaderMenuItemProps> = ({ title }) => {
                   />
                 </div>
                 <div className="prod-name">სუნამოს შერჩევის ხელოვნება</div>
-              </a>
+              </NavLink>
             </div>
           </div>
         </div>
       </div>
-     */}
     </div>
   );
 };

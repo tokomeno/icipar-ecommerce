@@ -58,13 +58,10 @@ export const CatalogPage: React.FC<CatalogPageProps> = () => {
               {!isLoading && products.length === 0 && (
                 <h2 className="h2 text-center">{t("products_not_found")}</h2>
               )}
-              {!isLoading ? (
-                products.map(p => (
-                  <Product key={p.id} product={p} wrapperClass="catalog-item" />
-                ))
-              ) : (
-                <ProductContetnLoader items={15} />
-              )}
+              {products.map(p => (
+                <Product key={p.id} product={p} wrapperClass="catalog-item" />
+              ))}
+              {isLoading && <ProductContetnLoader items={15} />}
             </div>
             {haveNextPage && (
               <div className="d-flex justify-content-center">

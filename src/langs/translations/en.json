@@ -138,6 +138,7 @@
     "coniniue_shopping": "Continue shopping",
     "mamakaci": "man",
     "women": "women",
-    "blog_post": "blog post"
+    "blog_post": "blog post",
+    "recaptcha_is_not_valid": "recaptcha_is_not_valid"
   }
 }

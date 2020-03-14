@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import { HomePage } from "./pages/home/home-page";
 import { AboutUsPage } from "./pages/about-us/about-us-page";
@@ -34,6 +34,8 @@ import { store } from "./redux/store";
 import { fetch_Social_ContactInfo_Branches } from "./redux/info/infoActions";
 import { StaticPage } from "./pages/static-page/static-page";
 import { Layout } from "./layout";
+import { loadReCaptcha } from "react-recaptcha-v3";
+import { RECAPTCHA_SITE_KEY } from "./consts/services";
 
 export const HistoryContext = React.createContext<History>(
   (null as any) as History
@@ -49,7 +51,10 @@ export interface match<P> {
 tryLocalAuth();
 store.dispatch(fetch_Social_ContactInfo_Branches() as any);
 
-const App: React.FC<{}> = props => {
+const App: React.FC<{}> = () => {
+  useEffect(() => {
+    loadReCaptcha(RECAPTCHA_SITE_KEY);
+  }, []);
   return (
     <I18nextProvider i18n={i18next}>
       <BrowserRouter>

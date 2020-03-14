@@ -8,6 +8,9 @@ import { useTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { IStoreState } from "../../redux/mainReducer";
 
+import { ReCaptcha } from "react-recaptcha-v3";
+import { RECAPTCHA_SITE_KEY } from "../../consts/services";
+import { useCaptcha } from "../../hooks/useCaptcha";
 interface ContactPageProps {
   contact_info: IStoreState["info"]["contact_info"];
   socials: IStoreState["info"]["socials"];
@@ -26,8 +29,10 @@ const _ContactPage: React.FC<ContactPageProps> = ({
     message?: string[];
     name?: string[];
     phone?: string[];
+    recaptcha_token?: string[];
   }>({});
   const [successMessage, setSuccessMessage] = useState<boolean>(false);
+  const myCaptcha = useCaptcha();
 
   const emailHandler = useInput("", () => {
     setErrors(prev => {
@@ -59,7 +64,8 @@ const _ContactPage: React.FC<ContactPageProps> = ({
       email: emailHandler.value,
       message: messageHandler.value,
       phone: phoneHandler.value,
-      name: nameHandler.value
+      name: nameHandler.value,
+      recaptcha_token: myCaptcha.recaptcha_token
     })
       .then(res => {
         setErrors({});
@@ -127,6 +133,21 @@ const _ContactPage: React.FC<ContactPageProps> = ({
                       {errors.message && Array.isArray(errors.message) && (
                         <p className="text-danger">{errors.message}</p>
                       )}
+
+                      <ReCaptcha
+                        sitekey={RECAPTCHA_SITE_KEY}
+                        action="contact"
+                        verifyCallback={token => {
+                          myCaptcha.setRecaptchaToken(token);
+                        }}
+                      />
+                      {errors.recaptcha_token &&
+                        Array.isArray(errors.recaptcha_token) && (
+                          <p className="text-danger">
+                            {errors.recaptcha_token}
+                          </p>
+                        )}
+
                       <div className="d-flex btns">
                         <button
                           type="button"

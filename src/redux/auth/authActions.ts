@@ -39,8 +39,9 @@ export const setCurrentUser = ({
 
 interface LoginUserParams {
   userData: {
-    email: string;
+    username: string;
     password: string;
+    recaptcha_token: string | null;
   };
   hideModal: () => void;
 }
@@ -49,8 +50,20 @@ export const loginUser = ({
   hideModal
 }: LoginUserParams): Function => {
   return async (dispatch: Dispatch) => {
+    if (!userData.recaptcha_token) {
+      dispatch(
+        setAuthErrors({
+          "g-recaptcha-response": ["recaptcha is not valid"],
+          msg: "recaptcha is not valid"
+        })
+      );
+      return;
+    }
     axios
-      .post<IUser>(API_LOGIN_URL, userData)
+      .post<IUser>(API_LOGIN_URL, {
+        ...userData,
+        "g-recaptcha-response": userData.recaptcha_token
+      })
       .then(res => {
         const { user, token } = res.data;
         if (res.data.error) {
@@ -73,6 +86,7 @@ interface RegisterUserParams {
     phone: string;
     password: string;
     password_confirmation: string;
+    recaptcha_token: string | null;
   };
   hideModal: () => void;
 }
@@ -81,10 +95,19 @@ export const registerUser = ({
   hideModal
 }: RegisterUserParams): Function => {
   return async (dispatch: Dispatch) => {
-    dispatch(setAuthErrors(null));
+    if (!userData.recaptcha_token) {
+      dispatch(
+        setAuthErrors({
+          "g-recaptcha-response": ["recaptcha is not valid"],
+          msg: "recaptcha is not valid"
+        })
+      );
+      return;
+    }
     axios
       .post<IUser>(API_REGISTER_URL, {
-        ...userData
+        ...userData,
+        "g-recaptcha-response": userData.recaptcha_token
       })
       .then(res => {
         const { user, token } = res.data;

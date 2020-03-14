@@ -7,6 +7,9 @@ import { registerUser } from "../../redux/auth/authActions";
 import { IStoreState } from "../../redux/mainReducer";
 import { AuthState } from "../../redux/auth/authTypes";
 import { useTranslation } from "react-i18next";
+import { useCaptcha } from "../../hooks/useCaptcha";
+import { ReCaptcha } from "react-recaptcha-v3";
+import { RECAPTCHA_SITE_KEY } from "../../consts/services";
 
 interface RegisterFormProps {
   showLoginForm: () => void;
@@ -24,17 +27,22 @@ const _RegisterForm: React.FC<RegisterFormProps> = ({
   hideModal
 }) => {
   const { t } = useTranslation();
+  const myCaptcha = useCaptcha();
   const handleSubmit = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     event.preventDefault();
-    const userData = {
-      email,
-      password,
-      password_confirmation,
-      phone
-    };
-    registerUser({ userData, hideModal });
+    registerUser({
+      userData: {
+        email,
+        password,
+        password_confirmation,
+        phone,
+        recaptcha_token: myCaptcha.recaptcha_token
+      },
+      hideModal
+    });
+    myCaptcha.captchaRef.current.execute();
   };
 
   const { value: email, onChange: setEmail } = useInput("");
@@ -51,6 +59,9 @@ const _RegisterForm: React.FC<RegisterFormProps> = ({
         { active: isActive }
       )}
     >
+      {errors && errors["g-recaptcha-response"] && (
+        <p className="text-danger">{errors["g-recaptcha-response"][0]}</p>
+      )}
       <AuthInput
         iconPath="/assets/images/form-user.svg"
         onChange={setEmail}
@@ -93,6 +104,14 @@ const _RegisterForm: React.FC<RegisterFormProps> = ({
           errors.password_confirmation &&
           errors.password_confirmation[0]
         }
+      />
+      <ReCaptcha
+        sitekey={RECAPTCHA_SITE_KEY}
+        action="register"
+        verifyCallback={token => {
+          myCaptcha.setRecaptchaToken(token);
+        }}
+        ref={myCaptcha.captchaRef}
       />
 
       <div className="btn-block d-flex align-items-center justify-content-end">

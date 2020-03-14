@@ -3,10 +3,15 @@ import {
   LAYTEST_BLOG_POST,
   LAYOUT_BRNADS,
   PRODUCT_CATEGORIES,
-  DAYLY_OFFER
+  DAYLY_OFFER,
+  GETBANNER
 } from "../api/endpoints";
 import { IBrandSliderItem } from "../data/brands";
 
+export interface IBanner {
+  image: string;
+  advertisement_number: number;
+}
 export interface IDailyOffer {
   product_id: number;
   title: string;
@@ -49,5 +54,9 @@ export class LayoutService {
 
   static dailyOffer() {
     return axiosWithToken.get<{ data: IDailyOffer }>(DAYLY_OFFER);
+  }
+
+  static getBanner(id: number) {
+    return axiosWithToken.get<{ data: any }>(GETBANNER + id);
   }
 }

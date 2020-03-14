@@ -94,6 +94,7 @@ export const STATIC_PAGE = MAIN_BASE_URL + "/static-page/";
 // LAYOUT
 export const ADDITIONAL_INFO = MAIN_BASE_URL + "/layout/additional-info";
 export const LAYTEST_BLOG_POST = MAIN_BASE_URL + "/layout/latest-blog-post";
+export const GETBANNER = MAIN_BASE_URL + "/advertisement/";
 
 // Orders
 // https://app.swaggerhub.com/apis-docs/badzaghua/iciparis-orders/1.0.0

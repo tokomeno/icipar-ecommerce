@@ -48,7 +48,7 @@ export const CatalogFilters: React.FC<CatalogFiltersProps> = React.memo(() => {
         <PriceRange></PriceRange>
       </FilterDropdown>
 
-      <CatBanner to={"#!"} image={"/assets/uploads/images/ban.png"} />
+      <CatBanner id={1} />
     </div>
   );
 });

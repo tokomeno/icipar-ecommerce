@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { LayoutService, IBanner } from "../services/layout.http";
 
 interface CatBannerProps {
-  to: string;
-  image: string;
+  id: number;
 }
 
-export const CatBanner: React.FC<CatBannerProps> = ({ to, image }) => {
+export const CatBanner: React.FC<CatBannerProps> = ({ id = 1 }) => {
+  const [banner, setBanner] = useState<IBanner | null>(null);
+  useEffect(() => {
+    LayoutService.getBanner(id).then(res => setBanner(res.data.data));
+  }, [id]);
+  if (!banner) return null;
   return (
     <div className="cat-banner">
-      <NavLink to={to} className="d-block">
-        <img src={image} alt="" />
+      <NavLink to={"#"} className="d-block">
+        <img src={banner.image} alt="" />
       </NavLink>
     </div>
   );

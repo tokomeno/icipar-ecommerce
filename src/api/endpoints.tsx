@@ -16,6 +16,9 @@ export const UPDATE_CUSTOMER_INFO = AUTH_BASE_URL + "/update-user";
 export const GET_USER_ADDRESSES = AUTH_BASE_URL + "/user/addresses";
 export const SET_USER_ADDRESSES = AUTH_BASE_URL + "/user/add-address";
 
+export const TOGGLE_FAVORITES = AUTH_BASE_URL + "/favourites/toggle";
+export const GET_FAVORITES = AUTH_BASE_URL + "/favourites";
+
 // Products
 // https://app.swaggerhub.com/apis-docs/badzaghua/iciparis-products/1.0.0
 export const PRODUCT_BASE_URL = "http://3.18.107.107/api";

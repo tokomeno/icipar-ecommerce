@@ -8,6 +8,7 @@ import {
 } from "../../api/helpers";
 import { store } from "../store";
 import { fetchCart } from "../cart/cartActions";
+import { fetchFavorites } from "../favorites/favoritesActions";
 
 export interface SetAuthErrorAction {
   type: AuthActionTypes.setAuthErrors;
@@ -31,6 +32,7 @@ export const setCurrentUser = ({
 }): SetCurrentUserAction => {
   setAuthorizationToken(token);
   store.dispatch(fetchCart() as any);
+  store.dispatch(fetchFavorites() as any);
   return {
     type: AuthActionTypes.setCurrentUser,
     payload: { user, token }

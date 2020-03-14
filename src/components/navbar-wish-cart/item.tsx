@@ -3,14 +3,9 @@ import React from "react";
 interface DropdownItemProps {
   product: {
     thumbnail: string;
-    price: number | string;
-    item_title: string;
+    price?: number | string;
+    title: string;
   };
-  // | {
-  //     thumbnail: string;
-  //     price: number | string;
-  //     item_title: string;
-  //   };
 }
 
 export const DropdownItem: React.FC<DropdownItemProps> = ({ product }) => {
@@ -20,15 +15,13 @@ export const DropdownItem: React.FC<DropdownItemProps> = ({ product }) => {
         <img src={product.thumbnail} alt="" />
       </div>
       <div className="desc">
-        <div className="item-title">
-          {product.item_title}
-          {/* {product.title && product.title} */}
-          {/* {product.title ? product.title : product.item_title} */}
-        </div>
-        <div className="price">
-          {product.price}
-          <sub>D</sub>
-        </div>
+        <div className="item-title">{product.title}</div>
+        {product.price && (
+          <div className="price">
+            {product.price}
+            <sub>D</sub>
+          </div>
+        )}
       </div>
     </div>
   );

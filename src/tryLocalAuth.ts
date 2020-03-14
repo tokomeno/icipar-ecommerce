@@ -4,6 +4,7 @@ import { setCurrentUser } from "./redux/auth/authActions";
 
 import { setGenericTokenAsHeader } from "./api/helpers";
 import { fetchCart } from "./redux/cart/cartActions";
+import { fetchFavorites } from "./redux/favorites/favoritesActions";
 
 export const tryLocalAuth = () => {
   const authStateFromStorage = localStorage.getItem("auth");
@@ -27,6 +28,7 @@ export const tryLocalAuth = () => {
   } else {
     setGenericTokenAsHeader().then(() => {
       store.dispatch(fetchCart() as any);
+      store.dispatch(fetchFavorites() as any);
     });
   }
 };

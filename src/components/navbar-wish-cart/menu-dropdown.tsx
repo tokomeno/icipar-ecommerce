@@ -3,11 +3,12 @@ import classnames from "classnames";
 import { Dropdown } from "react-bootstrap";
 import { DropdownItem } from "./item";
 import { ICartItem } from "../../redux/cart/cartTypes";
+import { IFavoritesState } from "../../redux/favorites/favoritesTypes";
 
 interface IMenuDropdownProps {
   buttonChildren: React.ReactNode;
   navLink: React.ReactNode;
-  products: ICartItem[];
+  products: ICartItem[] | IFavoritesState["items"];
   wrapperClassName?: "hdr-fav";
 }
 
@@ -25,8 +26,15 @@ export const MenuDropdown: React.FC<IMenuDropdownProps> = ({
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          {products.slice(0, 4).map(p => (
-            <DropdownItem product={p} key={p.item_id} />
+          {(products as any).slice(0, 5).map((p: any) => (
+            <DropdownItem
+              product={{
+                thumbnail: (p as any).thumbnail,
+                title: (p as any).title || (p as any).item_title,
+                price: (p as any).price || null
+              }}
+              key={(p as any).item_id || (p as any).id}
+            />
           ))}
           {navLink}
         </Dropdown.Menu>

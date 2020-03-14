@@ -4,16 +4,14 @@ import { useTranslation } from "react-i18next";
 import { MenuDropdown } from "./menu-dropdown";
 import { connect } from "react-redux";
 import { IStoreState } from "../../redux/mainReducer";
-import { ICartItem } from "../../redux/cart/cartTypes";
+import { IFavoritesState } from "../../redux/favorites/favoritesTypes";
 
-interface WishNavbarDropdownProps {
-  totalPrice: number;
-  cartItems: ICartItem[];
+interface FavoritesNavbarDropdownProps {
+  items: IFavoritesState["items"];
 }
 
-const _WishNavbarDropdown: React.FC<WishNavbarDropdownProps> = ({
-  cartItems,
-  totalPrice
+const _FavoritesNavbarDropdown: React.FC<FavoritesNavbarDropdownProps> = ({
+  items
 }) => {
   const { t } = useTranslation();
   return (
@@ -27,17 +25,18 @@ const _WishNavbarDropdown: React.FC<WishNavbarDropdownProps> = ({
           rel="noopener noreferrer"
         >
           {t("wishes")}
-          <img src="/assets/images/arrow-right.svg" alt="right arrow" />
+          {/* <img src="/assets/images/arrow-right.svg" alt="right arrow" /> */}
         </NavLink>
       }
-      products={cartItems}
+      products={items}
     />
   );
 };
 
-const mapStateToProps = ({ cart }: IStoreState) => ({
-  cartItems: cart.items,
-  totalPrice: cart.totalPrice
+const mapStateToProps = ({ favorites }: IStoreState) => ({
+  items: favorites.items
 });
 
-export const WishNavbarDropdown = connect(mapStateToProps)(_WishNavbarDropdown);
+export const FavoritesNavbarDropdown = connect(mapStateToProps)(
+  _FavoritesNavbarDropdown
+);

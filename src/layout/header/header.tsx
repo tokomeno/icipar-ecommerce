@@ -12,7 +12,7 @@ import { Search } from "./search";
 import { useToggle } from "../../hooks/common/useToggle";
 import { AboutPagesMenu } from "../../components/pageSideMenu";
 import { CartNavbarDropdown } from "../../components/navbar-wish-cart/cartNavbarDropdown";
-import { WishNavbarDropdown } from "../../components/navbar-wish-cart/wishNavbarDropdown";
+import { FavoritesNavbarDropdown } from "../../components/navbar-wish-cart/favorites-navbar-dropdown";
 import { connect } from "react-redux";
 import {
   LayoutService,
@@ -158,7 +158,7 @@ export const _Header: React.FC<HeaderProps> = ({ user, phone }) => {
                 <Search />
                 <div className="col-md-2 d-flex align-items-center justify-content-end">
                   <CartNavbarDropdown />
-                  {/* <WishNavbarDropdown /> */}
+                  <FavoritesNavbarDropdown />
                 </div>
               </div>
             </div>

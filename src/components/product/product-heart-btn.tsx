@@ -1,43 +1,33 @@
 import React from "react";
 import classnames from "classnames";
-import { useToggle } from "../../hooks/common/useToggle";
 import { IStoreState } from "../../redux/mainReducer";
 import { connect } from "react-redux";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
+import { toogleFavorite } from "../../redux/favorites/favoritesActions";
 
 interface ProductHeartBtnProps {
   productId: number;
   isAuth: boolean;
+  toogleFavorite: typeof toogleFavorite;
+  isActive: boolean;
+  loadingId: number | null;
 }
 
 const _ProductHeartBtn: React.FC<ProductHeartBtnProps> = ({
   productId,
-  isAuth
+  isAuth,
+  toogleFavorite,
+  isActive,
+  loadingId
 }) => {
-  const { toggle, isActive } = useToggle(false);
-  if (!isAuth) {
-    return (
-      <OverlayTrigger
-        trigger="hover"
-        overlay={<Tooltip id={`tooltip-top`}>Please Sign In</Tooltip>}
-      >
-        <button className={classnames("heart")}>
-          <img src="/assets/images/heart-dark.svg" alt="favorite" />
-          <img
-            src="/assets/images/loved.svg"
-            alt="favorite"
-            className="added"
-          />
-        </button>
-      </OverlayTrigger>
-    );
-  }
+  if (!isAuth) return <NotLoginHeart />;
   return (
     <button
       onClick={() => {
-        if (isAuth) toggle();
+        if (isAuth && loadingId !== productId) toogleFavorite(productId);
       }}
-      className={classnames("heart", { active: isActive })}
+      disabled={productId === loadingId}
+      className={classnames("heart disableOpacity", { active: isActive })}
     >
       <img src="/assets/images/heart-dark.svg" alt="favorite" />
       <img src="/assets/images/loved.svg" alt="favorite" className="added" />
@@ -45,10 +35,35 @@ const _ProductHeartBtn: React.FC<ProductHeartBtnProps> = ({
   );
 };
 
-const mapStateToProps = ({ auth }: IStoreState) => {
+const mapStateToProps = (
+  { auth, favorites }: IStoreState,
+  ownProps: Omit<
+    ProductHeartBtnProps,
+    "isAuth" | "toogleFavorite" | "loadingId" | "isActive"
+  >
+) => {
   return {
-    isAuth: !!auth.token
+    isAuth: !!auth.token,
+    isActive:
+      favorites.itemsByKeys && !!favorites.itemsByKeys[ownProps.productId],
+    loadingId: favorites.loadingId
   };
 };
 
-export const ProductHeartBtn = connect(mapStateToProps)(_ProductHeartBtn);
+export const ProductHeartBtn = connect(mapStateToProps, { toogleFavorite })(
+  _ProductHeartBtn
+);
+
+const NotLoginHeart: React.FC = () => {
+  return (
+    <OverlayTrigger
+      trigger="hover"
+      overlay={<Tooltip id={`tooltip-top`}>Please Sign In</Tooltip>}
+    >
+      <button className={classnames("heart")}>
+        <img src="/assets/images/heart-dark.svg" alt="favorite" />
+        <img src="/assets/images/loved.svg" alt="favorite" className="added" />
+      </button>
+    </OverlayTrigger>
+  );
+};

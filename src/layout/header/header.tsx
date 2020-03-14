@@ -16,9 +16,11 @@ import { WishNavbarDropdown } from "../../components/navbar-wish-cart/wishNavbar
 import { connect } from "react-redux";
 import {
   LayoutService,
-  ICategory,
-  IMenuCatrogy
+  IMenuCatrogy,
+  IDailyOffer,
+  ILatestBlogPost
 } from "../../services/layout.http";
+import { HeaderMenuItem } from "./header-menu-item";
 
 interface HeaderProps {
   user: IStoreState["auth"]["user"];
@@ -32,8 +34,10 @@ export const _Header: React.FC<HeaderProps> = ({ user, phone }) => {
     IActiveModalContext
   >(ActiveModalContext);
   const [menu, setMenu] = useState<IMenuCatrogy[]>([]);
-  const [dailyOffer, setDailyOffer] = useState<any>({});
-  const [latestBlogPost, setLatestBlogPost] = useState<any>({});
+  const [dailyOffer, setDailyOffer] = useState<IDailyOffer | null>(null);
+  const [latestBlogPost, setLatestBlogPost] = useState<ILatestBlogPost | null>(
+    null
+  );
 
   const { isActive, toggle, setActive, setInActive } = useToggle(false);
 
@@ -161,14 +165,16 @@ export const _Header: React.FC<HeaderProps> = ({ user, phone }) => {
           </div>
           <div className="container d-none d-lg-block">
             <div className="header-menu d-flex justify-content-between">
-              {menu.map(item => (
-                <HeaderMenuItem
-                  latestBlogPost={latestBlogPost}
-                  dailyOffer={dailyOffer}
-                  key={item.id}
-                  item={item}
-                />
-              ))}
+              {latestBlogPost &&
+                dailyOffer &&
+                menu.map(item => (
+                  <HeaderMenuItem
+                    latestBlogPost={latestBlogPost}
+                    dailyOffer={dailyOffer}
+                    key={item.id}
+                    item={item}
+                  />
+                ))}
               <div className="header-menu_item">
                 <Link to="/gift-card" className="link">
                   {t("gift_cart")}
@@ -244,94 +250,3 @@ const mapStateToProps = ({ info }: IStoreState) => {
 };
 
 export const Header = connect(mapStateToProps)(_Header);
-
-type HeaderMenuItemProps = {
-  item: IMenuCatrogy;
-  dailyOffer: any;
-  latestBlogPost: any;
-  // brands: IBrandSliderItem[];
-};
-const HeaderMenuItem: React.FC<HeaderMenuItemProps> = ({
-  item,
-  dailyOffer,
-  latestBlogPost
-}) => {
-  const { t } = useTranslation();
-  return (
-    <div className="header-menu_item">
-      <a href="#!" className="link">
-        {item.title}
-      </a>
-      <div className="inner-menu">
-        <div className="container">
-          <div className="d-flex">
-            <div className="inner-menu_block categories">
-              <div className="title">{t("categories")}</div>
-              <div className="items">
-                <NavLink to="#!" className="items-link">
-                  {t("man")}
-                </NavLink>
-                <NavLink to="#!" className="items-link">
-                  {t("women")}
-                </NavLink>
-                <NavLink to="#!" className="items-link">
-                  {t("news")}
-                </NavLink>
-              </div>
-            </div>
-            <div className="inner-menu_block categories">
-              <div className="title">{t("brands")}</div>
-              {Object.keys(item.brands).map(brandLatter => (
-                <div className="items">
-                  <div className="letter">{brandLatter}</div>
-                  {item.brands[brandLatter].map(b => (
-                    <NavLink to={"/all-brands#" + brandLatter} className="letter-link">
-                      {b.name}
-                    </NavLink>
-                  ))}
-                </div>
-              ))}
-            </div>
-            <div className="suggestion left">
-              <div className="title">დღის შეთავაზება</div>
-              <a href="#!" className="d-flex align-items-center flex-column">
-                <div className="image">
-                  <img
-                    src="/assets/uploads/images/suggestion1.png"
-                    alt="suggestion"
-                  />
-                </div>
-                <div className="prod-name">Calvin Klein All, 100ml</div>
-                <div className="price d-flex">
-                  <div className="old-price">
-                    <span>110</span>
-                    <sub>D</sub>
-                  </div>
-                  <div className="new-price">
-                    110
-                    <sub>D</sub>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div className="suggestion">
-              <div className="title">{t("blog_post")}</div>
-              <NavLink
-                to="#!"
-                className="d-flex align-items-center flex-column"
-              >
-                <div className="image">
-                  <img
-                    src="/assets/uploads/images/suggestion2.png"
-                    alt="suggestion"
-                  />
-                </div>
-                <div className="prod-name">სუნამოს შერჩევის ხელოვნება</div>
-              </NavLink>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};

@@ -7,6 +7,21 @@ import {
 } from "../api/endpoints";
 import { IBrandSliderItem } from "../data/brands";
 
+export interface IDailyOffer {
+  product_id: number;
+  title: string;
+  thumbnail: string;
+  original_price: number;
+  discounted_price: number;
+  discount_rate: number;
+}
+
+export interface ILatestBlogPost {
+  id: number;
+  slug: string;
+  title: string;
+  thumbnail: string;
+}
 export interface ICategory {
   id: number;
   title: string;
@@ -19,7 +34,7 @@ export type IMenuCatrogy = ICategory & {
 
 export class LayoutService {
   static latestBlog() {
-    return axiosWithToken.get<{ data: any }>(LAYTEST_BLOG_POST);
+    return axiosWithToken.get<{ data: ILatestBlogPost }>(LAYTEST_BLOG_POST);
   }
 
   static brands(cargoryId: number) {
@@ -33,6 +48,6 @@ export class LayoutService {
   }
 
   static dailyOffer() {
-    return axiosWithToken.get<{ data: any }>(DAYLY_OFFER);
+    return axiosWithToken.get<{ data: IDailyOffer }>(DAYLY_OFFER);
   }
 }

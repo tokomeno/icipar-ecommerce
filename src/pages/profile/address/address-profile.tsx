@@ -1,98 +1,85 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { ProfileBasePage } from "../index";
 import { useTranslation } from "react-i18next";
-import { useInput } from "../../../hooks/common/useInput";
-import { ProfileInput } from "../../../components/profile-input";
-import { AddressService } from "../../../services/address.http";
+import { v4 as uuidv4 } from "uuid";
+import {
+  AddressService,
+  ICity,
+  IAddress
+} from "../../../services/address.http";
+import { AddressForm } from "./address-form";
+import { ProfileSpinner } from "../../../components/spinners/profile-spiner";
+
+export type IFormAdreess = Omit<IAddress, "id" | "city_id"> & {
+  uniqueId: string;
+  id: number | null;
+  city_id: number | "";
+};
 
 interface AddressProiflePageProps {}
+const dummyAddress = (): IFormAdreess => ({
+  is_main: false,
+  city_id: "",
+  full_address: "",
+  comment: "",
+  contact_person_name: "",
+  contact_person_email: "",
+  contact_person_phone: "",
+  id: null,
+  uniqueId: uuidv4()
+});
 
 export const AddressProiflePage: React.FC<AddressProiflePageProps> = props => {
+  const [cities, setCities] = useState<ICity[]>([]);
+
+  const [addresses, setAddresses] = useState<IFormAdreess[] | null>(null);
+
   const { t } = useTranslation();
 
-  const [cities, setCities] = useState<{ id: number; city: string }[]>([]);
-  const { value: city_id, onChange: setcity_id } = useInput();
-  const { value: full_address, onChange: setfull_address } = useInput();
-  const { value: comment, onChange: setcomment } = useInput();
-  const {
-    value: contact_person_name,
-    onChange: setcontact_person_name
-  } = useInput();
-  const {
-    value: contact_person_email,
-    onChange: setcontact_person_email
-  } = useInput();
-  const {
-    value: contact_person_phone,
-    onChange: setcontact_person_phone
-  } = useInput();
-
-  const [originalData, setOriginalData] = useState<{
-    [key: string]: string | undefined;
-  }>({});
-
-  const [errors, setErrors] = useState<{ [key: string]: string[] }>({});
-
-  const handleSubmit = () => {
-    AddressService.add({
-      city_id,
-      full_address,
-      comment,
-      contact_person_name,
-      contact_person_email,
-      contact_person_phone
-    })
-      .then(res => {
-        setOriginalData(res.data.data);
-      })
-      .catch(err => {
-        if (err.response && err.response.data && err.response.data.error) {
-          setErrors(err.response.data.error);
-        } else {
-          alert("დაფიქსირდა შეცდომა");
-        }
-        console.log(err);
-      });
-  };
-
-  const setInputsFromOriginalData = () => {
-    setcity_id(originalData.city_id);
-    setfull_address(originalData.full_address);
-    setcomment(originalData.comment);
-    setcontact_person_name(originalData.contact_person_name);
-    setcontact_person_email(originalData.contact_person_email);
-    setcontact_person_phone(originalData.contact_person_phone);
-  };
-
-  useEffect(() => {
-    setInputsFromOriginalData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [originalData]);
-
-  useEffect(() => {
-    AddressService.getAll().then(res => {
-      if (
-        res.data.data.addresses &&
-        res.data.data.addresses[0] &&
-        typeof res.data.data.addresses[0] === "object"
-      ) {
-        setOriginalData(res.data.data.addresses[0]);
+  const deleteAddress = useCallback(
+    (uniqueId: string) => {
+      if (!Array.isArray(addresses)) return;
+      const deleteAddress = addresses.find(a => a.uniqueId === uniqueId);
+      if (!deleteAddress) return;
+      if (deleteAddress.id) {
+        AddressService.delete(deleteAddress.id).then(res => {
+          setAddresses(prevState =>
+            prevState!.filter(ad => ad.uniqueId !== uniqueId)
+          );
+        });
+      } else {
+        setAddresses(prevState =>
+          prevState!.filter(ad => ad.uniqueId !== uniqueId)
+        );
       }
-      setCities(res.data.data.cities);
+    },
+    [addresses]
+  );
+  const addNewAddressForm = useCallback(() => {
+    setAddresses(prevState => {
+      if (Array.isArray(prevState))
+        return [...prevState, { ...dummyAddress() }];
+      return [dummyAddress()];
     });
   }, []);
 
+  useEffect(() => {
+    AddressService.getAll().then(res => {
+      setAddresses(
+        res.data.data.addresses.map(a => ({ ...a, uniqueId: uuidv4() }))
+      );
+      setCities(res.data.data.cities);
+    });
+  }, []);
+  if (!addresses) return <ProfileSpinner />;
   return (
     <ProfileBasePage>
       <div className="profile-right profile-side table-profile">
         <div className="profile-top">
           <div className="row">
             <div className="col-sm-6">
-              <h1 className="profile-top_title">
+              <h1 onClick={addNewAddressForm} className="profile-top_title">
                 {t("add_new")}
-                <a href="#!" className="delete">
-                  {t("delete")}
-                </a>
               </h1>
             </div>
             <div className="col-sm-6">
@@ -102,97 +89,14 @@ export const AddressProiflePage: React.FC<AddressProiflePageProps> = props => {
             </div>
           </div>
         </div>
-        <form className="info">
-          <div className="row">
-            <div className="col-sm-6">
-              <div className="d-flex flex-column info-item">
-                <label>{t("city")}</label>
-                <select
-                  onChange={setcity_id}
-                  value={city_id}
-                  className="custom-select"
-                >
-                  <option selected>{t("choose_city")}</option>
-                  {cities.map(city => (
-                    <option key={city.id} value={city.id}>
-                      {city.city}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <ProfileInput
-                label={t("full_address")}
-                name={"full_address"}
-                value={full_address}
-                onChange={setfull_address}
-                errorMessage={
-                  errors && errors.full_address && errors.full_address[0]
-                }
-              />
-              <ProfileInput
-                label={t("comment")}
-                name={"comment"}
-                value={comment}
-                onChange={setcomment}
-                errorMessage={errors && errors.comment && errors.comment[0]}
-              />
-            </div>
-            <div className="col-sm-6">
-              <ProfileInput
-                label={t("contact_person_name")}
-                name={"contact_person_name"}
-                value={contact_person_name}
-                onChange={setcontact_person_name}
-                errorMessage={
-                  errors &&
-                  errors.contact_person_name &&
-                  errors.contact_person_name[0]
-                }
-              />
-
-              <ProfileInput
-                label={t("contact_person_phone")}
-                name={"contact_person_phone"}
-                value={contact_person_phone}
-                onChange={setcontact_person_phone}
-                errorMessage={
-                  errors &&
-                  errors.contact_person_phone &&
-                  errors.contact_person_phone[0]
-                }
-              />
-
-              <ProfileInput
-                label={t("contact_person_email")}
-                name={"contact_person_email"}
-                value={contact_person_email}
-                onChange={setcontact_person_email}
-                errorMessage={
-                  errors &&
-                  errors.contact_person_email &&
-                  errors.contact_person_email[0]
-                }
-              />
-            </div>
-          </div>
-          <div className="info-btns d-flex justify-content-sm-start justify-content-center">
-            <button
-              type="button"
-              onClick={handleSubmit}
-              className="save info-btns_btn"
-            >
-              {t("save")}
-            </button>
-            <button
-              type="button"
-              onClick={setInputsFromOriginalData}
-              className="cancel info-btns_btn"
-            >
-              {t("cancel")}
-            </button>
-          </div>
-        </form>
+        {addresses.map(address => (
+          <AddressForm
+            key={address.uniqueId}
+            cities={cities}
+            address={address}
+            deleteAddress={deleteAddress}
+          />
+        ))}
       </div>
     </ProfileBasePage>
   );

@@ -20,7 +20,7 @@ export const ProfileInput: React.FC<ProfileInputProps> = React.memo(
           onChange={onChange}
           type={isActive ? "text" : type}
           name={name}
-          id={name}
+          // id={name}
           value={value}
           className={type === "password" ? "pass-input password-eye-input" : ""}
           // autoComplete="off"

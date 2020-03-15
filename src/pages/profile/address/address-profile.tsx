@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { ProfileBasePage } from "../index";
 import { useTranslation } from "react-i18next";
-import { axiosWithToken } from "../../../api/axios-with-token";
-import { GET_USER_ADDRESSES, SET_USER_ADDRESSES } from "../../../api/endpoints";
 import { useInput } from "../../../hooks/common/useInput";
 import { ProfileInput } from "../../../components/profile-input";
+import { AddressService } from "../../../services/address.http";
 
 interface AddressProiflePageProps {}
 
@@ -35,15 +34,14 @@ export const AddressProiflePage: React.FC<AddressProiflePageProps> = props => {
   const [errors, setErrors] = useState<{ [key: string]: string[] }>({});
 
   const handleSubmit = () => {
-    axiosWithToken
-      .post(SET_USER_ADDRESSES, {
-        city_id,
-        full_address,
-        comment,
-        contact_person_name,
-        contact_person_email,
-        contact_person_phone
-      })
+    AddressService.add({
+      city_id,
+      full_address,
+      comment,
+      contact_person_name,
+      contact_person_email,
+      contact_person_phone
+    })
       .then(res => {
         setOriginalData(res.data.data);
       })
@@ -72,7 +70,7 @@ export const AddressProiflePage: React.FC<AddressProiflePageProps> = props => {
   }, [originalData]);
 
   useEffect(() => {
-    axiosWithToken.get(GET_USER_ADDRESSES).then(res => {
+    AddressService.getAll().then(res => {
       if (
         res.data.data.addresses &&
         res.data.data.addresses[0] &&
@@ -89,14 +87,14 @@ export const AddressProiflePage: React.FC<AddressProiflePageProps> = props => {
       <div className="profile-right profile-side table-profile">
         <div className="profile-top">
           <div className="row">
-            {/* <div className="col-sm-6">
+            <div className="col-sm-6">
               <h1 className="profile-top_title">
                 {t("add_new")}
                 <a href="#!" className="delete">
                   {t("delete")}
                 </a>
               </h1>
-            </div> */}
+            </div>
             <div className="col-sm-6">
               <h2 className="profile-top_title d-none d-sm-block">
                 {t("addresses")}
@@ -196,7 +194,6 @@ export const AddressProiflePage: React.FC<AddressProiflePageProps> = props => {
           </div>
         </form>
       </div>
-      ;
     </ProfileBasePage>
   );
 };

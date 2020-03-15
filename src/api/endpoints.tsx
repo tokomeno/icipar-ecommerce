@@ -14,7 +14,9 @@ export const GET_CUSTOMER_INFO = AUTH_BASE_URL + "/get-customer";
 export const UPDATE_CUSTOMER_INFO = AUTH_BASE_URL + "/update-user";
 
 export const GET_USER_ADDRESSES = AUTH_BASE_URL + "/user/addresses";
-export const SET_USER_ADDRESSES = AUTH_BASE_URL + "/user/add-address";
+export const ADD_USER_ADDRESSES = AUTH_BASE_URL + "/user/add-address";
+export const DELETE_USER_ADDRESSES = AUTH_BASE_URL + "/user/delete-address/";
+export const ADDRESS_MAKE_MAIN = AUTH_BASE_URL + "/user/make-address-main/";
 
 export const TOGGLE_FAVORITES = AUTH_BASE_URL + "/favourites/toggle";
 export const GET_FAVORITES = AUTH_BASE_URL + "/favourites";

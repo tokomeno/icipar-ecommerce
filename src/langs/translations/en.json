@@ -144,6 +144,17 @@
     "send_me_invoice_on_mail": "გამომიგზავნე ინვოისი მეილზე",
     "pay": "გადახდა",
     "paste_coupon_or_sale_code": "ჩააკოპირე კუპონის ან ფასდაკლების კოდი…",
-    "search_brand": "მოძებნე ბრენდი"
+    "search_brand": "მოძებნე ბრენდი",
+    "add_new": "add_new",
+    "city": "city",
+    "choose_city": "choose_city",
+    "full_address": "full_address",
+    "comment": "comment",
+    "contact_person_name": "contact_person_name",
+    "contact_person_phone": "contact_person_phone",
+    "contact_person_email": "contact_person_email",
+    "man": "man",
+    "daily_offer": "daily_offer",
+    "address_saved_successfully": "address saved successfully"
   }
 }

@@ -12,13 +12,18 @@ export interface IAllBrandsResponse {
   }[];
 }
 
+export interface IBrandShow {
+  name: string;
+  banner: string;
+  body: string;
+}
 export class BrandService {
   static getAll() {
     return axiosWithToken.get<IAllBrandsResponse>(ALL_BRANDS);
   }
 
   static getBySlug(slug: string) {
-    return axiosWithToken.get<{ data: any }>(SHOW_BRAND + slug);
+    return axiosWithToken.get<{ data: IBrandShow }>(SHOW_BRAND + slug);
   }
 
   static getFeaturedBrands() {

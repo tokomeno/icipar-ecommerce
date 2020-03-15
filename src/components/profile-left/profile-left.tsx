@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { logoutUser } from "../../redux/auth/authActions";
 import { IUser } from "../../redux/auth/authTypes";
 import classnames from "classnames";
+import { routes } from "../../routes/routes";
 
 interface ProfileLeftProps {
   logout: typeof logoutUser;
@@ -40,7 +41,7 @@ export const ProfileLeft: React.FC<ProfileLeftProps> = ({ user, logout }) => {
           <div className="ntfc" />
         </NavItem>
 
-        <NavItem to={"/profile/orders"} title={t("orders")}>
+        <NavItem to={routes.orders} title={t("orders")}>
           <img src="/assets/images/order-g.svg" alt="order" />
           <img
             src="/assets/images/order-r.svg"
@@ -49,7 +50,7 @@ export const ProfileLeft: React.FC<ProfileLeftProps> = ({ user, logout }) => {
           />
         </NavItem>
 
-        <NavItem to={"/profile/wishlist"} title={t("wishes")}>
+        <NavItem to={routes.favorites} title={t("wishes")}>
           <img src="/assets/images/heart-g.svg" alt="heart" />
           <img
             src="/assets/images/heart-r.svg"

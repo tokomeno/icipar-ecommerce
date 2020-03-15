@@ -41,6 +41,7 @@ export const FETCH_DISCOUNTED_PRODUCTS =
 
 export const FEATURED_BRANDS = PRODUCT_BASE_URL + "/featured-brands";
 export const ALL_BRANDS = PRODUCT_BASE_URL + "/brands";
+export const SHOW_BRAND = PRODUCT_BASE_URL + "/brand/";
 
 export const PRODUCT_BRANCH = PRODUCT_BASE_URL + "/product-branches";
 export const GET_BRANCHES = PRODUCT_BASE_URL + "/branches-map";
@@ -61,6 +62,8 @@ const CART_BATH_URL = "http://13.59.255.224/api";
 export const GET_CART = CART_BATH_URL + "/get-cart";
 export const CART_TOGGLE = CART_BATH_URL + "/toggle-item";
 export const TOGGLE_BUNDLE_CART = CART_BATH_URL + "/toggle-bundle";
+
+export const APPLY_POROMOTION = CART_BATH_URL + "/apply-promotion";
 
 export const ADD_GIFT_CART_TO_CART = CART_BATH_URL + "/new-gift-card/add";
 export const REMOVE_GIFT_CART_TO_CART = CART_BATH_URL + "/new-gift-card/remove";

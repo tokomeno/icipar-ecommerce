@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import Swiper from "react-id-swiper";
 // import chunk from "lodash.chunk";
 import { useSliderNav } from "../../../hooks/common/useSliderNav";
-import { IBrandSliderItem } from "../../../data/brands";
 import { useTranslation } from "react-i18next";
-import { axiosWithToken } from "../../../api/axios-with-token";
-import { FEATURED_BRANDS } from "../../../api/endpoints";
+import { IBrandSliderItem, BrandService } from "../../../services/brand.http";
 
 interface BrandSliderProps {}
 
@@ -27,8 +25,7 @@ export const BrandSlider: React.FC<BrandSliderProps> = () => {
   const [brands, setBrands] = useState<IBrandSliderItem[]>([]);
 
   useEffect(() => {
-    axiosWithToken
-      .get<{ data: IBrandSliderItem[] }>(FEATURED_BRANDS)
+    BrandService.getFeaturedBrands()
       .then(res => {
         if (res.data.data) {
           setBrands(res.data.data);

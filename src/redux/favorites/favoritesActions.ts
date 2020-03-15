@@ -22,7 +22,7 @@ export const fetchFavorites: Function = () => {
   };
 };
 
-export const toogleFavorite: (productId: number) => void = (
+export const toggleFavorite: (productId: number) => void = (
   productId: number
 ) => {
   return (dispatch: Dispatch) => {
@@ -31,17 +31,16 @@ export const toogleFavorite: (productId: number) => void = (
       type: FavoritesActionsType.loadingItemId
     });
     FavoritesService.toogle(productId).then(res => {
-      fetchFavorites();
       FavoritesService.getAll().then(res => {
         dispatch<SetFavoritesAction>({
           type: FavoritesActionsType.setFavorites,
           payload: res.data.data
         });
       });
-      // dispatch<SetFavoritesAction>({
-      //   type: FavoritesActionsType.setFavorites,
-      //   payload: res.data.data
-      // });
+      dispatch<SetFavoritesAction>({
+        type: FavoritesActionsType.setFavorites,
+        payload: res.data.data
+      });
     });
   };
 };

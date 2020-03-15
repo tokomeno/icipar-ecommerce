@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { match } from "react-router-dom";
+import { BrandService } from "../../services/brand.http";
 
-interface AboutBrandPageProps {}
+interface AboutBrandPageProps {
+  match: match<{ slug: string }>;
+}
 
-export const AboutBrandPage: React.FC<AboutBrandPageProps> = props => {
+export const AboutBrandPage: React.FC<AboutBrandPageProps> = ({ match }) => {
+  const [brand, setBrand] = useState<any>(null);
+  useEffect(() => {
+    BrandService.getBySlug(match.params.slug).then(res =>
+      setBrand(res.data.data)
+    );
+  }, [match.params.slug]);
   return (
     <>
       <div className="container">

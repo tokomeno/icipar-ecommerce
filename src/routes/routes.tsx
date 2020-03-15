@@ -8,10 +8,18 @@ export const routes = {
   contact: "/contact",
   shops: "/shops",
   allBrands: "/all-brands",
+  brandShow: (slug: string) => {
+    return `/brand/${slug}`;
+  },
   catalog: "/catalog",
 
   giftCard: "/gift-card",
-  productShow: "/product/:id",
+  productShow: (id: string | number) => {
+    return `/product/${id}`;
+  },
+
+  favorites: "/profile/favorites",
+  orders: "profile/orders",
 
   blogs: "/blogs",
   blogShow: "/blogs/:slug",

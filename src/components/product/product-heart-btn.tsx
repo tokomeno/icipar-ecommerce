@@ -3,12 +3,12 @@ import classnames from "classnames";
 import { IStoreState } from "../../redux/mainReducer";
 import { connect } from "react-redux";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
-import { toogleFavorite } from "../../redux/favorites/favoritesActions";
+import { toggleFavorite } from "../../redux/favorites/favoritesActions";
 
 interface ProductHeartBtnProps {
   productId: number;
   isAuth: boolean;
-  toogleFavorite: typeof toogleFavorite;
+  toogleFavorite: typeof toggleFavorite;
   isActive: boolean;
   loadingId: number | null;
 }
@@ -50,9 +50,9 @@ const mapStateToProps = (
   };
 };
 
-export const ProductHeartBtn = connect(mapStateToProps, { toogleFavorite })(
-  _ProductHeartBtn
-);
+export const ProductHeartBtn = connect(mapStateToProps, {
+  toogleFavorite: toggleFavorite
+})(_ProductHeartBtn);
 
 const NotLoginHeart: React.FC = () => {
   return (

@@ -3,6 +3,7 @@ export interface IFavoritesItem {
   thumbnail: string;
   product_id: number;
   title: string;
+  price?: number;
 }
 
 export interface IFavoritesState {

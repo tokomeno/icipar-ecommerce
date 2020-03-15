@@ -6,7 +6,7 @@ import {
   DAYLY_OFFER,
   GETBANNER
 } from "../api/endpoints";
-import { IBrandSliderItem } from "../data/brands";
+import { IBrandSliderItem } from "./brand.http";
 
 export interface IBanner {
   image: string;

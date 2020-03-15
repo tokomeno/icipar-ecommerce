@@ -14,6 +14,8 @@ import { useTranslation } from "react-i18next";
 import { ICartState, ICartItem } from "../../../redux/cart/cartTypes";
 import { CartCoupon } from "./cart-coupon";
 import { CartBundel } from "./cart-bundel";
+import { CartService } from "../../../services/cart.http";
+import { useInput } from "../../../hooks/common/useInput";
 
 interface CartContentProps {
   cartItems: ICartItem[];
@@ -43,7 +45,11 @@ export const _CartContent: React.FC<CartContentProps> = ({
   setBundleQntyToCart
 }) => {
   console.log(new_gift_cards);
+  const promotionInput = useInput();
   const { t } = useTranslation();
+  const applyCoupon = () => {
+    CartService.applyPromotion(promotionInput.value);
+  };
   return (
     <>
       <div className="checkout-top d-md-none d-flex align-items-center justify-content-center">
@@ -97,9 +103,13 @@ export const _CartContent: React.FC<CartContentProps> = ({
         <div className="shopping-bottom d-flex flex-column flex-md-row align-items-center justify-content-sm-between justify-content-center">
           <form className="copy-code d-flex align-items-center">
             <input
+              {...promotionInput}
               type="text"
-              placeholder="ჩააკოპირე კუპონის ან ფასდაკლების კოდი…"
+              placeholder={t("paste_coupon_or_sale_code")}
             />
+            <button type="button" onClick={applyCoupon}>
+              {t("send")}
+            </button>
             <span>-15%</span>
           </form>
           <div className="next d-flex align-items-center">

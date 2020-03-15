@@ -1,10 +1,20 @@
 import React from "react";
 import { ProfileBasePage } from "../index";
 import { useTranslation } from "react-i18next";
+import { connect } from "react-redux";
+import { IFavoritesState } from "../../../redux/favorites/favoritesTypes";
+import { IStoreState } from "../../../redux/mainReducer";
+import { toggleFavorite } from "../../../redux/favorites/favoritesActions";
 
-interface WishlistProfilePageProps {}
+interface WishlistProfilePageProps {
+  favorites: IFavoritesState["items"];
+  toggleFavorite: typeof toggleFavorite;
+}
 
-export const WishlistProfilePage: React.FC<WishlistProfilePageProps> = props => {
+export const _WishlistProfilePage: React.FC<WishlistProfilePageProps> = ({
+  favorites,
+  toggleFavorite
+}) => {
   const { t } = useTranslation();
 
   return (
@@ -18,59 +28,81 @@ export const WishlistProfilePage: React.FC<WishlistProfilePageProps> = props => 
             <thead>
               <tr>
                 <th>{t("products")}</th>
-                <th className="text-center">ფასი</th>
-                <th className="text-center">{t("cart")}</th>
+                <th className="text-center">{t("price")}</th>
+                <th className="text-center">{t("favorites")}</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td className="first-td">
-                  <a href="#!" className="d-flex align-items-center">
-                    <div className="image d-flex align-items-center justify-content-center">
-                      <img
-                        src="/assets/uploads/images/cart-product@2x.png"
-                        alt="cart"
-                      />
-                    </div>
-                    <div>
-                      <div className="name">Calvin Klein All, 100ml, Red</div>
-                      <div className="profbtns d-flex">
-                        <button className="profbtns_btn">{t("delete")}</button>
-                        <button className="heart profbtns_btn cart d-block d-sm-none">
-                          <img src="/assets/images/bag-r.svg" alt="favorite" />
-                          <div className="qty">
-                            <span className="num">0</span>
-                          </div>
-                        </button>
+              {favorites.map(favoriteProduct => (
+                <tr>
+                  <td className="first-td">
+                    <a href="#!" className="d-flex align-items-center">
+                      <div className="image d-flex align-items-center justify-content-center">
+                        <img src={favoriteProduct.thumbnail} alt="cart" />
                       </div>
-                    </div>
-                  </a>
-                </td>
-                <td className="price-td text-center">
-                  <div className="price-block">
-                    <div className="price sum">
-                      110
-                      <sub>D</sub>
-                    </div>
-                  </div>
-                </td>
-                <td className="text-center bag-td">
-                  <div className="bag d-flex flex-column align-items-center">
-                    <img src="/assets/images/bag-grey.svg" alt="cart" />
-                    <img
-                      src="/assets/images/bag-r.svg"
-                      alt="cart"
-                      className="hover"
-                    />
-                    <a href="#!" className="add-bag">
-                      {t("add_to_cart")}
+                      <div>
+                        <div className="name">{favoriteProduct.title}</div>
+                        <div className="profbtns d-flex">
+                          <button
+                            onClick={() => {
+                              toggleFavorite(favoriteProduct.product_id);
+                            }}
+                            className="profbtns_btn"
+                          >
+                            {t("delete")}
+                          </button>
+                          <button
+                            onClick={() => {
+                              toggleFavorite(favoriteProduct.product_id);
+                            }}
+                            className="heart profbtns_btn cart d-block d-sm-none"
+                          >
+                            <img
+                              src="/assets/images/loved.svg"
+                              alt="favorite"
+                            />
+                            <div className="qty">
+                              <span className="num">0</span>
+                            </div>
+                          </button>
+                        </div>
+                      </div>
                     </a>
-                  </div>
-                </td>
-              </tr>
+                  </td>
+                  <td className="price-td text-center">
+                    {favoriteProduct.price && (
+                      <div className="price-block">
+                        <div className="price sum">
+                          {favoriteProduct.price}
+                          <sub>D</sub>
+                        </div>
+                      </div>
+                    )}
+                  </td>
+                  <td className="text-center bag-td">
+                    <div
+                      onClick={e => {
+                        e.preventDefault();
+                        toggleFavorite(favoriteProduct.product_id);
+                      }}
+                      className="bag d-flex flex-column align-items-center"
+                    >
+                      <img src="/assets/images/loved.svg" alt="cart" />
+                      <img
+                        src="/assets/images/loved.svg"
+                        alt="cart"
+                        className="hover"
+                      />
+                      <a href="#!" className="add-bag">
+                        {t("remove_from_favorite")}
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
-          <div className="pagination d-none d-md-flex">
+          {/* <div className="pagination d-none d-md-flex">
             {t("pages")}:
             <div className="d-flex pages">
               <span className="pages-item">1</span>
@@ -90,22 +122,16 @@ export const WishlistProfilePage: React.FC<WishlistProfilePageProps> = props => 
                 6
               </a>
             </div>
-          </div>
-        </div>
-        <div className="shopping-bottom wishlist-btn d-flex align-items-center d-flex d-md-none justify-content-center">
-          <div className="next d-flex align-items-center">
-            <a href="#!" className="buy-btn">
-              {t("cart")}
-              <img src="/assets/images/arrow-right.svg" alt="arrow" />
-              <img
-                src="/assets/images/arrow-right_r.svg"
-                alt="arrow"
-                className="red-arrow"
-              />
-            </a>
-          </div>
+          </div> */}
         </div>
       </div>
     </ProfileBasePage>
   );
 };
+const mapStateToProps = ({ favorites }: IStoreState) => ({
+  favorites: favorites.items
+});
+
+export const WishlistProfilePage = connect(mapStateToProps, { toggleFavorite })(
+  _WishlistProfilePage
+);

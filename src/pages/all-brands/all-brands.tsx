@@ -2,37 +2,31 @@ import React, { useEffect, useState } from "react";
 
 import chunk from "lodash.chunk";
 import { BrandSlider } from "../../components/sliders/brandSlider/brandSlider";
-import { axiosWithToken } from "../../api/axios-with-token";
-import { ALL_BRANDS } from "../../api/endpoints";
 import { useTranslation } from "react-i18next";
 import { LayoutSpinner } from "../../components/spinners/layout-spinner";
-
-interface IAllBrandsResponse {
-  [k: string]: {
-    name: string;
-    slug: string;
-  }[];
-}
+import { BrandService, IAllBrandsResponse } from "../../services/brand.http";
+import { routes } from "../../routes/routes";
+import { NavLink } from "react-router-dom";
+import { useInput } from "../../hooks/common/useInput";
 
 interface AllBrandsPageProps {}
 
 // const alphabet = "abcdefghijklmnopqrstuvwxyz#".toUpperCase().split("");
 
 export const AllBrandsPage: React.FC<AllBrandsPageProps> = () => {
+  const { t } = useTranslation();
   const [brands, setBrands] = useState<IAllBrandsResponse | null>(null);
+  const brandSearchInput = useInput();
   useEffect(() => {
-    axiosWithToken
-      .get<IAllBrandsResponse>(ALL_BRANDS)
+    BrandService.getAll()
       .then(res => {
         setBrands(res.data);
         console.log(res.data);
       })
       .catch(err => {
-        alert("404");
         console.error(err);
       });
   }, []);
-  const { t } = useTranslation();
 
   if (!brands) return <LayoutSpinner />;
   return (
@@ -45,7 +39,11 @@ export const AllBrandsPage: React.FC<AllBrandsPageProps> = () => {
               <div className="col-md-4" />
               <h3 className="title text-center col-md-4">{t("all_brands")}</h3>
               <form action="" className="col-md-4 text-right">
-                <input type="text" placeholder="მოძებნე ბრენდი" />
+                <input
+                  {...brandSearchInput}
+                  type="text"
+                  placeholder={t("search_brand")}
+                />
                 <button
                   type="button"
                   className="d-flex align-items-center justify-content-center"
@@ -74,9 +72,12 @@ export const AllBrandsPage: React.FC<AllBrandsPageProps> = () => {
                         return (
                           <div className="list-row_col">
                             {_brands.map(b => (
-                              <a href="#!" className="link">
+                              <NavLink
+                                to={routes.brandShow(b.slug)}
+                                className="link"
+                              >
                                 {b.name}
-                              </a>
+                              </NavLink>
                             ))}
                           </div>
                         );

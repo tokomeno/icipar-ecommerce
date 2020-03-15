@@ -7,6 +7,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import ScrollArea from "react-scrollbar";
+import { routes } from "../../routes/routes";
 
 type HeaderMenuItemProps = {
   item: IMenuCatrogy;
@@ -44,26 +45,22 @@ export const HeaderMenuItem: React.FC<HeaderMenuItemProps> = ({
             </div>
             <div className="inner-menu_block categories">
               <div className="title">{t("brands")}</div>
-              <ScrollArea
-                speed={0.8}
-                className="area"
-                contentClassName="content"
-                horizontal={false}
-              >
+              <div className="items">
                 {Object.keys(item.brands).map(brandLatter => (
-                  <div className="items">
+                  <>
                     <div className="letter">{brandLatter}</div>
-                    {item.brands[brandLatter].map(b => (
+                    {item.brands[brandLatter].map((b, i) => (
                       <NavLink
-                        to={"/all-brands#" + brandLatter}
+                        key={i}
+                        to={routes.brandShow(b.slug)}
                         className="letter-link"
                       >
                         {b.name}
                       </NavLink>
                     ))}
-                  </div>
+                  </>
                 ))}
-              </ScrollArea>
+              </div>
             </div>
             <div className="suggestion left">
               <div className="title">{t("daily_offer")}</div>

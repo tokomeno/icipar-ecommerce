@@ -1,7 +1,4 @@
-export type IBrandSliderItem = {
-  slug: string;
-  logo: string;
-};
+import { IBrandSliderItem } from "../services/brand.http";
 
 export const brandsSlider: IBrandSliderItem[] = [
   { slug: "someslug-1", logo: "/assets/uploads/images/brand1.png" },

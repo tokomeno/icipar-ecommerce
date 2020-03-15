@@ -69,9 +69,19 @@ const App: React.FC<{}> = () => {
             <Route path={routes.howItWorks} exact component={HowItWorksPage} />
             <Route path={routes.shops} exact component={ShopPage} />
             <Route path={routes.allBrands} exact component={AllBrandsPage} />
+            <Route
+              path={routes.brandShow(":slug")}
+              exact
+              component={AboutBrandPage}
+            />
+
             <Route path={routes.catalog} exact component={CatalogPage} />
             <Route path={routes.giftCard} exact component={GiftCardPage} />
-            <Route path={routes.productShow} exact component={ProducShowPage} />
+            <Route
+              path={routes.productShow(":id")}
+              exact
+              component={ProducShowPage}
+            />
 
             <Route path={routes.blogShow} exact component={BlogShowPage} />
             <Route path={routes.blogs} exact component={BlogPage} />
@@ -84,11 +94,7 @@ const App: React.FC<{}> = () => {
               <Route path="/profile" exact component={ProfilePage} />
               <Route path="/profile/coupons" exact component={CouponsPage} />
               <Route path="/profile/checkout" exact component={CartPage} />
-              <Route
-                path="/profile/orders"
-                exact
-                component={OrdersProfilePage}
-              />
+              <Route path={routes.orders} exact component={OrdersProfilePage} />
               <Route path="/profile/info" exact component={InfoProfilePage} />
               <Route
                 path="/profile/address"
@@ -96,7 +102,7 @@ const App: React.FC<{}> = () => {
                 component={AddressProiflePage}
               />
               <Route
-                path="/profile/wishlist"
+                path={routes.favorites}
                 exact
                 component={WishlistProfilePage}
               />

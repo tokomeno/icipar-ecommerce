@@ -28,7 +28,7 @@ export const CartCheckoutForm: React.FC<CartCheckoutForm> = ({
             <option>თბილისი, სულხან ცინცაძის 2</option>
           </select>
         </div>
-        <div className="d-flex flex-column info-item">
+        {/* <div className="d-flex flex-column info-item">
           <label htmlFor="coupon">კუპონი</label>
           <input type="text" id="coupon" placeholder="JKR459JJ600" />
           <div className="sale">-15%</div>
@@ -36,12 +36,12 @@ export const CartCheckoutForm: React.FC<CartCheckoutForm> = ({
         <div className="d-flex flex-column info-item">
           <label htmlFor="gift">სასაჩუქრე ბარათი</label>
           <input type="text" id="gift" placeholder="XXXXXX" />
-        </div>
+        </div> */}
         <div className="d-flex justify-content-xl-end justify-content-start invoice">
           <label className="invoice-txt">
             <input type="checkbox" className="hide" />
             <span className="checkmark" />
-            გამომიგზავნე ინვოისი მეილზე
+            {t("send_me_invoice_on_mail")}
           </label>
         </div>
       </form>
@@ -78,7 +78,7 @@ export const CartCheckoutForm: React.FC<CartCheckoutForm> = ({
               <sub>D</sub>
             </div> */}
           <button onClick={handleSubmit} className="buy-btn">
-            გადახდა
+            {t("pay")}
             <img src="/assets/images/arrow-right.svg" alt="arrow" />
             <img
               src="/assets/images/arrow-right_r.svg"

@@ -3,12 +3,15 @@ import { ProfileBasePage } from "../index";
 import { useTranslation } from "react-i18next";
 import { useGiftCards } from "../../../hooks/useGiftCards";
 import { CouponsTable } from "../../../components/coupons-table";
+import { ProfileSpinner } from "../../../components/spinners/profile-spiner";
 
 interface GiftCardProfilePageProps {}
 
 export const GiftCardProfilePage: React.FC<GiftCardProfilePageProps> = props => {
   const { t } = useTranslation();
   const { discountGiftCard, giftCard } = useGiftCards();
+  if (!discountGiftCard || !giftCard) return <ProfileSpinner />;
+
   return (
     <ProfileBasePage>
       <div className="profile-right profile-side couples-table">

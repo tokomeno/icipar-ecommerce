@@ -15,8 +15,10 @@ export interface IDiscountCard {
 }
 
 export const useGiftCards = () => {
-  const [giftCard, setGiftCard] = useState<IGiftCard[]>([]);
-  const [discountGiftCard, setDiscountGiftCard] = useState<IDiscountCard[]>([]);
+  const [giftCard, setGiftCard] = useState<IGiftCard[] | null>(null);
+  const [discountGiftCard, setDiscountGiftCard] = useState<
+    IDiscountCard[] | null
+  >(null);
 
   useEffect(() => {
     axiosWithToken.get<{ data: IGiftCard[] }>(GIFT_CARD).then(res => {

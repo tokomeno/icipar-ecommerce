@@ -23,8 +23,12 @@ export interface IDiscountCoupon {
 }
 
 export const useCoupons = () => {
-  const [amountCoupons, setAmountCoupons] = useState<IAmountCoupon[]>([]);
-  const [discountCoupons, setDiscountCoupons] = useState<IDiscountCoupon[]>([]);
+  const [amountCoupons, setAmountCoupons] = useState<IAmountCoupon[] | null>(
+    null
+  );
+  const [discountCoupons, setDiscountCoupons] = useState<
+    IDiscountCoupon[] | null
+  >(null);
 
   useEffect(() => {
     axiosWithToken.get<{ data: IAmountCoupon[] }>(AMOUNT_COUPONS).then(res => {

@@ -3,12 +3,15 @@ import { ProfileBasePage } from "../index";
 import { useTranslation } from "react-i18next";
 import { useCoupons } from "../../../hooks/useCoupons";
 import { CouponsTable } from "../../../components/coupons-table";
+import { ProfileSpinner } from "../../../components/spinners/profile-spiner";
 
 interface CouponsPageProps {}
 
 export const CouponsPage: React.FC<CouponsPageProps> = props => {
   const { amountCoupons, discountCoupons } = useCoupons();
   const { t } = useTranslation();
+
+  if (!amountCoupons || !discountCoupons) return <ProfileSpinner />;
 
   return (
     <ProfileBasePage>

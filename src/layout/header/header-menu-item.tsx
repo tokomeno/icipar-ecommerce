@@ -6,7 +6,6 @@ import {
 } from "../../services/layout.http";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
-import ScrollArea from "react-scrollbar";
 import { routes } from "../../routes/routes";
 
 type HeaderMenuItemProps = {
@@ -47,7 +46,7 @@ export const HeaderMenuItem: React.FC<HeaderMenuItemProps> = ({
               <div className="title">{t("brands")}</div>
               <div className="items">
                 {Object.keys(item.brands).map(brandLatter => (
-                  <>
+                  <React.Fragment key={brandLatter}>
                     <div className="letter">{brandLatter}</div>
                     {item.brands[brandLatter].map((b, i) => (
                       <NavLink
@@ -58,7 +57,7 @@ export const HeaderMenuItem: React.FC<HeaderMenuItemProps> = ({
                         {b.name}
                       </NavLink>
                     ))}
-                  </>
+                  </React.Fragment>
                 ))}
               </div>
             </div>

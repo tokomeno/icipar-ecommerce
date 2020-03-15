@@ -36,6 +36,7 @@ import { StaticPage } from "./pages/static-page/static-page";
 import { Layout } from "./layout";
 import { loadReCaptcha } from "react-recaptcha-v3";
 import { RECAPTCHA_SITE_KEY } from "./consts/services";
+import { setDefaultLang } from "./langsUtil";
 
 export const HistoryContext = React.createContext<History>(
   (null as any) as History
@@ -48,6 +49,7 @@ export interface match<P> {
   url: string;
 }
 
+setDefaultLang();
 tryLocalAuth();
 store.dispatch(fetch_Social_ContactInfo_Branches() as any);
 

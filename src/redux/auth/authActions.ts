@@ -1,5 +1,13 @@
 import axios from "axios";
-import { AuthActionTypes, IUser, AuthState } from "./authTypes";
+import {
+  AuthActionTypes,
+  IUser,
+  AuthState,
+  SetCurrentUserAction,
+  SetAuthErrorAction,
+  UpdateAvatarAction,
+  LogoutUserAction
+} from "./authTypes";
 import { Dispatch } from "redux";
 import { API_LOGIN_URL, API_REGISTER_URL } from "../../api/endpoints";
 import {
@@ -9,19 +17,6 @@ import {
 import { store } from "../store";
 import { fetchCart } from "../cart/cartActions";
 import { fetchFavorites } from "../favorites/favoritesActions";
-
-export interface SetAuthErrorAction {
-  type: AuthActionTypes.setAuthErrors;
-  payload: AuthState["errors"];
-}
-
-export interface SetCurrentUserAction {
-  type: AuthActionTypes.setCurrentUser;
-  payload: {
-    user: IUser;
-    token: string;
-  };
-}
 
 export const setCurrentUser = ({
   user,
@@ -123,16 +118,17 @@ export const registerUser = ({
   };
 };
 
+export const updateAvatar = (avatar: string): UpdateAvatarAction => ({
+  type: AuthActionTypes.updateAvatar,
+  payload: avatar
+});
+
 export const setAuthErrors = (
   errors: AuthState["errors"]
 ): SetAuthErrorAction => ({
   payload: errors,
   type: AuthActionTypes.setAuthErrors
 });
-
-export interface LogoutUserAction {
-  type: AuthActionTypes.logoutUser;
-}
 
 export const logoutUser = (): LogoutUserAction => {
   setGenericTokenAsHeader();

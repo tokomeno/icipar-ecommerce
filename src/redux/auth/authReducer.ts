@@ -40,6 +40,15 @@ export const authReducer = (
         loading: false,
         errors: null
       };
+    case AuthActionTypes.updateAvatar: {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          avatar: action.payload
+        }
+      };
+    }
     default:
       return state;
   }

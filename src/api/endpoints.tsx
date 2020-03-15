@@ -18,6 +18,7 @@ export const SET_USER_ADDRESSES = AUTH_BASE_URL + "/user/add-address";
 
 export const TOGGLE_FAVORITES = AUTH_BASE_URL + "/favourites/toggle";
 export const GET_FAVORITES = AUTH_BASE_URL + "/favourites";
+export const UPLOAD_AVATAR = AUTH_BASE_URL + "/upload-avatar";
 
 // Products
 // https://app.swaggerhub.com/apis-docs/badzaghua/iciparis-products/1.0.0

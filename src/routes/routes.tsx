@@ -19,7 +19,7 @@ export const routes = {
   },
 
   favorites: "/profile/favorites",
-  orders: "profile/orders",
+  orders: "/profile/orders",
 
   blogs: "/blogs",
   blogShow: "/blogs/:slug",

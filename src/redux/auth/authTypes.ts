@@ -1,9 +1,3 @@
-import {
-  SetCurrentUserAction,
-  SetAuthErrorAction,
-  LogoutUserAction
-} from "./authActions";
-
 // TODO: ADD User Type When ip will be rady
 export interface IUser {
   [key: string]: any;
@@ -28,10 +22,34 @@ export interface AuthState {
 export enum AuthActionTypes {
   setCurrentUser = "setCurrentUser",
   logoutUser = "logoutUser",
-  setAuthErrors = "setAuthErrors"
+  setAuthErrors = "setAuthErrors",
+  updateAvatar = "updateAvatar"
+}
+
+export interface SetAuthErrorAction {
+  type: AuthActionTypes.setAuthErrors;
+  payload: AuthState["errors"];
+}
+
+export interface SetCurrentUserAction {
+  type: AuthActionTypes.setCurrentUser;
+  payload: {
+    user: IUser;
+    token: string;
+  };
+}
+
+export interface UpdateAvatarAction {
+  type: AuthActionTypes.updateAvatar;
+  payload: string;
+}
+
+export interface LogoutUserAction {
+  type: AuthActionTypes.logoutUser;
 }
 
 export type AuthActions =
   | SetCurrentUserAction
   | SetAuthErrorAction
-  | LogoutUserAction;
+  | LogoutUserAction
+  | UpdateAvatarAction;

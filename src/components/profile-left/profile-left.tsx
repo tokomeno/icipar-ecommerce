@@ -6,6 +6,7 @@ import { logoutUser } from "../../redux/auth/authActions";
 import { IUser } from "../../redux/auth/authTypes";
 import classnames from "classnames";
 import { routes } from "../../routes/routes";
+import { Avatar } from "./avatar";
 
 interface ProfileLeftProps {
   logout: typeof logoutUser;
@@ -26,9 +27,7 @@ export const ProfileLeft: React.FC<ProfileLeftProps> = ({ user, logout }) => {
       <div className="username text-center d-lg-none d-block">
         {t("hello")} <span>{user.name}</span>
       </div>
-      <div className="user-image">
-        <img src={user.avatar} alt="user" />
-      </div>
+      <Avatar user={user} />
       <NavItem to={"/profile"} title={t("my_page")}>
         <img src="/assets/images/user-g.svg" alt="user" />
         <img src="/assets/images/user-red.svg" alt="user" className="active" />

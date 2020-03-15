@@ -31,12 +31,6 @@ export const toggleFavorite: (productId: number) => void = (
       type: FavoritesActionsType.loadingItemId
     });
     FavoritesService.toogle(productId).then(res => {
-      FavoritesService.getAll().then(res => {
-        dispatch<SetFavoritesAction>({
-          type: FavoritesActionsType.setFavorites,
-          payload: res.data.data
-        });
-      });
       dispatch<SetFavoritesAction>({
         type: FavoritesActionsType.setFavorites,
         payload: res.data.data

@@ -25,7 +25,7 @@ export const _ShopPage: React.FC<ShopPageProps> = ({ branches }) => {
   useEffect(() => {
     const filtered = filterByValue(branches, searchInput.value);
     setFilterBranches(filtered);
-  }, [searchInput.value]);
+  }, [branches, searchInput.value]);
 
   if (!branches) return <LayoutSpinner></LayoutSpinner>;
   return (

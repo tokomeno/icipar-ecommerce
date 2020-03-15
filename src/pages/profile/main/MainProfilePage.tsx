@@ -1,8 +1,10 @@
 import React from "react";
 import { ProfileBasePage } from "../index";
-import { dummyProductData } from "../../../data/product";
-import { Product } from "../../../components/product/product";
+// import { dummyProductData } from "../../../data/product";
+// import { Product } from "../../../components/product/product";
 import { useTranslation } from "react-i18next";
+import { NavLink } from "react-router-dom";
+import { routes } from "../../../routes/routes";
 
 interface ProfilePageProps {
   name?: string;
@@ -17,8 +19,8 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ name }) => {
           {t("hello")} <span className="name">{name}</span>
         </div>
         <div className="prof-grid d-flex justify-content-between">
-          <a
-            href="#!"
+          <NavLink
+            to="#!"
             className="prof-grid_item d-flex align-items-center justify-content-center"
           >
             <img
@@ -32,9 +34,9 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ name }) => {
               alt="right arrow"
               className="arrow"
             />
-          </a>
-          <a
-            href="#!"
+          </NavLink>
+          <NavLink
+            to={routes.blogs}
             className="prof-grid_item d-flex align-items-center justify-content-center"
           >
             <img
@@ -42,15 +44,15 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ name }) => {
               alt="news"
               className="grid-image"
             />
-            <h2 className="title">სიახლეები</h2>
+            <h2 className="title">{t("news")}</h2>
             <img
               src="/assets/images/arrow-right.svg"
               alt="right arrow"
               className="arrow"
             />
-          </a>
-          <a
-            href="#!"
+          </NavLink>
+          <NavLink
+            to={routes.blogs}
             className="prof-grid_item d-flex align-items-center justify-content-center"
           >
             <img
@@ -58,40 +60,40 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ name }) => {
               alt="blog"
               className="grid-image"
             />
-            <h2 className="title">ბლოგი</h2>
+            <h2 className="title">{t("blog")}</h2>
             <img
               src="/assets/images/arrow-right.svg"
               alt="right arrow"
               className="arrow"
             />
-          </a>
+          </NavLink>
         </div>
-        <div className="recomend-title text-center">რეკომენდაციები შენთვის</div>
+        {/* <div className="recomend-title text-center">რეკომენდაციები შენთვის</div>
         <div className="line" />
         <div className="menu d-flex justify-content-center align-items-center">
-          <a href="#!" className="menu_link active">
+          <NavLink to="#!" className="menu_link active">
             ყველა
-          </a>
-          <a href="#!" className="menu_link">
+          </NavLink>
+          <NavLink to="#!" className="menu_link">
             სუნამოები
-          </a>
-          <a href="#!" className="menu_link">
+          </NavLink>
+          <NavLink to="#!" className="menu_link">
             კანის მოვლა
-          </a>
-          <a href="#!" className="menu_link">
+          </NavLink>
+          <NavLink to="#!" className="menu_link">
             მაკიაჟი
-          </a>
-          <a href="#!" className="menu_link">
+          </NavLink>
+          <NavLink to="#!" className="menu_link">
             პარაფარმაცია
-          </a>
-        </div>
-        <div>
+          </NavLink>
+        </div> */}
+        {/* <div>
           <div className="products d-flex flex-wrap">
             {dummyProductData.slice(1, 3).map(p => (
               <Product key={p.id} wrapperClass="product" product={p} />
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
     </ProfileBasePage>
   );

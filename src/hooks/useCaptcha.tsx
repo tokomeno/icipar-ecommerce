@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 
 export const useCaptcha = () => {
   const [recaptcha_token, setRecaptchaToken] = useState<string>("");

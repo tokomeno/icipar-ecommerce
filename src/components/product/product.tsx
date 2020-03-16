@@ -17,7 +17,6 @@ interface ProductProps {
 export const Product: React.FC<ProductProps> = ({
   wrapperClass,
   product,
-  isHot,
   cartItem
 }) => {
   return (
@@ -31,14 +30,18 @@ export const Product: React.FC<ProductProps> = ({
             <ProductRaiting rateNum={product.rating} starRate={1} />
             <div className="d-flex">
               <ProductHeartBtn productId={product.id} />
-              <ProductCartBtn
-                mainItemId={product.main_item_id}
-                productId={product.id}
-              />
+              {product.being_sold_online && (
+                <ProductCartBtn
+                  mainItemId={product.main_item_id}
+                  productId={product.id}
+                />
+              )}
             </div>
           </div>
         </div>
-        {isHot && <ProductHot />}
+        {product.preorderable && (
+          <ProductHot productId={product.id} countdown={product.preorderable} />
+        )}
         <Link to={`/product/${product.id}`} className="news_link">
           {product.title}
         </Link>

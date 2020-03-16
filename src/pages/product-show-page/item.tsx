@@ -13,6 +13,7 @@ interface ItemProps {
   activeItem: IProductWithItems["items"][number];
   branches: { full_address: string }[];
   delivery_terms: string;
+  hot_timer?: JSX.Element;
 }
 
 export const Item: React.FC<ItemProps> = ({
@@ -20,7 +21,8 @@ export const Item: React.FC<ItemProps> = ({
   setActiveItemFromId,
   activeItem,
   branches,
-  delivery_terms
+  delivery_terms,
+  hot_timer
 }) => {
   const { t } = useTranslation();
   return (
@@ -43,15 +45,17 @@ export const Item: React.FC<ItemProps> = ({
           </div>
           <div className="col-md-7">
             <div className="description">
-              <Social />
+              {/* <Social /> */}
               <div className="d-flex align-items-center">
                 <Rating rating={product.rating} />
                 <div className="review">
                   (<span>87</span> {t("ganxilva")})
                 </div>
               </div>
+
               <div className="d-flex name-block">
                 <h1 className="name">{activeItem.title}</h1>
+                {hot_timer && hot_timer}
                 <button className="heart profbtns_btn">
                   <img
                     src="/assets/images/heart-border.svg"

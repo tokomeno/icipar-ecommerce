@@ -16,6 +16,14 @@ import {
   mapToRequestParams
 } from "../hooks/useProducts/helper";
 
+export interface IProductPreordable {
+  y: number;
+  m: number;
+  d: number;
+  h: number;
+  i: number;
+  s: number;
+}
 export interface IProduct {
   id: number;
   title: string;
@@ -26,6 +34,8 @@ export interface IProduct {
   price_min: number;
   price_max?: number;
   main_item_id: number;
+  being_sold_online: boolean;
+  preorderable?: IProductPreordable;
 }
 
 export interface IProductBundle {

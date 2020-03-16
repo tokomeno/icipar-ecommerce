@@ -13,6 +13,7 @@ import { connect } from "react-redux";
 import { IStoreState } from "../../redux/mainReducer";
 import { LayoutSpinner } from "../../components/spinners/layout-spinner";
 import { ProductService } from "../../services/product.http";
+import { ProductHot } from "../../components/product/product-hot";
 
 interface ProducShowPageProps {
   match: match<{ id: string }>;
@@ -67,6 +68,14 @@ const _ProducShowPage: React.FC<ProducShowPageProps> = ({
         setActiveItemFromId={setActiveItemFromId}
         activeItem={activeItem}
         product={product}
+        hot_timer={
+          product.preorderable && (
+            <ProductHot
+              productId={product.id}
+              countdown={product.preorderable}
+            />
+          )
+        }
       />
       <div className="prod-content">
         <ProductContent details={product["details"]} brand={product["brand"]} />

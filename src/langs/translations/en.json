@@ -155,6 +155,7 @@
     "contact_person_email": "contact_person_email",
     "man": "man",
     "daily_offer": "daily_offer",
-    "address_saved_successfully": "address saved successfully"
+    "address_saved_successfully": "address saved successfully",
+    "blog_page": "blog_page"
   }
 }

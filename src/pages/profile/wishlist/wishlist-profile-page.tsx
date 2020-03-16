@@ -34,7 +34,7 @@ export const _WishlistProfilePage: React.FC<WishlistProfilePageProps> = ({
             </thead>
             <tbody>
               {favorites.map(favoriteProduct => (
-                <tr>
+                <tr key={favoriteProduct.id}>
                   <td className="first-td">
                     <a href="#!" className="d-flex align-items-center">
                       <div className="image d-flex align-items-center justify-content-center">

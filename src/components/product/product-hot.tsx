@@ -13,10 +13,10 @@ const _ProductHot: React.FC<ProductHotProps> = ({ countdown, productId }) => {
     console.log(countdown);
     setDate(
       new Date().getTime() +
-        countdown.s +
-        countdown.i * 60 +
-        countdown.h * 3600 +
-        countdown.d * 86400
+        countdown.s * 1000 +
+        countdown.i * 1000 * 60 +
+        countdown.h * 1000 * 3600 +
+        countdown.d * 1000 * 60 * 60 * 24
     );
   }, [countdown]);
   if (!tillDate) return null;

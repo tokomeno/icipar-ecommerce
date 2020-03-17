@@ -3,7 +3,8 @@ import {
   ADD_USER_ADDRESSES,
   GET_USER_ADDRESSES,
   DELETE_USER_ADDRESSES,
-  ADDRESS_MAKE_MAIN
+  ADDRESS_MAKE_MAIN,
+  EDIT_USER_ADDRESSES
 } from "../api/endpoints";
 
 export interface IAddress {
@@ -29,15 +30,18 @@ export class AddressService {
     }>(GET_USER_ADDRESSES);
   }
 
-  static add(data: {
+  static createOrUpdate(data: {
+    id: null | number;
     city_id: string;
     full_address: string;
     comment: string;
     contact_person_name: string;
     contact_person_email: string;
     contact_person_phone: string;
+    is_main: boolean;
   }) {
-    return axiosWithToken.post(ADD_USER_ADDRESSES, data);
+    const url = data.id ? EDIT_USER_ADDRESSES + data.id : ADD_USER_ADDRESSES;
+    return axiosWithToken.post(url, data);
   }
 
   static delete(id: number) {

@@ -27,6 +27,7 @@ export const CouponsTable: React.FC<CouponsTableProps> = ({ items }) => {
         <tbody>
           {items.map(c => (
             <tr
+              key={c.code}
               className={classnames("coupons-tr", {
                 used: c.isActive
               })}

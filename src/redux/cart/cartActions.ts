@@ -22,21 +22,20 @@ import { IGiftCardErrors } from "../../pages/gift-card/gift-card-page";
 export const fetchCart: Function = () => {
   return async (dispatch: Dispatch) => {
     axiosWithToken
-      .get<{ data: { items: ICartItem[]; original_amount: number } & any }>(
-        GET_CART
-      )
+      .get<{ data: ICartState }>(GET_CART)
       .then(res => {
-        dispatch<SetCartAction>({
-          type: CartActionsType.setCart,
-          payload: res.data.data
-        });
+        dispatch<SetCartAction>(setCart(res.data.data));
       })
       .catch(err => {
         console.log(err);
-        // alert("დაფიქსირდა შეცდომა");
       });
   };
 };
+
+export const setCart = (cart: ICartState): SetCartAction => ({
+  type: CartActionsType.setCart,
+  payload: cart
+});
 
 export const increaseItem: (itemId: number) => void = (itemId: number) => {
   const item = store.getState().cart.itemsByKeys[itemId];

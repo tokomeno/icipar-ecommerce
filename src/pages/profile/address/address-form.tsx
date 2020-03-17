@@ -4,6 +4,7 @@ import { useInput } from "../../../hooks/common/useInput";
 import { AddressService, ICity } from "../../../services/address.http";
 import { ProfileInput } from "../../../components/profile-input";
 import { IFormAdreess } from "./address-profile";
+import { useToggle } from "../../../hooks/common/useToggle";
 
 interface AddressFormProps {
   address: IFormAdreess;
@@ -41,16 +42,22 @@ export const AddressForm: React.FC<AddressFormProps> = ({
     onChange: setcontact_person_phone
   } = useInput(address.contact_person_phone || "");
 
+  const { isActive: isMain, toggle: toggleMain } = useToggle(
+    address.is_main || false
+  );
+
   const [errors, setErrors] = useState<{ [key: string]: string[] }>({});
 
   const handleSubmit = () => {
-    AddressService.add({
+    AddressService.createOrUpdate({
+      id: address.id,
       city_id,
       full_address,
       comment,
       contact_person_name,
       contact_person_email,
-      contact_person_phone
+      contact_person_phone,
+      is_main: isMain
     })
       .then(res => {
         setErrors({});
@@ -120,6 +127,21 @@ export const AddressForm: React.FC<AddressFormProps> = ({
             onChange={setcomment}
             errorMessage={errors && errors.comment && errors.comment[0]}
           />
+          <div className="d-flex flex-column info-item invoice">
+            <br />
+            <label className="invoice-txt">
+              <input
+                type="checkbox"
+                className="hide"
+                checked={isMain}
+                onChange={toggleMain}
+              />
+              <span className="checkmark" />
+              {t("main_address")}
+            </label>
+            <br />
+          </div>
+          {/* </div> */}
         </div>
         <div className="col-sm-6">
           <ProfileInput

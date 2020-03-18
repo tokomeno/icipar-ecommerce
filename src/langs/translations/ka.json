@@ -147,12 +147,6 @@
     "search_brand": "მოძებნე ბრენდი",
     "add_new": "ახლის დამატება",
     "city": "ქალაქი",
-    "choose_city": "აირჩიეთ ქალაქი",
-    "full_address": "სრული მისამართი",
-    "comment": "კომენტარი",
-    "contact_person_name": "contact_person_name",
-    "contact_person_phone": "contact_person_phone",
-    "contact_person_email": "contact_person_email",
     "man": "კაცი",
     "daily_offer": "daily_offer",
     "address_saved_successfully": "address saved successfully",
@@ -162,6 +156,16 @@
     "confirm_phone_placeholder": "confirm_phone_placeholder",
     "check_mail_for_pin": "check_mail_for_pin",
     "check_phone_for_pin": "check_phone_for_pin",
-    "reviews": "reviews"
+    "reviews": "reviews",
+    "gift_card": "სასაჩუქრე ბარათი",
+    "discount_gift_card": "ფასდაკლების ბარათი",
+    "new_password_confirmation": "გაიმეორეთ ახალი პაროლი",
+    "choose_city": "აირჩიეთ ქალაქი",
+    "full_address": "სრული მისამართი",
+    "comment": "კომენტარი",
+    "contact_person_name": "საკონტაქტო პიროვნების სახელი",
+    "contact_person_phone": "საკონტაქტო პიროვნების ნომერი",
+    "contact_person_email": "საკონტაქტო პიროვნების ელ-ფოსტა",
+    "message": "შეტყობინება"
   }
 }

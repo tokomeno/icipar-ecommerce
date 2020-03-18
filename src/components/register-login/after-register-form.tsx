@@ -1,12 +1,11 @@
-import React, { useCallback, useState } from "react";
-import classnames from "classnames";
+import React, { useState } from "react";
 import { useInput } from "../../hooks/common/useInput";
 import { AuthInput } from "./authInput";
 import { connect } from "react-redux";
 import { IStoreState } from "../../redux/mainReducer";
-import { AuthState, IUser } from "../../redux/auth/authTypes";
 import { useTranslation } from "react-i18next";
 import { AuthService } from "../../services/auth.http";
+import { IUser } from "../../redux/auth/authTypes";
 
 interface AfterRegisterFormProps {
   hideModal: () => void;

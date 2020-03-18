@@ -155,7 +155,7 @@ export const _Header: React.FC<HeaderProps> = ({ user, phone, menu }) => {
                 <Search />
                 <div className="col-md-2 d-flex align-items-center justify-content-end">
                   <CartNavbarDropdown />
-                  <FavoritesNavbarDropdown />
+                  {user && <FavoritesNavbarDropdown />}
                 </div>
               </div>
             </div>

@@ -10,10 +10,12 @@ export const fetchFavorites: Function = () => {
   return async (dispatch: Dispatch) => {
     FavoritesService.getAll()
       .then(res => {
-        dispatch<SetFavoritesAction>({
-          type: FavoritesActionsType.setFavorites,
-          payload: res.data.data
-        });
+        if (res.data && res.data.data) {
+          dispatch<SetFavoritesAction>({
+            type: FavoritesActionsType.setFavorites,
+            payload: res.data.data
+          });
+        }
       })
       .catch(err => {
         console.log(err);

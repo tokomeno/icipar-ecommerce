@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from "react";
 
 import { BundleProduct } from "../../components/bundle-product/bundle-product";
 import { ProductSimpleSlider } from "../../components/sliders/product-simple-slider/product-simple-slider";
-import { dummyProductData } from "../../data/product";
 import { Reviews } from "../../components/reviews/reviews";
 import { ProductContent } from "../../components/product-content/product-content";
 import { useTranslation } from "react-i18next";

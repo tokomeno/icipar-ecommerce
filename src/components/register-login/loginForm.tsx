@@ -108,9 +108,9 @@ const _LoginForm: React.FC<LoginFormProps> = ({
       </div>
       <FbLoginBtn />
       <GoogleLoginBtn />
-      <a href="#!" className="pass-forgot">
+      {/* <a href="#!" className="pass-forgot">
         {t("frogot_password")}?
-      </a>
+      </a> */}
     </form>
   );
 };

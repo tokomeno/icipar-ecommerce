@@ -4,9 +4,14 @@ import { connect } from "react-redux";
 // import { API_GA_LOGIN_URL } from "../../api/endpoints";
 import { GOOGLE_CLIENT_ID } from "../../consts";
 import { setCurrentUser } from "../../redux/auth/authActions";
+import { useTranslation } from "react-i18next";
 // import Axios from "axios";
 
  
+const GaText = () => {
+  const {t} = useTranslation()
+  return (<div className="txt text-center">{t("ga_auth")}</div>)
+}
 
 class GoogleLoginButton extends React.PureComponent {
   responseGoogle = (res) => {
@@ -47,7 +52,7 @@ class GoogleLoginButton extends React.PureComponent {
             <div className="icon d-flex align-items-center justify-content-center">
               <i className="fab fa-google" />
             </div>
-            <div className="txt text-center">გუგლით ავტორიზაცია</div>
+            <GaText/>
           </a>
         )}
         autoLoad={false}
@@ -58,6 +63,8 @@ class GoogleLoginButton extends React.PureComponent {
     );
   }
 }
+
+
 
 export const GoogleLoginBtn = connect(null, { setCurrentUser })(
   GoogleLoginButton

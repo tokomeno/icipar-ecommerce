@@ -145,17 +145,18 @@
     "pay": "გადახდა",
     "paste_coupon_or_sale_code": "ჩააკოპირე კუპონის ან ფასდაკლების კოდი…",
     "search_brand": "მოძებნე ბრენდი",
-    "add_new": "add_new",
-    "city": "city",
-    "choose_city": "choose_city",
-    "full_address": "full_address",
-    "comment": "comment",
+    "add_new": "ახლის დამატება",
+    "city": "ქალაქი",
+    "choose_city": "აირჩიეთ ქალაქი",
+    "full_address": "სრული მისამართი",
+    "comment": "კომენტარი",
     "contact_person_name": "contact_person_name",
     "contact_person_phone": "contact_person_phone",
     "contact_person_email": "contact_person_email",
-    "man": "man",
+    "man": "კაცი",
     "daily_offer": "daily_offer",
     "address_saved_successfully": "address saved successfully",
-    "blog_page": "blog_page"
+    "blog_page": "blog_page",
+    "ga_auth": "გუგლით ავტორიზაცია"
   }
 }

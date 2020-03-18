@@ -48,6 +48,7 @@ export const InfoProfilePage: React.FC<InfoProfilePageProps> = props => {
       })
       .then(res => {
         setSuccessMessage(t("profile_info_updated"));
+        setErrors({});
       })
       .catch(err => {
         if (err.response && err.response.data && err.response.data.error) {

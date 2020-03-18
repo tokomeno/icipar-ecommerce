@@ -31,7 +31,10 @@ import { InfoProfilePage } from "./pages/profile/info/info-profile";
 import { BlogShowPage } from "./pages/blog-show/blog-show";
 import { BlogPage } from "./pages/blog/blog-page";
 import { store } from "./redux/store";
-import { fetch_Social_ContactInfo_Branches } from "./redux/info/infoActions";
+import {
+  fetch_Social_ContactInfo_Branches,
+  setLayoutCatogriesAction
+} from "./redux/info/infoActions";
 import { StaticPage } from "./pages/static-page/static-page";
 import { Layout } from "./layout";
 import { loadReCaptcha } from "react-recaptcha-v3";
@@ -52,6 +55,7 @@ export interface match<P> {
 setDefaultLang();
 tryLocalAuth();
 store.dispatch(fetch_Social_ContactInfo_Branches() as any);
+store.dispatch(setLayoutCatogriesAction() as any);
 
 const App: React.FC<{}> = () => {
   useEffect(() => {
@@ -90,16 +94,20 @@ const App: React.FC<{}> = () => {
 
             <Route path={routes.staticPages} exact component={StaticPage} />
 
-            <Route path="/profile/cart" exact component={CartPage} />
+            <Route path={routes.cart} exact component={CartPage} />
             {/* PROFILE PAGES */}
             <PrivateRoute>
-              <Route path="/profile" exact component={ProfilePage} />
+              <Route path={routes.profile} exact component={ProfilePage} />
               <Route path="/profile/coupons" exact component={CouponsPage} />
-              <Route path="/profile/checkout" exact component={CartPage} />
+              <Route path={routes.checkout} exact component={CartPage} />
               <Route path={routes.orders} exact component={OrdersProfilePage} />
-              <Route path="/profile/info" exact component={InfoProfilePage} />
               <Route
-                path="/profile/address"
+                path={routes.profileInfo}
+                exact
+                component={InfoProfilePage}
+              />
+              <Route
+                path={routes.profileAddress}
                 exact
                 component={AddressProiflePage}
               />

@@ -1,7 +1,7 @@
 import React from "react";
 import Slider from "react-slick";
-import { IProductWithItems } from "../../data/product";
 import Lightbox from "react-image-lightbox";
+import { IProductWithItems } from "../../services/product.http";
 
 interface ProductShowSliderProps {
   activeItem: IProductWithItems["items"][number];

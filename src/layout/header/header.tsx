@@ -25,15 +25,15 @@ import { HeaderMenuItem } from "./header-menu-item";
 interface HeaderProps {
   user: IStoreState["auth"]["user"];
   phone: string;
+  menu: IMenuCatrogy[];
 }
 
-export const _Header: React.FC<HeaderProps> = ({ user, phone }) => {
+export const _Header: React.FC<HeaderProps> = ({ user, phone, menu }) => {
   const { t } = useTranslation();
   const history = useHistory();
   const { setActiveModal, activeModal, hideModal } = useContext<
     IActiveModalContext
   >(ActiveModalContext);
-  const [menu, setMenu] = useState<IMenuCatrogy[]>([]);
   const [dailyOffer, setDailyOffer] = useState<IDailyOffer | null>(null);
   const [latestBlogPost, setLatestBlogPost] = useState<ILatestBlogPost | null>(
     null
@@ -60,9 +60,6 @@ export const _Header: React.FC<HeaderProps> = ({ user, phone }) => {
   }, [toggle, handleScroll]);
 
   useEffect(() => {
-    LayoutService.productCategories().then(res => {
-      setMenu(res.data.data);
-    });
     LayoutService.dailyOffer().then(res => {
       setDailyOffer(res.data.data);
     });
@@ -245,7 +242,8 @@ export const _Header: React.FC<HeaderProps> = ({ user, phone }) => {
 
 const mapStateToProps = ({ info }: IStoreState) => {
   return {
-    phone: info.contact_info.phone
+    phone: info.contact_info.phone,
+    menu: info.layoutCategories
   };
 };
 

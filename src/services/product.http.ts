@@ -1,5 +1,4 @@
 import Axios from "axios";
-import { IProductWithItems } from "../data/product";
 import {
   FETCH_PRODUCT_URL,
   PRODUCT_BRANCH,
@@ -46,6 +45,37 @@ export interface IProductBundle {
     thumbnail: string;
     price: number;
   }[];
+}
+
+export interface IProductWithItems {
+  id: number;
+  title: string;
+  rating: number;
+  being_sold_online: boolean;
+  details: {
+    description: string;
+    usage: string;
+    ingredients: string;
+  };
+  brand: {
+    name: string;
+    description: string;
+  };
+  preorderable?: any;
+  items: Item[];
+}
+
+interface Item {
+  id: number;
+  title: string;
+  volume: number;
+  thumbnail: string;
+  color?: any;
+  stock: number;
+  price: number;
+  original_price: number;
+  discount_rate: number;
+  images: { image: string }[];
 }
 
 export class ProductService {

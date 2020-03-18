@@ -9,7 +9,8 @@ let initState: IInfoState = {
   product_delivery_terms: {
     content: ""
   },
-  branches: []
+  branches: [],
+  layoutCategories: []
 };
 
 export const infoReducer = (
@@ -31,6 +32,11 @@ export const infoReducer = (
       return {
         ...state,
         branches: action.payload
+      };
+    case InfoActionTypes.SetLayoutCatrogires:
+      return {
+        ...state,
+        layoutCategories: action.payload
       };
     default:
       return state;

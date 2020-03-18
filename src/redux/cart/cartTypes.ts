@@ -20,6 +20,7 @@ export interface ICartState {
   errors: {
     new_gift_cards?: string | null;
   };
+  promotion_display_text?: string | null | undefined;
 }
 
 export interface ICartBundle {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { IProductWithItems } from "../../data/product";
 import { useTranslation } from "react-i18next";
 import classnames from "classnames";
+import { IProductWithItems } from "../../services/product.http";
 
 interface ProductContentProps {
   details: IProductWithItems["details"];

@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Dropdown } from "react-bootstrap";
-import { LayoutService, ICategory } from "../../services/layout.http";
+import { IMenuCatrogy } from "../../services/layout.http";
 import { ProductAutocompleteDropdown } from "../../components/product-autocomplete-dropdown";
 import { useProductAutocomplete } from "../../hooks/useProductAutocomplete";
+import { connect } from "react-redux";
+import { IStoreState } from "../../redux/mainReducer";
 
-interface SearchProps {}
+interface SearchProps {
+  categories: IMenuCatrogy[];
+}
 
-export const Search: React.FC<SearchProps> = props => {
+const _Search: React.FC<SearchProps> = ({ categories = [] }) => {
   const { t } = useTranslation();
-  const [categories, setCategories] = useState<ICategory[]>([]);
   const {
     handleSubmit,
     resetProducts,
@@ -19,16 +22,6 @@ export const Search: React.FC<SearchProps> = props => {
     activeTab,
     setActiveTab
   } = useProductAutocomplete();
-
-  useEffect(() => {
-    LayoutService.productCategories()
-      .then(res => {
-        setCategories(res.data.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, []);
 
   return (
     <div className="col-md-7" style={{ position: "relative" }}>
@@ -85,3 +78,9 @@ export const Search: React.FC<SearchProps> = props => {
     </div>
   );
 };
+
+const mapStateToProps = ({ info }: IStoreState) => ({
+  categories: info.layoutCategories
+});
+
+export const Search = connect(mapStateToProps)(_Search);

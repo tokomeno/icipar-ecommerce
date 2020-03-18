@@ -1,11 +1,11 @@
 import React from "react";
 import { ProductShowSlider } from "./product-show-slider";
-import { IProductWithItems } from "../../data/product";
 import classnames from "classnames";
 import { AddCartButton } from "./AddCartButton";
 import { useTranslation } from "react-i18next";
 import { Rating } from "../../components/rating";
 import { Dropdown } from "react-bootstrap";
+import { IProductWithItems } from "../../services/product.http";
 
 interface ItemProps {
   product: IProductWithItems;
@@ -48,9 +48,9 @@ export const Item: React.FC<ItemProps> = ({
               {/* <Social /> */}
               <div className="d-flex align-items-center">
                 <Rating rating={product.rating} />
-                <div className="review">
+                {/* <div className="review">
                   (<span>87</span> {t("ganxilva")})
-                </div>
+                </div> */}
               </div>
 
               <div className="d-flex name-block">
@@ -80,7 +80,12 @@ export const Item: React.FC<ItemProps> = ({
                   ({t("maragshia_erteuli", { number: activeItem.stock })})
                 </div>
               </div>
-              <AddCartButton activeItem={activeItem} />
+
+              <AddCartButton
+                being_sold_online={product.being_sold_online}
+                activeItem={activeItem}
+              />
+
               <div className="d-lg-flex d-none">
                 <Dropdown drop="down">
                   <Dropdown.Toggle
@@ -181,25 +186,25 @@ const CustomToggle = React.forwardRef<any, any>(
   )
 );
 
-const Social = () => (
-  <div className="social">
-    <a
-      href="#!"
-      className="fb social-item d-flex align-items-center justify-content-center"
-    >
-      <i className="fab fa-facebook-f" />
-    </a>
-    <a
-      href="#!"
-      className="tw social-item d-flex align-items-center justify-content-center"
-    >
-      <i className="fab fa-twitter" />
-    </a>
-    <a
-      href="#!"
-      className="p social-item d-flex align-items-center justify-content-center"
-    >
-      <i className="fab fa-pinterest" />
-    </a>
-  </div>
-);
+// const Social = () => (
+//   <div className="social">
+//     <a
+//       href="#!"
+//       className="fb social-item d-flex align-items-center justify-content-center"
+//     >
+//       <i className="fab fa-facebook-f" />
+//     </a>
+//     <a
+//       href="#!"
+//       className="tw social-item d-flex align-items-center justify-content-center"
+//     >
+//       <i className="fab fa-twitter" />
+//     </a>
+//     <a
+//       href="#!"
+//       className="p social-item d-flex align-items-center justify-content-center"
+//     >
+//       <i className="fab fa-pinterest" />
+//     </a>
+//   </div>
+// );

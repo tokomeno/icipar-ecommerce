@@ -80,33 +80,3 @@ export const dummyProductData: IProduct[] = [
     thumbnail: "/assets/uploads/images/slider7.png"
   }
 ];
-
-export interface IProductWithItems {
-  id: number;
-  title: string;
-  rating: number;
-  details: {
-    description: string;
-    usage: string;
-    ingredients: string;
-  };
-  brand: {
-    name: string;
-    description: string;
-  };
-  preorderable?: any;
-  items: Item[];
-}
-
-interface Item {
-  id: number;
-  title: string;
-  volume: number;
-  thumbnail: string;
-  color?: any;
-  stock: number;
-  price: number;
-  original_price: number;
-  discount_rate: number;
-  images: { image: string }[];
-}

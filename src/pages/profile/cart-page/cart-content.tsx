@@ -15,8 +15,7 @@ import { useTranslation } from "react-i18next";
 import { ICartState, ICartItem } from "../../../redux/cart/cartTypes";
 import { CartCoupon } from "./cart-coupon";
 import { CartBundel } from "./cart-bundel";
-import { CartService } from "../../../services/cart.http";
-import { useInput } from "../../../hooks/common/useInput";
+import { ApplyCoupon } from "./apply-coupon";
 
 interface CartContentProps {
   setCart: typeof setCart;
@@ -31,6 +30,7 @@ interface CartContentProps {
   bundles: ICartState["bundles"];
   removeGiftCart: typeof removeGiftCart;
   setBundleQntyToCart: typeof setBundleQntyToCart;
+  promotion_display_text: ICartState["promotion_display_text"];
 }
 
 export const _CartContent: React.FC<CartContentProps> = ({
@@ -45,7 +45,8 @@ export const _CartContent: React.FC<CartContentProps> = ({
   removeGiftCart,
   bundles,
   setBundleQntyToCart,
-  setCart
+  setCart,
+  promotion_display_text
 }) => {
   const { t } = useTranslation();
   return (
@@ -99,7 +100,10 @@ export const _CartContent: React.FC<CartContentProps> = ({
         </div>
 
         <div className="shopping-bottom d-flex flex-column flex-md-row align-items-center justify-content-sm-between justify-content-center">
-          <ApplyCoupon setCart={setCart} />
+          <ApplyCoupon
+            promotion_display_text={promotion_display_text}
+            setCart={setCart}
+          />
           <div className="next d-flex align-items-center">
             <div className="last-price d-none d-sm-block">
               {totalPrice}
@@ -127,7 +131,8 @@ const mapStateToProps = ({ cart }: IStoreState) => {
     totalPrice: cart.totalPrice,
     loadingItemId: cart.loadingItemId,
     new_gift_cards: cart.new_gift_cards,
-    bundles: cart.bundles
+    bundles: cart.bundles,
+    promotion_display_text: cart.promotion_display_text
   };
 };
 
@@ -140,29 +145,3 @@ export const CartContent = connect(mapStateToProps, {
   setBundleQntyToCart,
   setCart
 })(_CartContent);
-
-const ApplyCoupon: React.FC<{ setCart: typeof setCart }> = ({ setCart }) => {
-  const { t } = useTranslation();
-  const applyCoupon = () => {
-    CartService.applyPromotion(promotionInput.value).then(res => {
-      setCart(res.data.data);
-    });
-  };
-  const promotionInput = useInput();
-
-  return (
-    <form className="copy-code d-flex align-items-center">
-      <div>
-        <input
-          {...promotionInput}
-          type="text"
-          placeholder={t("paste_coupon_or_sale_code")}
-        />
-        <span>-15%</span>
-      </div>
-      <button className="buy-btn" type="button" onClick={applyCoupon}>
-        {t("send")}
-      </button>
-    </form>
-  );
-};

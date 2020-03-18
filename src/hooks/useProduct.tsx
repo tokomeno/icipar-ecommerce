@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { IProductWithItems } from "../data/product";
-import { ProductService } from "../services/product.http";
+import { ProductService, IProductWithItems } from "../services/product.http";
 
 export const useProduct = (productId: number | string) => {
   const [product, setProduct] = useState<IProductWithItems | null>(null);

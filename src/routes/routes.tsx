@@ -20,6 +20,11 @@ export const routes = {
 
   favorites: "/profile/favorites",
   orders: "/profile/orders",
+  profile: "/profile",
+  checkout: "/profile/checkout",
+  profileInfo: "/profile/info",
+  profileAddress: "/profile/address",
+  cart: "/profile/cart",
 
   blogs: "/blogs",
   blogShow: "/blogs/:slug",

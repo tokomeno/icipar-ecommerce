@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
-import { IProductWithItems } from "../../data/product";
 import { useTranslation } from "react-i18next";
 import { useCounter } from "../../hooks/common/useCounter";
 import { connect } from "react-redux";
 import { changeQnty } from "../../redux/cart/cartActions";
+import { IProductWithItems } from "../../services/product.http";
 
 interface AddCartButtonProps {
   activeItem: IProductWithItems["items"][number];
   changeQntyById: typeof changeQnty;
+  being_sold_online: boolean;
 }
 
 const _AddCartButton: React.FC<AddCartButtonProps> = ({

@@ -3,10 +3,15 @@ import { ADDITIONAL_INFO, PRODUCT_DELIVERY_TERMS } from "../../api/endpoints";
 import { Dispatch } from "redux";
 import { IInfoState, InfoActionTypes } from "./infoTypes";
 import { BranchService, IBranch } from "../../services/branch.http";
+import { LayoutService, IMenuCatrogy } from "../../services/layout.http";
 
 export interface SetBrnachesAction {
   payload: IBranch[];
   type: InfoActionTypes.SetBrnaches;
+}
+export interface SetLayoutCatrogiresAction {
+  payload: IMenuCatrogy[];
+  type: InfoActionTypes.SetLayoutCatrogires;
 }
 
 export interface SetSocialAndContactInfoAction {
@@ -18,6 +23,21 @@ export interface SetPorductDeliveryTermsAction {
   payload: IInfoState["product_delivery_terms"];
   type: InfoActionTypes.SetPorductDeliveryTerms;
 }
+
+export const setLayoutCatogriesAction = () => {
+  return (dispatch: Dispatch) => {
+    LayoutService.productCategories()
+      .then(res => {
+        dispatch<SetLayoutCatrogiresAction>({
+          type: InfoActionTypes.SetLayoutCatrogires,
+          payload: res.data.data
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+};
 
 export const fetch_Social_ContactInfo_Branches = () => {
   return (dispatch: Dispatch) => {

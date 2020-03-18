@@ -2,8 +2,10 @@ import { IBranch } from "../../services/branch.http";
 import {
   SetSocialAndContactInfoAction,
   SetPorductDeliveryTermsAction,
-  SetBrnachesAction
+  SetBrnachesAction,
+  SetLayoutCatrogiresAction
 } from "./infoActions";
+import { IMenuCatrogy } from "../../services/layout.http";
 
 export interface IInfoState {
   socials: ISocial[];
@@ -15,6 +17,7 @@ export interface IInfoState {
     content: string;
   };
   branches: IBranch[];
+  layoutCategories: IMenuCatrogy[];
 }
 
 export interface ISocial {
@@ -25,10 +28,12 @@ export interface ISocial {
 export enum InfoActionTypes {
   SetSocialAndContactInfo,
   SetPorductDeliveryTerms,
-  SetBrnaches
+  SetBrnaches,
+  SetLayoutCatrogires
 }
 
 export type InfoActions =
   | SetSocialAndContactInfoAction
   | SetPorductDeliveryTermsAction
-  | SetBrnachesAction;
+  | SetBrnachesAction
+  | SetLayoutCatrogiresAction;

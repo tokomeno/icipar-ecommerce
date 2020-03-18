@@ -1,15 +1,17 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { routes } from "../routes/routes";
+import { runInContext } from "vm";
 
 interface PageSideMenuProps {}
 
 export const AboutPagesMenu = [
-  { title: "about_us", to: "/about-us" },
-  { title: "how_it_works", to: "/how-it-works" },
+  { title: "about_us", to: routes.aboutUs },
+  { title: "how_it_works", to: routes.howItWorks },
   // { title: "delivery_terms", to: "#!" },
-  { title: "contact", to: "/contact" },
-  { title: "faq", to: "/page/faq" }
+  { title: "contact", to: routes.contact },
+  { title: "faq", to: routes.faq }
 ];
 export const PageSideMenu: React.FC<PageSideMenuProps> = props => {
   const { t } = useTranslation();

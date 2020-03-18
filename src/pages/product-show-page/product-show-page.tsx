@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 
 import { BundleProduct } from "../../components/bundle-product/bundle-product";
 import { ProductSimpleSlider } from "../../components/sliders/product-simple-slider/product-simple-slider";
-import { dummyProductData, IProductWithItems } from "../../data/product";
+import { dummyProductData } from "../../data/product";
 import { Reviews } from "../../components/reviews/reviews";
 import { ProductContent } from "../../components/product-content/product-content";
 import { useTranslation } from "react-i18next";
@@ -12,7 +12,7 @@ import { match } from "react-router-dom";
 import { connect } from "react-redux";
 import { IStoreState } from "../../redux/mainReducer";
 import { LayoutSpinner } from "../../components/spinners/layout-spinner";
-import { ProductService } from "../../services/product.http";
+import { ProductService, IProductWithItems } from "../../services/product.http";
 import { ProductHot } from "../../components/product/product-hot";
 
 interface ProducShowPageProps {

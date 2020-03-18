@@ -22,7 +22,7 @@ export const CatalogPage: React.FC<CatalogPageProps> = () => {
   );
 
   useEffect(() => {
-    setFilterFromParams();
+    if (window.location.search.length) setFilterFromParams();
   }, [setFilterFromParams]);
 
   const { activeModal, hideModal } = useContext(ActiveModalContext);

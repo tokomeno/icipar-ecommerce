@@ -157,6 +157,11 @@
     "daily_offer": "daily_offer",
     "address_saved_successfully": "address saved successfully",
     "blog_page": "blog_page",
-    "ga_auth": "გუგლით ავტორიზაცია"
+    "ga_auth": "გუგლით ავტორიზაცია",
+    "confirm_email_placeholder": "confirm_email_placeholder",
+    "confirm_phone_placeholder": "confirm_phone_placeholder",
+    "check_mail_for_pin": "check_mail_for_pin",
+    "check_phone_for_pin": "check_phone_for_pin",
+    "reviews": "reviews"
   }
 }

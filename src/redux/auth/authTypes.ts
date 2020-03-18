@@ -2,6 +2,9 @@
 export interface IUser {
   [key: string]: any;
   avatar: string;
+  id: number;
+  phone: number | null;
+  email: number | null;
 }
 
 export interface AuthState {

@@ -1,7 +1,8 @@
 import {
   AuthState as IAuthState,
   AuthActions,
-  AuthActionTypes
+  AuthActionTypes,
+  IUser
 } from "./authTypes";
 
 let initState: IAuthState = {
@@ -46,7 +47,7 @@ export const authReducer = (
         user: {
           ...state.user,
           avatar: action.payload
-        }
+        } as IUser
       };
     }
     default:

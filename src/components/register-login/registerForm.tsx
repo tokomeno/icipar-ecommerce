@@ -17,6 +17,7 @@ interface RegisterFormProps {
   errors: AuthState["errors"];
   registerUser: typeof registerUser;
   hideModal: () => void;
+  onRegister: () => void;
 }
 
 const _RegisterForm: React.FC<RegisterFormProps> = ({
@@ -24,10 +25,12 @@ const _RegisterForm: React.FC<RegisterFormProps> = ({
   showLoginForm,
   errors,
   registerUser,
-  hideModal
+  hideModal,
+  onRegister
 }) => {
   const { t } = useTranslation();
   const myCaptcha = useCaptcha();
+
   const handleSubmit = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
@@ -40,7 +43,7 @@ const _RegisterForm: React.FC<RegisterFormProps> = ({
         phone,
         recaptcha_token: myCaptcha.recaptcha_token
       },
-      hideModal
+      hideModal: onRegister
     });
     myCaptcha.captchaRef.current.execute();
   };
@@ -52,7 +55,7 @@ const _RegisterForm: React.FC<RegisterFormProps> = ({
     ""
   );
 
-  return (
+  const register = (
     <form
       className={classnames(
         "logForm reg-wrapper d-flex flex-column align-items-center justify-content-center",
@@ -124,6 +127,8 @@ const _RegisterForm: React.FC<RegisterFormProps> = ({
       </div>
     </form>
   );
+
+  return register;
 };
 
 const mapStateToProps = ({ auth }: IStoreState) => {

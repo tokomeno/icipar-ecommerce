@@ -130,14 +130,12 @@ export class ProductService {
   }
 
   static getSimilar(productId: number | string) {
-    return Axios.get<{ data: IProduct[] }>(
-      `${PRODUCT_SIMILAR_TO}?id=${productId}`
-    );
+    return Axios.get<{ data: IProduct[] }>(`${PRODUCT_SIMILAR_TO}${productId}`);
   }
 
   static getOtherBought(productId: number | string) {
     return Axios.get<{ data: IProduct[] }>(
-      `${PRODUCT_OTHERS_BOUGHT}?id=${productId}`
+      `${PRODUCT_OTHERS_BOUGHT}${productId}`
     );
   }
 }

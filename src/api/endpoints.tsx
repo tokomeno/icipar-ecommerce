@@ -23,6 +23,8 @@ export const ADDRESS_MAKE_MAIN = AUTH_BASE_URL + "/user/make-address-main/";
 export const TOGGLE_FAVORITES = AUTH_BASE_URL + "/favourites/toggle";
 export const GET_FAVORITES = AUTH_BASE_URL + "/favourites";
 export const UPLOAD_AVATAR = AUTH_BASE_URL + "/upload-avatar";
+export const CONFIRM_EMAIL = AUTH_BASE_URL + "/confirm-email";
+export const CONFIRM_PHONE = AUTH_BASE_URL + "/confirm-phone";
 
 // Products
 // https://app.swaggerhub.com/apis-docs/badzaghua/iciparis-products/1.0.0
@@ -54,9 +56,9 @@ export const PRODUCT_REVIEW = PRODUCT_BASE_URL + "/product-reviews/store";
 export const FETCH_BUNDLE_FOR_ITEM = PRODUCT_BASE_URL + "/item-bundle?item_id=";
 
 export const PRODUCT_OTHERS_BOUGHT =
-  PRODUCT_BASE_URL + "/featured-products/others-bought?product_id=";
+  PRODUCT_BASE_URL + "/product/others-bought?product_id=";
 export const PRODUCT_SIMILAR_TO =
-  PRODUCT_BASE_URL + "/featured-products/similar-to?product_id=";
+  PRODUCT_BASE_URL + "/product/similar-to?product_id=";
 // LAYOUT
 export const PRODUCT_CATEGORIES =
   PRODUCT_BASE_URL + "/layout/product-categories";

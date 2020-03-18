@@ -8,6 +8,8 @@ import {
 } from "../../contexts/modalContex";
 import { connect } from "react-redux";
 import { setAuthErrors } from "../../redux/auth/authActions";
+import { useToggle } from "../../hooks/common/useToggle";
+import { AfterRegisterForm } from "./after-register-form";
 
 interface RegisterLoginProps {
   setAuthErrors: typeof setAuthErrors;
@@ -22,6 +24,10 @@ const _RegisterLogin: React.FC<RegisterLoginProps> = ({ setAuthErrors }) => {
     setAuthErrors(null);
     setActiveForm(form);
   };
+  const {
+    isActive: isActiveAfterRegisterForm,
+    setActive: setActiveAfterRegisterForm
+  } = useToggle();
 
   return (
     <Modal
@@ -60,7 +66,11 @@ const _RegisterLogin: React.FC<RegisterLoginProps> = ({ setAuthErrors }) => {
               isActive={activeForm === "register"}
               showLoginForm={() => showForm("login")}
               hideModal={hideModal}
+              onRegister={setActiveAfterRegisterForm}
             />
+            {isActiveAfterRegisterForm && (
+              <AfterRegisterForm hideModal={hideModal} />
+            )}
           </div>
           <div className="col-lg-6 login_content d-none d-md-block">
             <div className="bg"></div>

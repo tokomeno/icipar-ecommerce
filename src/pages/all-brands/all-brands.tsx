@@ -71,14 +71,26 @@ export const AllBrandsPage: React.FC<AllBrandsPageProps> = () => {
                       _brands => {
                         return (
                           <div className="list-row_col">
-                            {_brands.map(b => (
-                              <NavLink
-                                to={routes.brandShow(b.slug)}
-                                className="link"
-                              >
-                                {b.name}
-                              </NavLink>
-                            ))}
+                            {_brands.map(b => {
+                              if (
+                                brandSearchInput.value.length === 0 ||
+                                b.name
+                                  .toLowerCase()
+                                  .includes(
+                                    brandSearchInput.value.toLowerCase()
+                                  )
+                              ) {
+                                return (
+                                  <NavLink
+                                    to={routes.brandShow(b.slug)}
+                                    className="link"
+                                  >
+                                    {b.name}
+                                  </NavLink>
+                                );
+                              }
+                              return null;
+                            })}
                           </div>
                         );
                       }

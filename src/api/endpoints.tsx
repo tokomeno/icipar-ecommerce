@@ -52,9 +52,11 @@ export const PRODUCT_BRANCH = PRODUCT_BASE_URL + "/product-branches";
 export const GET_BRANCHES = PRODUCT_BASE_URL + "/branches-map";
 export const PRODUCT_REVIEW = PRODUCT_BASE_URL + "/product-reviews/store";
 export const FETCH_BUNDLE_FOR_ITEM = PRODUCT_BASE_URL + "/item-bundle?item_id=";
-export const PRODUCT_OTHERS_BOUGHT =
-  PRODUCT_BASE_URL + "/featured-products/others-bought";
 
+export const PRODUCT_OTHERS_BOUGHT =
+  PRODUCT_BASE_URL + "/featured-products/others-bought?product_id=";
+export const PRODUCT_SIMILAR_TO =
+  PRODUCT_BASE_URL + "/featured-products/similar-to?product_id=";
 // LAYOUT
 export const PRODUCT_CATEGORIES =
   PRODUCT_BASE_URL + "/layout/product-categories";

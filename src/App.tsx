@@ -70,7 +70,6 @@ const App: React.FC<{}> = () => {
             <Route path={routes.home} exact component={HomePage} />
             {/* PAGES */}
             <Route path={routes.aboutUs} exact component={AboutUsPage} />
-            <Route path={routes.aboutBrand} exact component={AboutBrandPage} />
             <Route path={routes.contact} exact component={ContactPage} />
             <Route path={routes.howItWorks} exact component={HowItWorksPage} />
             <Route path={routes.shops} exact component={ShopPage} />

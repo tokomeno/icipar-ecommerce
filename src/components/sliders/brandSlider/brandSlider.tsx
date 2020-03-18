@@ -4,6 +4,8 @@ import Swiper from "react-id-swiper";
 import { useSliderNav } from "../../../hooks/common/useSliderNav";
 import { useTranslation } from "react-i18next";
 import { IBrandSliderItem, BrandService } from "../../../services/brand.http";
+import { routes } from "../../../routes/routes";
+import { NavLink } from "react-router-dom";
 
 interface BrandSliderProps {}
 
@@ -51,9 +53,13 @@ export const BrandSlider: React.FC<BrandSliderProps> = () => {
             {...params}
           >
             {brands.map(b => (
-              <a href="#!" key={b.slug} className="swiper-slide">
+              <NavLink
+                to={routes.brandShow(b.slug)}
+                key={b.slug}
+                className="swiper-slide"
+              >
                 <img key={b.slug} src={b.logo} alt="chanel" />
-              </a>
+              </NavLink>
             ))}
           </Swiper>
           <div

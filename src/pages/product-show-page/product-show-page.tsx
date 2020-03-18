@@ -12,7 +12,11 @@ import { match } from "react-router-dom";
 import { connect } from "react-redux";
 import { IStoreState } from "../../redux/mainReducer";
 import { LayoutSpinner } from "../../components/spinners/layout-spinner";
-import { ProductService, IProductWithItems } from "../../services/product.http";
+import {
+  ProductService,
+  IProductWithItems,
+  IProduct
+} from "../../services/product.http";
 import { ProductHot } from "../../components/product/product-hot";
 
 interface ProducShowPageProps {
@@ -26,6 +30,17 @@ const _ProducShowPage: React.FC<ProducShowPageProps> = ({
 }) => {
   const { t } = useTranslation();
   const { product } = useProduct(match.params.id);
+  const [othersBought, setOthersBought] = useState<IProduct[]>([]);
+  const [similarTo, setSimilarTo] = useState<IProduct[]>([]);
+  useEffect(() => {
+    ProductService.getSimilar(match.params.id).then(res =>
+      setSimilarTo(res.data.data)
+    );
+    ProductService.getOtherBought(match.params.id).then(res =>
+      setOthersBought(res.data.data)
+    );
+  }, [match.params.id]);
+
   const [activeItem, setActiveItem] = useState<
     IProductWithItems["items"][number] | null
   >(null);
@@ -80,16 +95,24 @@ const _ProducShowPage: React.FC<ProducShowPageProps> = ({
       <div className="prod-content">
         <ProductContent details={product["details"]} brand={product["brand"]} />
         <BundleProduct item_id={activeItem.id} />
-        <ProductSimpleSlider
-          title={t("similar_products")}
-          products={dummyProductData}
-        />
-        <div className="line-sliders d-none d-sm-block" />
-        <ProductSimpleSlider
-          title={t("what_others_bought")}
-          products={dummyProductData}
-        />
-        <div className="line-sliders d-none d-sm-block" />
+        {similarTo.length > 0 && (
+          <>
+            <ProductSimpleSlider
+              title={t("similar_products")}
+              products={similarTo}
+            />
+            <div className="line-sliders d-none d-sm-block" />
+          </>
+        )}
+        {othersBought.length > 0 && (
+          <>
+            <ProductSimpleSlider
+              title={t("what_others_bought")}
+              products={othersBought}
+            />
+            <div className="line-sliders d-none d-sm-block" />
+          </>
+        )}
         <Reviews />
       </div>
     </div>

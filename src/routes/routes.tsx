@@ -4,7 +4,6 @@ export const routes = {
   howItWorks: "/page/how-it-works",
   faq: "/page/faq",
 
-  aboutBrand: "/about-brand",
   contact: "/contact",
   shops: "/shops",
   allBrands: "/all-brands",

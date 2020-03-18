@@ -11,7 +11,7 @@ export const Reviews: React.FC<ReveiwProps> = props => {
       <div className="line-sliders d-none d-sm-block" />
       <div className="review-content">
         <div className="top d-sm-flex d-none flex-column align-items-center">
-          <h3 className="title">განხილვები</h3>
+          <h3 className="title">{t("reviews")}</h3>
           <div className="d-flex align-items-center">
             <div className="rate">
               <i className="fa fa-star checked" />
@@ -20,9 +20,9 @@ export const Reviews: React.FC<ReveiwProps> = props => {
               <i className="fa fa-star" />
               <i className="fa fa-star" />
             </div>
-            <div className="num">
+            {/* <div className="num">
               (<span>87</span> განხილვა)
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="review-block">

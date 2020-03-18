@@ -4,7 +4,9 @@ import {
   PRODUCT_BRANCH,
   FETCH_PRODUCTS_FILTER_DATA,
   PRODUCT_REVIEW,
-  FETCH_BUNDLE_FOR_ITEM
+  FETCH_BUNDLE_FOR_ITEM,
+  PRODUCT_SIMILAR_TO,
+  PRODUCT_OTHERS_BOUGHT
 } from "../api/endpoints";
 import { IProductFilterData } from "../hooks/useProductFilterAttributes";
 import { axiosWithToken } from "../api/axios-with-token";
@@ -125,5 +127,17 @@ export class ProductService {
         console.log(err);
         alert("error_occured");
       });
+  }
+
+  static getSimilar(productId: number | string) {
+    return Axios.get<{ data: IProduct[] }>(
+      `${PRODUCT_SIMILAR_TO}?id=${productId}`
+    );
+  }
+
+  static getOtherBought(productId: number | string) {
+    return Axios.get<{ data: IProduct[] }>(
+      `${PRODUCT_OTHERS_BOUGHT}?id=${productId}`
+    );
   }
 }

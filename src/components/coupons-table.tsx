@@ -29,7 +29,7 @@ export const CouponsTable: React.FC<CouponsTableProps> = ({ items }) => {
             <tr
               key={c.code}
               className={classnames("coupons-tr", {
-                used: c.isActive
+                used: !c.isActive
               })}
             >
               <td>

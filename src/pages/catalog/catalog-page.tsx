@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 import { Product } from "../../components/product/product";
 import { useProducts } from "../../hooks/useProducts/useProducts";
@@ -14,10 +14,17 @@ interface CatalogPageProps {}
 
 export const CatalogPage: React.FC<CatalogPageProps> = () => {
   const { t } = useTranslation();
-  const { productFilterData } = useContext(PorductFilterContext);
+  const { productFilterData, setFilterFromParams } = useContext(
+    PorductFilterContext
+  );
   const { products, nextPage, haveNextPage, isLoading } = useProducts(
     productFilterData
   );
+
+  useEffect(() => {
+    setFilterFromParams();
+  }, [setFilterFromParams]);
+
   const { activeModal, hideModal } = useContext(ActiveModalContext);
 
   if (!productFilterData) return <div></div>;

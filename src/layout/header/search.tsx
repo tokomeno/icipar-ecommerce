@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { Dropdown } from "react-bootstrap";
 import { IMenuCatrogy } from "../../services/layout.http";

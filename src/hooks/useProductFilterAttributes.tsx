@@ -72,14 +72,14 @@ export const useProductFilterAttributes = () => {
   >();
   useEffect(() => {
     ProductService.getFilterAttributes().then(res => {
-      const data = addTitlePropertoesToFilterData(res.data.data);
+      const data = addTitlePropertiesToFilterData(res.data.data);
       setProductFilterAttributes(data);
     });
   }, []);
   return { productFilterAttributes };
 };
 
-const addTitlePropertoesToFilterData = (data: IProductFilterData) => {
+const addTitlePropertiesToFilterData = (data: IProductFilterData) => {
   data.categories = data.categories.map(item => ({
     ...item,
     title: item.title

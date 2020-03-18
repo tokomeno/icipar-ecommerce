@@ -1,5 +1,4 @@
 import React from "react";
-import { productCategories } from "../../data/categories";
 import { useTranslation } from "react-i18next";
 import { AboutPagesMenu } from "../../components/pageSideMenu";
 import { NavLink } from "react-router-dom";

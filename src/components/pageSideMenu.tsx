@@ -2,7 +2,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { routes } from "../routes/routes";
-import { runInContext } from "vm";
 
 interface PageSideMenuProps {}
 

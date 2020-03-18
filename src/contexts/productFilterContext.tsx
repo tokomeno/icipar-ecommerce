@@ -43,6 +43,7 @@ interface IPorductFilterContext {
     React.SetStateAction<IProductFilterRequestParameter>
   >;
   setFilterOnKey: FOnFilterChange;
+  setFilterFromParams: () => void;
 }
 
 export const PorductFilterContext = createContext<IPorductFilterContext>(
@@ -52,7 +53,11 @@ export const PorductFilterContext = createContext<IPorductFilterContext>(
 export const PorductFilterProvider: React.FC<{}> = ({ children }) => {
   const [productFilterData, setProductFilterData] = useState<
     IProductFilterRequestParameter
-  >(getQueryParamsFromUrl);
+  >(defaultData);
+
+  const setFilterFromParams = useCallback(() => {
+    setProductFilterData(getQueryParamsFromUrl());
+  }, []);
 
   const setFilterOnKey: FOnFilterChange = useCallback(
     (ids, filterKey) => {
@@ -66,7 +71,8 @@ export const PorductFilterProvider: React.FC<{}> = ({ children }) => {
       value={{
         productFilterData,
         setFilterOnKey,
-        setProductFilterData
+        setProductFilterData,
+        setFilterFromParams
       }}
     >
       {children}

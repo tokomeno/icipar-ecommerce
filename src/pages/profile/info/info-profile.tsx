@@ -8,11 +8,14 @@ import {
   GET_CUSTOMER_INFO
 } from "../../../api/endpoints";
 import { ProfileInput } from "../../../components/profile-input";
+import { useLoader } from "../../../hooks/common/useLoader";
+import { ProfileSpinner } from "../../../components/spinners/profile-spiner";
 
 interface InfoProfilePageProps {}
 
 export const InfoProfilePage: React.FC<InfoProfilePageProps> = props => {
   const { t } = useTranslation();
+  const { isLoading, stopLoading } = useLoader(true);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const { value: name, onChange: setName } = useInput();
   const { value: surname, onChange: setSurname } = useInput();
@@ -79,14 +82,17 @@ export const InfoProfilePage: React.FC<InfoProfilePageProps> = props => {
       .then(res => {
         if (typeof res.data.data === "object") {
           setOriginalData(res.data.data);
+          stopLoading();
         }
       })
       .catch(err => {
         console.log(err);
         alert("დაფიქსირდა შედცომა");
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  if (isLoading) return <ProfileSpinner />;
   return (
     <ProfileBasePage>
       <div className="profile-right profile-side table-profile">

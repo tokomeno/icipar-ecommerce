@@ -171,6 +171,12 @@
     "amount_spent": "amount spent",
     "days_left": "days left",
     "validity_date": "validity date",
-    "copyright_text_footer": "ALL RIGHTS RESERVED, ICI PARIS {{year}}"
+    "copyright_text_footer": "ALL RIGHTS RESERVED, ICI PARIS {{year}}",
+    "favorites": "favorites",
+    "remove_from_favorite": "remove from favorite",
+    "main_address": "Main address",
+    "date": "Date",
+    "discount_rate_earned": "Discount rate earned",
+    "total_amount_spent": "total amount spent"
   }
 }

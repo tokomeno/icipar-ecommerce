@@ -18,6 +18,7 @@ export interface IDiscountCoupon {
   valid_for: string;
   code: string;
 
+  days_left: string;
   validity_date: string;
   rate: number;
 }

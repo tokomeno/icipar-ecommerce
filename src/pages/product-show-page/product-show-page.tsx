@@ -112,7 +112,7 @@ const _ProducShowPage: React.FC<ProducShowPageProps> = ({
             <div className="line-sliders d-none d-sm-block" />
           </>
         )}
-        <Reviews />
+        <Reviews product_id={product.id} />
       </div>
     </div>
   );

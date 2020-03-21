@@ -166,6 +166,10 @@
     "contact_person_name": "საკონტაქტო პიროვნების სახელი",
     "contact_person_phone": "საკონტაქტო პიროვნების ნომერი",
     "contact_person_email": "საკონტაქტო პიროვნების ელ-ფოსტა",
-    "message": "შეტყობინება"
+    "message": "შეტყობინება",
+    "validity_for": "validity for",
+    "amount_spent": "amount spent",
+    "days_left": "days left",
+    "validity_date": "validity date"
   }
 }

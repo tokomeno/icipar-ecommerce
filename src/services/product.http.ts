@@ -6,7 +6,8 @@ import {
   PRODUCT_REVIEW,
   FETCH_BUNDLE_FOR_ITEM,
   PRODUCT_SIMILAR_TO,
-  PRODUCT_OTHERS_BOUGHT
+  PRODUCT_OTHERS_BOUGHT,
+  FETCH_PRODUCT_REVIEW
 } from "../api/endpoints";
 import { IProductFilterData } from "../hooks/useProductFilterAttributes";
 import { axiosWithToken } from "../api/axios-with-token";
@@ -37,6 +38,14 @@ export interface IProduct {
   main_item_id: number;
   being_sold_online: boolean;
   preorderable?: IProductPreordable;
+}
+
+export interface IProductReview {
+  rate: number;
+  comment: string;
+  user_name: string;
+  user_avatar: string;
+  title?: string;
 }
 
 export interface IProductBundle {
@@ -91,6 +100,10 @@ export class ProductService {
     return Axios.get<{ data: { full_address: string }[] }>(PRODUCT_BRANCH, {
       params: { product_id: productId }
     });
+  }
+
+  static getProductReviews(id: number) {
+    return Axios.get<{ data: IProductReview[] }>(FETCH_PRODUCT_REVIEW + id);
   }
 
   static getFilterAttributes() {

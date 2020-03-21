@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 
 // import { PageSideMenu } from "../../components/pageSideMenu";
 import { match } from "react-router-dom";
-import { BlogService, IBlogList } from "../../services/blog.http";
+import { BlogService, IBlogShow } from "../../services/blog.http";
 import { LayoutSpinner } from "../../components/spinners/layout-spinner";
 
 interface BlogShowPageProps {
@@ -11,7 +11,7 @@ interface BlogShowPageProps {
 }
 
 export const BlogShowPage: React.FC<BlogShowPageProps> = ({ match }) => {
-  const [blog, setBlog] = useState<IBlogList | null>(null);
+  const [blog, setBlog] = useState<IBlogShow | null>(null);
 
   useEffect(() => {
     BlogService.getBySlug(match.params.slug)
@@ -40,7 +40,10 @@ export const BlogShowPage: React.FC<BlogShowPageProps> = ({ match }) => {
                 <img src={blog.thumbnail} className="img-fluid" alt="blog" />
               </div>
             </div>
-            <div className="desc mt-20">{blog.excerpt}</div>
+            <div
+              className="desc mt-20"
+              dangerouslySetInnerHTML={{ __html: blog.body }}
+            />
           </div>
         </div>
       </div>

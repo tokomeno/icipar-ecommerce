@@ -38,9 +38,9 @@ export const CartBundel: React.FC<CartBundelProps> = ({
               >
                 {t("delete")}
               </button>
-              <button className="profbtns_btn d-none d-md-block">
+              {/* <button className="profbtns_btn d-none d-md-block">
                 {t("mogvianebit_sheviden")}
-              </button>
+              </button> */}
               <button className="heart profbtns_btn">
                 <img src="/assets/images/heart-border.svg" alt="favorite" />
                 <img

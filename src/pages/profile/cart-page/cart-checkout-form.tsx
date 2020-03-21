@@ -20,13 +20,19 @@ export const CartCheckoutForm: React.FC<CartCheckoutForm> = ({
         <h2 className="profile-top_title d-none d-sm-block">{t("shedena")}</h2>
       </div>
       <form className="info">
-        <div className="dropdown info-item">
-          <label>მისამართი</label>
-          <select className="selectpicker">
-            <option>თბილისი, სულხან ცინცაძის 3</option>
-            <option>თბილისი, სულხან ცინცაძის 1</option>
-            <option>თბილისი, სულხან ცინცაძის 2</option>
+        <div className="d-flex flex-column info-item">
+          <label>{t("city")}</label>
+          <select className="custom-select">
+            <option>{t("choose_city")}</option>
+            {[{ id: 1, city: "qal" }].map(city => (
+              <option key={city.id} value={city.id}>
+                {city.city}
+              </option>
+            ))}
           </select>
+          {/* {errors && errors.city_id && errors.city_id[0] && (
+            <span className="text-danger pl-5">{errors.city_id[0]}</span>
+          )} */}
         </div>
         {/* <div className="d-flex flex-column info-item">
           <label htmlFor="coupon">კუპონი</label>

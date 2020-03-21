@@ -12,6 +12,7 @@ export interface IDiscountCard {
   date: string;
   total_amount_spent: number;
   discount_rate_earned: number;
+  status?: "active" | string; //TODO:: backend
 }
 
 export const useGiftCards = () => {

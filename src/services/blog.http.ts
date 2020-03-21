@@ -14,7 +14,7 @@ export interface IBlogShow {
   title: string;
   thumbnail: string;
   created_at: string;
-  excerpt: string;
+  body: string;
 }
 
 export class BlogService {
@@ -23,6 +23,6 @@ export class BlogService {
   }
 
   static getBySlug(slug: string) {
-    return axiosWithToken.get<{ data: IBlogList }>(BLOG_SHOW + slug);
+    return axiosWithToken.get<{ data: IBlogShow }>(BLOG_SHOW + slug);
   }
 }

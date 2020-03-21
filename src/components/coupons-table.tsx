@@ -13,7 +13,6 @@ interface CouponsTableProps {
   body: JSX.Element;
 }
 export const CouponsTable: React.FC<CouponsTableProps> = ({ head, body }) => {
-  const { t } = useTranslation();
   return (
     <div className="table-responsive">
       <table className="table table-striped">

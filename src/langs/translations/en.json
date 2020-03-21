@@ -170,6 +170,7 @@
     "validity_for": "validity for",
     "amount_spent": "amount spent",
     "days_left": "days left",
-    "validity_date": "validity date"
+    "validity_date": "validity date",
+    "copyright_text_footer": "ALL RIGHTS RESERVED, ICI PARIS {{year}}"
   }
 }

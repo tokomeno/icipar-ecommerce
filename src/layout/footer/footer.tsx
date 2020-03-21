@@ -155,7 +155,7 @@ const _Footer: React.FC<FooterProps> = ({
         <div className="rights">
           <div className="container">
             <p className="text-center text-md-left">
-              ALL RIGHTS RESERVED, ICI PARIS, 2019
+              {t("copyright_text_footer", { year: new Date().getFullYear() })}
             </p>
           </div>
         </div>

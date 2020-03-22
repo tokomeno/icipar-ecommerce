@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import { IProduct } from "../../../services/product.http";
 import { DefaultSpinner } from "../../spinners/spinner";
+import { routes } from "../../../routes/routes";
 
 interface ProductSliderProps {
   fetchUrl?: string;
@@ -121,9 +122,10 @@ export const ProductSlider: React.FC<ProductSliderProps> = ({
       <div className="slider-section-top">
         <div className=" d-flex align-items-center justify-content-sm-center justify-content-between xs-titlesblock">
           <h3 className="slider-section-top_title section-title">{title}</h3>
-          <NavLink to="#!" className="slider-section-top_link">
+          <NavLink to={routes.catalog} className="slider-section-top_link">
             <span>/</span>
-            {t("show_more")} ({showMoreNumber})
+            {t("show_more")}
+            {/* ({showMoreNumber}) */}
           </NavLink>
         </div>
         <div className="line" />

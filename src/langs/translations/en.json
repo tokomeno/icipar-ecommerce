@@ -177,6 +177,7 @@
     "main_address": "Main address",
     "date": "Date",
     "discount_rate_earned": "Discount rate earned",
-    "total_amount_spent": "total amount spent"
+    "total_amount_spent": "total amount spent",
+    "main": "main"
   }
 }

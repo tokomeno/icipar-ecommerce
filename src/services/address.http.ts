@@ -41,7 +41,7 @@ export class AddressService {
     is_main: boolean;
   }) {
     const url = data.id ? EDIT_USER_ADDRESSES + data.id : ADD_USER_ADDRESSES;
-    return axiosWithToken.post(url, data);
+    return axiosWithToken.post<{ data: IAddress }>(url, data);
   }
 
   static delete(id: number) {

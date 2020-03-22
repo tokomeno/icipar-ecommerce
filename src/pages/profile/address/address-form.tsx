@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useInput } from "../../../hooks/common/useInput";
 import {
@@ -43,7 +43,7 @@ export const AddressForm: React.FC<AddressFormProps> = ({
     onChange: setcontact_person_phone
   } = useInput("");
 
-  const { isActive: isMain, toggle: toggleMain } = useToggle(false);
+  const { isActive: isMain } = useToggle(false);
 
   const [errors, setErrors] = useState<{ [key: string]: string[] }>({});
 

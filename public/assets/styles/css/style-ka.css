@@ -4479,7 +4479,8 @@ sub {
         .brands .slider .brands-slider .swiper-slide img {
           max-width: 90%;
           opacity: 0.3;
-          transition: 0.3s; }
+          transition: 0.3s;
+          max-height: 100%; }
         .brands .slider .brands-slider .swiper-slide:hover img {
           opacity: 1; }
     .brands .slider .swiper-button-prev,
@@ -9515,3 +9516,55 @@ table .complain {
     color: #fff;
     letter-spacing: 2px;
     margin-top: 15px; }
+
+.slick-track {
+  max-height: 400px; }
+
+.disableOpacity:disabled {
+  opacity: 0.6 !important; }
+
+.opacity-03 {
+  opacity: 0.3 !important; }
+
+.info-item select {
+  width: 100%;
+  height: 50px;
+  padding-left: 20px;
+  border: 2px solid #c1c1c1;
+  -webkit-border-radius: 10px !important;
+  -moz-border-radius: 10px !important;
+  -ms-border-radius: 10px !important;
+  border-radius: 10px !important;
+  font-family: "Roboto _GEO Nus";
+  font-size: 18px;
+  color: #707070; }
+
+.info-item select:focus {
+  border-color: #373435; }
+
+.swiper-button-next.d-flex.align-items-center.justify-content-center,
+.swiper-button-prev.d-flex.align-items-center.justify-content-center {
+  z-index: 1; }
+
+.blogSection .blogSlider .blog-container.blog-list .col-md-6 .swiper-slide {
+  background-color: white !important;
+  margin-bottom: 20px; }
+
+.fadeInOpacity {
+  animation: fadeInOpacity 600ms ease-in-out; }
+
+/* Chrome, Safari, Opera */
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+/* .grecaptcha-badge {
+  visibility: hidden;
+} */
+.image > img {
+  max-height: 100%; }
+
+.hot-block .timer {
+  width: 100%; }

@@ -8,6 +8,7 @@ import { axiosWithToken } from "../../../api/axios-with-token";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import { IProduct } from "../../../services/product.http";
+import { DefaultSpinner } from "../../spinners/spinner";
 
 interface ProductSliderProps {
   fetchUrl?: string;
@@ -93,7 +94,25 @@ export const ProductSlider: React.FC<ProductSliderProps> = ({
 
   const { sliderNav, currentSliderIndex } = useSliderNav(products.length, 0);
 
-  if (!activeTabId) return null;
+  const loader = (
+    <section
+      className={classnames("slider-section", classes.sectionClasses)}
+      data-aos-off="fade-up"
+    >
+      <div className="slider-section-top">
+        <div className=" d-flex align-items-center justify-content-sm-center justify-content-between xs-titlesblock">
+          <h3 className="slider-section-top_title section-title">{title}</h3>
+        </div>
+        <div className="line" />
+      </div>
+      <div className="slider news-slide">
+        <DefaultSpinner />
+      </div>
+    </section>
+  );
+
+  if (!activeTabId) return loader;
+
   return (
     <section
       className={classnames("slider-section", classes.sectionClasses)}

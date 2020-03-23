@@ -1,26 +1,32 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { OrderService } from "../../../services/order.http";
 import { ProfileInput } from "../../../components/profile-input";
 import { ICustomer, CustomerService } from "../../../services/customer.http";
 import { useInput } from "../../../hooks/common/useInput";
 import { useLoader } from "../../../hooks/common/useLoader";
+import { ICity } from "../../../services/address.http";
+import { useHistory } from "react-router-dom";
+import { routes } from "../../../routes/routes";
 
 interface CartCheckoutForm {
   totalPrice: number;
   showContent: () => void;
+  cities: ICity[];
   customer: ICustomer;
 }
 export const CartCheckoutForm: React.FC<CartCheckoutForm> = ({
   totalPrice,
   showContent,
+  cities,
   customer
 }) => {
+  const history = useHistory();
   const { t } = useTranslation();
   const { isLoading, startLoading, stopLoading } = useLoader();
   const [trans_id, setTrans_id] = useState<string | number | null>(null);
 
-  const tbcForm = useRef<any>(null);
+  const tbcForm = useRef<HTMLFormElement | null>(null);
   const { value: name, onChange: setname } = useInput(customer.name || "");
   const { value: email, onChange: setemail } = useInput(customer.email || "");
   const { value: phone, onChange: setphone } = useInput(customer.phone || "");
@@ -54,7 +60,9 @@ export const CartCheckoutForm: React.FC<CartCheckoutForm> = ({
       .then(res => {
         setErrors({});
         stopLoading();
-        OrderService.payementStart();
+        OrderService.payementStart().then(res => {
+          setTrans_id(res.data.trans_id);
+        });
       })
       .catch(err => {
         stopLoading();
@@ -66,6 +74,13 @@ export const CartCheckoutForm: React.FC<CartCheckoutForm> = ({
         console.log(err);
       });
   };
+  useEffect(() => {
+    if (tbcForm && tbcForm.current) {
+      tbcForm.current.submit();
+      history.push(routes.profile);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trans_id]);
   return (
     <div className="profile-right profile-side table-profile buy-cont checkout-buy active">
       <div className="profile-top d-none d-md-block">
@@ -82,10 +97,7 @@ export const CartCheckoutForm: React.FC<CartCheckoutForm> = ({
                 className="custom-select"
               >
                 <option>{t("choose_city")}</option>
-                {[
-                  { id: 1, city: "qal 1" },
-                  { id: 2, city: "qal 2" }
-                ].map(city => (
+                {cities.map(city => (
                   <option key={city.id} value={city.id}>
                     {city.city}
                   </option>
@@ -203,9 +215,21 @@ export const CartCheckoutForm: React.FC<CartCheckoutForm> = ({
             className="buy-btn disableOpacity"
           >
             {t("pay")}
-            <img src="/assets/images/arrow-right.svg" alt="arrow" />
+
             <img
-              src="/assets/images/arrow-right_r.svg"
+              src={
+                isLoading
+                  ? "/assets/images/spinner-svg.svg"
+                  : "/assets/images/arrow-right.svg"
+              }
+              alt="arrow"
+            />
+            <img
+              src={
+                isLoading
+                  ? "/assets/images/spinner-svg.svg"
+                  : "/assets/images/arrow-right_r.svg"
+              }
               alt="arrow"
               className="red-arrow"
             />
@@ -214,9 +238,10 @@ export const CartCheckoutForm: React.FC<CartCheckoutForm> = ({
       </div>
       {trans_id && (
         <form
+          target="_blank"
           ref={tbcForm}
           name="returnform"
-          action="https://ecommerce.ufc.ge/ecomm2/ClientHandler"
+          action={`https://ecommerce.ufc.ge/ecomm2/ClientHandler?t=` + trans_id}
           method="POST"
         >
             <input type="hidden" name="trans_id" value={trans_id} />

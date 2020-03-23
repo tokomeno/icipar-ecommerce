@@ -48,6 +48,6 @@ export class OrderService {
   }
 
   static payementStart() {
-    return axiosWithToken.post(PAYMENT_START);
+    return axiosWithToken.post<{ trans_id: string }>(PAYMENT_START);
   }
 }

@@ -27,6 +27,7 @@ export const GET_FAVORITES = AUTH_BASE_URL + "/favourites";
 export const UPLOAD_AVATAR = AUTH_BASE_URL + "/upload-avatar";
 export const CONFIRM_EMAIL = AUTH_BASE_URL + "/confirm-email";
 export const CONFIRM_PHONE = AUTH_BASE_URL + "/confirm-phone";
+export const GET_CITIES = AUTH_BASE_URL + "/cities";
 
 // Products
 // https://app.swaggerhub.com/apis-docs/badzaghua/iciparis-products/1.0.0

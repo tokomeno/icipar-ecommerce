@@ -4,7 +4,8 @@ import {
   GET_USER_ADDRESSES,
   DELETE_USER_ADDRESSES,
   ADDRESS_MAKE_MAIN,
-  EDIT_USER_ADDRESSES
+  EDIT_USER_ADDRESSES,
+  GET_CITIES
 } from "../api/endpoints";
 
 export interface IAddress {
@@ -50,5 +51,9 @@ export class AddressService {
 
   static makeMain(id: number) {
     return axiosWithToken.post(ADDRESS_MAKE_MAIN + id);
+  }
+
+  static getCities() {
+    return axiosWithToken.get<{ data: ICity[] }>(GET_CITIES);
   }
 }

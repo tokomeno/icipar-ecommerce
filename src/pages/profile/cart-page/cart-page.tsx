@@ -7,6 +7,7 @@ import { useToggle } from "../../../hooks/common/useToggle";
 import { CartContent } from "./cart-content";
 import { CustomerService, ICustomer } from "../../../services/customer.http";
 import { ProfileSpinner } from "../../../components/spinners/profile-spiner";
+import { AddressService, ICity } from "../../../services/address.http";
 
 interface CartPageProps {
   totalPrice: number;
@@ -19,12 +20,14 @@ const _CartPage: React.FC<CartPageProps> = ({ totalPrice }) => {
     setInActive: goToCheckout
   } = useToggle(false);
   const [customer, setCustomer] = useState<ICustomer | null>(null);
+  const [cities, setCities] = useState<ICity[] | null>(null);
 
   useEffect(() => {
     CustomerService.getCustomer().then(res => setCustomer(res.data.data));
+    AddressService.getCities().then(res => setCities(res.data.data));
   }, []);
 
-  if (!customer) return <ProfileSpinner />;
+  if (!customer || !cities) return <ProfileSpinner />;
 
   return (
     <ProfileBasePage>
@@ -32,6 +35,7 @@ const _CartPage: React.FC<CartPageProps> = ({ totalPrice }) => {
         {FirstStep && <CartContent goToCheckout={goToCheckout} />}
         {!FirstStep && (
           <CartCheckoutForm
+            cities={cities}
             customer={customer}
             showContent={showContent}
             totalPrice={totalPrice}

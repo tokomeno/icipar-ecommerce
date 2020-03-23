@@ -18,7 +18,7 @@ const _CartPage: React.FC<CartPageProps> = ({ totalPrice }) => {
     isActive: FirstStep,
     setActive: showContent,
     setInActive: goToCheckout
-  } = useToggle(false);
+  } = useToggle(true);
   const [customer, setCustomer] = useState<ICustomer | null>(null);
   const [cities, setCities] = useState<ICity[] | null>(null);
 

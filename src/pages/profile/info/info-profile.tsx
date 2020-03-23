@@ -3,13 +3,11 @@ import { ProfileBasePage } from "../index";
 import { useInput } from "../../../hooks/common/useInput";
 import { useTranslation } from "react-i18next";
 import { axiosWithToken } from "../../../api/axios-with-token";
-import {
-  UPDATE_CUSTOMER_INFO,
-  GET_CUSTOMER_INFO
-} from "../../../api/endpoints";
+import { UPDATE_CUSTOMER_INFO } from "../../../api/endpoints";
 import { ProfileInput } from "../../../components/profile-input";
 import { useLoader } from "../../../hooks/common/useLoader";
 import { ProfileSpinner } from "../../../components/spinners/profile-spiner";
+import { CustomerService } from "../../../services/customer.http";
 
 interface InfoProfilePageProps {}
 
@@ -77,11 +75,10 @@ export const InfoProfilePage: React.FC<InfoProfilePageProps> = props => {
   }, [originalData]);
 
   useEffect(() => {
-    axiosWithToken
-      .get(GET_CUSTOMER_INFO)
+    CustomerService.getCustomer()
       .then(res => {
         if (typeof res.data.data === "object") {
-          setOriginalData(res.data.data);
+          setOriginalData(res.data.data as any);
           stopLoading();
         }
       })

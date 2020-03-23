@@ -10,6 +10,8 @@ export const API_FB_LOGIN_URL =
 export const API_GA_LOGIN_URL =
   AUTH_BASE_URL + "/social-login/login-user-by-token/google";
 
+export const UPDATE_CUSTOMER_FOR_ORDER =
+  AUTH_BASE_URL + "/generic-user/add-or-update-customer";
 export const GET_CUSTOMER_INFO = AUTH_BASE_URL + "/get-customer";
 export const UPDATE_CUSTOMER_INFO = AUTH_BASE_URL + "/update-user";
 
@@ -120,6 +122,8 @@ export const GET_ORDERS = ORDER_BASE_URL + "/orders";
 export const COMPLAINT_ORDER = ORDER_BASE_URL + "/complaint/store";
 
 export const CONFIRM_ORDER = ORDER_BASE_URL + "/confirm-order";
+
+export const PAYMENT_START = ORDER_BASE_URL + "/payment/start";
 
 // EMAIL
 // https://app.swaggerhub.com/apis-docs/badzaghua/iciparis-emails/1.0.0

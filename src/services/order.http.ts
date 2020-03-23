@@ -1,5 +1,10 @@
 import { axiosWithToken } from "../api/axios-with-token";
-import { GET_ORDERS, COMPLAINT_ORDER, CONFIRM_ORDER } from "../api/endpoints";
+import {
+  GET_ORDERS,
+  COMPLAINT_ORDER,
+  CONFIRM_ORDER,
+  PAYMENT_START
+} from "../api/endpoints";
 
 interface Bundle {
   title: string;
@@ -40,5 +45,9 @@ export class OrderService {
 
   static complete() {
     return axiosWithToken.post(CONFIRM_ORDER);
+  }
+
+  static payementStart() {
+    return axiosWithToken.post(PAYMENT_START);
   }
 }

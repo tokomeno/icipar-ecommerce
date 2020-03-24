@@ -178,6 +178,8 @@
     "date": "Date",
     "discount_rate_earned": "Discount rate earned",
     "total_amount_spent": "total amount spent",
-    "main": "main"
+    "main": "main",
+    "payment_success": "payment success text",
+    "payment_fail": "payment fail text"
   }
 }

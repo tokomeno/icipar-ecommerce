@@ -40,6 +40,7 @@ import { Layout } from "./layout";
 import { loadReCaptcha } from "react-recaptcha-v3";
 import { RECAPTCHA_SITE_KEY } from "./consts/services";
 import { setDefaultLang } from "./langsUtil";
+import { PaymentCallbackPage } from "./pages/profile/payment-callback-page/payment-callback-page";
 
 export const HistoryContext = React.createContext<History>(
   (null as any) as History
@@ -78,6 +79,17 @@ const App: React.FC<{}> = () => {
               path={routes.brandShow(":slug")}
               exact
               component={AboutBrandPage}
+            />
+
+            <Route
+              path={routes.paymentFail}
+              exact
+              component={PaymentCallbackPage}
+            />
+            <Route
+              path={routes.paymentSuccess}
+              exact
+              component={PaymentCallbackPage}
             />
 
             <Route path={routes.catalog} exact component={CatalogPage} />

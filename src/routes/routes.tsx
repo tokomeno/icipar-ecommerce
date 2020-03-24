@@ -17,6 +17,9 @@ export const routes = {
     return `/product/${id}`;
   },
 
+  paymentSuccess: "/payment/success",
+  paymentFail: "/payment/fail",
+
   favorites: "/profile/favorites",
   orders: "/profile/orders",
   profile: "/profile",

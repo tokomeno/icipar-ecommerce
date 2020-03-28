@@ -159,7 +159,11 @@ export const Items: React.FC<ItemsProps> = React.memo(
             }}
             key={item.id}
           >
-            <img src={item.thumbnail} alt={item.title} />
+            <img
+              style={{ maxHeight: "90%" }}
+              src={item.thumbnail}
+              alt={item.title}
+            />
             <div className="txt">{item.volume} მლ.</div>
             {/* <div className="hover">წონა: 0.3 კგ.</div> */}
           </a>

@@ -9,18 +9,21 @@ import { IUser } from "../../redux/auth/authTypes";
 
 interface AfterRegisterFormProps {
   hideModal: () => void;
-  user: IUser;
+  user: IStoreState["auth"]["user"];
 }
 
 const _AfterRegisterForm: React.FC<AfterRegisterFormProps> = ({
   hideModal,
   user
 }) => {
-  console.log(user);
   const { t } = useTranslation();
-  const confirmType: "email" | "phone" = user.phone ? "email" : "phone";
   const confirmationInput = useInput("");
   const [errors, setErrors] = useState<string | null>(null);
+  if (!user) {
+    console.error("user is null");
+    return null;
+  }
+  const confirmType: "email" | "phone" = user.phone ? "phone" : "email";
 
   const handleSubmit = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>

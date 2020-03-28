@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import { HomePage } from "./pages/home/home-page";
-import { AboutUsPage } from "./pages/about-us/about-us-page";
+// import { AboutUsPage } from "./pages/about-us/about-us-page";
 import { ContactPage } from "./pages/contact/contact-page";
-import { HowItWorksPage } from "./pages/how-it-works/how-it-works-page";
+// import { HowItWorksPage } from "./pages/how-it-works/how-it-works-page";
 import { ShopPage } from "./pages/shops/shop-page";
 import { AboutBrandPage } from "./pages/about-brand/about-brand-page";
 import { AllBrandsPage } from "./pages/all-brands/all-brands";
@@ -70,9 +70,9 @@ const App: React.FC<{}> = () => {
           <Switch>
             <Route path={routes.home} exact component={HomePage} />
             {/* PAGES */}
-            <Route path={routes.aboutUs} exact component={AboutUsPage} />
+            {/* <Route path={routes.aboutUs} exact component={AboutUsPage} /> */}
+            {/* <Route path={routes.howItWorks} exact component={HowItWorksPage} /> */}
             <Route path={routes.contact} exact component={ContactPage} />
-            <Route path={routes.howItWorks} exact component={HowItWorksPage} />
             <Route path={routes.shops} exact component={ShopPage} />
             <Route path={routes.allBrands} exact component={AllBrandsPage} />
             <Route

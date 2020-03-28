@@ -81,14 +81,13 @@ export const _Header: React.FC<HeaderProps> = ({ user, phone, menu }) => {
       ></div>
       <header className={classnames("site__header", { active: isActive })}>
         <div className="header d-flex flex-md-column flex-column-reverse">
-          <div className="header-sale text-center">
-            <p className="header-sale_txt d-none d-md-block">
-              გამოიწერეთ სიახლეები და მიიღეთ 15%-იანი ფასდაკლება
-            </p>
-            <p className="header-sale_txt d-block d-md-none">
-              40%-იანი ფასდაკლება მხოლოდ შენთვის
-            </p>
-          </div>
+          {user && !user.is_subscribed && (
+            <div className="header-sale text-center">
+              <p className="header-sale_txt d-none d-md-block">
+                {t("subscribe_to_the_news_and_get_header_text")}
+              </p>
+            </div>
+          )}
 
           <div className="sup-hdr d-none d-md-block">
             <div className="container">

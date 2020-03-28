@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { Rating } from "../../components/rating";
 import { Dropdown } from "react-bootstrap";
 import { IProductWithItems } from "../../services/product.http";
+import { ProductHeartBtn } from "../../components/product/product-heart-btn";
 
 interface ItemProps {
   product: IProductWithItems;
@@ -56,7 +57,7 @@ export const Item: React.FC<ItemProps> = ({
               <div className="d-flex name-block">
                 <h1 className="name">{activeItem.title}</h1>
                 {hot_timer && hot_timer}
-                <button className="heart profbtns_btn">
+                {/* <button className="heart profbtns_btn">
                   <img
                     src="/assets/images/heart-border.svg"
                     alt="favorite"
@@ -67,7 +68,24 @@ export const Item: React.FC<ItemProps> = ({
                     alt="favorite"
                     className="added favorite"
                   />
-                </button>
+                </button> */}
+                <ProductHeartBtn
+                  extraClassname="profbtns_btn"
+                  productId={product.id}
+                >
+                  <>
+                    <img
+                      src="/assets/images/heart-border.svg"
+                      alt="favorite"
+                      className="favorite"
+                    />
+                    <img
+                      src="/assets/images/loved.svg"
+                      alt="favorite"
+                      className="added favorite"
+                    />
+                  </>
+                </ProductHeartBtn>
               </div>
               <div className="full-name">{product.brand.name}</div>
               <div className="sizes d-flex align-items-xl-center flex-xl-row flex-column align-items-start">

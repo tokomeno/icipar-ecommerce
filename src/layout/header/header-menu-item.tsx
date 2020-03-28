@@ -31,13 +31,19 @@ export const HeaderMenuItem: React.FC<HeaderMenuItemProps> = ({
             <div className="inner-menu_block categories">
               <div className="title">{t("categories")}</div>
               <div className="items">
-                <NavLink to="#!" className="items-link">
+                <NavLink
+                  to={routes.catalog + `?genders[]=2`}
+                  className="items-link"
+                >
                   {t("man")}
                 </NavLink>
-                <NavLink to="#!" className="items-link">
+                <NavLink
+                  to={routes.catalog + `?genders[]=1`}
+                  className="items-link"
+                >
                   {t("women")}
                 </NavLink>
-                <NavLink to="#!" className="items-link">
+                <NavLink to={routes.blogs} className="items-link">
                   {t("news")}
                 </NavLink>
               </div>

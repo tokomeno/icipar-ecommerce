@@ -11,6 +11,8 @@ interface ProductHeartBtnProps {
   toogleFavorite: typeof toggleFavorite;
   isActive: boolean;
   loadingId: number | null;
+  extraClassname?: string;
+  children?: JSX.Element;
 }
 
 const _ProductHeartBtn: React.FC<ProductHeartBtnProps> = ({
@@ -18,7 +20,9 @@ const _ProductHeartBtn: React.FC<ProductHeartBtnProps> = ({
   isAuth,
   toogleFavorite,
   isActive,
-  loadingId
+  loadingId,
+  extraClassname,
+  children
 }) => {
   if (!isAuth) return <NotLoginHeart />;
   return (
@@ -27,10 +31,22 @@ const _ProductHeartBtn: React.FC<ProductHeartBtnProps> = ({
         if (isAuth && loadingId !== productId) toogleFavorite(productId);
       }}
       disabled={productId === loadingId}
-      className={classnames("heart disableOpacity", { active: isActive })}
+      className={classnames("heart disableOpacity", extraClassname, {
+        active: isActive
+      })}
     >
-      <img src="/assets/images/heart-dark.svg" alt="favorite" />
-      <img src="/assets/images/loved.svg" alt="favorite" className="added" />
+      {children ? (
+        children
+      ) : (
+        <>
+          <img src="/assets/images/heart-dark.svg" alt="favorite" />
+          <img
+            src="/assets/images/loved.svg"
+            alt="favorite"
+            className="added"
+          />
+        </>
+      )}
     </button>
   );
 };
@@ -39,7 +55,7 @@ const mapStateToProps = (
   { auth, favorites }: IStoreState,
   ownProps: Omit<
     ProductHeartBtnProps,
-    "isAuth" | "toogleFavorite" | "loadingId" | "isActive"
+    "isAuth" | "toogleFavorite" | "loadingId" | "isActive" | "children"
   >
 ) => {
   return {

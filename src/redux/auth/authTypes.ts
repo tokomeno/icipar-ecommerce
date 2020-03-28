@@ -1,6 +1,7 @@
 // TODO: ADD User Type When ip will be rady
 export interface IUser {
   [key: string]: any;
+  is_subscribed?: boolean;
   avatar: string;
   id: number;
   phone: number | null;

@@ -180,6 +180,7 @@
     "total_amount_spent": "total amount spent",
     "main": "main",
     "payment_success": "payment success text",
-    "payment_fail": "payment fail text"
+    "payment_fail": "payment fail text",
+    "subscribe_to_the_news_and_get_header_text": "გამოიწერეთ სიახლეები და მიიღეთ 15%-იანი ფასდაკლება"
   }
 }

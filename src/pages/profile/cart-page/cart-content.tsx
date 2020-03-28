@@ -99,7 +99,7 @@ export const _CartContent: React.FC<CartContentProps> = ({
           </table>
         </div>
 
-        <div className="shopping-bottom d-flex flex-column flex-md-row align-items-center justify-content-sm-between justify-content-center">
+        <div className="shopping-bottom d-flex flex-column flex-md-row align-items-start justify-content-sm-between justify-content-center">
           <ApplyCoupon
             promotion_display_text={promotion_display_text}
             setCart={setCart}
@@ -109,7 +109,12 @@ export const _CartContent: React.FC<CartContentProps> = ({
               {totalPrice}
               <sub>D</sub>
             </div>
-            <a href="#!" onClick={goToCheckout} className="buy-btn">
+            <a
+              style={{ padding: "10px 19px" }}
+              href="#!"
+              onClick={goToCheckout}
+              className="buy-btn"
+            >
               {t("shedena")}
               <img src="/assets/images/arrow-right.svg" alt="arrow" />
               <img

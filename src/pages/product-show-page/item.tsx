@@ -178,7 +178,7 @@ export const Items: React.FC<ItemsProps> = React.memo(
             key={item.id}
           >
             <img
-              style={{ maxHeight: "90%" }}
+              style={{ maxHeight: "100%", maxWidth: "100%", width: "auto" }}
               src={item.thumbnail}
               alt={item.title}
             />

@@ -30,7 +30,7 @@ export const Product: React.FC<ProductProps> = ({
             <ProductRaiting rateNum={product.rating} starRate={1} />
             <div className="d-flex">
               <ProductHeartBtn productId={product.id} />
-              {product.being_sold_online && (
+              {!!product.being_sold_online && (
                 <ProductCartBtn
                   mainItemId={product.main_item_id}
                   productId={product.id}

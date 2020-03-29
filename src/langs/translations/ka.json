@@ -181,6 +181,10 @@
     "main": "main",
     "payment_success": "payment success text",
     "payment_fail": "payment fail text",
-    "subscribe_to_the_news_and_get_header_text": "გამოიწერეთ სიახლეები და მიიღეთ 15%-იანი ფასდაკლება"
+    "subscribe_to_the_news_and_get_header_text": "გამოიწერეთ სიახლეები და მიიღეთ 15%-იანი ფასდაკლება",
+    "website_rules": "საიტის წესები",
+    "please_read_rules": "გთხოვთ გაეცნოთ წესებს",
+    "agree": "ვეთანხმები",
+    "not_agree": "არ ვეთანხმები"
   }
 }

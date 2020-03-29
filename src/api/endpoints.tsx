@@ -109,6 +109,8 @@ export const MAIN_SECITIONS = MAIN_BASE_URL + "/homepage/mainpage-sections";
 
 export const PRODUCT_DELIVERY_TERMS = MAIN_BASE_URL + "/term/delivery_terms";
 
+export const WEBSITE_TERMS = MAIN_BASE_URL + "/term/website_terms";
+
 export const STATIC_PAGE = MAIN_BASE_URL + "/static-page/";
 
 // LAYOUT

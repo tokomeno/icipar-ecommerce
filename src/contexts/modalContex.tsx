@@ -2,7 +2,9 @@ import React, { createContext, useState } from "react";
 
 export type IActiveModalContext = {
   activeModal:
-    | "login-register"
+    | "register-modal"
+    | "login-modal"
+    | "terms-modal"
     | "search-modal"
     | "burger-menu"
     | "filter"

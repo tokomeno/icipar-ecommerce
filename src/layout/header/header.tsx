@@ -132,7 +132,7 @@ export const _Header: React.FC<HeaderProps> = ({ user, phone, menu }) => {
                     </NavLink>
                   ) : (
                     <a
-                      onClick={() => setActiveModal("login-register")}
+                      onClick={() => setActiveModal("login-modal")}
                       href="#!"
                       className="sup-hdr_link"
                     >
@@ -224,7 +224,7 @@ export const _Header: React.FC<HeaderProps> = ({ user, phone, menu }) => {
                     if (user) {
                       history.push("/profile");
                     } else {
-                      setActiveModal("login-register");
+                      setActiveModal("login-modal");
                     }
                   }}
                 >

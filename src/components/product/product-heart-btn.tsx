@@ -73,7 +73,7 @@ export const ProductHeartBtn = connect(mapStateToProps, {
 const NotLoginHeart: React.FC = () => {
   return (
     <OverlayTrigger
-      trigger="hover"
+      trigger={["focus", "hover"]}
       overlay={<Tooltip id={`tooltip-top`}>Please Sign In</Tooltip>}
     >
       <button className={classnames("heart")}>

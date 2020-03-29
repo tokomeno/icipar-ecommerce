@@ -5,16 +5,15 @@ import axios from "axios";
 import { connect } from "react-redux";
 import { setCurrentUser } from "../../redux/auth/authActions";
 import { useTranslation } from "react-i18next";
-import {  API_FB_LOGIN_URL } from "../../api/endpoints";
+import { API_FB_LOGIN_URL } from "../../api/endpoints";
 import { ActiveModalContext } from "../../contexts/modalContex";
 import { FACEBOOK_CLIENT_ID } from "../../consts";
- 
-const FbLoginButton  = ({ setCurrentUser }) => {
+
+const FbLoginButton = ({ setCurrentUser }) => {
   const { t } = useTranslation();
   const { hideModal } = useContext(ActiveModalContext);
 
-  const responseFacebook = (res ) => {
-    console.log(res)
+  const responseFacebook = res => {
     const userData = {
       ...res
       //   accessToken: res.accessToken,
@@ -23,7 +22,7 @@ const FbLoginButton  = ({ setCurrentUser }) => {
       //   nickname: res.nickname,
       //   email: res.email,
       //   imageUrl: res.url
-    }; 
+    };
     axios
       .get(`${API_FB_LOGIN_URL}?token=${res.accessToken}`, { userData })
       .then(res => {
@@ -37,14 +36,13 @@ const FbLoginButton  = ({ setCurrentUser }) => {
         console.log("დაფიქსირდა შეცდომა");
       });
   };
-  console.log(FACEBOOK_CLIENT_ID);
   return (
     <FacebookLogin
       appId={FACEBOOK_CLIENT_ID}
       autoLoad={false}
       fields="name,email,picture"
       callback={responseFacebook}
-      render={(renderProps) => (
+      render={renderProps => (
         <a
           onClick={renderProps.onClick}
           href="#!"

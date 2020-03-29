@@ -10,7 +10,6 @@ interface ProductHotProps {
 const _ProductHot: React.FC<ProductHotProps> = ({ countdown, productId }) => {
   const [tillDate, setDate] = useState<number | null>(null);
   useEffect(() => {
-    console.log(countdown);
     setDate(
       new Date().getTime() +
         countdown.s * 1000 +

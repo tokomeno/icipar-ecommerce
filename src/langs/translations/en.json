@@ -185,6 +185,7 @@
     "website_rules": "website rules",
     "please_read_rules": "please read rules",
     "agree": "agree",
-    "not_agree": "not agree"
+    "not_agree": "not agree",
+    "email_confirmed_successfully": "email confirmed successfully"
   }
 }

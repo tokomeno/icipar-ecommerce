@@ -41,6 +41,7 @@ import { loadReCaptcha } from "react-recaptcha-v3";
 import { RECAPTCHA_SITE_KEY } from "./consts/services";
 import { setDefaultLang } from "./langsUtil";
 import { PaymentCallbackPage } from "./pages/profile/payment-callback-page/payment-callback-page";
+import { ConfirmEmailPage } from "./pages/confirm-email/confirm-email-page";
 
 export const HistoryContext = React.createContext<History>(
   (null as any) as History
@@ -106,6 +107,12 @@ const App: React.FC<{}> = () => {
             <Route path={routes.staticPages} exact component={StaticPage} />
 
             <Route path={routes.cart} exact component={CartPage} />
+            <Route
+              path={routes.confirmEmail}
+              exact
+              component={ConfirmEmailPage}
+            />
+
             {/* PROFILE PAGES */}
             <PrivateRoute>
               <Route path={routes.profile} exact component={ProfilePage} />

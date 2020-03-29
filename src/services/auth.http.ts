@@ -9,7 +9,7 @@ export class AuthService {
     });
   }
 
-  static confirmEmail(user_id: number, hash: number | string) {
+  static confirmEmail(user_id: string | number, hash: number | string) {
     return axiosWithToken.post(CONFIRM_EMAIL, { user_id, hash });
   }
 }

@@ -185,6 +185,7 @@
     "website_rules": "საიტის წესები",
     "please_read_rules": "გთხოვთ გაეცნოთ წესებს",
     "agree": "ვეთანხმები",
-    "not_agree": "არ ვეთანხმები"
+    "not_agree": "არ ვეთანხმები",
+    "email_confirmed_successfully": "ელ.ფოსტით წარმატებით დადასტურდა"
   }
 }

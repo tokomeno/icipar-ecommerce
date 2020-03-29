@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Modal } from "react-bootstrap";
 import { RegisterForm } from "./registerForm";
 import { LoginForm } from "./loginForm";
@@ -7,18 +7,17 @@ import {
   IActiveModalContext
 } from "../../contexts/modalContex";
 import { connect } from "react-redux";
-import { setAuthErrors } from "../../redux/auth/authActions";
 import { useToggle } from "../../hooks/common/useToggle";
-import { AfterRegisterForm } from "./after-register-form";
 import { IStoreState } from "../../redux/mainReducer";
 import { TermModal } from "./terms-modal";
+import { ConfirmPhone } from "./confirm-phone";
+import { IUser } from "../../redux/auth/authTypes";
 
 interface RegisterLoginProps {
-  setAuthErrors: typeof setAuthErrors;
   user: IStoreState["auth"]["user"];
 }
 
-const _RegisterLogin: React.FC<RegisterLoginProps> = ({ setAuthErrors }) => {
+const _RegisterLogin: React.FC<RegisterLoginProps> = ({ user }) => {
   const { hideModal, activeModal, setActiveModal } = useContext<
     IActiveModalContext
   >(ActiveModalContext);
@@ -66,11 +65,14 @@ const _RegisterLogin: React.FC<RegisterLoginProps> = ({ setAuthErrors }) => {
               <RegisterForm
                 isActive={activeModal === "register-modal"}
                 showLoginForm={() => setActiveModal("login-modal")}
-                hideModal={hideModal}
-                onRegister={setActiveAfterRegisterForm}
+                onRegister={(user: IUser | null) => {
+                  console.log(user);
+                  if (user && user.phone) return setActiveAfterRegisterForm();
+                  hideModal();
+                }}
               />
               {isActiveAfterRegisterForm && (
-                <AfterRegisterForm hideModal={hideModal} />
+                <ConfirmPhone hideModal={hideModal} />
               )}
             </div>
             <div className="col-lg-6 login_content d-none d-md-block">
@@ -86,6 +88,4 @@ const _RegisterLogin: React.FC<RegisterLoginProps> = ({ setAuthErrors }) => {
 const mapStateToProps = ({ auth }: IStoreState) => ({
   user: auth.user
 });
-export const RegisterLogin = connect(mapStateToProps, { setAuthErrors })(
-  _RegisterLogin
-);
+export const RegisterLogin = connect(mapStateToProps)(_RegisterLogin);

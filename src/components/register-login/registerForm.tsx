@@ -5,7 +5,7 @@ import { AuthInput } from "./authInput";
 import { connect } from "react-redux";
 import { registerUser } from "../../redux/auth/authActions";
 import { IStoreState } from "../../redux/mainReducer";
-import { AuthState } from "../../redux/auth/authTypes";
+import { AuthState, IUser } from "../../redux/auth/authTypes";
 import { useTranslation } from "react-i18next";
 import { useCaptcha } from "../../hooks/useCaptcha";
 import { ReCaptcha } from "react-recaptcha-v3";
@@ -16,8 +16,8 @@ interface RegisterFormProps {
   isActive: boolean;
   errors: AuthState["errors"];
   registerUser: typeof registerUser;
-  hideModal: () => void;
-  onRegister: () => void;
+
+  onRegister: (user: IUser | null) => void;
 }
 
 const _RegisterForm: React.FC<RegisterFormProps> = ({
@@ -25,7 +25,6 @@ const _RegisterForm: React.FC<RegisterFormProps> = ({
   showLoginForm,
   errors,
   registerUser,
-  hideModal,
   onRegister
 }) => {
   const { t } = useTranslation();
@@ -43,7 +42,7 @@ const _RegisterForm: React.FC<RegisterFormProps> = ({
         phone,
         recaptcha_token: myCaptcha.recaptcha_token
       },
-      hideModal: onRegister
+      callback: onRegister
     });
     myCaptcha.captchaRef.current.execute();
   };

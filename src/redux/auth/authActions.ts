@@ -85,11 +85,11 @@ interface RegisterUserParams {
     password_confirmation: string;
     recaptcha_token: string | null;
   };
-  hideModal: () => void;
+  callback: (user: IUser | null) => void;
 }
 export const registerUser = ({
   userData,
-  hideModal
+  callback
 }: RegisterUserParams): Function => {
   return async (dispatch: Dispatch) => {
     if (!userData.recaptcha_token) {
@@ -102,14 +102,14 @@ export const registerUser = ({
       return;
     }
     axios
-      .post<IUser>(API_REGISTER_URL, {
+      .post<{ user: IUser; token: string }>(API_REGISTER_URL, {
         ...userData,
         "g-recaptcha-response": userData.recaptcha_token
       })
       .then(res => {
         const { user, token } = res.data;
         dispatch<SetCurrentUserAction>(setCurrentUser({ user, token }));
-        hideModal();
+        callback(user);
       })
       .catch(err => {
         console.log(err);

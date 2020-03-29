@@ -27,6 +27,8 @@ export const routes = {
   profileInfo: "/profile/info",
   profileAddress: "/profile/address",
   cart: "/profile/cart",
+  profileCoupons: "/profile/coupons",
+  profileGiftCard: "/profile/gift-cards",
 
   blogs: "/blogs",
   blogShow: "/blogs/:slug",

@@ -109,7 +109,11 @@ const App: React.FC<{}> = () => {
             {/* PROFILE PAGES */}
             <PrivateRoute>
               <Route path={routes.profile} exact component={ProfilePage} />
-              <Route path="/profile/coupons" exact component={CouponsPage} />
+              <Route
+                path={routes.profileCoupons}
+                exact
+                component={CouponsPage}
+              />
               <Route path={routes.checkout} exact component={CartPage} />
               <Route path={routes.orders} exact component={OrdersProfilePage} />
               <Route
@@ -128,7 +132,7 @@ const App: React.FC<{}> = () => {
                 component={WishlistProfilePage}
               />
               <Route
-                path="/profile/gift-cards"
+                path={routes.profileGiftCard}
                 exact
                 component={GiftCardProfilePage}
               />

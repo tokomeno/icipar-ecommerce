@@ -57,8 +57,8 @@ const _TermModal: React.FC<TermModalProps> = ({ setAuthErrors }) => {
             className="d-md-none d-block"
           />
         </button>
-        <div className="title text-center">საიტის წესები</div>
-        <div className="rules-title">გთხოვთ გაეცნოთ წესებს</div>
+        <div className="title text-center">{t("website_rules")}</div>
+        <div className="rules-title">{t("please_read_rules")}</div>
         <div className="rules-block">
           <div className="txt-block">
             {terms ? (

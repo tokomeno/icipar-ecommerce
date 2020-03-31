@@ -186,6 +186,7 @@
     "please_read_rules": "please read rules",
     "agree": "agree",
     "not_agree": "not agree",
-    "email_confirmed_successfully": "email confirmed successfully"
+    "email_confirmed_successfully": "email confirmed successfully",
+    "avatar_upload_tooltip": "click to upload photo"
   }
 }

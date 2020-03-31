@@ -186,6 +186,7 @@
     "please_read_rules": "გთხოვთ გაეცნოთ წესებს",
     "agree": "ვეთანხმები",
     "not_agree": "არ ვეთანხმები",
-    "email_confirmed_successfully": "ელ.ფოსტით წარმატებით დადასტურდა"
+    "email_confirmed_successfully": "ელ.ფოსტით წარმატებით დადასტურდა",
+    "avatar_upload_tooltip": "click to upload photo"
   }
 }

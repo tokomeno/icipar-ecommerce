@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { IUser } from "../../redux/auth/authTypes";
 import { AvatarService } from "../../services/avatar.http";
 import { updateAvatar } from "../../redux/auth/authActions";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 
 interface AvatarProps {
   user: IUser;
@@ -10,6 +12,7 @@ interface AvatarProps {
 }
 
 const _Avatar: React.FC<AvatarProps> = ({ user, updateAvatar }) => {
+  const { t } = useTranslation();
   const fileInput = useRef<HTMLInputElement>(null);
   const fileSelectedHandler = useCallback(
     event => {
@@ -23,20 +26,28 @@ const _Avatar: React.FC<AvatarProps> = ({ user, updateAvatar }) => {
   );
 
   return (
-    <div
-      onClick={() => {
-        if (fileInput.current) fileInput.current.click();
-      }}
-      className="user-image"
+    <OverlayTrigger
+      key={"top"}
+      placement={"top"}
+      overlay={
+        <Tooltip id={`tooltip-top`}>{t("avatar_upload_tooltip")}</Tooltip>
+      }
     >
-      <img src={user.avatar} alt="user" />
-      <input
-        ref={fileInput}
-        style={{ display: "none" }}
-        type="file"
-        onChange={fileSelectedHandler}
-      />
-    </div>
+      <div
+        onClick={() => {
+          if (fileInput.current) fileInput.current.click();
+        }}
+        className="user-image"
+      >
+        <img src={user.avatar} alt="user" />
+        <input
+          ref={fileInput}
+          style={{ display: "none" }}
+          type="file"
+          onChange={fileSelectedHandler}
+        />
+      </div>
+    </OverlayTrigger>
   );
 };
 

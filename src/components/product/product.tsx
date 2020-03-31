@@ -23,7 +23,7 @@ export const Product: React.FC<ProductProps> = ({
     <React.Fragment>
       <div className={wrapperClass + " fadeInOpacity"}>
         <div className="image">
-          <Link to={`/product/${product.id}`} className="img">
+          <Link to={`/product/${product.id}/${product.slug}`} className="img">
             <img style={{ maxHeight: "100%" }} src={product.thumbnail} alt="" />
           </Link>
           <div className="option d-flex justify-content-between align-items-center">

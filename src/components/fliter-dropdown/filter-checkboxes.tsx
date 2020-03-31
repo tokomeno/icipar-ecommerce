@@ -7,7 +7,11 @@ import {
 
 interface FilterCheckboxesProps {
   filterName: keyof IFilterCheckboxes;
-  checkboxes: { title: string; id: number | string }[];
+  checkboxes: {
+    title: string;
+    id: number | string;
+    children?: { title: string; id: number | string }[];
+  }[];
   type?: "colors";
 }
 type ICheckbox = (number | string)[];
@@ -39,25 +43,50 @@ export const FilterCheckboxes: React.FC<FilterCheckboxesProps> = React.memo(
       }
       isFirstMount.current = false;
     }, [checkedIds, setFilterOnKey, isFirstMount, filterName]);
-
+    console.log(checkboxes);
     return (
       <React.Fragment>
         {checkboxes.map(ch => (
-          <label
-            key={ch.id}
-            className={classnames("filter-link", { color: type === "colors" })}
-            style={{
-              backgroundColor: type === "colors" ? ch.title : undefined
-            }}
-          >
-            {type === "colors" ? <div className="color" /> : ch.title}
-            <input
-              checked={isChecked(ch.id)}
-              onChange={() => handleChange(ch)}
-              type="checkbox"
-            />
-            <span className="checkmark" />
-          </label>
+          <React.Fragment key={ch.id}>
+            <label
+              key={ch.id}
+              className={classnames("filter-link", {
+                color: type === "colors"
+              })}
+              style={{
+                backgroundColor: type === "colors" ? ch.title : undefined
+              }}
+            >
+              {type === "colors" ? <div className="color" /> : ch.title}
+              <input
+                checked={isChecked(ch.id)}
+                onChange={() => handleChange(ch)}
+                type="checkbox"
+              />
+              <span className="checkmark" />
+            </label>
+            {ch.children &&
+              ch.children.map(ch => (
+                <label
+                  key={ch.id}
+                  className={classnames("filter-link", {
+                    color: type === "colors"
+                  })}
+                  style={{
+                    backgroundColor: type === "colors" ? ch.title : undefined,
+                    marginLeft: "5px"
+                  }}
+                >
+                  {type === "colors" ? <div className="color" /> : ch.title}
+                  <input
+                    checked={isChecked(ch.id)}
+                    onChange={() => handleChange(ch)}
+                    type="checkbox"
+                  />
+                  <span className="checkmark" />
+                </label>
+              ))}
+          </React.Fragment>
         ))}
       </React.Fragment>
     );

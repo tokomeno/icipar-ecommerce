@@ -37,7 +37,7 @@ export const ProfileLeft: React.FC<ProfileLeftProps> = ({ user, logout }) => {
         <NavItem to={"/profile/cart"} title={t("cart")}>
           <img src="/assets/images/bag-g.svg" alt="bag" />
           <img src="/assets/images/bag-r.svg" alt="bag" className="active" />
-          <div className="ntfc" />
+          {/* <div className="ntfc"></div> */}
         </NavItem>
 
         <NavItem to={routes.orders} title={t("orders")}>
@@ -56,7 +56,7 @@ export const ProfileLeft: React.FC<ProfileLeftProps> = ({ user, logout }) => {
             alt="heart"
             className="active"
           />
-          <div className="ntfc" />
+          {/* <div className="ntfc" /> */}
         </NavItem>
 
         <NavItem to={routes.profileCoupons} title={t("coupons")}>

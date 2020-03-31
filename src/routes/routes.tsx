@@ -16,7 +16,7 @@ export const routes = {
 
   giftCard: "/gift-card",
   productShow: (id: string | number) => {
-    return `/product/${id}`;
+    return `/product/${id}/:slug`;
   },
 
   paymentSuccess: "/payment/success",

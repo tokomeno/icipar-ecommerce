@@ -2428,7 +2428,7 @@ sub {
 .burger-nav {
   position: absolute;
   top: 0;
-  z-index: 4;
+  z-index: 10;
   height: 100vh;
   width: 85%;
   padding: 25px 20px;
@@ -9593,7 +9593,8 @@ table .complain {
   opacity: 1; }
 
 a,
-button {
+button,
+.menu-item {
   cursor: pointer !important; }
 
 .site__header {

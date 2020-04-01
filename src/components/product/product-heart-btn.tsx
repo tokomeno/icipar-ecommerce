@@ -4,6 +4,7 @@ import { IStoreState } from "../../redux/mainReducer";
 import { connect } from "react-redux";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
 import { toggleFavorite } from "../../redux/favorites/favoritesActions";
+import { useTranslation } from "react-i18next";
 
 interface ProductHeartBtnProps {
   productId: number;
@@ -73,12 +74,13 @@ export const ProductHeartBtn = connect(mapStateToProps, {
 const NotLoginHeart: React.FC<{ extraClassname?: string }> = ({
   extraClassname
 }) => {
+  const { t } = useTranslation();
   return (
     <OverlayTrigger
       trigger={["focus", "hover"]}
-      overlay={<Tooltip id={`tooltip-top`}></Tooltip>}
+      overlay={<Tooltip id={`tooltip-top`}>{t("please_sign_in")}</Tooltip>}
     >
-      <button className={(classnames("heart"), extraClassname)}>
+      <button className={classnames("heart", extraClassname)}>
         <img src="/assets/images/heart-dark.svg" alt="favorite" />
         <img src="/assets/images/loved.svg" alt="favorite" className="added" />
       </button>

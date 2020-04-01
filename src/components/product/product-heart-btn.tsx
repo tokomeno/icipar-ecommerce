@@ -24,7 +24,7 @@ const _ProductHeartBtn: React.FC<ProductHeartBtnProps> = ({
   extraClassname,
   children
 }) => {
-  if (!isAuth) return <NotLoginHeart />;
+  if (!isAuth) return <NotLoginHeart extraClassname={extraClassname} />;
   return (
     <button
       onClick={() => {
@@ -70,13 +70,15 @@ export const ProductHeartBtn = connect(mapStateToProps, {
   toogleFavorite: toggleFavorite
 })(_ProductHeartBtn);
 
-const NotLoginHeart: React.FC = () => {
+const NotLoginHeart: React.FC<{ extraClassname?: string }> = ({
+  extraClassname
+}) => {
   return (
     <OverlayTrigger
       trigger={["focus", "hover"]}
-      overlay={<Tooltip id={`tooltip-top`}>Please Sign In</Tooltip>}
+      overlay={<Tooltip id={`tooltip-top`}></Tooltip>}
     >
-      <button className={classnames("heart")}>
+      <button className={(classnames("heart"), extraClassname)}>
         <img src="/assets/images/heart-dark.svg" alt="favorite" />
         <img src="/assets/images/loved.svg" alt="favorite" className="added" />
       </button>

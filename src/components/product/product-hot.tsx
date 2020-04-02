@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { IProductPreordable } from "../../services/product.http";
+import { ProductHeartBtn } from "./product-heart-btn";
 
 interface ProductHotProps {
   productId: number;
@@ -36,6 +37,15 @@ const _ProductHot: React.FC<ProductHotProps> = ({ countdown, productId }) => {
         <img src="/assets/images/heartw.svg" alt="bag" />
         <img src="/assets/images/heart.svg" alt="bag" className="red" />
       </a> */}
+      <ProductHeartBtn
+        extraClassname="bag d-flex align-items-center justify-content-center"
+        productId={productId}
+      >
+        <>
+          <img src="/assets/images/heartw.svg" alt="bag" />
+          <img src="/assets/images/heart.svg" alt="bag" className="red" />
+        </>
+      </ProductHeartBtn>
     </div>
   );
 };

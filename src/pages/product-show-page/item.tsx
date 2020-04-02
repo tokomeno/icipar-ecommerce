@@ -54,9 +54,33 @@ export const Item: React.FC<ItemProps> = ({
                 </div> */}
               </div>
 
-              <div className="d-flex name-block">
+              <div
+                className={classnames("d-flex name-block", {
+                  "align-items-lg-center align-items-start flex-lg-row flex-column-reverse": !!hot_timer
+                })}
+              >
                 <h1 className="name">{activeItem.title}</h1>
-                {hot_timer && hot_timer}
+                {hot_timer ? (
+                  hot_timer
+                ) : (
+                  <ProductHeartBtn
+                    extraClassname="profbtns_btn"
+                    productId={product.id}
+                  >
+                    <>
+                      <img
+                        src="/assets/images/heart-border.svg"
+                        alt="favorite"
+                        className="favorite"
+                      />
+                      <img
+                        src="/assets/images/loved.svg"
+                        alt="favorite"
+                        className="added favorite"
+                      />
+                    </>
+                  </ProductHeartBtn>
+                )}
                 {/* <button className="heart profbtns_btn">
                   <img
                     src="/assets/images/heart-border.svg"
@@ -69,23 +93,6 @@ export const Item: React.FC<ItemProps> = ({
                     className="added favorite"
                   />
                 </button> */}
-                <ProductHeartBtn
-                  extraClassname="profbtns_btn"
-                  productId={product.id}
-                >
-                  <>
-                    <img
-                      src="/assets/images/heart-border.svg"
-                      alt="favorite"
-                      className="favorite"
-                    />
-                    <img
-                      src="/assets/images/loved.svg"
-                      alt="favorite"
-                      className="added favorite"
-                    />
-                  </>
-                </ProductHeartBtn>
               </div>
               <div className="full-name">{product.brand.name}</div>
               <div className="sizes d-flex align-items-xl-center flex-xl-row flex-column align-items-start">

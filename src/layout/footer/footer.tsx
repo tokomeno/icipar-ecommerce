@@ -52,34 +52,34 @@ const _Footer: React.FC<FooterProps> = ({
                   <div className="title">{t("follow")}</div>
                   <ul className="d-flex justify-content-center justify-content-lg-start card-block">
                     <li className="card-block_item">
-                      <NavLink
-                        to={facebook ? facebook.link : "#!"}
+                      <a
+                        href={facebook ? facebook.link : "#!"}
                         rel="noopener noreferrer"
                         target="_blank"
                         className="soc d-flex align-items-center justify-content-center"
                       >
                         <i className="fab fa-facebook-f" />
-                      </NavLink>
+                      </a>
                     </li>
                     <li className="card-block_item">
-                      <NavLink
-                        to={instagram ? instagram.link : "#!"}
+                      <a
+                        href={instagram ? instagram.link : "#!"}
                         rel="noopener noreferrer"
                         target="_blank"
                         className="soc d-flex align-items-center justify-content-center"
                       >
                         <i className="fab fa-instagram" />
-                      </NavLink>
+                      </a>
                     </li>
                     <li className="card-block_item">
-                      <NavLink
-                        to={google ? google.link : "#!"}
+                      <a
+                        href={google ? google.link : "#!"}
                         rel="noopener noreferrer"
                         target="_blank"
                         className="soc d-flex align-items-center justify-content-center"
                       >
                         <i className="fab fa-google" />
-                      </NavLink>
+                      </a>
                     </li>
                   </ul>
                 </div>

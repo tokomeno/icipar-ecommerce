@@ -12,6 +12,7 @@ import {
 } from "../../api/endpoints";
 import { BrandSlider } from "../../components/sliders/brandSlider/brandSlider";
 import { SectionSliders } from "./section-sliders";
+import { InstagramHome } from "../../components/instagram-home";
 
 interface HomePageProps {}
 
@@ -50,31 +51,20 @@ export const HomePage: React.FC<HomePageProps> = () => {
         fetchUrl={FETCH_BESTSELLER_PRODUCTS}
       />
       {/* <ProductSlider
-       
         classes={{ sectionClasses: ["recommendedslider"] }}
         title={t("recomendations")}
         menuCetegories={productCategories}
         showMoreNumber={123}
         products={dummyProductData}
       /> */}
+
       <BlogSlider />
 
       <BrandSlider />
 
       <CommentSlider />
 
-      <div className="container" data-aos-r="fade-down">
-        <div className="insta text-center">
-          <img src="/assets/images/insta.svg" alt="instagram" />
-          <div className="insta-block">
-            <div className="bg d-block d-md-none" />
-            <a href="#!" className="insta-block_btn">
-              {t("folow_on_instargam")}
-            </a>
-          </div>
-        </div>
-      </div>
-      <div className="stores" />
+      <InstagramHome />
     </>
   );
 };

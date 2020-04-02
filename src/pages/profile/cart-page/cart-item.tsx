@@ -7,6 +7,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { ICartState, ICartItem } from "../../../redux/cart/cartTypes";
 import classnames from "classnames";
+import { ProductHeartBtn } from "../../../components/product/product-heart-btn";
 
 export type CartItemProps = {
   cartItem: ICartItem;
@@ -43,14 +44,18 @@ export const CartItem: React.FC<CartItemProps> = ({
               {/* <button className="profbtns_btn d-none d-md-block">
                 {t("mogvianebit_sheviden")}
               </button> */}
-              <button className="heart profbtns_btn">
+              <ProductHeartBtn
+                extraClassname="profbtns_btn"
+                productId={cartItem.product_id}
+              />
+              {/* <button className="heart profbtns_btn">
                 <img src="/assets/images/heart-border.svg" alt="favorite" />
                 <img
                   src="/assets/images/loved.svg"
                   alt="favorite"
                   className="added"
                 />
-              </button>
+              </button> */}
             </div>
           </div>
         </a>

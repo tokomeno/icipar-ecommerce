@@ -13,7 +13,7 @@ interface CartCheckoutForm {
   totalPrice: number;
   showContent: () => void;
   cities: ICity[];
-  customer: ICustomer;
+  customer: Partial<ICustomer>;
 }
 export const CartCheckoutForm: React.FC<CartCheckoutForm> = ({
   totalPrice,
@@ -244,8 +244,7 @@ export const CartCheckoutForm: React.FC<CartCheckoutForm> = ({
           action={`https://ecommerce.ufc.ge/ecomm2/ClientHandler?t=` + trans_id}
           method="POST"
         >
-            <input type="hidden" name="trans_id" value={trans_id} />
-           
+            <input type="hidden" name="trans_id" value={trans_id} /> 
         </form>
       )}
     </div>

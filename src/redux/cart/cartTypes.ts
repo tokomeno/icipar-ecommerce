@@ -7,6 +7,7 @@ export interface ICartItem {
   thumbnail: string;
   item_title: string;
   amount_payable: number;
+  product_id: number;
 }
 
 export interface ICartState {

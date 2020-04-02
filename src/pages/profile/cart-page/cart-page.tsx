@@ -19,11 +19,14 @@ const _CartPage: React.FC<CartPageProps> = ({ totalPrice }) => {
     setActive: showContent,
     setInActive: goToCheckout
   } = useToggle(true);
-  const [customer, setCustomer] = useState<ICustomer | null>(null);
+
+  const [customer, setCustomer] = useState<Partial<ICustomer>>({});
   const [cities, setCities] = useState<ICity[] | null>(null);
 
   useEffect(() => {
-    CustomerService.getCustomer().then(res => setCustomer(res.data.data));
+    CustomerService.getCustomer()
+      .then(res => setCustomer(res.data.data))
+      .catch(err => {});
     AddressService.getCities().then(res => setCities(res.data.data));
   }, []);
 

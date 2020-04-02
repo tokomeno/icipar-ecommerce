@@ -83,7 +83,7 @@ interface RegisterUserParams {
     phone: string;
     password: string;
     password_confirmation: string;
-    recaptcha_token: string | null;
+    recaptcha_token: string;
   };
   callback: (user: IUser | null) => void;
 }
@@ -92,15 +92,6 @@ export const registerUser = ({
   callback
 }: RegisterUserParams): Function => {
   return async (dispatch: Dispatch) => {
-    if (!userData.recaptcha_token) {
-      dispatch(
-        setAuthErrors({
-          "g-recaptcha-response": ["recaptcha is not valid"],
-          msg: "recaptcha is not valid"
-        })
-      );
-      return;
-    }
     axios
       .post<{ user: IUser; token: string }>(API_REGISTER_URL, {
         ...userData,

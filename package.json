@@ -29,7 +29,6 @@
     "i18next": "^19.3.3",
     "lodash.chunk": "^4.2.0",
     "lodash.debounce": "^4.0.8",
-    "node-sass": "^4.13.1",
     "query-string": "^6.11.1",
     "react": "^16.13.0",
     "react-bootstrap": "^1.0.0-beta.17",
@@ -52,14 +51,19 @@
     "slick-carousel": "^1.8.1",
     "swiper": "^5.3.6",
     "typescript": "~3.7.2",
-    "uuid": "^3.4.0"
+    "uuid": "^3.4.0",
+    "clean-css-cli": "^4.3.0",
+    "node-sass": "^4.13.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "compile:sass": "node-sass public/assets/styles/scss -o public/assets/styles/css"
+    "compile:sass": "node-sass public/assets/styles/scss -o public/assets/styles/css",
+    "compile-styles": "node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 public/assets/styles/scss -o public/assets/styles/css",
+    "css-minify": "cleancss --level 1 --format breaksWith=lf --source-map --source-map-inline-sources --output public/assets/styles/css/style-ka.min.css public/assets/styles/css/style-ka.css",
+    "process-styles": "npm run compile-styles && npm run css-minify"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -75,6 +79,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {}
+  }
 }

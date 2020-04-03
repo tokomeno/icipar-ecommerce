@@ -9146,6 +9146,10 @@ table {
 
 // ///////////////////////////////////////////////////////
 
+.search-nav.active {
+  z-index: 1000;
+}
+
 .slick-track {
   max-height: 400px;
 }

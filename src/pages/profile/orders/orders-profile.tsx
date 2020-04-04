@@ -7,14 +7,14 @@ import classnames from "classnames";
 import { useActiveState } from "../../../hooks/common/useActiveState";
 import {
   IActiveModalContext,
-  ActiveModalContext
+  ActiveModalContext,
 } from "../../../contexts/modalContex";
 import { ChooseRateProductModal } from "./choose-rate-product-modal";
 import { OrderComplaintModal } from "./order-complaint-modal";
 
 interface OrdersProfilePageProps {}
 
-export const OrdersProfilePage: React.FC<OrdersProfilePageProps> = props => {
+export const OrdersProfilePage: React.FC<OrdersProfilePageProps> = (props) => {
   const { setActiveModal, activeModal } = useContext<IActiveModalContext>(
     ActiveModalContext
   );
@@ -27,8 +27,8 @@ export const OrdersProfilePage: React.FC<OrdersProfilePageProps> = props => {
 
   useEffect(() => {
     OrderService.getAll()
-      .then(res => setOrders(res.data.data as any))
-      .catch(err => {
+      .then((res) => setOrders(res.data.data as any))
+      .catch((err) => {
         console.error(err);
       });
   }, []);
@@ -49,8 +49,8 @@ export const OrdersProfilePage: React.FC<OrdersProfilePageProps> = props => {
           <div className="md-btns d-md-none d-flex align-items-center justify-content-center">
             <div
               onClick={() => setActiveState("orders")}
-              className={classnames("order-btn", {
-                active: activeState === "orders"
+              className={classnames("cursor-pointer order-btn", {
+                active: activeState === "orders",
               })}
             >
               {t("orders")}
@@ -58,8 +58,8 @@ export const OrdersProfilePage: React.FC<OrdersProfilePageProps> = props => {
             <span>/</span>
             <div
               onClick={() => setActiveState("history")}
-              className={classnames("history-btn", {
-                active: activeState === "history"
+              className={classnames("cursor-pointer history-btn", {
+                active: activeState === "history",
               })}
             >
               {t("history")}
@@ -69,7 +69,7 @@ export const OrdersProfilePage: React.FC<OrdersProfilePageProps> = props => {
             className={classnames(
               "profile-right profile-side table-profile orders",
               {
-                active: activeState === "orders"
+                active: activeState === "orders",
               }
             )}
           >
@@ -79,8 +79,8 @@ export const OrdersProfilePage: React.FC<OrdersProfilePageProps> = props => {
             <div className="table-responsive order-t">
               <OrderTable>
                 {orders
-                  .filter(order => order.delivery_status !== "FINISHED")
-                  .map(order => (
+                  .filter((order) => order.delivery_status !== "FINISHED")
+                  .map((order) => (
                     <tr key={order.id}>
                       <td className="td1">
                         <div className="order-code">
@@ -109,7 +109,7 @@ export const OrdersProfilePage: React.FC<OrdersProfilePageProps> = props => {
             className={classnames(
               "profile-right profile-side table-profile buy-cont orders-history",
               {
-                active: activeState === "history"
+                active: activeState === "history",
               }
             )}
           >
@@ -119,8 +119,8 @@ export const OrdersProfilePage: React.FC<OrdersProfilePageProps> = props => {
             <div className="table-responsive order-t">
               <OrderTable>
                 {orders
-                  .filter(order => order.delivery_status === "FINISHED")
-                  .map(order => (
+                  .filter((order) => order.delivery_status === "FINISHED")
+                  .map((order) => (
                     <tr key={order.id}>
                       <td className="td1">
                         <div className="order-code">
@@ -192,7 +192,7 @@ const OrderTable: React.FC<{}> = ({ children }) => {
 const OrderItems: React.FC<{ items: IOrder["items"] }> = ({ items }) => {
   return (
     <div className="order-code_hover d-flex align-items-center flex-column">
-      {items.map(item => (
+      {items.map((item) => (
         <div
           key={item.thumbnail + item.title}
           className="d-flex mt-3"
@@ -226,7 +226,7 @@ const ProgressBar: React.FC<{ order: IOrder }> = ({ order }) => {
       </div>
       <div
         className={classnames("progress-bar", {
-          active: order.delivery_status !== "PROCESSING"
+          active: order.delivery_status !== "PROCESSING",
         })}
         role="progressbar"
         style={{ width: "calc(100% / 3)" }}
@@ -240,7 +240,7 @@ const ProgressBar: React.FC<{ order: IOrder }> = ({ order }) => {
       </div>
       <div
         className={classnames("progress-bar", {
-          active: order.delivery_status === "FINISHED"
+          active: order.delivery_status === "FINISHED",
         })}
         role="progressbar"
         style={{ width: "calc(100% / 3)" }}

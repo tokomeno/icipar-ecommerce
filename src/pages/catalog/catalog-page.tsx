@@ -17,9 +17,13 @@ export const CatalogPage: React.FC<CatalogPageProps> = () => {
   const { productFilterData, setFilterFromParams } = useContext(
     PorductFilterContext
   );
-  const { products, nextPage, haveNextPage, isLoading } = useProducts(
-    productFilterData
-  );
+  const {
+    products,
+    nextPage,
+    haveNextPage,
+    isLoading,
+    isLoadingNexPage,
+  } = useProducts(productFilterData);
 
   useEffect(() => {
     if (window.location.search.length) setFilterFromParams();
@@ -34,7 +38,7 @@ export const CatalogPage: React.FC<CatalogPageProps> = () => {
         <div className="d-flex">
           <div
             className={classnames("filter-block", {
-              active: activeModal === "filter"
+              active: activeModal === "filter",
             })}
           >
             <button
@@ -65,10 +69,14 @@ export const CatalogPage: React.FC<CatalogPageProps> = () => {
               {!isLoading && products.length === 0 && (
                 <h2 className="h2 text-center">{t("products_not_found")}</h2>
               )}
-              {products.map(p => (
-                <Product key={p.id} product={p} wrapperClass="catalog-item" />
-              ))}
-              {isLoading && <ProductContetnLoader items={15} />}
+              {!isLoading ? (
+                products.map((p) => (
+                  <Product key={p.id} product={p} wrapperClass="catalog-item" />
+                ))
+              ) : (
+                <ProductContetnLoader items={30} />
+              )}
+              {isLoadingNexPage && <ProductContetnLoader items={15} />}
             </div>
             {haveNextPage && (
               <div className="d-flex justify-content-center">

@@ -7,7 +7,7 @@ import { IProduct, ProductService } from "../../services/product.http";
 
 export enum ascOrDesc {
   asc = "asc",
-  desc = "desc"
+  desc = "desc",
 }
 
 export type ISortByPrice = (ascOrDesc: ascOrDesc) => void;
@@ -20,21 +20,26 @@ export const useProducts = (
   const {
     isActive: isLoading,
     setActive: startLoading,
-    setInActive: stopLoading
+    setInActive: stopLoading,
   } = useToggle(true);
+  const {
+    isActive: isLoadingNexPage,
+    setActive: startLoadingNexPage,
+    setInActive: stopLoadingNexPage,
+  } = useToggle(false);
 
   const nextPage = () => {
     if (links && links.next) {
-      startLoading();
+      startLoadingNexPage();
       ProductService.fetchProducts(
         links.next,
         productFilterData,
         ({ links, data }: FetchProductResponse) => {
-          setProducts(prevState => {
+          setProducts((prevState) => {
             return [...prevState, ...data];
           });
           setLinks(links);
-          stopLoading();
+          stopLoadingNexPage();
         }
       );
     }
@@ -67,9 +72,10 @@ export const useProducts = (
 
   return {
     isLoading,
+    isLoadingNexPage,
     products,
     links,
     nextPage,
-    haveNextPage: (links && links.next) || null
+    haveNextPage: (links && links.next) || null,
   };
 };

@@ -11,12 +11,14 @@ interface IStatePriceRange {
 }
 
 class PriceRange extends React.Component<{}, IStatePriceRange> {
+  private rangeFilterTimeout: NodeJS.Timeout | null;
   static contextType = PorductFilterContext;
   context!: React.ContextType<typeof PorductFilterContext>;
 
   constructor(props: {}) {
     super(props);
     this.state = { values: [0, 500] };
+    this.rangeFilterTimeout = null;
   }
 
   componentDidMount = () => {
@@ -25,12 +27,14 @@ class PriceRange extends React.Component<{}, IStatePriceRange> {
     }
   };
   rangeChange = (values: number[]) => {
-    this.setState({ values: [values[0], values[1]] }, () => {
-      this.context.setProductFilterData(prevState => ({
+    this.setState({ values: [values[0], values[1]] });
+    if (this.rangeFilterTimeout) clearInterval(this.rangeFilterTimeout);
+    this.rangeFilterTimeout = setTimeout(() => {
+      this.context.setProductFilterData((prevState) => ({
         ...prevState,
-        price_range: [this.state.values[0], this.state.values[1]]
+        price_range: [this.state.values[0], this.state.values[1]],
       }));
-    });
+    }, 400);
   };
   render() {
     return (
@@ -43,10 +47,10 @@ class PriceRange extends React.Component<{}, IStatePriceRange> {
               className="price"
               name="priceFrom"
               value={this.state.values[0]}
-              onChange={e => {
+              onChange={(e) => {
                 let newValue = e.target.value;
                 this.setState({
-                  values: [parseInt(newValue), this.state.values[1]]
+                  values: [parseInt(newValue), this.state.values[1]],
                 });
               }}
             />
@@ -58,10 +62,10 @@ class PriceRange extends React.Component<{}, IStatePriceRange> {
               className="price"
               name="priceEnd"
               value={this.state.values[1]}
-              onChange={e => {
+              onChange={(e) => {
                 let newValue = e.target.value;
                 this.setState({
-                  values: [this.state.values[0], parseInt(newValue)]
+                  values: [this.state.values[0], parseInt(newValue)],
                 });
               }}
             />
@@ -82,7 +86,7 @@ class PriceRange extends React.Component<{}, IStatePriceRange> {
                 ...props.style,
                 height: "36px",
                 display: "flex",
-                width: "100%"
+                width: "100%",
               }}
             >
               <div
@@ -95,9 +99,9 @@ class PriceRange extends React.Component<{}, IStatePriceRange> {
                     values: this.state.values,
                     colors: ["#ccc", "#548BF4", "#ccc"],
                     min: MIN,
-                    max: MAX
+                    max: MAX,
                   }),
-                  alignSelf: "center"
+                  alignSelf: "center",
                 }}
               >
                 {children}
@@ -116,7 +120,7 @@ class PriceRange extends React.Component<{}, IStatePriceRange> {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                boxShadow: "0px 2px 6px #AAA"
+                boxShadow: "0px 2px 6px #AAA",
               }}
             ></div>
           )}

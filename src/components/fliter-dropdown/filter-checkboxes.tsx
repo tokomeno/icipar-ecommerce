@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef, useContext } from "react";
 import classnames from "classnames";
 import {
   IFilterCheckboxes,
-  PorductFilterContext
+  PorductFilterContext,
 } from "../../contexts/productFilterContext";
 
 interface FilterCheckboxesProps {
@@ -27,9 +27,9 @@ export const FilterCheckboxes: React.FC<FilterCheckboxesProps> = React.memo(
 
     const handleChange = (ch: { title: string; id: number | string }) => {
       if (isChecked(ch.id)) {
-        setCheckedIds(prevState => prevState.filter(i => i !== ch.id));
+        setCheckedIds((prevState) => prevState.filter((i) => i !== ch.id));
       } else {
-        setCheckedIds(prevState => [...prevState, ch.id]);
+        setCheckedIds((prevState) => [...prevState, ch.id]);
       }
     };
     const isChecked = (id: string | number): boolean => {
@@ -43,18 +43,18 @@ export const FilterCheckboxes: React.FC<FilterCheckboxesProps> = React.memo(
       }
       isFirstMount.current = false;
     }, [checkedIds, setFilterOnKey, isFirstMount, filterName]);
-    console.log(checkboxes);
+    console.log(filterName);
     return (
       <React.Fragment>
-        {checkboxes.map(ch => (
+        {checkboxes.map((ch) => (
           <React.Fragment key={ch.id}>
             <label
               key={ch.id}
               className={classnames("filter-link", {
-                color: type === "colors"
+                color: type === "colors",
               })}
               style={{
-                backgroundColor: type === "colors" ? ch.title : undefined
+                backgroundColor: type === "colors" ? ch.title : undefined,
               }}
             >
               {type === "colors" ? <div className="color" /> : ch.title}
@@ -66,15 +66,15 @@ export const FilterCheckboxes: React.FC<FilterCheckboxesProps> = React.memo(
               <span className="checkmark" />
             </label>
             {ch.children &&
-              ch.children.map(ch => (
+              ch.children.map((ch) => (
                 <label
                   key={ch.id}
                   className={classnames("filter-link", {
-                    color: type === "colors"
+                    color: type === "colors",
                   })}
                   style={{
                     backgroundColor: type === "colors" ? ch.title : undefined,
-                    marginLeft: "5px"
+                    marginLeft: "5px",
                   }}
                 >
                   {type === "colors" ? <div className="color" /> : ch.title}

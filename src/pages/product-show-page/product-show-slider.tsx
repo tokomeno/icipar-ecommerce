@@ -12,7 +12,7 @@ const params = {
   slidesToScroll: 1,
   arrows: false,
   fade: true,
-  infinite: true
+  infinite: true,
 };
 
 const param2 = {
@@ -24,7 +24,7 @@ const param2 = {
   centerMode: false,
   focusOnSelect: true,
   arrows: false,
-  infinite: true
+  infinite: true,
 };
 
 export class ProductShowSlider extends React.PureComponent<
@@ -37,7 +37,7 @@ export class ProductShowSlider extends React.PureComponent<
     super(props);
     this.state = {
       nav1: null,
-      nav2: null
+      nav2: null,
     };
   }
 
@@ -46,14 +46,14 @@ export class ProductShowSlider extends React.PureComponent<
       nav1: this.slider1,
       nav2: this.slider2,
       photoIndex: 0,
-      isOpen: false
+      isOpen: false,
     });
   }
 
   render() {
     const { activeItem } = this.props;
     const { photoIndex, isOpen } = this.state;
-    const images = activeItem.images.map(i => i.image);
+    const images = activeItem.images.map((i) => i.image);
     return (
       <div className="d-flex flex-row-reverse justify-content-center">
         <img
@@ -64,26 +64,31 @@ export class ProductShowSlider extends React.PureComponent<
         />
         <Slider
           asNavFor={this.state.nav2}
-          ref={slider => (this.slider1 = slider)}
+          ref={(slider) => (this.slider1 = slider)}
           {...params}
           className="slider-for"
         >
-          {this.props.activeItem.images.map(image => (
+          {this.props.activeItem.images.map((image) => (
             <div key={image.image} className="item">
-              <img src={image.image} alt="" draggable="false" />
+              <img
+                style={{ maxHeight: "345px" }}
+                src={image.image}
+                alt=""
+                draggable="false"
+              />
             </div>
           ))}
         </Slider>
 
         <Slider
           asNavFor={this.state.nav1}
-          ref={slider => (this.slider2 = slider)}
+          ref={(slider) => (this.slider2 = slider)}
           {...param2}
           className="slider-nav d-none d-lg-flex flex-column justify-content-center"
         >
-          {this.props.activeItem.images.map(image => (
+          {this.props.activeItem.images.map((image) => (
             <div key={image.image} className="item">
-              <img src={image.image} alt="" />
+              <img style={{ maxHeight: "88px" }} src={image.image} alt="" />
             </div>
           ))}
         </Slider>
@@ -96,12 +101,12 @@ export class ProductShowSlider extends React.PureComponent<
             onCloseRequest={() => this.setState({ isOpen: false })}
             onMovePrevRequest={() =>
               this.setState({
-                photoIndex: (photoIndex + images.length - 1) % images.length
+                photoIndex: (photoIndex + images.length - 1) % images.length,
               })
             }
             onMoveNextRequest={() =>
               this.setState({
-                photoIndex: (photoIndex + 1) % images.length
+                photoIndex: (photoIndex + 1) % images.length,
               })
             }
           />

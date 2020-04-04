@@ -19,6 +19,7 @@ interface ProductSliderProps {
     sectionClasses?: string[];
   };
   isHot?: boolean;
+  sectionId?: string;
 }
 
 const params = {
@@ -28,28 +29,28 @@ const params = {
   renderNextButton: () => null,
   breakpoints: {
     1799: {
-      spaceBetween: 30
+      spaceBetween: 30,
     },
     1199: {
       slidesPerView: 4,
-      spaceBetween: 40
+      spaceBetween: 40,
     },
     991: {
       slidesPerView: 3,
-      spaceBetween: 50
+      spaceBetween: 50,
     },
     767: {
-      slidesPerView: 2
+      slidesPerView: 2,
     },
     575: {
-      slidesPerView: 1.5
+      slidesPerView: 1.5,
     },
     400: {
       slidesPerView: 1.5,
-      spaceBetween: 20
-    }
+      spaceBetween: 20,
+    },
   },
-  observer: true
+  observer: true,
 };
 
 interface IProductByCateogry {
@@ -63,7 +64,8 @@ export const ProductSlider: React.FC<ProductSliderProps> = ({
   showMoreNumber,
   classes,
   isHot,
-  fetchUrl
+  fetchUrl,
+  sectionId,
 }) => {
   const { t } = useTranslation();
   const [productByCategory, setProductByCategory] = useState<
@@ -74,7 +76,9 @@ export const ProductSlider: React.FC<ProductSliderProps> = ({
   const [activeTabId, setActiveTabId] = useState<number | null>(null);
 
   const setActiveTab = (category_id: number) => {
-    const p = productByCategory.find(item => item.category_id === category_id);
+    const p = productByCategory.find(
+      (item) => item.category_id === category_id
+    );
     if (!p) return;
     setProducts(p.products);
     setActiveTabId(p.category_id);
@@ -84,19 +88,20 @@ export const ProductSlider: React.FC<ProductSliderProps> = ({
     if (!fetchUrl) return;
     axiosWithToken
       .get<{ data: IProductByCateogry[] }>(fetchUrl)
-      .then(res => {
+      .then((res) => {
         const { data } = res.data;
         setProductByCategory(data);
         setActiveTabId(data[0].category_id);
         setProducts(data[0].products);
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   }, [fetchUrl]);
 
   const { sliderNav, currentSliderIndex } = useSliderNav(products.length, 0);
 
   const loader = (
     <section
+      id={sectionId}
       className={classnames("slider-section", classes.sectionClasses)}
       data-aos-off="fade-up"
     >
@@ -116,6 +121,7 @@ export const ProductSlider: React.FC<ProductSliderProps> = ({
 
   return (
     <section
+      id={sectionId}
       className={classnames("slider-section", classes.sectionClasses)}
       data-aos-off="fade-up"
     >
@@ -130,14 +136,14 @@ export const ProductSlider: React.FC<ProductSliderProps> = ({
         </div>
         <div className="line" />
         <div className="menu d-flex justify-content-center align-items-center">
-          {productByCategory.map(i => (
+          {productByCategory.map((i) => (
             <a
               href="#!"
               key={i.category_id}
               className={classnames("menu_link", {
-                active: i.category_id === activeTabId
+                active: i.category_id === activeTabId,
               })}
-              onClick={e => {
+              onClick={(e) => {
                 e.preventDefault();
                 setActiveTab(i.category_id);
               }}

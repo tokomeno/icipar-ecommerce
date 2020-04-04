@@ -8,7 +8,7 @@ import {
   FETCH_BESTSELLER_PRODUCTS,
   FETCH_NEWARRIVALS_PRODUCTS,
   FETCH_HOTDEALS_PRODUCTS,
-  FETCH_DISCOUNTED_PRODUCTS
+  FETCH_DISCOUNTED_PRODUCTS,
 } from "../../api/endpoints";
 import { BrandSlider } from "../../components/sliders/brandSlider/brandSlider";
 import { SectionSliders } from "./section-sliders";
@@ -31,24 +31,28 @@ export const HomePage: React.FC<HomePageProps> = () => {
         classes={{ sectionClasses: ["hot__slide"] }}
         fetchUrl={FETCH_HOTDEALS_PRODUCTS}
         isHot={true}
+        sectionId={"hot__slide"}
       />
       <ProductSlider
         title={t("news")}
         showMoreNumber={123}
         classes={{ sectionClasses: ["news__slide"] }}
         fetchUrl={FETCH_NEWARRIVALS_PRODUCTS}
+        sectionId={"news__slide"}
       />
       <ProductSlider
         classes={{ sectionClasses: ["saleslider"] }}
         title={t("sales")}
         showMoreNumber={123}
         fetchUrl={FETCH_DISCOUNTED_PRODUCTS}
+        sectionId={"saleslider"}
       />
       <ProductSlider
         classes={{ sectionClasses: ["bestsellerslider"] }}
         title={t("bestsellers")}
         showMoreNumber={123}
         fetchUrl={FETCH_BESTSELLER_PRODUCTS}
+        sectionId={"bestsellerslider"}
       />
       {/* <ProductSlider
         classes={{ sectionClasses: ["recommendedslider"] }}

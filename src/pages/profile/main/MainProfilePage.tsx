@@ -5,6 +5,7 @@ import { ProfileBasePage } from "../index";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import { routes } from "../../../routes/routes";
+import { NavHashLink } from "react-router-hash-link";
 
 interface ProfilePageProps {
   name?: string;
@@ -19,8 +20,8 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ name }) => {
           {t("hello")} <span className="name">{name}</span>
         </div>
         <div className="prof-grid d-flex justify-content-between">
-          <NavLink
-            to="#!"
+          <NavHashLink
+            to={routes.home + "#bestsellerslider"}
             className="prof-grid_item d-flex align-items-center justify-content-center"
           >
             <img
@@ -34,9 +35,9 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ name }) => {
               alt="right arrow"
               className="arrow"
             />
-          </NavLink>
-          <NavLink
-            to={routes.blogs}
+          </NavHashLink>
+          <NavHashLink
+            to={routes.home + "#news__slide"}
             className="prof-grid_item d-flex align-items-center justify-content-center"
           >
             <img
@@ -50,7 +51,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ name }) => {
               alt="right arrow"
               className="arrow"
             />
-          </NavLink>
+          </NavHashLink>
           <NavLink
             to={routes.blogs}
             className="prof-grid_item d-flex align-items-center justify-content-center"

@@ -8,7 +8,7 @@ import {
   increaseItem,
   removeGiftCart,
   setBundleQntyToCart,
-  setCart
+  setCart,
 } from "../../../redux/cart/cartActions";
 import { CartItem } from "./cart-item";
 import { useTranslation } from "react-i18next";
@@ -31,6 +31,7 @@ interface CartContentProps {
   removeGiftCart: typeof removeGiftCart;
   setBundleQntyToCart: typeof setBundleQntyToCart;
   promotion_display_text: ICartState["promotion_display_text"];
+  promotion_code: ICartState["promotion_code"];
 }
 
 export const _CartContent: React.FC<CartContentProps> = ({
@@ -46,7 +47,8 @@ export const _CartContent: React.FC<CartContentProps> = ({
   bundles,
   setBundleQntyToCart,
   setCart,
-  promotion_display_text
+  promotion_display_text,
+  promotion_code,
 }) => {
   const { t } = useTranslation();
   return (
@@ -72,7 +74,7 @@ export const _CartContent: React.FC<CartContentProps> = ({
               </tr>
             </thead>
             <tbody>
-              {cartItems.map(cartItem => (
+              {cartItems.map((cartItem) => (
                 <CartItem
                   loadingItemId={loadingItemId}
                   removeItem={removeItem}
@@ -82,14 +84,14 @@ export const _CartContent: React.FC<CartContentProps> = ({
                   cartItem={cartItem}
                 />
               ))}
-              {new_gift_cards.map(giftcard => (
+              {new_gift_cards.map((giftcard) => (
                 <CartCoupon
                   key={giftcard.card_type}
                   removeGiftCart={removeGiftCart}
                   giftCard={giftcard}
                 />
               ))}
-              {bundles.map(bundle => (
+              {bundles.map((bundle) => (
                 <CartBundel
                   setBundleQntyToCart={setBundleQntyToCart}
                   bundle={bundle}
@@ -103,8 +105,9 @@ export const _CartContent: React.FC<CartContentProps> = ({
           <ApplyCoupon
             promotion_display_text={promotion_display_text}
             setCart={setCart}
+            promotion_code={promotion_code}
           />
-          <div className="next d-flex align-items-center">
+          <div className="next flex-shrink-0 d-flex align-items-center">
             <div className="last-price d-none d-sm-block">
               {totalPrice}
               <sub>D</sub>
@@ -137,7 +140,8 @@ const mapStateToProps = ({ cart }: IStoreState) => {
     loadingItemId: cart.loadingItemId,
     new_gift_cards: cart.new_gift_cards,
     bundles: cart.bundles,
-    promotion_display_text: cart.promotion_display_text
+    promotion_display_text: cart.promotion_display_text,
+    promotion_code: cart.promotion_code,
   };
 };
 
@@ -148,5 +152,5 @@ export const CartContent = connect(mapStateToProps, {
   decreaseItem,
   removeGiftCart,
   setBundleQntyToCart,
-  setCart
+  setCart,
 })(_CartContent);

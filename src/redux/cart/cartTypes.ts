@@ -22,6 +22,7 @@ export interface ICartState {
     new_gift_cards?: string | null;
   };
   promotion_display_text?: string | null | undefined;
+  promotion_code?: string | null | undefined;
 }
 
 export interface ICartBundle {
@@ -45,7 +46,7 @@ export enum CartActionsType {
   removeItem = "removeItem",
   changeQnty = "changeQnty",
   loadingItemId = "loadingItemId",
-  setErrors = "setErrors"
+  setErrors = "setErrors",
 }
 
 export interface SetCartAction {

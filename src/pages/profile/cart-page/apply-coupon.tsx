@@ -8,10 +8,14 @@ import { useInput } from "../../../hooks/common/useInput";
 export const ApplyCoupon: React.FC<{
   setCart: typeof setCart;
   promotion_display_text: ICartState["promotion_display_text"];
-}> = ({ setCart, promotion_display_text }) => {
+  promotion_code: ICartState["promotion_code"];
+}> = ({ setCart, promotion_display_text, promotion_code }) => {
   const { t } = useTranslation();
+  const promotionInput = useInput();
+
   const applyPromotion = () => {
     CartService.applyPromotion(promotionInput.value).then((res) => {
+      promotionInput.onChange("");
       setCart(res.data.data);
     });
   };
@@ -20,10 +24,9 @@ export const ApplyCoupon: React.FC<{
       setCart(res.data.data);
     });
   };
-  const promotionInput = useInput();
 
   return (
-    <form className="copy-code d-flex align-items-start">
+    <form className="copy-code d-flex align-items-start flex-wrap">
       <div>
         <input
           {...promotionInput}
@@ -34,14 +37,16 @@ export const ApplyCoupon: React.FC<{
           <span style={{ color: "black" }} className="position-relative">
             {promotion_display_text}
 
-            <button
-              type="button"
-              onClick={cancelPromotion}
-              style={{ color: "#fa7268" }}
-              className="btn btn-md btn-link ml-5"
-            >
-              &times;
-            </button>
+            {promotion_code && (
+              <button
+                type="button"
+                onClick={cancelPromotion}
+                style={{ color: "#fa7268" }}
+                className="btn btn-md btn-link ml-5"
+              >
+                &times;
+              </button>
+            )}
           </span>
         )}
       </div>

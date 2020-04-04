@@ -1,9 +1,10 @@
 import { store } from "./redux/store";
 
-import { setCurrentUser } from "./redux/auth/authActions";
+import { setCurrentUser, logoutUser } from "./redux/auth/authActions";
 
-import { setGenericTokenAsHeader } from "./api/helpers";
+import { setGenericTokenAsHeader } from "./api/inital-auth";
 import { fetchCart } from "./redux/cart/cartActions";
+import { AuthService } from "./services/auth.http";
 
 export const tryLocalAuth = () => {
   const authStateFromStorage = localStorage.getItem("auth");
@@ -21,9 +22,10 @@ export const tryLocalAuth = () => {
     store.dispatch(
       setCurrentUser({
         token: storageAuthState.token,
-        user: storageAuthState.user
+        user: storageAuthState.user,
       })
     );
+    ifUserTokenIsNotValidLogout(storageAuthState.token);
   } else {
     setGenericTokenAsHeader().then(() => {
       store.dispatch(fetchCart() as any);
@@ -31,6 +33,8 @@ export const tryLocalAuth = () => {
   }
 };
 
-// const checkGenericUser = () => {};
-
-// const checkUser = () => {};
+const ifUserTokenIsNotValidLogout = (token: string) => {
+  AuthService.checkUserToken(token).catch((err) => {
+    store.dispatch(logoutUser());
+  });
+};

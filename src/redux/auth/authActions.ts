@@ -6,21 +6,21 @@ import {
   SetCurrentUserAction,
   SetAuthErrorAction,
   UpdateAvatarAction,
-  LogoutUserAction
+  LogoutUserAction,
 } from "./authTypes";
 import { Dispatch } from "redux";
 import { API_LOGIN_URL, API_REGISTER_URL } from "../../api/endpoints";
 import {
   setAuthorizationToken,
-  setGenericTokenAsHeader
-} from "../../api/helpers";
+  setGenericTokenAsHeader,
+} from "../../api/inital-auth";
 import { store } from "../store";
 import { fetchCart } from "../cart/cartActions";
 import { fetchFavorites } from "../favorites/favoritesActions";
 
 export const setCurrentUser = ({
   user,
-  token
+  token,
 }: {
   user: IUser;
   token: string;
@@ -30,7 +30,7 @@ export const setCurrentUser = ({
   store.dispatch(fetchFavorites() as any);
   return {
     type: AuthActionTypes.setCurrentUser,
-    payload: { user, token }
+    payload: { user, token },
   };
 };
 
@@ -44,14 +44,14 @@ interface LoginUserParams {
 }
 export const loginUser = ({
   userData,
-  hideModal
+  hideModal,
 }: LoginUserParams): Function => {
   return async (dispatch: Dispatch) => {
     if (!userData.recaptcha_token) {
       dispatch(
         setAuthErrors({
           "g-recaptcha-response": ["recaptcha is not valid"],
-          msg: "recaptcha is not valid"
+          msg: "recaptcha is not valid",
         })
       );
       return;
@@ -59,9 +59,9 @@ export const loginUser = ({
     axios
       .post<IUser>(API_LOGIN_URL, {
         ...userData,
-        "g-recaptcha-response": userData.recaptcha_token
+        "g-recaptcha-response": userData.recaptcha_token,
       })
-      .then(res => {
+      .then((res) => {
         const { user, token } = res.data;
         if (res.data.error) {
           dispatch(setAuthErrors({ msg: "credentials_not_match" }));
@@ -70,7 +70,7 @@ export const loginUser = ({
         dispatch<SetCurrentUserAction>(setCurrentUser({ user, token }));
         hideModal();
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         catchLoginRegisterError(err, dispatch);
       });
@@ -89,20 +89,20 @@ interface RegisterUserParams {
 }
 export const registerUser = ({
   userData,
-  callback
+  callback,
 }: RegisterUserParams): Function => {
   return async (dispatch: Dispatch) => {
     axios
       .post<{ user: IUser; token: string }>(API_REGISTER_URL, {
         ...userData,
-        "g-recaptcha-response": userData.recaptcha_token
+        "g-recaptcha-response": userData.recaptcha_token,
       })
-      .then(res => {
+      .then((res) => {
         const { user, token } = res.data;
         dispatch<SetCurrentUserAction>(setCurrentUser({ user, token }));
         callback(user);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         catchLoginRegisterError(err, dispatch);
       });
@@ -111,20 +111,20 @@ export const registerUser = ({
 
 export const updateAvatar = (avatar: string): UpdateAvatarAction => ({
   type: AuthActionTypes.updateAvatar,
-  payload: avatar
+  payload: avatar,
 });
 
 export const setAuthErrors = (
   errors: AuthState["errors"]
 ): SetAuthErrorAction => ({
   payload: errors,
-  type: AuthActionTypes.setAuthErrors
+  type: AuthActionTypes.setAuthErrors,
 });
 
 export const logoutUser = (): LogoutUserAction => {
   setGenericTokenAsHeader();
   return {
-    type: AuthActionTypes.logoutUser
+    type: AuthActionTypes.logoutUser,
   };
 };
 

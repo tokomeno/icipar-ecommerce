@@ -17,17 +17,17 @@ const Filters: Partial<keyof IFilterCheckboxes>[] = [
   "collections",
   "usages",
   "smells",
-  "countries"
+  "countries",
 ];
 
-export const CatalogFilters: React.FC<CatalogFiltersProps> = React.memo(() => {
+export const CatalogFilters: React.FC<CatalogFiltersProps> = () => {
   const { t } = useTranslation();
   const { productFilterAttributes } = useProductFilterAttributes();
 
   if (!productFilterAttributes) return <div className="list" />;
   return (
     <div className="list">
-      {Filters.map(name => (
+      {Filters.map((name) => (
         <FilterDropdown key={name} type="default" title={t(name)}>
           <FilterCheckboxes
             filterName={name}
@@ -51,4 +51,4 @@ export const CatalogFilters: React.FC<CatalogFiltersProps> = React.memo(() => {
       <CatBanner id={1} />
     </div>
   );
-});
+};

@@ -2,7 +2,11 @@
 // https://app.swaggerhub.com/apis-docs/badzaghua/iciparis-accounts/1.0
 const AUTH_BASE_URL = "http://3.15.209.19/api";
 
-export const GENERIC_USER = AUTH_BASE_URL + "/guest/assign-generic-user";
+export const CHECK_GENERIC_TOKEN = AUTH_BASE_URL + "/ms/generic-user/for-guest";
+export const CHECK_USER_TOKEN = AUTH_BASE_URL + "/ms/user";
+
+export const GET_GENERIC_USER_TOKEN =
+  AUTH_BASE_URL + "/guest/assign-generic-user";
 export const API_LOGIN_URL = AUTH_BASE_URL + "/login";
 export const API_REGISTER_URL = AUTH_BASE_URL + "/register";
 export const API_FB_LOGIN_URL =

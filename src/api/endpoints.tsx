@@ -82,6 +82,7 @@ export const CART_TOGGLE = CART_BATH_URL + "/toggle-item";
 export const TOGGLE_BUNDLE_CART = CART_BATH_URL + "/toggle-bundle";
 
 export const APPLY_POROMOTION = CART_BATH_URL + "/apply-promotion";
+export const CANCEL_PROMOTION = CART_BATH_URL + "/cancel-promotion";
 
 export const ADD_GIFT_CART_TO_CART = CART_BATH_URL + "/new-gift-card/add";
 export const REMOVE_GIFT_CART_TO_CART = CART_BATH_URL + "/new-gift-card/remove";

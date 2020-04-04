@@ -10,8 +10,13 @@ export const ApplyCoupon: React.FC<{
   promotion_display_text: ICartState["promotion_display_text"];
 }> = ({ setCart, promotion_display_text }) => {
   const { t } = useTranslation();
-  const applyCoupon = () => {
-    CartService.applyPromotion(promotionInput.value).then(res => {
+  const applyPromotion = () => {
+    CartService.applyPromotion(promotionInput.value).then((res) => {
+      setCart(res.data.data);
+    });
+  };
+  const cancelPromotion = () => {
+    CartService.cancelPromotion().then((res) => {
       setCart(res.data.data);
     });
   };
@@ -25,13 +30,26 @@ export const ApplyCoupon: React.FC<{
           type="text"
           placeholder={t("paste_coupon_or_sale_code")}
         />
-        <span>{promotion_display_text}</span>
+        {promotion_display_text && (
+          <span style={{ color: "black" }} className="position-relative">
+            {promotion_display_text}
+
+            <button
+              type="button"
+              onClick={cancelPromotion}
+              style={{ color: "#fa7268" }}
+              className="btn btn-md btn-link ml-5"
+            >
+              &times;
+            </button>
+          </span>
+        )}
       </div>
       <button
         className="buy-btn"
         style={{ marginLeft: "4px" }}
         type="button"
-        onClick={applyCoupon}
+        onClick={applyPromotion}
       >
         {t("send")}
       </button>

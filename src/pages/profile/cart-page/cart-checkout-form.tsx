@@ -19,7 +19,7 @@ export const CartCheckoutForm: React.FC<CartCheckoutForm> = ({
   totalPrice,
   showContent,
   cities,
-  customer
+  customer,
 }) => {
   const history = useHistory();
   const { t } = useTranslation();
@@ -54,17 +54,17 @@ export const CartCheckoutForm: React.FC<CartCheckoutForm> = ({
       id_number,
       birth_date,
       city_id,
-      full_address
+      full_address,
     })
       // OrderService.complete()
-      .then(res => {
+      .then((res) => {
         setErrors({});
         stopLoading();
-        OrderService.payementStart().then(res => {
+        OrderService.payementStart().then((res) => {
           setTrans_id(res.data.trans_id);
         });
       })
-      .catch(err => {
+      .catch((err) => {
         stopLoading();
         if (err.response && err.response.data && err.response.data.error) {
           setErrors(err.response.data.error);
@@ -97,12 +97,17 @@ export const CartCheckoutForm: React.FC<CartCheckoutForm> = ({
                 className="custom-select"
               >
                 <option>{t("choose_city")}</option>
-                {cities.map(city => (
+                {cities.map((city) => (
                   <option key={city.id} value={city.id}>
                     {city.city}
                   </option>
                 ))}
               </select>
+              {errors && errors.city_id && errors.city_id[0] && (
+                <span className="text-danger pl-5">
+                  {errors && errors.city_id && errors.city_id[0]}
+                </span>
+              )}
             </div>
 
             <ProfileInput
@@ -201,14 +206,14 @@ export const CartCheckoutForm: React.FC<CartCheckoutForm> = ({
           {t("coniniue_shopping")}
         </a>
         <div className="next d-flex align-items-center">
-          <div className="old-price d-none d-sm-block">
+          {/* <div className="old-price d-none d-sm-block">
+            {totalPrice}
+            <sub>D</sub>
+          </div> */}
+          <div className="last-price d-none d-sm-block">
             {totalPrice}
             <sub>D</sub>
           </div>
-          {/* <div className="last-price d-none d-sm-block">
-              110
-              <sub>D</sub>
-            </div> */}
           <button
             disabled={isLoading}
             onClick={handleSubmit}

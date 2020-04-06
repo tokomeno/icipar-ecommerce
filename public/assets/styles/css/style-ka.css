@@ -7513,6 +7513,7 @@ sub {
 
 .profile .profile-right .shopping-bottom .buy-btn img {
   margin-left: 60px;
+  max-height: 25px;
 }
 
 .profile .profile-right .shopping-bottom .buy-btn .red-arrow {
@@ -7761,6 +7762,7 @@ sub {
 
 .profile .checkout-cont .info-item {
   width: 400px;
+  max-width: 100%;
 }
 
 @media (max-width: 575px) {

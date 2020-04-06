@@ -3932,6 +3932,7 @@ sub {
 
         img {
           margin-left: 60px;
+          max-height: 25px;
         }
 
         .red-arrow {
@@ -4150,6 +4151,7 @@ sub {
 
     .info-item {
       width: 400px;
+      max-width: 100%;
 
       @media (max-width: 575px) {
         width: 100%;

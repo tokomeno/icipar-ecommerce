@@ -5,6 +5,7 @@ import {
   CHECK_GENERIC_TOKEN,
   CHECK_USER_TOKEN,
   GET_GENERIC_USER_TOKEN,
+  MY_RECOMENDATIONS,
 } from "../api/endpoints";
 import Axios from "axios";
 
@@ -38,5 +39,9 @@ export class AuthService {
         Authorization: `Bearer ${token}`,
       },
     });
+  }
+
+  static myRecomendation() {
+    return axiosWithToken.get(MY_RECOMENDATIONS);
   }
 }

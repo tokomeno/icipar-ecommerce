@@ -36,6 +36,9 @@ export const GET_CITIES = AUTH_BASE_URL + "/cities";
 // Products
 // https://app.swaggerhub.com/apis-docs/badzaghua/iciparis-products/1.0.0
 export const PRODUCT_BASE_URL = "http://3.18.107.107/api";
+
+export const MY_RECOMENDATIONS =
+  PRODUCT_BASE_URL + "/featured-products/recommended";
 export const FETCH_PRODUCTS_URL = PRODUCT_BASE_URL + "/products";
 export const FETCH_PRODUCTS_FILTER_DATA = PRODUCT_BASE_URL + "/product-filters";
 

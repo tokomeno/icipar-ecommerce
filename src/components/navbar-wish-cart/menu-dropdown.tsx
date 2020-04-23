@@ -16,7 +16,7 @@ export const MenuDropdown: React.FC<IMenuDropdownProps> = ({
   products,
   wrapperClassName,
   buttonChildren,
-  navLink
+  navLink,
 }) => {
   return (
     <div className={classnames("hdr-cart", wrapperClassName)}>
@@ -25,19 +25,21 @@ export const MenuDropdown: React.FC<IMenuDropdownProps> = ({
           {buttonChildren}
         </Dropdown.Toggle>
 
-        <Dropdown.Menu>
-          {(products as any).slice(0, 5).map((p: any) => (
-            <DropdownItem
-              product={{
-                thumbnail: (p as any).thumbnail,
-                title: (p as any).title || (p as any).item_title,
-                price: (p as any).price || null
-              }}
-              key={(p as any).item_id || (p as any).id}
-            />
-          ))}
-          {navLink}
-        </Dropdown.Menu>
+        {products.length > 0 ? (
+          <Dropdown.Menu>
+            {(products as any).slice(0, 5).map((p: any) => (
+              <DropdownItem
+                product={{
+                  thumbnail: (p as any).thumbnail,
+                  title: (p as any).title || (p as any).item_title,
+                  price: (p as any).price || null,
+                }}
+                key={(p as any).item_id || (p as any).id}
+              />
+            ))}
+            {navLink}
+          </Dropdown.Menu>
+        ) : null}
       </Dropdown>
     </div>
   );
@@ -51,7 +53,7 @@ const CustomToggle = React.forwardRef<any, any>(
       aria-haspopup="true"
       aria-expanded="false"
       ref={ref}
-      onClick={e => {
+      onClick={(e) => {
         e.preventDefault();
         onClick(e);
       }}

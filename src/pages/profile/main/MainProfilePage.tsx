@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ProfileBasePage } from "../index";
 // import { dummyProductData } from "../../../data/product";
 // import { Product } from "../../../components/product/product";
@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import { routes } from "../../../routes/routes";
 import { NavHashLink } from "react-router-hash-link";
+import { AuthService } from "../../../services/auth.http";
 
 interface ProfilePageProps {
   name?: string;
@@ -13,6 +14,9 @@ interface ProfilePageProps {
 
 export const ProfilePage: React.FC<ProfilePageProps> = ({ name }) => {
   const { t } = useTranslation();
+  useEffect(() => {
+    AuthService.myRecomendation().then((res) => console.log(res.data));
+  }, []);
   return (
     <ProfileBasePage>
       <div className="profile-right profile-side d-lg-block d-none">

@@ -19,23 +19,23 @@ export interface FetchProductResponse {
   data: IProduct[];
 }
 
-export type IProductFilterRequestParam = {
+export type IProductFilterBackendRequestParam = {
   keyword?: any;
   category_ids?: (number | string)[];
-  age_range?: IFilterRange;
   aroma_ids?: (number | string)[];
   brand_ids?: (number | string)[];
   collection_ids?: (number | string)[];
-  price_range?: IFilterRange;
-  volume_range?: IFilterRange;
   gender_ids?: (number | string)[];
   release_country_ids?: (number | string)[];
   release_years?: (number | string)[];
   usage_ids?: (number | string)[];
   color_group_ids?: (number | string)[];
   smell_ids?: (number | string)[];
-  discount_range?: IFilterRange;
   order?: "-price" | "price";
+  age_range?: IFilterRange;
+  discount_range?: IFilterRange;
+  price_range?: IFilterRange;
+  volume_range?: IFilterRange;
 };
 
 interface IFilterRange {

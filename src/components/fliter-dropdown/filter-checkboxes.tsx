@@ -18,7 +18,7 @@ type ICheckbox = (number | string)[];
 
 export const FilterCheckboxes: React.FC<FilterCheckboxesProps> = React.memo(
   ({ checkboxes, type, filterName }) => {
-    const { setFilterOnKey, productFilterData } = useContext(
+    const { setFilterCheckbox, productFilterData } = useContext(
       PorductFilterContext
     );
     const [checkedIds, setCheckedIds] = useState<ICheckbox>(
@@ -39,10 +39,10 @@ export const FilterCheckboxes: React.FC<FilterCheckboxesProps> = React.memo(
     const isFirstMount = useRef(true);
     useEffect(() => {
       if (!isFirstMount.current) {
-        setFilterOnKey(checkedIds, filterName);
+        setFilterCheckbox(checkedIds, filterName);
       }
       isFirstMount.current = false;
-    }, [checkedIds, setFilterOnKey, isFirstMount, filterName]);
+    }, [checkedIds, setFilterCheckbox, isFirstMount, filterName]);
     return (
       <React.Fragment>
         {checkboxes.map((ch) => (

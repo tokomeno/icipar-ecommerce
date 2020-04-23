@@ -7,15 +7,15 @@ import {
   FETCH_BUNDLE_FOR_ITEM,
   PRODUCT_SIMILAR_TO,
   PRODUCT_OTHERS_BOUGHT,
-  FETCH_PRODUCT_REVIEW
+  FETCH_PRODUCT_REVIEW,
 } from "../api/endpoints";
 import { IProductFilterData } from "../hooks/useProductFilterAttributes";
 import { axiosWithToken } from "../api/axios-with-token";
-import { IProductFilterRequestParameter } from "../contexts/productFilterContext";
+import { IProductFilterFrontEndRequestParameter } from "../contexts/productFilterContext";
 import { FetchProductResponse } from "../hooks/useProducts/types";
 import {
   pushQueryParamsToUrl,
-  mapToRequestParams
+  mapToRequestParams,
 } from "../hooks/useProducts/helper";
 
 export interface IProductPreordable {
@@ -99,7 +99,7 @@ export class ProductService {
 
   static getBranchesForProduct(productId: number | string) {
     return Axios.get<{ data: { full_address: string }[] }>(PRODUCT_BRANCH, {
-      params: { product_id: productId }
+      params: { product_id: productId },
     });
   }
 
@@ -127,17 +127,17 @@ export class ProductService {
 
   static fetchProducts(
     url: string,
-    productFilterData: IProductFilterRequestParameter,
+    productFilterData: IProductFilterFrontEndRequestParameter,
     callback: (res: FetchProductResponse) => void
   ): void {
     pushQueryParamsToUrl(productFilterData);
     const filterParams = mapToRequestParams(productFilterData);
     axiosWithToken
       .post<FetchProductResponse>(url, filterParams)
-      .then(res => {
+      .then((res) => {
         callback(res.data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         alert("error_occured");
       });

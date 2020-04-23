@@ -13,12 +13,12 @@ export interface IFilterCheckboxes {
   countries: (string | number)[];
   release_years: (string | number)[];
   ////////////////
-  volume_range: (string | number)[];
-  age_range: (string | number)[];
-  discount_range: (string | number)[];
+  volume_range: string[];
+  age_range: string[];
+  discount_range: string[];
 }
 
-const defaultData: IProductFilterRequestParameter = {
+const defaultData: IProductFilterFrontEndRequestParameter = {
   categories: [],
   aromas: [],
   genders: [],
@@ -37,15 +37,17 @@ const defaultData: IProductFilterRequestParameter = {
   discount_range: [],
 };
 
-export type IProductFilterRequestParameter = Partial<IFilterCheckboxes> & {
+export type IProductFilterFrontEndRequestParameter = Partial<
+  IFilterCheckboxes
+> & {
   order?: "price" | "-price";
   keyword?: string;
   price_range?: [number, number];
 };
 
 interface IPorductFilterContext {
-  productFilterData: IProductFilterRequestParameter;
-  setFilterOnKey: (
+  productFilterData: IProductFilterFrontEndRequestParameter;
+  setFilterCheckbox: (
     ids: (number | string)[],
     filterName: keyof IFilterCheckboxes
   ) => void;
@@ -61,14 +63,14 @@ export const PorductFilterContext = createContext<IPorductFilterContext>(
 
 export const PorductFilterProvider: React.FC<{}> = ({ children }) => {
   const [productFilterData, setProductFilterData] = useState<
-    IProductFilterRequestParameter
+    IProductFilterFrontEndRequestParameter
   >(defaultData);
 
   const setFilterFromParams = useCallback(() => {
     setProductFilterData(getQueryParamsFromUrl());
   }, []);
 
-  const setFilterOnKey: IPorductFilterContext["setFilterOnKey"] = useCallback(
+  const setFilterCheckbox: IPorductFilterContext["setFilterCheckbox"] = useCallback(
     (ids, filterKey) => {
       setProductFilterData((prevState) => ({ ...prevState, [filterKey]: ids }));
     },
@@ -99,11 +101,12 @@ export const PorductFilterProvider: React.FC<{}> = ({ children }) => {
     [setProductFilterData]
   );
 
+  console.log(productFilterData);
   return (
     <PorductFilterContext.Provider
       value={{
         productFilterData,
-        setFilterOnKey,
+        setFilterCheckbox,
         setNewKeyword,
         setFilterFromParams,
         setPriceRange,

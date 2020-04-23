@@ -126,17 +126,16 @@ const addTitlePropertiesToFilterData = (data: IProductFilterData) => {
   let years: any = data.release_years;
 
   data.release_years = years.map((item: any) => ({
-    id: item as number,
+    id: parseInt(item),
     title: item as number,
   }));
 
-  // DONT JUDJE :D
+  // Calm down :D
   let volume_range: {
     title: string;
     min: number;
     max: number;
   }[] = Object.values(data.volume_range);
-  console.log(data.volume_range, Object.values(volume_range));
   data.volume_range = volume_range.map((item) => ({
     ...item,
     id: [item.min, item.max].join("-"),
@@ -148,7 +147,6 @@ const addTitlePropertiesToFilterData = (data: IProductFilterData) => {
     min: number;
     max: number;
   }[] = Object.values(data.age_range);
-  console.log(data.age_range, Object.values(age_range));
   data.age_range = age_range.map((item) => ({
     ...item,
     id: [item.min, item.max].join("-"),
@@ -160,7 +158,6 @@ const addTitlePropertiesToFilterData = (data: IProductFilterData) => {
     min: number;
     max: number;
   }[] = Object.values(data.discount_range);
-  console.log(data.discount_range, Object.values(discount_range));
   data.discount_range = discount_range.map((item) => ({
     ...item,
     id: [item.min, item.max].join("-"),

@@ -1,5 +1,5 @@
-import { IProductFilterRequestParameter } from "../../contexts/productFilterContext";
-import { IProductFilterRequestParam } from "./types";
+import { IProductFilterFrontEndRequestParameter } from "../../contexts/productFilterContext";
+import { IProductFilterBackendRequestParam } from "./types";
 import queryString from "query-string";
 
 export const pushQueryParamsToUrl = (data: any[] | object) => {
@@ -14,9 +14,9 @@ export const pushQueryParamsToUrl = (data: any[] | object) => {
 };
 
 export const mapToRequestParams = (
-  productFilter: IProductFilterRequestParameter
-): IProductFilterRequestParam => {
-  const res: IProductFilterRequestParam = {};
+  productFilter: IProductFilterFrontEndRequestParameter
+): IProductFilterBackendRequestParam => {
+  const res: IProductFilterBackendRequestParam = {};
 
   if (productFilter.aromas && productFilter.aromas.length)
     res.aroma_ids = productFilter.aromas;
@@ -51,6 +51,19 @@ export const mapToRequestParams = (
   if (productFilter.usages && productFilter.usages.length)
     res.usage_ids = productFilter.usages;
 
+  if (productFilter.release_years && productFilter.release_years.length)
+    res.release_years = productFilter.release_years;
+
+  if (productFilter.volume_range && productFilter.volume_range.length) {
+    res.volume_range = getMinAndMaxValues(productFilter.volume_range);
+  }
+  if (productFilter.discount_range && productFilter.discount_range.length) {
+    res.discount_range = getMinAndMaxValues(productFilter.discount_range);
+  }
+  if (productFilter.age_range && productFilter.age_range.length) {
+    res.age_range = getMinAndMaxValues(productFilter.age_range);
+  }
+
   if (
     productFilter.price_range &&
     Array.isArray(productFilter.price_range) &&
@@ -58,7 +71,20 @@ export const mapToRequestParams = (
   )
     res.price_range = {
       min: productFilter.price_range[0],
-      max: productFilter.price_range[1]
+      max: productFilter.price_range[1],
     };
   return res;
+};
+
+const getMinAndMaxValues = (arr: string[]): { min: number; max: number } => {
+  let a: any[][] = arr.map((item) => item.split("-"));
+  let b = []
+    .concat(...(a as any))
+    .map((st) => parseFloat(st))
+    .sort((a, b) => a - b);
+
+  return {
+    min: b[0],
+    max: b[b.length - 1],
+  };
 };

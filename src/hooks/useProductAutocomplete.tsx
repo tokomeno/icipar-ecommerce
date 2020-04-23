@@ -16,7 +16,7 @@ import { ICategory } from "../services/layout.http";
 export const useProductAutocomplete = () => {
   const location = useLocation();
   const history = useHistory();
-  const { setProductFilterData } = useContext(PorductFilterContext);
+  const { setNewKeyword } = useContext(PorductFilterContext);
   const [products, setProducts] = useState<IProduct[]>([]);
   const { value: keyword, onChange: setKeyword } = useInput("");
   const [activeTab, setActiveTab] = useState<ICategory | null>(null);
@@ -35,9 +35,9 @@ export const useProductAutocomplete = () => {
         FETCH_PRODUCTS_URL,
         {
           keyword: keyword,
-          categories: activeTab ? [activeTab.id] : []
+          categories: activeTab ? [activeTab.id] : [],
         },
-        res => {
+        (res) => {
           setProducts(res.data);
         }
       );
@@ -49,10 +49,8 @@ export const useProductAutocomplete = () => {
 
   const handleSubmit = () => {
     if (location.pathname === routes.catalog) return;
-    setProductFilterData(prevState => ({
-      ...prevState,
-      keyword: keyword
-    }));
+    setNewKeyword(keyword);
+
     history.push({ pathname: routes.catalog });
   };
 
@@ -63,6 +61,6 @@ export const useProductAutocomplete = () => {
     keyword,
     setKeyword,
     activeTab,
-    setActiveTab
+    setActiveTab,
   };
 };

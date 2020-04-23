@@ -189,6 +189,9 @@
     "email_confirmed_successfully": "ელ.ფოსტით წარმატებით დადასტურდა",
     "avatar_upload_tooltip": "click to upload photo",
     "please_sign_in": "გთხოვთ გაიაროთ ავტორიზაცია",
-    "release_years": "გამოშვების წელი"
+    "release_years": "გამოშვების წელი",
+    "volume_range": "Volume Range",
+    "age_range": "Age Range",
+    "discount_range": "Discount Range"
   }
 }

@@ -11,14 +11,11 @@ interface PriceSorterProps {
 export const PriceSorter: React.FC<PriceSorterProps> = ({ ordering }) => {
   const { t } = useTranslation();
 
-  const { setProductFilterData } = useContext(PorductFilterContext);
+  const { setPriceSorter } = useContext(PorductFilterContext);
   const { setActiveModal } = useContext(ActiveModalContext);
 
-  const sortByPrice: ISortByPrice = asc_or_desc => {
-    setProductFilterData(prevState => ({
-      ...prevState,
-      order: ascOrDesc.asc === asc_or_desc ? "price" : "-price"
-    }));
+  const sortByPrice: ISortByPrice = (asc_or_desc) => {
+    setPriceSorter(ascOrDesc.asc === asc_or_desc ? "price" : "-price");
   };
   return (
     <div className="d-flex">
@@ -64,7 +61,7 @@ const CustomToggle = React.forwardRef<any, any>(
   ({ children, onClick }, ref) => (
     <button
       ref={ref}
-      onClick={e => {
+      onClick={(e) => {
         e.preventDefault();
         onClick(e);
       }}

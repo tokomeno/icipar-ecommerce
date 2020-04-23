@@ -30,10 +30,7 @@ class PriceRange extends React.Component<{}, IStatePriceRange> {
     this.setState({ values: [values[0], values[1]] });
     if (this.rangeFilterTimeout) clearInterval(this.rangeFilterTimeout);
     this.rangeFilterTimeout = setTimeout(() => {
-      this.context.setProductFilterData((prevState) => ({
-        ...prevState,
-        price_range: [this.state.values[0], this.state.values[1]],
-      }));
+      this.context.setPriceRange([this.state.values[0], this.state.values[1]]);
     }, 400);
   };
   render() {

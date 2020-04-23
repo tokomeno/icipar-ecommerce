@@ -12,6 +12,18 @@ export interface IProductFilterData {
   color_groups: Colorgroup[];
   countries: Country[];
   release_years: ReleaseYears[];
+
+  ////////////////
+  volume_range: RangeCheckBox[];
+  age_range: RangeCheckBox[];
+  discount_range: RangeCheckBox[];
+}
+
+interface RangeCheckBox {
+  id: string;
+  title: string;
+  min: number;
+  max: number;
 }
 
 interface Country {
@@ -116,6 +128,43 @@ const addTitlePropertiesToFilterData = (data: IProductFilterData) => {
   data.release_years = years.map((item: any) => ({
     id: item as number,
     title: item as number,
+  }));
+
+  // DONT JUDJE :D
+  let volume_range: {
+    title: string;
+    min: number;
+    max: number;
+  }[] = Object.values(data.volume_range);
+  console.log(data.volume_range, Object.values(volume_range));
+  data.volume_range = volume_range.map((item) => ({
+    ...item,
+    id: [item.min, item.max].join("-"),
+    title: item.title,
+  }));
+
+  let age_range: {
+    title: string;
+    min: number;
+    max: number;
+  }[] = Object.values(data.age_range);
+  console.log(data.age_range, Object.values(age_range));
+  data.age_range = age_range.map((item) => ({
+    ...item,
+    id: [item.min, item.max].join("-"),
+    title: item.title,
+  }));
+
+  let discount_range: {
+    title: string;
+    min: number;
+    max: number;
+  }[] = Object.values(data.discount_range);
+  console.log(data.discount_range, Object.values(discount_range));
+  data.discount_range = discount_range.map((item) => ({
+    ...item,
+    id: [item.min, item.max].join("-"),
+    title: item.title,
   }));
 
   return data;

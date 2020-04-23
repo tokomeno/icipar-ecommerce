@@ -12,6 +12,10 @@ export interface IFilterCheckboxes {
   color_groups: (string | number)[];
   countries: (string | number)[];
   release_years: (string | number)[];
+  ////////////////
+  volume_range: (string | number)[];
+  age_range: (string | number)[];
+  discount_range: (string | number)[];
 }
 
 const defaultData: IProductFilterRequestParameter = {
@@ -26,6 +30,11 @@ const defaultData: IProductFilterRequestParameter = {
   countries: [],
   order: "-price",
   release_years: [],
+
+  ////////////////
+  volume_range: [],
+  age_range: [],
+  discount_range: [],
 };
 
 export type IProductFilterRequestParameter = Partial<IFilterCheckboxes> & {
@@ -34,18 +43,16 @@ export type IProductFilterRequestParameter = Partial<IFilterCheckboxes> & {
   price_range?: [number, number];
 };
 
-export type FOnFilterChange = (
-  ids: (number | string)[],
-  filterName: keyof IFilterCheckboxes
-) => void;
-
 interface IPorductFilterContext {
   productFilterData: IProductFilterRequestParameter;
-  setProductFilterData: React.Dispatch<
-    React.SetStateAction<IProductFilterRequestParameter>
-  >;
-  setFilterOnKey: FOnFilterChange;
+  setFilterOnKey: (
+    ids: (number | string)[],
+    filterName: keyof IFilterCheckboxes
+  ) => void;
   setFilterFromParams: () => void;
+  setNewKeyword: (keyword: string) => void;
+  setPriceRange: (price: [number, number]) => void;
+  setPriceSorter: (order: "price" | "-price") => void;
 }
 
 export const PorductFilterContext = createContext<IPorductFilterContext>(
@@ -61,9 +68,33 @@ export const PorductFilterProvider: React.FC<{}> = ({ children }) => {
     setProductFilterData(getQueryParamsFromUrl());
   }, []);
 
-  const setFilterOnKey: FOnFilterChange = useCallback(
+  const setFilterOnKey: IPorductFilterContext["setFilterOnKey"] = useCallback(
     (ids, filterKey) => {
       setProductFilterData((prevState) => ({ ...prevState, [filterKey]: ids }));
+    },
+    [setProductFilterData]
+  );
+
+  const setNewKeyword = useCallback(
+    (keyword: string) => {
+      setProductFilterData((prevState) => ({ ...prevState, keyword: keyword }));
+    },
+    [setProductFilterData]
+  );
+
+  const setPriceRange: IPorductFilterContext["setPriceRange"] = useCallback(
+    (prices) => {
+      setProductFilterData((prevState) => ({
+        ...prevState,
+        price_range: prices,
+      }));
+    },
+    [setProductFilterData]
+  );
+
+  const setPriceSorter: IPorductFilterContext["setPriceSorter"] = useCallback(
+    (order) => {
+      setProductFilterData((prevState) => ({ ...prevState, order: order }));
     },
     [setProductFilterData]
   );
@@ -73,8 +104,10 @@ export const PorductFilterProvider: React.FC<{}> = ({ children }) => {
       value={{
         productFilterData,
         setFilterOnKey,
-        setProductFilterData,
+        setNewKeyword,
         setFilterFromParams,
+        setPriceRange,
+        setPriceSorter,
       }}
     >
       {children}

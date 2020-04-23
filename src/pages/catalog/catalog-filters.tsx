@@ -19,6 +19,9 @@ const Filters: Partial<keyof IFilterCheckboxes>[] = [
   "smells",
   "countries",
   "release_years",
+  "volume_range",
+  "age_range",
+  "discount_range",
 ];
 
 export const CatalogFilters: React.FC<CatalogFiltersProps> = () => {

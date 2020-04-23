@@ -189,6 +189,9 @@
     "email_confirmed_successfully": "Email confirmed successfully",
     "avatar_upload_tooltip": "Click to upload photo",
     "please_sign_in": "Please Sign In",
-    "release_years": "Release Years"
+    "release_years": "Release Years",
+    "volume_range": "Volume Range",
+    "age_range": "Age Range",
+    "discount_range": "Discount Range"
   }
 }

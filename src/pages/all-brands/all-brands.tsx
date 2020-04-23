@@ -19,11 +19,11 @@ export const AllBrandsPage: React.FC<AllBrandsPageProps> = () => {
   const brandSearchInput = useInput();
   useEffect(() => {
     BrandService.getAll()
-      .then(res => {
+      .then((res) => {
         setBrands(res.data);
         console.log(res.data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
       });
   }, []);
@@ -54,24 +54,24 @@ export const AllBrandsPage: React.FC<AllBrandsPageProps> = () => {
             </div>
             {/* active */}
             <div className="alphabet d-flex align-items-center justify-content-between">
-              {Object.keys(brands).map(l => (
-                <a href={"#" + l} className="alphabet_item ">
+              {Object.keys(brands).map((l, index) => (
+                <a href={"#" + l} key={index} className="alphabet_item ">
                   {l}
                 </a>
               ))}
             </div>
             <div className="list">
-              {Object.keys(brands).map(l => (
+              {Object.keys(brands).map((l) => (
                 <div id={l} className="list-row d-flex flex-md-row flex-column">
                   <div className="list-row_col first_col">
                     <div className="alpha-title">{l}</div>
                   </div>
                   <div className="scroll_list d-flex">
                     {chunk(brands[l], Math.ceil(brands[l].length / 4)).map(
-                      _brands => {
+                      (_brands) => {
                         return (
                           <div className="list-row_col">
-                            {_brands.map(b => {
+                            {_brands.map((b) => {
                               if (
                                 brandSearchInput.value.length === 0 ||
                                 b.name

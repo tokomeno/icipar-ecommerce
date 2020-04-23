@@ -3631,6 +3631,12 @@ sub {
                 margin: 0;
               }
 
+              /* Firefox */
+              .qty input[type=number] {
+                -moz-appearance: textfield;
+              }
+
+
               .qty input {
                 @include font-style($bold-font, 18px, $dark-gray);
                 @include border-radius(10px);
@@ -7499,6 +7505,11 @@ table {
       .qty input::-webkit-inner-spin-button {
         -webkit-appearance: none;
         margin: 0;
+      }
+
+      /* Firefox */
+      .qty input[type=number] {
+        -moz-appearance: textfield;
       }
 
       .qty input {

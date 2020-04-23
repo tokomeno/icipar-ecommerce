@@ -10,22 +10,22 @@ interface FilterDropdownProps {
 const typeClasses = {
   default: {
     parentClass: "",
-    childClass: "filter-menu flex-column"
+    childClass: "filter-menu flex-column",
   },
   price: {
     parentClass: "price-filter",
-    childClass: "price-range justify-content-center"
+    childClass: "price-range justify-content-center",
   },
   color: {
     parentClass: "",
-    childClass: "filter-menu flex-wrap"
-  }
+    childClass: "filter-menu flex-wrap",
+  },
 };
 
 export const FilterDropdown: React.FC<FilterDropdownProps> = ({
   title,
   children,
-  type
+  type,
 }) => {
   const { isActive, toggle } = useToggle(true);
   const { isActive: showMoreIsActive } = useToggle(true);
@@ -33,7 +33,7 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({
   return (
     <div
       className={classnames("filter", typeClasses[type].parentClass, {
-        active: isActive
+        active: isActive,
       })}
     >
       <span
@@ -48,7 +48,7 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({
       </span>
       <div
         className={classnames("d-flex", typeClasses[type].childClass, {
-          active: showMoreIsActive
+          active: showMoreIsActive,
         })}
       >
         {children}

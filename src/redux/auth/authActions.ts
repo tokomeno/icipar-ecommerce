@@ -17,6 +17,7 @@ import {
 import { store } from "../store";
 import { fetchCart } from "../cart/cartActions";
 import { fetchFavorites } from "../favorites/favoritesActions";
+import queryString from "query-string";
 
 export const setCurrentUser = ({
   user,
@@ -38,7 +39,6 @@ interface LoginUserParams {
   userData: {
     username: string;
     password: string;
-    recaptcha_token: string | null;
   };
   hideModal: () => void;
 }
@@ -47,20 +47,8 @@ export const loginUser = ({
   hideModal,
 }: LoginUserParams): Function => {
   return async (dispatch: Dispatch) => {
-    if (!userData.recaptcha_token) {
-      dispatch(
-        setAuthErrors({
-          "g-recaptcha-response": ["recaptcha is not valid"],
-          msg: "recaptcha is not valid",
-        })
-      );
-      return;
-    }
     axios
-      .post<IUser>(API_LOGIN_URL, {
-        ...userData,
-        "g-recaptcha-response": userData.recaptcha_token,
-      })
+      .post<IUser>(API_LOGIN_URL, userData)
       .then((res) => {
         const { user, token } = res.data;
         if (res.data.error) {
@@ -84,6 +72,7 @@ interface RegisterUserParams {
     password: string;
     password_confirmation: string;
     recaptcha_token: string;
+    ref?: string;
   };
   callback: (user: IUser | null) => void;
 }
@@ -92,11 +81,14 @@ export const registerUser = ({
   callback,
 }: RegisterUserParams): Function => {
   return async (dispatch: Dispatch) => {
+    const data = {
+      ...userData,
+      "g-recaptcha-response": userData.recaptcha_token,
+    };
+    const ref = queryString.parse(window.location.search).ref;
+    if (typeof ref === "string") data.ref = ref;
     axios
-      .post<{ user: IUser; token: string }>(API_REGISTER_URL, {
-        ...userData,
-        "g-recaptcha-response": userData.recaptcha_token,
-      })
+      .post<{ user: IUser; token: string }>(API_REGISTER_URL, data)
       .then((res) => {
         const { user, token } = res.data;
         dispatch<SetCurrentUserAction>(setCurrentUser({ user, token }));

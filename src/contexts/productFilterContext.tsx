@@ -11,6 +11,7 @@ export interface IFilterCheckboxes {
   smells: (string | number)[];
   color_groups: (string | number)[];
   countries: (string | number)[];
+  release_years: (string | number)[];
 }
 
 const defaultData: IProductFilterRequestParameter = {
@@ -23,7 +24,8 @@ const defaultData: IProductFilterRequestParameter = {
   smells: [],
   color_groups: [],
   countries: [],
-  order: "-price"
+  order: "-price",
+  release_years: [],
 };
 
 export type IProductFilterRequestParameter = Partial<IFilterCheckboxes> & {
@@ -61,7 +63,7 @@ export const PorductFilterProvider: React.FC<{}> = ({ children }) => {
 
   const setFilterOnKey: FOnFilterChange = useCallback(
     (ids, filterKey) => {
-      setProductFilterData(prevState => ({ ...prevState, [filterKey]: ids }));
+      setProductFilterData((prevState) => ({ ...prevState, [filterKey]: ids }));
     },
     [setProductFilterData]
   );
@@ -72,7 +74,7 @@ export const PorductFilterProvider: React.FC<{}> = ({ children }) => {
         productFilterData,
         setFilterOnKey,
         setProductFilterData,
-        setFilterFromParams
+        setFilterFromParams,
       }}
     >
       {children}
@@ -86,7 +88,7 @@ const getQueryParamsFromUrl = () => {
     if (q.length) {
       const filterData = queryString.parse(q, {
         arrayFormat: "bracket",
-        parseNumbers: true
+        parseNumbers: true,
       });
 
       if (!isValidPriceRange(filterData)) {

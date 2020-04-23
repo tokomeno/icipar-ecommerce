@@ -9,9 +9,6 @@ import { useTranslation } from "react-i18next";
 import { loginUser } from "../../redux/auth/authActions";
 import { IStoreState } from "../../redux/mainReducer";
 import { connect } from "react-redux";
-import { ReCaptcha } from "react-recaptcha-v3";
-import { RECAPTCHA_SITE_KEY } from "../../consts/services";
-import { useCaptcha } from "../../hooks/useCaptcha";
 
 interface LoginFormProps {
   isActive: boolean;
@@ -25,10 +22,9 @@ const _LoginForm: React.FC<LoginFormProps> = ({
   showRegisterForm,
   hideModal,
   errors,
-  loginUser
+  loginUser,
 }) => {
   const { t } = useTranslation();
-  const myCaptcha = useCaptcha();
 
   const handleSubmit = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -38,10 +34,8 @@ const _LoginForm: React.FC<LoginFormProps> = ({
       username: email,
       password,
       isRemeber,
-      recaptcha_token: myCaptcha.recaptcha_token
     };
     loginUser({ userData, hideModal });
-    myCaptcha.captchaRef.current.execute();
   };
   const { value: email, onChange: setEmail } = useInput("");
   const { value: password, onChange: setPassword } = useInput("");
@@ -72,15 +66,6 @@ const _LoginForm: React.FC<LoginFormProps> = ({
         type="password"
         placeholder="პაროლი"
         errorMessage={errors && errors.password && errors.password[0]}
-      />
-
-      <ReCaptcha
-        sitekey={RECAPTCHA_SITE_KEY}
-        action="loginForm"
-        verifyCallback={token => {
-          myCaptcha.setRecaptchaToken(token);
-        }}
-        ref={myCaptcha.captchaRef}
       />
 
       <div className="btn-block d-flex align-items-center justify-content-between">

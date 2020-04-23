@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { IBlogList } from "../../../services/blog.http";
+import { HomePageBlogSlider } from "../../../services/blog.http";
 
 interface BlogSliderItemProps {
-  blog: IBlogList;
+  blog: HomePageBlogSlider["blog_posts"][number];
 }
 
 export const BlogSliderItem: React.FC<BlogSliderItemProps> = ({ blog }) => {
@@ -15,7 +15,7 @@ export const BlogSliderItem: React.FC<BlogSliderItemProps> = ({ blog }) => {
         <img src={blog.thumbnail} alt="blog" />
       </div>
       <div className="desc">
-        <div className="date">{blog.created_at}</div>
+        {/* <div className="date">{blog.created_at}</div> */}
         <div className="title">{blog.title}</div>
         <p className="txt">{blog.excerpt}</p>
         <Link

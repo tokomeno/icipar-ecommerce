@@ -7,6 +7,7 @@ import { Rating } from "../../components/rating";
 import { Dropdown } from "react-bootstrap";
 import { IProductWithItems } from "../../services/product.http";
 import { ProductHeartBtn } from "../../components/product/product-heart-btn";
+import { FacebookShareButton, TwitterShareButton } from "react-share";
 
 interface ItemProps {
   product: IProductWithItems;
@@ -23,7 +24,7 @@ export const Item: React.FC<ItemProps> = ({
   activeItem,
   branches,
   delivery_terms,
-  hot_timer
+  hot_timer,
 }) => {
   const { t } = useTranslation();
   return (
@@ -46,7 +47,7 @@ export const Item: React.FC<ItemProps> = ({
           </div>
           <div className="col-md-7">
             <div className="description">
-              {/* <Social /> */}
+              <Social />
               <div className="d-flex align-items-center">
                 <Rating rating={product.rating} />
                 {/* <div className="review">
@@ -56,7 +57,7 @@ export const Item: React.FC<ItemProps> = ({
 
               <div
                 className={classnames("d-flex name-block", {
-                  "align-items-lg-center align-items-start flex-lg-row flex-column-reverse": !!hot_timer
+                  "align-items-lg-center align-items-start flex-lg-row flex-column-reverse": !!hot_timer,
                 })}
               >
                 <h1 className="name">{activeItem.title}</h1>
@@ -106,10 +107,12 @@ export const Item: React.FC<ItemProps> = ({
                 </div>
               </div>
 
-              <AddCartButton
-                being_sold_online={product.being_sold_online}
-                activeItem={activeItem}
-              />
+              {product.being_sold_online && (
+                <AddCartButton
+                  being_sold_online={product.being_sold_online}
+                  activeItem={activeItem}
+                />
+              )}
 
               <div className="d-lg-flex d-none">
                 <Dropdown drop="down">
@@ -147,7 +150,7 @@ export const Item: React.FC<ItemProps> = ({
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
-                    {branches.map(b => (
+                    {branches.map((b) => (
                       <Dropdown.Item key={b.full_address}>
                         {b.full_address}
                       </Dropdown.Item>
@@ -173,11 +176,11 @@ export const Items: React.FC<ItemsProps> = React.memo(
   ({ items, activeItem, setActiveItemFromId }) => {
     return (
       <div className="d-flex">
-        {items.map(item => (
+        {items.map((item) => (
           <a
             href="#!"
             className={classnames("sizes-item d-flex align-items-center", {
-              active: activeItem.id === item.id
+              active: activeItem.id === item.id,
             })}
             onClick={() => {
               setActiveItemFromId(item.id);
@@ -205,7 +208,7 @@ const CustomToggle = React.forwardRef<any, any>(
       href="#!"
       className="deliv d-flex"
       ref={ref}
-      onClick={e => {
+      onClick={(e) => {
         e.preventDefault();
         onClick(e);
       }}
@@ -215,25 +218,37 @@ const CustomToggle = React.forwardRef<any, any>(
   )
 );
 
-// const Social = () => (
-//   <div className="social">
-//     <a
-//       href="#!"
-//       className="fb social-item d-flex align-items-center justify-content-center"
-//     >
-//       <i className="fab fa-facebook-f" />
-//     </a>
-//     <a
-//       href="#!"
-//       className="tw social-item d-flex align-items-center justify-content-center"
-//     >
-//       <i className="fab fa-twitter" />
-//     </a>
-//     <a
-//       href="#!"
-//       className="p social-item d-flex align-items-center justify-content-center"
-//     >
-//       <i className="fab fa-pinterest" />
-//     </a>
-//   </div>
-// );
+const Social = () => (
+  <div className="social">
+    <FacebookShareButton
+      className="fb social-item d-flex align-items-center justify-content-center"
+      url={window.location.href}
+    >
+      <a
+        href="#!"
+        className="fb social-item d-flex align-items-center justify-content-center"
+      >
+        <i className="fab fa-facebook-f" />
+      </a>
+    </FacebookShareButton>
+
+    <TwitterShareButton
+      className="tw social-item d-flex align-items-center justify-content-center"
+      url={window.location.href}
+    >
+      <a
+        href="#!"
+        className="tw social-item d-flex align-items-center justify-content-center"
+      >
+        <i className="fab fa-twitter" />
+      </a>
+    </TwitterShareButton>
+
+    {/* <a
+      href="#!"
+      className="p social-item d-flex align-items-center justify-content-center"
+    >
+      <i className="fab fa-pinterest" />
+    </a> */}
+  </div>
+);

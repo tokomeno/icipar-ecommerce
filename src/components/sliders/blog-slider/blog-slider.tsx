@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSliderNav } from "../../../hooks/common/useSliderNav";
-import { productCategories } from "../../../data/categories";
 import Swiper from "react-id-swiper";
 import { BlogSliderItem } from "./blog-slider-item";
 import { SwiperCustomNavBtn } from "../../swiper/swiper-custom-nav-btn";
-import { axiosWithToken } from "../../../api/axios-with-token";
-import { HOMEPAGE_BLOG_POSTS } from "../../../api/endpoints";
 import { useTranslation } from "react-i18next";
-import { IBlogList } from "../../../services/blog.http";
+import { HomePageBlogSlider, BlogService } from "../../../services/blog.http";
+import { DefaultSpinner } from "../../spinners/spinner";
 
 interface BlogSliderProps {}
 
@@ -19,32 +17,49 @@ const params = {
   breakpoints: {
     1499: {
       slidesPerView: 4,
-      spaceBetween: 10
+      spaceBetween: 10,
     },
     991: {
-      slidesPerView: 3
+      slidesPerView: 3,
     },
     767: {
-      slidesPerView: 2
+      slidesPerView: 2,
     },
     480: {
-      slidesPerView: 1
-    }
+      slidesPerView: 1,
+    },
   },
-  observer: true
+  observer: true,
 };
 
 export const BlogSlider: React.FC<BlogSliderProps> = () => {
   const { t } = useTranslation();
-  const [blogs, setBlogs] = useState<IBlogList[]>([]);
+  const [blogs, setBlogs] = useState<HomePageBlogSlider["blog_posts"]>([]);
+  const [blogsSlider, setBlogsSlider] = useState<HomePageBlogSlider[]>([]);
+  const [catrogires, setCatrgories] = useState<{ id: number; title: string }[]>(
+    []
+  );
+  const [activeTabId, setActiveTabId] = useState<number | null>(null);
+  const setActiveTab = (category_id: number) => {
+    const p = blogsSlider.find((item) => item.category_id === category_id);
+    if (!p) return;
+    setBlogs(p.blog_posts);
+    setActiveTabId(p.category_id);
+  };
 
   useEffect(() => {
-    axiosWithToken
-      .get<{ data: IBlogList[] }>(HOMEPAGE_BLOG_POSTS)
-      .then(res => {
-        setBlogs(res.data.data);
+    BlogService.homePageSlider()
+      .then((res) => {
+        setBlogsSlider(res.data.data);
+        setCatrgories(
+          res.data.data.map((i) => ({
+            id: i.category_id,
+            title: i.category_title,
+          }))
+        );
+        setActiveTabId(res.data.data[0].category_id);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }, []);
@@ -61,8 +76,16 @@ export const BlogSlider: React.FC<BlogSliderProps> = () => {
               {t("blog")}
             </h3>
             <div className="menu d-flex align-items-center">
-              {productCategories.map(i => (
-                <a key={i.id} href="#!" className="menu_link">
+              {catrogires.map((i) => (
+                <a
+                  key={i.id}
+                  href="#!"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setActiveTab(i.id);
+                  }}
+                  className="menu_link"
+                >
                   {i.title}
                 </a>
               ))}
@@ -72,15 +95,19 @@ export const BlogSlider: React.FC<BlogSliderProps> = () => {
       </div>
       <div className="blogSlider">
         <div className="container">
-          <Swiper
-            containerClass={"blog-container swiper-container"}
-            activeSlideKey={currentSliderIndex.toString()}
-            {...params}
-          >
-            {blogs.map((blog, index) => (
-              <BlogSliderItem key={index} blog={blog} />
-            ))}
-          </Swiper>
+          {activeTabId ? (
+            <Swiper
+              containerClass={"blog-container swiper-container"}
+              activeSlideKey={currentSliderIndex.toString()}
+              {...params}
+            >
+              {blogs.map((blog, index) => (
+                <BlogSliderItem key={index} blog={blog} />
+              ))}
+            </Swiper>
+          ) : (
+            <DefaultSpinner />
+          )}
         </div>
         <SwiperCustomNavBtn sliderNav={sliderNav} />
       </div>

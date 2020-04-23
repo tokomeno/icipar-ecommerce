@@ -1,5 +1,6 @@
 export const routes = {
   home: "/",
+  registerRef: "/registration",
   aboutUs: "/page/about-us",
   howItWorks: "/page/how-it-works",
   faq: "/page/faq",
@@ -34,5 +35,5 @@ export const routes = {
 
   blogs: "/blogs",
   blogShow: "/blogs/:slug",
-  staticPages: "/page/:slug"
+  staticPages: "/page/:slug",
 };

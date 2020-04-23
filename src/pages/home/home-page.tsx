@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import { MainSlider } from "./mainSlider";
 import { ProductSlider } from "../../components/sliders/producSlider/productSlider";
 import { BlogSlider } from "../../components/sliders/blog-slider/blog-slider";
@@ -13,11 +13,21 @@ import {
 import { BrandSlider } from "../../components/sliders/brandSlider/brandSlider";
 import { SectionSliders } from "./section-sliders";
 import { InstagramHome } from "../../components/instagram-home";
+import { useLocation } from "react-router-dom";
+import { routes } from "../../routes/routes";
+import { ActiveModalContext } from "../../contexts/modalContex";
 
 interface HomePageProps {}
 
 export const HomePage: React.FC<HomePageProps> = () => {
   const { t } = useTranslation();
+  const { setActiveModal } = useContext(ActiveModalContext);
+  const { pathname } = useLocation();
+  useEffect(() => {
+    if (pathname === routes.registerRef) {
+      setActiveModal("register-modal");
+    }
+  }, []);
 
   return (
     <>

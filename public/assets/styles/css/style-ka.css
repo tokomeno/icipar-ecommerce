@@ -7152,6 +7152,10 @@ sub {
   height: 20px;
 }
 
+.profile .profile-right table tbody tr td .quantity {
+  /* Firefox */
+}
+
 .profile .profile-right table tbody tr td .quantity span {
   font-size: 12px;
   color: #6e6e6e;
@@ -7162,6 +7166,10 @@ sub {
 .profile .profile-right table tbody tr td .quantity .qty input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.profile .profile-right table tbody tr td .quantity .qty input[type=number] {
+  -moz-appearance: textfield;
 }
 
 .profile .profile-right table tbody tr td .quantity .qty input {
@@ -11541,6 +11549,7 @@ table .complain {
 
 .product .price-block .quantity {
   margin-left: 60px;
+  /* Firefox */
 }
 
 .product .price-block .quantity span {
@@ -11553,6 +11562,10 @@ table .complain {
 .product .price-block .quantity .qty input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.product .price-block .quantity .qty input[type=number] {
+  -moz-appearance: textfield;
 }
 
 .product .price-block .quantity .qty input {

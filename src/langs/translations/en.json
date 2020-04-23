@@ -188,6 +188,7 @@
     "not_agree": "Not agree",
     "email_confirmed_successfully": "Email confirmed successfully",
     "avatar_upload_tooltip": "Click to upload photo",
-    "please_sign_in": "Please Sign In"
+    "please_sign_in": "Please Sign In",
+    "release_years": "Release Years"
   }
 }

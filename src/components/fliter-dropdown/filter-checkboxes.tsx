@@ -43,7 +43,6 @@ export const FilterCheckboxes: React.FC<FilterCheckboxesProps> = React.memo(
       }
       isFirstMount.current = false;
     }, [checkedIds, setFilterOnKey, isFirstMount, filterName]);
-    console.log(filterName);
     return (
       <React.Fragment>
         {checkboxes.map((ch) => (
@@ -66,6 +65,7 @@ export const FilterCheckboxes: React.FC<FilterCheckboxesProps> = React.memo(
               <span className="checkmark" />
             </label>
             {ch.children &&
+              isChecked(ch.id) &&
               ch.children.map((ch) => (
                 <label
                   key={ch.id}

@@ -11,6 +11,7 @@ export interface IProductFilterData {
   smells: Smell[];
   color_groups: Colorgroup[];
   countries: Country[];
+  release_years: ReleaseYears[];
 }
 
 interface Country {
@@ -66,12 +67,17 @@ interface Child {
   title: string;
 }
 
+interface ReleaseYears {
+  id: number;
+  title: string;
+}
+
 export const useProductFilterAttributes = () => {
   const [productFilterAttributes, setProductFilterAttributes] = useState<
     IProductFilterData
   >();
   useEffect(() => {
-    ProductService.getFilterAttributes().then(res => {
+    ProductService.getFilterAttributes().then((res) => {
       const data = addTitlePropertiesToFilterData(res.data.data);
       setProductFilterAttributes(data);
     });
@@ -80,29 +86,37 @@ export const useProductFilterAttributes = () => {
 };
 
 const addTitlePropertiesToFilterData = (data: IProductFilterData) => {
-  data.categories = data.categories.map(item => ({
+  data.categories = data.categories.map((item) => ({
     ...item,
-    title: item.title
+    title: item.title,
   }));
-  data.genders = data.genders.map(item => ({
+  data.genders = data.genders.map((item) => ({
     ...item,
-    title: item.gender
+    title: item.gender,
   }));
-  data.brands = data.brands.map(item => ({ ...item, title: item.name }));
-  data.collections = data.collections.map(item => ({
+  data.brands = data.brands.map((item) => ({ ...item, title: item.name }));
+  data.collections = data.collections.map((item) => ({
     ...item,
-    title: item.title
+    title: item.title,
   }));
-  data.aromas = data.aromas.map(item => ({ ...item, title: item.aroma }));
-  data.usages = data.usages.map(item => ({ ...item, title: item.usage }));
-  data.smells = data.smells.map(item => ({ ...item, title: item.smell }));
-  data.color_groups = data.color_groups.map(item => ({
+  data.aromas = data.aromas.map((item) => ({ ...item, title: item.aroma }));
+  data.usages = data.usages.map((item) => ({ ...item, title: item.usage }));
+  data.smells = data.smells.map((item) => ({ ...item, title: item.smell }));
+  data.color_groups = data.color_groups.map((item) => ({
     ...item,
-    title: item.code
+    title: item.code,
   }));
-  data.countries = data.countries.map(item => ({
+  data.countries = data.countries.map((item) => ({
     ...item,
-    title: item.country
+    title: item.country,
   }));
+
+  let years: any = data.release_years;
+
+  data.release_years = years.map((item: any) => ({
+    id: item as number,
+    title: item as number,
+  }));
+
   return data;
 };

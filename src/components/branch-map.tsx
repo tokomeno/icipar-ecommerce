@@ -14,7 +14,7 @@ export const BranchMap: React.FC<{ shops: IBranch[] }> = ({ shops }) => {
         bootstrapURLKeys={{ key: GOOGLE_MAP_API_KEY }}
         defaultCenter={{
           lat: shops[0] ? parseFloat(shops[0].lat) : 41.716667,
-          lng: shops[0] ? parseFloat(shops[0].lng) : 44.783333
+          lng: shops[0] ? parseFloat(shops[0].lng) : 44.783333,
         }}
         defaultZoom={14}
       >
@@ -34,13 +34,13 @@ export const BranchMap: React.FC<{ shops: IBranch[] }> = ({ shops }) => {
 };
 
 const MyMarker: React.FC<{ shop: IBranch; lat: number; lng: number }> = ({
-  shop
+  shop,
 }) => {
   return (
     <OverlayTrigger
       key={shop.id}
       placement={"top"}
-      overlay={<Tooltip id={shop.id}>{shop.name}</Tooltip>}
+      overlay={<Tooltip id={shop.id.toString()}>{shop.name}</Tooltip>}
     >
       <img src="/assets/images/mapmarker.svg" alt="" />
     </OverlayTrigger>

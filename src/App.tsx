@@ -33,7 +33,7 @@ import { BlogPage } from "./pages/blog/blog-page";
 import { store } from "./redux/store";
 import {
   fetch_Social_ContactInfo_Branches,
-  setLayoutCatogriesAction
+  setLayoutCatogriesAction,
 } from "./redux/info/infoActions";
 import { StaticPage } from "./pages/static-page/static-page";
 import { Layout } from "./layout";
@@ -70,6 +70,8 @@ const App: React.FC<{}> = () => {
         <Layout>
           <Switch>
             <Route path={routes.home} exact component={HomePage} />
+            <Route path={routes.registerRef} exact component={HomePage} />
+
             {/* PAGES */}
             {/* <Route path={routes.aboutUs} exact component={AboutUsPage} /> */}
             {/* <Route path={routes.howItWorks} exact component={HowItWorksPage} /> */}

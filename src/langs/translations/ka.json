@@ -33,7 +33,7 @@
     "aromas": "არომატები",
     "genders": "სქესი",
     "collections": "კოლექციები",
-    "usages": "გამოყენებa",
+    "usages": "გამოყენება",
     "smells": "სუნის ტიპი",
     "countries": "ქვეყნები",
     "color_groups": "ფერები",
@@ -188,6 +188,7 @@
     "not_agree": "არ ვეთანხმები",
     "email_confirmed_successfully": "ელ.ფოსტით წარმატებით დადასტურდა",
     "avatar_upload_tooltip": "click to upload photo",
-    "please_sign_in": "გთხოვთ გაიაროთ ავტორიზაცია"
+    "please_sign_in": "გთხოვთ გაიაროთ ავტორიზაცია",
+    "release_years": "გამოშვების წელი"
   }
 }

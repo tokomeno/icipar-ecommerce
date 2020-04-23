@@ -243,7 +243,6 @@ export const CartCheckoutForm: React.FC<CartCheckoutForm> = ({
       </div>
       {trans_id && (
         <form
-          target="_blank"
           ref={tbcForm}
           name="returnform"
           action={`https://ecommerce.ufc.ge/ecomm2/ClientHandler?t=` + trans_id}

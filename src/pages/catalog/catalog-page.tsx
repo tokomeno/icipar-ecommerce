@@ -80,7 +80,14 @@ export const CatalogPage: React.FC<CatalogPageProps> = () => {
             </div>
             {haveNextPage && (
               <div className="d-flex justify-content-center">
-                <button onClick={nextPage} className="more-btn">
+                <button
+                  onClick={() => {
+                    if (!isLoading) {
+                      nextPage();
+                    }
+                  }}
+                  className="more-btn"
+                >
                   {t("more")}
                 </button>
               </div>

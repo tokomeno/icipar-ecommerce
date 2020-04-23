@@ -15,7 +15,7 @@ import { CartPage } from "./pages/profile/cart-page/cart-page";
 import { GiftCardProfilePage } from "./pages/profile/gift-cart/gift-card-profile";
 import { OrdersProfilePage } from "./pages/profile/orders/orders-profile";
 import { ProducShowPage } from "./pages/product-show-page/product-show-page";
-import { ScrollToTop } from "./scrollToTop";
+import { ScropllToTopOnPageChange } from "./scrollToTop";
 import { AddressProiflePage } from "./pages/profile/address/address-profile";
 import { WishlistProfilePage } from "./pages/profile/wishlist/wishlist-profile-page";
 import { ProfilePage } from "./pages/profile/main/MainProfilePage";
@@ -66,7 +66,7 @@ const App: React.FC<{}> = () => {
   return (
     <I18nextProvider i18n={i18next}>
       <BrowserRouter>
-        <ScrollToTop />
+        <ScropllToTopOnPageChange />
         <Layout>
           <Switch>
             <Route path={routes.home} exact component={HomePage} />

@@ -4,6 +4,7 @@ import { useCounter } from "../../hooks/common/useCounter";
 import { connect } from "react-redux";
 import { changeQnty } from "../../redux/cart/cartActions";
 import { IProductWithItems } from "../../services/product.http";
+import { diffInPercentage } from "../../utils";
 
 interface AddCartButtonProps {
   activeItem: IProductWithItems["items"][number];
@@ -13,7 +14,7 @@ interface AddCartButtonProps {
 
 const _AddCartButton: React.FC<AddCartButtonProps> = ({
   activeItem,
-  changeQntyById
+  changeQntyById,
 }) => {
   const { t } = useTranslation();
   const { counter: productQnty, decrease, increase, setCounter } = useCounter(
@@ -33,19 +34,26 @@ const _AddCartButton: React.FC<AddCartButtonProps> = ({
           <sub>D</sub>
         </div>
         {/* "card-owner" კლასი დაამატეთ "sale" კლასს */}
-        {/* <div className="sale-cont d-flex align-items-center">
-          <div className="sale">
-            -70%
-            <div className="hover">
+        {activeItem.original_price &&
+          activeItem.original_price !== activeItem.price && (
+            <div className="sale-cont d-flex align-items-center">
+              <div className="sale">
+                -
+                {Math.ceil(
+                  diffInPercentage(activeItem.original_price, activeItem.price)
+                )}
+                %
+                {/* <div className="hover">
               ფასდაკლებას იღებთ <br />
               ფასდაკლების ბარათის გამო
+            </div> */}
+              </div>
+              <div className="old-price">
+                {activeItem.original_price}
+                <sub>D</sub>
+              </div>
             </div>
-          </div>
-          <div className="old-price">
-            110
-            <sub>D</sub>
-          </div>
-        </div> */}
+          )}
       </div>
       <div className="quantity d-flex flex-column align-items-center">
         <span onClick={increase} className="plus">
@@ -78,5 +86,5 @@ const _AddCartButton: React.FC<AddCartButtonProps> = ({
 };
 
 export const AddCartButton = connect(null, {
-  changeQntyById: changeQnty
+  changeQntyById: changeQnty,
 })(_AddCartButton);

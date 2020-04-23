@@ -82,18 +82,6 @@ export const Item: React.FC<ItemProps> = ({
                     </>
                   </ProductHeartBtn>
                 )}
-                {/* <button className="heart profbtns_btn">
-                  <img
-                    src="/assets/images/heart-border.svg"
-                    alt="favorite"
-                    className="favorite"
-                  />
-                  <img
-                    src="/assets/images/loved.svg"
-                    alt="favorite"
-                    className="added favorite"
-                  />
-                </button> */}
               </div>
               <div className="full-name">{product.brand.name}</div>
               <div className="sizes d-flex align-items-xl-center flex-xl-row flex-column align-items-start">
@@ -174,6 +162,7 @@ interface ItemsProps {
 
 export const Items: React.FC<ItemsProps> = React.memo(
   ({ items, activeItem, setActiveItemFromId }) => {
+    const { t } = useTranslation();
     return (
       <div className="d-flex">
         {items.map((item) => (
@@ -192,7 +181,9 @@ export const Items: React.FC<ItemsProps> = React.memo(
               src={item.thumbnail}
               alt={item.title}
             />
-            <div className="txt">{item.volume} მლ.</div>
+            <div className="txt">
+              {item.volume} {t("ml")}
+            </div>
             {/* <div className="hover">წონა: 0.3 კგ.</div> */}
           </a>
         ))}

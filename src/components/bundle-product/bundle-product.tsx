@@ -13,15 +13,15 @@ interface BundleProductProps {
 
 const _BundleProduct: React.FC<BundleProductProps> = ({
   item_id,
-  toogleBundleToCart
+  toogleBundleToCart,
 }) => {
   const { t } = useTranslation();
   const { isLoading, startLoading, stopLoading } = useLoader();
   const [bundle, setBundle] = useState<IProductBundle | null>(null);
   useEffect(() => {
     ProductService.getBundleForItem(item_id)
-      .then(res => setBundle(res.data.data))
-      .catch(err => {});
+      .then((res) => setBundle(res.data.data))
+      .catch((err) => {});
   }, [item_id]);
 
   if (!bundle) return null;
@@ -69,7 +69,7 @@ const _BundleProduct: React.FC<BundleProductProps> = ({
           </div>
           <button
             disabled={isLoading}
-            onClick={e => {
+            onClick={(e) => {
               e.preventDefault();
               startLoading();
               toogleBundleToCart(
@@ -95,5 +95,5 @@ const _BundleProduct: React.FC<BundleProductProps> = ({
 };
 
 export const BundleProduct = connect(null, {
-  toogleBundleToCart: setBundleQntyToCart
+  toogleBundleToCart: setBundleQntyToCart,
 })(_BundleProduct);

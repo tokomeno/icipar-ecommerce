@@ -101,7 +101,6 @@ export const PorductFilterProvider: React.FC<{}> = ({ children }) => {
     [setProductFilterData]
   );
 
-  console.log(productFilterData);
   return (
     <PorductFilterContext.Provider
       value={{

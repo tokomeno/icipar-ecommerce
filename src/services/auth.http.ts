@@ -8,6 +8,13 @@ import {
   MY_RECOMENDATIONS,
 } from "../api/endpoints";
 import Axios from "axios";
+import { IProduct } from "./product.http";
+
+export interface MyRecomendations {
+  category_id: number;
+  category_title: string;
+  products: IProduct[];
+}
 
 export class AuthService {
   static confirmPhone(user_id: number, pin: number | string) {
@@ -42,6 +49,6 @@ export class AuthService {
   }
 
   static myRecomendation() {
-    return axiosWithToken.get(MY_RECOMENDATIONS);
+    return axiosWithToken.get<{ data: MyRecomendations[] }>(MY_RECOMENDATIONS);
   }
 }

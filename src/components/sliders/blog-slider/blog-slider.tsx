@@ -35,10 +35,10 @@ const params = {
 export const BlogSlider: React.FC<BlogSliderProps> = () => {
   const { t } = useTranslation();
   const [blogs, setBlogs] = useState<HomePageBlogSlider["blog_posts"]>([]);
-  const [blogsSlider, setBlogsSlider] = useState<HomePageBlogSlider[]>([]);
-  const [catrogires, setCatrgories] = useState<{ id: number; title: string }[]>(
+  const [categories, setCatrgories] = useState<{ id: number; title: string }[]>(
     []
   );
+  const [blogsSlider, setBlogsSlider] = useState<HomePageBlogSlider[]>([]);
   const [activeTabId, setActiveTabId] = useState<number | null>(null);
   const setActiveTab = (category_id: number) => {
     const p = blogsSlider.find((item) => item.category_id === category_id);
@@ -57,6 +57,7 @@ export const BlogSlider: React.FC<BlogSliderProps> = () => {
             title: i.category_title,
           }))
         );
+        setBlogs(res.data.data[0].blog_posts);
         setActiveTabId(res.data.data[0].category_id);
       })
       .catch((err) => {
@@ -76,7 +77,7 @@ export const BlogSlider: React.FC<BlogSliderProps> = () => {
               {t("blog")}
             </h3>
             <div className="menu d-flex align-items-center">
-              {catrogires.map((i) => (
+              {categories.map((i) => (
                 <a
                   key={i.id}
                   href="#!"

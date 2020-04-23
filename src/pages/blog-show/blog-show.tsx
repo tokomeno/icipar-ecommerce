@@ -15,10 +15,10 @@ export const BlogShowPage: React.FC<BlogShowPageProps> = ({ match }) => {
 
   useEffect(() => {
     BlogService.getBySlug(match.params.slug)
-      .then(res => {
+      .then((res) => {
         setBlog(res.data.data);
       })
-      .catch(err => {
+      .catch((err) => {
         alert("404");
         console.log(err);
       });
@@ -37,7 +37,12 @@ export const BlogShowPage: React.FC<BlogShowPageProps> = ({ match }) => {
               <h1 className="title mt-20">{blog.title}</h1>
               <span className="badge badge-secondary">{blog.created_at}</span>
               <div className="blog-image mt-20">
-                <img src={blog.thumbnail} className="img-fluid" alt="blog" />
+                <img
+                  src={blog.thumbnail}
+                  style={{ maxHeight: 400 }}
+                  className="img-fluid"
+                  alt="blog"
+                />
               </div>
             </div>
             <div

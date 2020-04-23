@@ -27,7 +27,7 @@ export const HomePage: React.FC<HomePageProps> = () => {
     if (pathname === routes.registerRef) {
       setActiveModal("register-modal");
     }
-  }, []);
+  }, [setActiveModal, pathname]);
 
   return (
     <>

@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useCallback } from "react";
 
 export type IActiveModalContext = {
   activeModal:
@@ -23,7 +23,7 @@ export const ActiveModalProvider: React.FC<{}> = ({ children }) => {
   const [state, setState] = useState<{
     activeModal: IActiveModalContext["activeModal"];
   }>({
-    activeModal: null
+    activeModal: null,
   });
 
   const hideModal = () => {
@@ -32,13 +32,16 @@ export const ActiveModalProvider: React.FC<{}> = ({ children }) => {
     setState({ ...state, activeModal: null });
   };
 
-  const setActiveModal: IActiveModalContext["setActiveModal"] = name => {
-    if (name === "search-modal" || name === "burger-menu") {
-      document.body.style.overflowY = "hidden";
-      document.body.style.overflowX = "hidden";
-    }
-    setState({ ...state, activeModal: name });
-  };
+  const setActiveModal: IActiveModalContext["setActiveModal"] = useCallback(
+    (name) => {
+      if (name === "search-modal" || name === "burger-menu") {
+        document.body.style.overflowY = "hidden";
+        document.body.style.overflowX = "hidden";
+      }
+      setState((prevState) => ({ ...prevState, activeModal: name }));
+    },
+    [setState]
+  );
 
   return (
     <ActiveModalContext.Provider

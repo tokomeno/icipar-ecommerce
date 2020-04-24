@@ -6,6 +6,7 @@ import { SwiperCustomNavBtn } from "../../swiper/swiper-custom-nav-btn";
 import { useTranslation } from "react-i18next";
 import { HomePageBlogSlider, BlogService } from "../../../services/blog.http";
 import { DefaultSpinner } from "../../spinners/spinner";
+import classnames from "classnames";
 
 interface BlogSliderProps {}
 
@@ -85,7 +86,9 @@ export const BlogSlider: React.FC<BlogSliderProps> = () => {
                     e.preventDefault();
                     setActiveTab(i.id);
                   }}
-                  className="menu_link"
+                  className={classnames("menu_link", {
+                    active: i.id === activeTabId,
+                  })}
                 >
                   {i.title}
                 </a>

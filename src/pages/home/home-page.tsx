@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { MainSlider } from "./mainSlider";
-import { ProductSlider } from "../../components/sliders/producSlider/productSlider";
+import { ProductSlider } from "../../components/sliders/produc-slider/product-slider";
 import { BlogSlider } from "../../components/sliders/blog-slider/blog-slider";
 import { CommentSlider } from "../../components/comment-slider/comment-slider";
 import { useTranslation } from "react-i18next";
@@ -10,7 +10,7 @@ import {
   FETCH_HOTDEALS_PRODUCTS,
   FETCH_DISCOUNTED_PRODUCTS,
 } from "../../api/endpoints";
-import { BrandSlider } from "../../components/sliders/brandSlider/brandSlider";
+import { BrandSlider } from "../../components/sliders/brand-slider/brand-slider";
 import { SectionSliders } from "./section-sliders";
 import { InstagramHome } from "../../components/instagram-home";
 import { useLocation } from "react-router-dom";

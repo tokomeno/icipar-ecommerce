@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import chunk from "lodash.chunk";
-import { BrandSlider } from "../../components/sliders/brandSlider/brandSlider";
+import { BrandSlider } from "../../components/sliders/brand-slider/brand-slider";
 import { useTranslation } from "react-i18next";
 import { LayoutSpinner } from "../../components/spinners/layout-spinner";
 import { BrandService, IAllBrandsResponse } from "../../services/brand.http";

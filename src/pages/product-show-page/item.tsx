@@ -1,7 +1,7 @@
 import React from "react";
 import { ProductShowSlider } from "./product-show-slider";
 import classnames from "classnames";
-import { AddCartButton } from "./AddCartButton";
+import { AddCartButton } from "./add-cart-button";
 import { useTranslation } from "react-i18next";
 import { Rating } from "../../components/rating";
 import { Dropdown } from "react-bootstrap";

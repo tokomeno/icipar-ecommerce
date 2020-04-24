@@ -4172,11 +4172,11 @@ sub {
       width: 100%;
     }
 
-    @media (max-width: 767px) {
-      .table-profile {
-        //min-height: auto;
-      }
-    }
+    // @media (max-width: 767px) {
+    //   .table-profile {
+    //     min-height: auto;
+    //   }
+    // }
   }
 
   @media (max-width: 1799px) {
@@ -7028,10 +7028,10 @@ table {
     }
   }
 
-  img {
-    //width: 100%;
-    //min-height: 100%;
-  }
+  // img {
+  //   width: 100%;
+  //   min-height: 100%;
+  // }
 
   .slider-nav {
     width: 110px;

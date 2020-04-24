@@ -13571,9 +13571,6 @@ table .complain {
   }
 }
 
-/* .grecaptcha-badge {
-  visibility: hidden;
-} */
 .image > img {
   max-height: 100%;
 }
@@ -13616,6 +13613,39 @@ button,
 
 .site__header {
   z-index: 4;
+}
+
+#scrollTopBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10000;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: #fa7268;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 4px;
+}
+
+#scrollTopBtn:hover {
+  background-color: #f36b61;
+}
+
+.grecaptcha-badge {
+  visibility: collapse !important;
+  visibility: hidden;
+}
+
+.bg__site {
+  position: fixed;
+}
+
+.burger-nav,
+.user-nav {
+  position: fixed;
 }
 
 /*# sourceMappingURL=style-ka.css.map */

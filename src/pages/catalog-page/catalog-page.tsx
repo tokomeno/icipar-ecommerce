@@ -14,7 +14,7 @@ interface CatalogPageProps {}
 
 export const CatalogPage: React.FC<CatalogPageProps> = () => {
   const { t } = useTranslation();
-  const { productFilterData, setFilterFromParams } = useContext(
+  const { productFilterData, setFilterFromQueryString } = useContext(
     PorductFilterContext
   );
   const {
@@ -26,8 +26,8 @@ export const CatalogPage: React.FC<CatalogPageProps> = () => {
   } = useProducts(productFilterData);
 
   useEffect(() => {
-    if (window.location.search.length) setFilterFromParams();
-  }, [setFilterFromParams]);
+    if (window.location.search.length) setFilterFromQueryString();
+  }, [setFilterFromQueryString]);
 
   const { activeModal, hideModal } = useContext(ActiveModalContext);
 
@@ -51,18 +51,6 @@ export const CatalogPage: React.FC<CatalogPageProps> = () => {
           </div>
           <div className="catalog">
             <div className="catalog_top d-flex justify-content-between align-items-center flex-column flex-lg-row">
-              <div className="cat-menu d-flex">
-                {/* <a href="#!" className="cat-menu_item">
-                    მთავარი
-                  </a>
-                  <div className="right"> &gt; </div>
-                  <a href="#!" className="cat-menu_item">
-                    სუნამოები
-                  </a>
-                  <div className="right"> &gt; </div>
-                  <span className="cat-menu_item">ქალი</span> */}
-              </div>
-
               <PriceSorter ordering={productFilterData.order || "price"} />
             </div>
             <div className="d-flex flex-wrap justify-content-sm-start justify-content-center">

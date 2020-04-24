@@ -51,7 +51,7 @@ interface IPorductFilterContext {
     ids: (number | string)[],
     filterName: keyof IFilterCheckboxes
   ) => void;
-  setFilterFromParams: () => void;
+  setFilterFromQueryString: () => void;
   setNewKeyword: (keyword: string) => void;
   setPriceRange: (price: [number, number]) => void;
   setPriceSorter: (order: "price" | "-price") => void;
@@ -66,8 +66,8 @@ export const PorductFilterProvider: React.FC<{}> = ({ children }) => {
     IProductFilterFrontEndRequestParameter
   >(defaultData);
 
-  const setFilterFromParams = useCallback(() => {
-    setProductFilterData(getQueryParamsFromUrl());
+  const setFilterFromQueryString = useCallback(() => {
+    setProductFilterData(getValidatedQueryParamsFromUrl());
   }, []);
 
   const setFilterCheckbox: IPorductFilterContext["setFilterCheckbox"] = useCallback(
@@ -107,7 +107,7 @@ export const PorductFilterProvider: React.FC<{}> = ({ children }) => {
         productFilterData,
         setFilterCheckbox,
         setNewKeyword,
-        setFilterFromParams,
+        setFilterFromQueryString,
         setPriceRange,
         setPriceSorter,
       }}
@@ -117,7 +117,8 @@ export const PorductFilterProvider: React.FC<{}> = ({ children }) => {
   );
 };
 
-const getQueryParamsFromUrl = () => {
+// TODO: Some extra validations
+const getValidatedQueryParamsFromUrl = (): IProductFilterFrontEndRequestParameter => {
   try {
     const q = window.location.search;
     if (q.length) {

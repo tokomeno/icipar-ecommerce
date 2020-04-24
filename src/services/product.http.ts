@@ -15,7 +15,7 @@ import { IProductFilterFrontEndRequestParameter } from "../contexts/productFilte
 import { FetchProductResponse } from "../hooks/useProducts/types";
 import {
   pushQueryParamsToUrl,
-  mapToRequestParams,
+  tranfromFrontEndFilterToBackEndFilterData,
 } from "../hooks/useProducts/helper";
 
 export interface IProductPreordable {
@@ -131,7 +131,9 @@ export class ProductService {
     callback: (res: FetchProductResponse) => void
   ): void {
     pushQueryParamsToUrl(productFilterData);
-    const filterParams = mapToRequestParams(productFilterData);
+    const filterParams = tranfromFrontEndFilterToBackEndFilterData(
+      productFilterData
+    );
     axiosWithToken
       .post<FetchProductResponse>(url, filterParams)
       .then((res) => {

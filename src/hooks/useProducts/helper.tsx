@@ -13,7 +13,7 @@ export const pushQueryParamsToUrl = (data: any[] | object) => {
   window.history.pushState({ path: newurl }, "", newurl);
 };
 
-export const mapToRequestParams = (
+export const tranfromFrontEndFilterToBackEndFilterData = (
   productFilter: IProductFilterFrontEndRequestParameter
 ): IProductFilterBackendRequestParam => {
   const res: IProductFilterBackendRequestParam = {};

@@ -48,11 +48,8 @@ export const useProducts = (
   const firstRender = useRef(true);
 
   useEffect(() => {
-    let time = 1000;
-    if (firstRender.current) {
-      firstRender.current = false;
-      time = 0;
-    }
+    let time = firstRender.current ? 0 : 1000;
+    if (firstRender.current) firstRender.current = false;
     const fetching = setTimeout(() => {
       startLoading();
       ProductService.fetchProducts(

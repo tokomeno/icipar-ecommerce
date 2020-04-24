@@ -7,7 +7,7 @@ import { ContactPage } from "./pages/contact/contact-page";
 import { ShopPage } from "./pages/shops/shop-page";
 import { AboutBrandPage } from "./pages/about-brand/about-brand-page";
 import { AllBrandsPage } from "./pages/all-brands/all-brands";
-import { CatalogPage } from "./pages/catalog/catalog-page";
+import { CatalogPage } from "./pages/catalog-page/catalog-page";
 
 import { CouponsPage } from "./pages/profile/coupons/coupons-page";
 import { GiftCardPage } from "./pages/gift-card/gift-card-page";

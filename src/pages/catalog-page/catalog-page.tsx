@@ -63,7 +63,12 @@ export const CatalogPage: React.FC<CatalogPageProps> = () => {
               )}
               {!isLoading ? (
                 products.map((p) => (
-                  <Product key={p.id} product={p} wrapperClass="catalog-item" />
+                  <Product
+                    displayLables={true}
+                    key={p.id}
+                    product={p}
+                    wrapperClass="catalog-item"
+                  />
                 ))
               ) : (
                 <ProductContetnLoader items={30} />

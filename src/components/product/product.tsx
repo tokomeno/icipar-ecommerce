@@ -11,9 +11,14 @@ interface ProductProps {
   product: IProduct;
   wrapperClass: "catalog-item" | "swiper-slide" | "product";
   isHot?: boolean;
+  displayLables?: boolean;
 }
 
-export const Product: React.FC<ProductProps> = ({ wrapperClass, product }) => {
+export const Product: React.FC<ProductProps> = ({
+  wrapperClass,
+  product,
+  displayLables,
+}) => {
   const { t } = useTranslation();
   return (
     <React.Fragment>
@@ -45,13 +50,13 @@ export const Product: React.FC<ProductProps> = ({ wrapperClass, product }) => {
           {product.price_min} - {product.price_max}
           <sub>D</sub>
         </div>
-        {product.label === "new" ? (
+        {displayLables && product.label === "new" ? (
           <div className="product-label news">{t("new")}</div>
         ) : null}
-        {product.label === "sale" ? (
+        {displayLables && product.label === "sale" ? (
           <div className="product-label sale">{t("sale")}</div>
         ) : null}
-        {product.label === "hot_deals" ? (
+        {displayLables && product.label === "hot_deals" ? (
           <div className="product-label sale">{t("hot_deal")}</div>
         ) : null}
       </div>

@@ -95,11 +95,13 @@ export const Item: React.FC<ItemProps> = ({
                 </div>
               </div>
 
-              {product.being_sold_online && (
+              {product.being_sold_online ? (
                 <AddCartButton
                   being_sold_online={product.being_sold_online}
                   activeItem={activeItem}
                 />
+              ) : (
+                <div className="mt-50"></div>
               )}
 
               <div className="d-lg-flex d-none">

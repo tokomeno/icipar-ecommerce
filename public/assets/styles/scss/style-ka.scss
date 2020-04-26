@@ -3632,10 +3632,9 @@ sub {
               }
 
               /* Firefox */
-              .qty input[type=number] {
+              .qty input[type="number"] {
                 -moz-appearance: textfield;
               }
-
 
               .qty input {
                 @include font-style($bold-font, 18px, $dark-gray);
@@ -7508,7 +7507,7 @@ table {
       }
 
       /* Firefox */
-      .qty input[type=number] {
+      .qty input[type="number"] {
         -moz-appearance: textfield;
       }
 
@@ -9156,7 +9155,6 @@ table {
   }
 }
 
-
 /////////////////////////////////////////////////////////
 
 .search-nav.active {
@@ -9190,7 +9188,7 @@ table {
 }
 
 .info-item select:focus {
-  border-color: #373435
+  border-color: #373435;
 }
 
 .swiper-button-next.d-flex.align-items-center.justify-content-center,
@@ -9217,7 +9215,6 @@ table {
     opacity: 1;
   }
 }
-
 
 .image>img {
   max-height: 100%;

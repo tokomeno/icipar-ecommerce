@@ -13656,10 +13656,6 @@ button,
   flex-shrink: 0;
 }
 
-.catalog-item {
-  position: relative;
-}
-
 .product-label {
   position: absolute;
   top: -8px;

@@ -7168,7 +7168,7 @@ sub {
   margin: 0;
 }
 
-.profile .profile-right table tbody tr td .quantity .qty input[type=number] {
+.profile .profile-right table tbody tr td .quantity .qty input[type="number"] {
   -moz-appearance: textfield;
 }
 
@@ -11564,7 +11564,7 @@ table .complain {
   margin: 0;
 }
 
-.product .price-block .quantity .qty input[type=number] {
+.product .price-block .quantity .qty input[type="number"] {
   -moz-appearance: textfield;
 }
 
@@ -13654,6 +13654,10 @@ button,
 
 .flex-shrink-0 {
   flex-shrink: 0;
+}
+
+.catalog-item {
+  position: relative;
 }
 
 .product-label {

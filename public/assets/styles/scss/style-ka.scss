@@ -9295,3 +9295,43 @@ button,
 .user-nav {
   position: fixed;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+
+.catalog-item {
+  position: relative;
+}
+
+.product-label {
+  position: absolute;
+  top: -8px;
+  right: 30px;
+  padding-left: 15px;
+  padding-right: 15px;
+  height: 22px;
+  line-height: 22px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px 1px #dcdbdb;
+  box-shadow: 0 1px 4px 1px #373435;
+  background-color: #373435;
+  text-transform: uppercase;
+}
+
+.product-label.sale {
+  box-shadow: 0 1px 4px 1px #fa7268;
+  background-color: #fa7268;
+}
+
+.product-label.news {
+  box-shadow: 0 1px 4px 1px #373435;
+  background-color: #373435;
+}

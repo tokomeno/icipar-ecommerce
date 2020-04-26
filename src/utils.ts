@@ -1,3 +1,8 @@
-export const diffInPercentage = (a: number, b: number): number => {
-  return 100 * Math.abs((a - b) / ((a + b) / 2));
+export const diffInPercentage = (
+  oldNumber: number,
+  newNumber: number
+): number => {
+  var decreaseValue = oldNumber - newNumber;
+
+  return (decreaseValue / oldNumber) * 100;
 };

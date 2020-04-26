@@ -21,7 +21,6 @@ export const AllBrandsPage: React.FC<AllBrandsPageProps> = () => {
     BrandService.getAll()
       .then((res) => {
         setBrands(res.data);
-        console.log(res.data);
       })
       .catch((err) => {
         console.error(err);

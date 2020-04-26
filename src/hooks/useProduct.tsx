@@ -6,18 +6,18 @@ export const useProduct = (productId: number | string) => {
 
   useEffect(() => {
     ProductService.getById(productId)
-      .then(res => {
+      .then((res) => {
         if (res.data.data) {
           setProduct(res.data.data);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         alert("დაფიქსირდა შეცდომა");
         console.log(err);
       });
   }, [productId]);
 
   return {
-    product
+    product,
   };
 };

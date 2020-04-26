@@ -112,7 +112,9 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ name }) => {
             />
           </NavLink>
         </div>
-        <div className="recomend-title text-center">რეკომენდაციები შენთვის</div>
+        <div className="recomend-title text-center">
+          {t("recomendations_for_you")}
+        </div>
         <div className="line" />
         <div className="menu d-flex justify-content-center align-items-center">
           {categories.map((i) => (

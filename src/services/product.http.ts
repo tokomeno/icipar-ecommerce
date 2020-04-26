@@ -12,12 +12,31 @@ import {
 import { IProductFilterData } from "../hooks/useProductFilterAttributes";
 import { axiosWithToken } from "../api/axios-with-token";
 import { IProductFilterFrontEndRequestParameter } from "../contexts/productFilterContext";
-import { FetchProductResponse } from "../hooks/useProducts/types";
+
 import {
   pushQueryParamsToUrl,
   tranfromFrontEndFilterToBackEndFilterData,
+  IProductFilterBackendRequestParam,
 } from "../hooks/useProducts/helper";
 
+export interface FetchProductResponse {
+  links: {
+    first: string;
+    last: string;
+    prev?: null | string;
+    next?: null | string;
+  };
+  meta: {
+    from: number;
+    to: number;
+    current_page: number;
+    last_page: number;
+    total: number;
+    path: string;
+    per_page: number;
+  };
+  data: IProduct[];
+}
 export interface IProductPreordable {
   y: number;
   m: number;
@@ -127,22 +146,21 @@ export class ProductService {
 
   static fetchProducts(
     url: string,
-    productFilterData: IProductFilterFrontEndRequestParameter,
-    callback: (res: FetchProductResponse) => void
-  ): void {
+    productFilterData: IProductFilterFrontEndRequestParameter
+  ): Promise<FetchProductResponse> {
     pushQueryParamsToUrl(productFilterData);
-    const filterParams = tranfromFrontEndFilterToBackEndFilterData(
+    const filterParams: IProductFilterBackendRequestParam = tranfromFrontEndFilterToBackEndFilterData(
       productFilterData
     );
-    axiosWithToken
+    return axiosWithToken
       .post<FetchProductResponse>(url, filterParams)
       .then((res) => {
-        callback(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("error_occured");
+        return res.data;
       });
+    // .catch((err) => {
+    //   console.log(err);
+    //   alert("error_occured");
+    // });
   }
 
   static getSimilar(productId: number | string) {

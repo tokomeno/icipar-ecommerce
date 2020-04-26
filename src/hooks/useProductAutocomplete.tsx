@@ -31,16 +31,12 @@ export const useProductAutocomplete = () => {
       return;
     }
     const fetching = setTimeout(() => {
-      ProductService.fetchProducts(
-        FETCH_PRODUCTS_URL,
-        {
-          keyword: keyword,
-          categories: activeTab ? [activeTab.id] : [],
-        },
-        (res) => {
-          setProducts(res.data);
-        }
-      );
+      ProductService.fetchProducts(FETCH_PRODUCTS_URL, {
+        keyword: keyword,
+        categories: activeTab ? [activeTab.id] : [],
+      }).then((res) => {
+        setProducts(res.data);
+      });
     }, 300);
     return () => {
       clearTimeout(fetching);

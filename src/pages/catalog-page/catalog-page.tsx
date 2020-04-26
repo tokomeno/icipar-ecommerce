@@ -9,6 +9,7 @@ import { PorductFilterContext } from "../../contexts/productFilterContext";
 import { ProductContetnLoader } from "../../components/product/product-content-loader";
 import { ActiveModalContext } from "../../contexts/modalContex";
 import classnames from "classnames";
+import { dummyProductData } from "../../data/product";
 
 interface CatalogPageProps {}
 
@@ -54,6 +55,9 @@ export const CatalogPage: React.FC<CatalogPageProps> = () => {
               <PriceSorter ordering={productFilterData.order || "price"} />
             </div>
             <div className="d-flex flex-wrap justify-content-sm-start justify-content-center">
+              {/* {dummyProductData.map((p) => (
+                <Product key={p.id} product={p} wrapperClass="catalog-item" />
+              ))} */}
               {!isLoading && products.length === 0 && (
                 <h2 className="h2 text-center">{t("products_not_found")}</h2>
               )}

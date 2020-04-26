@@ -1,6 +1,29 @@
 import { IProductFilterFrontEndRequestParameter } from "../../contexts/productFilterContext";
-import { IProductFilterBackendRequestParam } from "./types";
 import queryString from "query-string";
+
+export type IProductFilterBackendRequestParam = {
+  keyword?: any;
+  category_ids?: (number | string)[];
+  aroma_ids?: (number | string)[];
+  brand_ids?: (number | string)[];
+  collection_ids?: (number | string)[];
+  gender_ids?: (number | string)[];
+  release_country_ids?: (number | string)[];
+  release_years?: (number | string)[];
+  usage_ids?: (number | string)[];
+  color_group_ids?: (number | string)[];
+  smell_ids?: (number | string)[];
+  order?: "-price" | "price";
+  age_range?: IFilterRange;
+  discount_range?: IFilterRange;
+  price_range?: IFilterRange;
+  volume_range?: IFilterRange;
+};
+
+interface IFilterRange {
+  min: number;
+  max: number;
+}
 
 export const pushQueryParamsToUrl = (data: any[] | object) => {
   const q = queryString.stringify(data, { arrayFormat: "bracket" });

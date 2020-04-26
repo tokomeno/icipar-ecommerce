@@ -58,6 +58,7 @@ export interface IProduct {
   main_item_id: number;
   being_sold_online: boolean;
   preorderable?: IProductPreordable;
+  label?: "new" | "sale" | "hot_deals" | null;
 }
 
 export interface IProductReview {

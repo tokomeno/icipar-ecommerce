@@ -193,6 +193,8 @@
     "volume_range": "Volume Range",
     "age_range": "Age Range",
     "discount_range": "Discount Range",
-    "ml": " მლ."
+    "ml": " მლ.",
+    "new": "New",
+    "hot_deal": "Hot Deal"
   }
 }

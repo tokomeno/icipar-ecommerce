@@ -9,7 +9,7 @@ import { PorductFilterContext } from "../../contexts/productFilterContext";
 import { ProductContetnLoader } from "../../components/product/product-content-loader";
 import { ActiveModalContext } from "../../contexts/modalContex";
 import classnames from "classnames";
-import { dummyProductData } from "../../data/product";
+// import { dummyProductData } from "../../data/product";
 
 interface CatalogPageProps {}
 

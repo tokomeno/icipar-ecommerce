@@ -4,21 +4,17 @@ import { ProductCartBtn } from "./product-cart-btn";
 import { ProductHeartBtn } from "./product-heart-btn";
 import { Link } from "react-router-dom";
 import { ProductHot } from "./product-hot";
-import { ICartItem } from "../../redux/cart/cartTypes";
 import { IProduct } from "../../services/product.http";
+import { useTranslation } from "react-i18next";
 
 interface ProductProps {
   product: IProduct;
-  cartItem?: ICartItem;
   wrapperClass: "catalog-item" | "swiper-slide" | "product";
   isHot?: boolean;
 }
 
-export const Product: React.FC<ProductProps> = ({
-  wrapperClass,
-  product,
-  cartItem
-}) => {
+export const Product: React.FC<ProductProps> = ({ wrapperClass, product }) => {
+  const { t } = useTranslation();
   return (
     <React.Fragment>
       <div className={wrapperClass + " fadeInOpacity"}>
@@ -49,6 +45,15 @@ export const Product: React.FC<ProductProps> = ({
           {product.price_min} - {product.price_max}
           <sub>D</sub>
         </div>
+        {product.label === "new" ? (
+          <div className="product-label news">{t("new")}</div>
+        ) : null}
+        {product.label === "sale" ? (
+          <div className="product-label sale">{t("sale")}</div>
+        ) : null}
+        {product.label === "hot_deals" ? (
+          <div className="product-label sale">{t("hot_deal")}</div>
+        ) : null}
       </div>
     </React.Fragment>
   );

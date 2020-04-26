@@ -5,26 +5,38 @@ import { connect } from "react-redux";
 import { changeQnty } from "../../redux/cart/cartActions";
 import { IProductWithItems } from "../../services/product.http";
 import { diffInPercentage } from "../../utils";
+import { IStoreState } from "../../redux/mainReducer";
+import { ICartItem } from "../../redux/cart/cartTypes";
 
 interface AddCartButtonProps {
   activeItem: IProductWithItems["items"][number];
   changeQntyById: typeof changeQnty;
   being_sold_online: boolean;
+  cartItem: ICartItem | null;
+  loadingItemId: number | null;
 }
 
 const _AddCartButton: React.FC<AddCartButtonProps> = ({
   activeItem,
   changeQntyById,
+  cartItem,
+  loadingItemId,
 }) => {
   const { t } = useTranslation();
   const { counter: productQnty, decrease, increase, setCounter } = useCounter(
-    1,
+    cartItem && cartItem.items_count ? cartItem.items_count : 1,
     1
   );
 
   useEffect(() => {
     setCounter(1);
   }, [activeItem, setCounter]);
+
+  useEffect(() => {
+    if (cartItem && cartItem.items_count) {
+      setCounter(cartItem.items_count);
+    }
+  }, [cartItem, setCounter]);
 
   return (
     <div className="price-block d-flex align-items-center justify-content-sm-start justify-content-center">
@@ -66,12 +78,12 @@ const _AddCartButton: React.FC<AddCartButtonProps> = ({
           <i className="fas fa-chevron-down" />
         </span>
       </div>
-      <a
+      <button
         onClick={() => {
           changeQntyById(activeItem.id, productQnty);
         }}
-        href="#!"
-        className="buy d-flex"
+        className="buy d-flex disableOpacity"
+        disabled={activeItem.id === loadingItemId}
       >
         {t("cart")}
         <img src="/assets/images/arrow-right.svg" alt="arrow" />
@@ -80,11 +92,25 @@ const _AddCartButton: React.FC<AddCartButtonProps> = ({
           alt="arrow"
           className="red"
         />
-      </a>
+      </button>
     </div>
   );
 };
 
-export const AddCartButton = connect(null, {
+const mapStateToProps = (
+  { cart }: IStoreState,
+  ownProps: Omit<
+    AddCartButtonProps,
+    "changeQntyById" | "cartItem" | "loadingItemId"
+  >
+) => {
+  const { activeItem } = ownProps;
+  const cartItem = cart.itemsByKeys[activeItem.id];
+  return {
+    cartItem,
+    loadingItemId: cart.loadingItemId,
+  };
+};
+export const AddCartButton = connect(mapStateToProps, {
   changeQntyById: changeQnty,
 })(_AddCartButton);

@@ -134,7 +134,12 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ name }) => {
         <div>
           <div className="products d-flex flex-wrap">
             {products.map((p) => (
-              <Product key={p.id} wrapperClass="product" product={p} />
+              <Product
+                displayLables={true}
+                key={p.id}
+                wrapperClass="product"
+                product={p}
+              />
             ))}
           </div>
         </div>

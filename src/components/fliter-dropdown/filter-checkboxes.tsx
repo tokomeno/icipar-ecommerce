@@ -5,13 +5,15 @@ import {
   PorductFilterContext,
 } from "../../contexts/productFilterContext";
 
+interface ICheckbox {
+  title: string;
+  id: number | string;
+  children?: { title: string; id: number | string }[];
+}
+
 interface FilterCheckboxesProps {
   filterName: keyof IFilterCheckboxes;
-  checkboxes: {
-    title: string;
-    id: number | string;
-    children?: { title: string; id: number | string }[];
-  }[];
+  checkboxes: ICheckbox[];
   type?: "colors";
 }
 
@@ -25,13 +27,16 @@ export const FilterCheckboxes: React.FC<FilterCheckboxesProps> = React.memo(
       return checkedIds.indexOf(id) > -1;
     };
 
-    const handleChange = (ch: { title: string; id: number | string }) => {
+    const handleChange = (ch: ICheckbox) => {
       const checkedIds = productFilterData[filterName] || [];
       let newCheckedIds;
       if (isChecked(ch.id)) {
         newCheckedIds = checkedIds.filter((i) => i !== ch.id);
       } else {
         newCheckedIds = [...checkedIds, ch.id];
+        if (ch.children) {
+          // TODO: uncheck children
+        }
       }
       setFilterCheckbox(newCheckedIds, filterName);
     };
@@ -62,12 +67,11 @@ export const FilterCheckboxes: React.FC<FilterCheckboxesProps> = React.memo(
               ch.children.map((ch) => (
                 <label
                   key={ch.id}
-                  className={classnames("filter-link", {
+                  className={classnames("filter-link ml-5", {
                     color: type === "colors",
                   })}
                   style={{
                     backgroundColor: type === "colors" ? ch.title : undefined,
-                    marginLeft: "5px",
                   }}
                 >
                   {type === "colors" ? <div className="color" /> : ch.title}

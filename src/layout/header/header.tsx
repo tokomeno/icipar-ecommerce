@@ -177,20 +177,38 @@ export const _Header: React.FC<HeaderProps> = ({ user, phone, menu }) => {
                     item={item}
                   />
                 ))}
-              <div className="header-menu_item">
-                <Link to="/gift-card" className="link">
-                  {t("gift_cart")}
-                </Link>
-              </div>
 
               <div className="header-menu_item">
-                <Link to="/all-brands" className="link">
+                <Link
+                  to={{
+                    pathname: routes.catalog,
+                    search:
+                      "discount_range[]=0-0.25&discount_range[]=0.25-0.5&discount_range[]=0.5-0.75&discount_range[]=0.75-1",
+                    state: "refresh",
+                  }}
+                  className="link"
+                >
+                  {t("sale")}
+                </Link>
+              </div>
+              <div className="header-menu_item">
+                <Link to={routes.allBrands} className="link">
                   {t("brands")}
+                </Link>
+              </div>
+              <div className="header-menu_item">
+                <Link to={routes.giftCard} className="link">
+                  {t("gift_cart")}
                 </Link>
               </div>
               <div className="header-menu_item">
                 <Link to="/catalog" className="link">
                   {t("catalog")}
+                </Link>
+              </div>
+              <div className="header-menu_item">
+                <Link to={routes.blogs} className="link text-main-color">
+                  {t("blog")}
                 </Link>
               </div>
             </div>

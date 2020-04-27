@@ -4,7 +4,7 @@ import {
   LAYOUT_BRNADS,
   PRODUCT_CATEGORIES,
   DAYLY_OFFER,
-  GETBANNER
+  GETBANNER,
 } from "../api/endpoints";
 import { IBrandSliderItem } from "./brand.http";
 

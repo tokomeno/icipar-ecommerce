@@ -4,7 +4,7 @@ import { PageSideMenu } from "../../components/pageSideMenu";
 
 interface AboutUsPageProps {}
 
-export const AboutUsPage: React.FC<AboutUsPageProps> = props => {
+export const AboutUsPage: React.FC<AboutUsPageProps> = (props) => {
   return (
     <>
       <div className="container">

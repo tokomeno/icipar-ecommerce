@@ -10,12 +10,12 @@ interface RatingProps {
 export const Rating: React.FC<RatingProps> = ({
   rating = 0,
   ratable = false,
-  onRateChange
+  onRateChange,
 }) => {
   const [rate, setRate] = useState(rating);
   return (
     <div className="rating">
-      {[1, 2, 3, 4, 5].map(n => (
+      {[1, 2, 3, 4, 5].map((n) => (
         <span
           key={n}
           onClick={() => {

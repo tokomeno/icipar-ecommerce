@@ -8,7 +8,7 @@ interface InstagramHomeProps {
 }
 
 export const _InstagramHome: React.FC<InstagramHomeProps> = ({ socials }) => {
-  const instagram = socials.find(i => i.social === "instagram");
+  const instagram = socials.find((i) => i.social === "instagram");
   const { t } = useTranslation();
 
   return (
@@ -35,6 +35,6 @@ export const _InstagramHome: React.FC<InstagramHomeProps> = ({ socials }) => {
 };
 
 const mapStateToProps = ({ info }: IStoreState) => ({
-  socials: info.socials
+  socials: info.socials,
 });
 export const InstagramHome = connect(mapStateToProps)(_InstagramHome);

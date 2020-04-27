@@ -10,7 +10,7 @@ interface ProductAutocompleteDropdownProps {
 
 export const ProductAutocompleteDropdown: React.FC<ProductAutocompleteDropdownProps> = ({
   products,
-  resetProducts
+  resetProducts,
 }) => {
   const searchDropdownRef = useRef(null);
   useDeteckOutsideClick(searchDropdownRef, () => {
@@ -25,7 +25,7 @@ export const ProductAutocompleteDropdown: React.FC<ProductAutocompleteDropdownPr
           style={{ overflowY: "auto", zIndex: 100 }}
           aria-labelledby="cart1"
         >
-          {products.map(product => (
+          {products.map((product) => (
             <NavLink
               key={product.id}
               onClick={resetProducts}

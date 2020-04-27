@@ -13,14 +13,14 @@ export const EmailSubscribe: React.FC = () => {
   const inputHandler = useInput("");
   const handleSubmit = () => {
     EmailService.subscribe(inputHandler.value)
-      .then(res => {
+      .then((res) => {
         setErrorMessage(null);
         setSuccessMessage(t("you_have_subscribed"));
         setTimeout(() => {
           setSuccessMessage(null);
         }, 2000);
       })
-      .catch(err => {
+      .catch((err) => {
         if (Array.isArray(err.response.data.email)) {
           setErrorMessage(err.response.data.email.join(" "));
         }

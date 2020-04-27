@@ -32,19 +32,21 @@ export const useCoupons = () => {
   >(null);
 
   useEffect(() => {
-    axiosWithToken.get<{ data: IAmountCoupon[] }>(AMOUNT_COUPONS).then(res => {
-      setAmountCoupons(res.data.data);
-    });
+    axiosWithToken
+      .get<{ data: IAmountCoupon[] }>(AMOUNT_COUPONS)
+      .then((res) => {
+        setAmountCoupons(res.data.data);
+      });
 
     axiosWithToken
       .get<{ data: IDiscountCoupon[] }>(DISCOUNT_COUPONS)
-      .then(res => {
+      .then((res) => {
         setDiscountCoupons(res.data.data);
       });
   }, []);
 
   return {
     amountCoupons,
-    discountCoupons
+    discountCoupons,
   };
 };

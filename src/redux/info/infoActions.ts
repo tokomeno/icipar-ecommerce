@@ -27,13 +27,13 @@ export interface SetPorductDeliveryTermsAction {
 export const setLayoutCatogriesAction = () => {
   return (dispatch: Dispatch) => {
     LayoutService.productCategories()
-      .then(res => {
+      .then((res) => {
         dispatch<SetLayoutCatrogiresAction>({
           type: InfoActionTypes.SetLayoutCatrogires,
-          payload: res.data.data
+          payload: res.data.data,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
@@ -44,37 +44,37 @@ export const fetch_Social_ContactInfo_Branches = () => {
     Axios.get<{
       data: IInfoState["product_delivery_terms"];
     }>(PRODUCT_DELIVERY_TERMS)
-      .then(res => {
+      .then((res) => {
         dispatch<SetPorductDeliveryTermsAction>({
           payload: res.data.data,
-          type: InfoActionTypes.SetPorductDeliveryTerms
+          type: InfoActionTypes.SetPorductDeliveryTerms,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
       });
 
     Axios.get<{
       data: Pick<IInfoState, "contact_info" | "socials">;
     }>(ADDITIONAL_INFO)
-      .then(res => {
+      .then((res) => {
         dispatch<SetSocialAndContactInfoAction>({
           payload: res.data.data,
-          type: InfoActionTypes.SetSocialAndContactInfo
+          type: InfoActionTypes.SetSocialAndContactInfo,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
       });
 
     BranchService.getAll()
-      .then(res => {
+      .then((res) => {
         dispatch<SetBrnachesAction>({
           payload: res.data.data,
-          type: InfoActionTypes.SetBrnaches
+          type: InfoActionTypes.SetBrnaches,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
       });
   };

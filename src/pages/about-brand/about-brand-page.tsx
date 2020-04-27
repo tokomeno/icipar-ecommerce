@@ -12,7 +12,7 @@ export const AboutBrandPage: React.FC<AboutBrandPageProps> = ({ match }) => {
   const { t } = useTranslation();
   const [brand, setBrand] = useState<IBrandShow | null>(null);
   useEffect(() => {
-    BrandService.getBySlug(match.params.slug).then(res =>
+    BrandService.getBySlug(match.params.slug).then((res) =>
       setBrand(res.data.data)
     );
   }, [match.params.slug]);

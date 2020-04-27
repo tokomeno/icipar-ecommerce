@@ -18,7 +18,7 @@ export const AuthInput: React.FC<AuthInputProps> = ({
   value,
   type,
   children,
-  errorMessage
+  errorMessage,
 }) => {
   const { isActive, toggle } = useToggle(false);
   return (

@@ -3,7 +3,7 @@ import { Modal } from "react-bootstrap";
 
 import {
   ActiveModalContext,
-  IActiveModalContext
+  IActiveModalContext,
 } from "../../contexts/modalContex";
 import { connect } from "react-redux";
 import { setAuthErrors } from "../../redux/auth/authActions";
@@ -27,7 +27,7 @@ const _TermModal: React.FC<TermModalProps> = ({ setAuthErrors }) => {
   useEffect(() => {
     axiosWithToken
       .get<{ data: { content: string } }>(WEBSITE_TERMS)
-      .then(res => setTerms(res.data.data.content));
+      .then((res) => setTerms(res.data.data.content));
   }, []);
 
   return (
@@ -65,7 +65,7 @@ const _TermModal: React.FC<TermModalProps> = ({ setAuthErrors }) => {
               <p
                 className="txt"
                 dangerouslySetInnerHTML={{
-                  __html: terms
+                  __html: terms,
                 }}
               />
             ) : (
@@ -90,7 +90,7 @@ const _TermModal: React.FC<TermModalProps> = ({ setAuthErrors }) => {
 };
 
 const mapStateToProps = ({ auth }: IStoreState) => ({
-  user: auth.user
+  user: auth.user,
 });
 export const TermModal = connect(mapStateToProps, { setAuthErrors })(
   _TermModal

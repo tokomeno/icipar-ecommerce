@@ -22,9 +22,16 @@ export const HeaderMenuDropdownItem: React.FC<HeaderMenuItemProps> = ({
   const { t } = useTranslation();
   return (
     <div className="header-menu_item">
-      <a href="#!" className="link">
+      <NavLink
+        to={{
+          pathname: routes.catalog,
+          search: "categories[]=" + item.id,
+          state: "refresh",
+        }}
+        className="link"
+      >
         {item.title}
-      </a>
+      </NavLink>
       <div className="inner-menu">
         <div className="container">
           <div className="d-flex">

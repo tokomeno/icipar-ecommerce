@@ -10,14 +10,14 @@ export const AboutPagesMenu = [
   { title: "how_it_works", to: routes.howItWorks },
   // { title: "delivery_terms", to: "#!" },
   { title: "contact", to: routes.contact },
-  { title: "faq", to: routes.faq }
+  { title: "faq", to: routes.faq },
 ];
-export const PageSideMenu: React.FC<PageSideMenuProps> = props => {
+export const PageSideMenu: React.FC<PageSideMenuProps> = (props) => {
   const { t } = useTranslation();
   return (
     <div className="col-md-3 d-none d-lg-block">
       <div className="aboutmenu">
-        {AboutPagesMenu.map(menu => (
+        {AboutPagesMenu.map((menu) => (
           <NavLink
             key={menu.to}
             activeClassName="active"

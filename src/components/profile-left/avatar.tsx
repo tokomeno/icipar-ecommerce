@@ -15,9 +15,9 @@ const _Avatar: React.FC<AvatarProps> = ({ user, updateAvatar }) => {
   const { t } = useTranslation();
   const fileInput = useRef<HTMLInputElement>(null);
   const fileSelectedHandler = useCallback(
-    event => {
+    (event) => {
       if (event.target.files && event.target.files[0]) {
-        AvatarService.upload(event.target.files[0]).then(res => {
+        AvatarService.upload(event.target.files[0]).then((res) => {
           updateAvatar(res.data.data.avatar);
         });
       }

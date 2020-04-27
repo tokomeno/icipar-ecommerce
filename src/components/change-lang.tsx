@@ -4,7 +4,7 @@ import { changeLanguage } from "../langsUtil";
 
 interface ChangeLangProps {}
 
-export const ChangeLang: React.FC<ChangeLangProps> = props => {
+export const ChangeLang: React.FC<ChangeLangProps> = (props) => {
   const activeLang = i18next.languages ? i18next.languages[0] : "ka";
 
   return (
@@ -12,7 +12,7 @@ export const ChangeLang: React.FC<ChangeLangProps> = props => {
       {activeLang === "en" ? (
         <a
           href="#!"
-          onClick={e => {
+          onClick={(e) => {
             e.preventDefault();
             changeLanguage("ka");
           }}
@@ -27,7 +27,7 @@ export const ChangeLang: React.FC<ChangeLangProps> = props => {
       ) : (
         <a
           href="#!"
-          onClick={e => {
+          onClick={(e) => {
             e.preventDefault();
             changeLanguage("en");
           }}

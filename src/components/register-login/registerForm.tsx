@@ -16,7 +16,6 @@ interface RegisterFormProps {
   isActive: boolean;
   errors: AuthState["errors"];
   registerUser: typeof registerUser;
-
   onRegister: (user: IUser | null) => void;
 }
 
@@ -25,7 +24,7 @@ const _RegisterForm: React.FC<RegisterFormProps> = ({
   showLoginForm,
   errors,
   registerUser,
-  onRegister
+  onRegister,
 }) => {
   const { t } = useTranslation();
   const myCaptcha = useCaptcha();
@@ -40,9 +39,9 @@ const _RegisterForm: React.FC<RegisterFormProps> = ({
         password,
         password_confirmation,
         phone,
-        recaptcha_token: myCaptcha.recaptcha_token
+        recaptcha_token: myCaptcha.recaptcha_token,
       },
-      callback: onRegister
+      callback: onRegister,
     });
     myCaptcha.captchaRef.current.execute();
   };
@@ -110,7 +109,7 @@ const _RegisterForm: React.FC<RegisterFormProps> = ({
       <ReCaptcha
         sitekey={RECAPTCHA_SITE_KEY}
         action="register"
-        verifyCallback={token => {
+        verifyCallback={(token) => {
           myCaptcha.setRecaptchaToken(token);
         }}
         ref={myCaptcha.captchaRef}

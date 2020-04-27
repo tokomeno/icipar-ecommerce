@@ -4,7 +4,7 @@ import { RegisterForm } from "./registerForm";
 import { LoginForm } from "./loginForm";
 import {
   ActiveModalContext,
-  IActiveModalContext
+  IActiveModalContext,
 } from "../../contexts/modalContex";
 import { connect } from "react-redux";
 import { useToggle } from "../../hooks/common/useToggle";
@@ -24,7 +24,7 @@ const _RegisterLogin: React.FC<RegisterLoginProps> = ({ user }) => {
 
   const {
     isActive: isActiveAfterRegisterForm,
-    setActive: setActiveAfterRegisterForm
+    setActive: setActiveAfterRegisterForm,
   } = useToggle();
 
   return (
@@ -86,6 +86,6 @@ const _RegisterLogin: React.FC<RegisterLoginProps> = ({ user }) => {
 };
 
 const mapStateToProps = ({ auth }: IStoreState) => ({
-  user: auth.user
+  user: auth.user,
 });
 export const RegisterLogin = connect(mapStateToProps)(_RegisterLogin);

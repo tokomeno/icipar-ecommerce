@@ -27,14 +27,14 @@ const _ConfirmPhone: React.FC<ConfirmPhoneProps> = ({ hideModal, user }) => {
     event.preventDefault();
 
     AuthService.confirmPhone(user.id, confirmationInput.value)
-      .then(res => {
+      .then((res) => {
         if (res.data.error) {
           setErrors(res.data.error);
         } else {
           hideModal();
         }
       })
-      .catch(err => {
+      .catch((err) => {
         if (
           typeof err.response.data.error === "object" &&
           Array.isArray(err.response.data.error.pin)

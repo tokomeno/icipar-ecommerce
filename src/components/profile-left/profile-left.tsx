@@ -21,7 +21,7 @@ export const ProfileLeft: React.FC<ProfileLeftProps> = ({ user, logout }) => {
   return (
     <div
       className={classnames("profile-left profile-side d-lg-block", {
-        "d-none": location.pathname !== "/profile"
+        "d-none": location.pathname !== "/profile",
       })}
     >
       <div className="username text-center d-lg-none d-block">

@@ -25,7 +25,7 @@ export const ConfirmEmailPage: React.FC<ConfirmEmailPageProps> = () => {
       .then(() => {
         setSuccess(t("email_confirmed_successfully"));
       })
-      .catch(err => {
+      .catch((err) => {
         if (typeof err.response.data === "string") {
           setFailMessage(err.response.data);
         } else {

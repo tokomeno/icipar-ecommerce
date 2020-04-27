@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useCallback, useState } from "react";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import {
   IActiveModalContext,
-  ActiveModalContext
+  ActiveModalContext,
 } from "../../contexts/modalContex";
 import { ChangeLang } from "../../components/change-lang";
 import { useTranslation } from "react-i18next";
@@ -18,9 +18,10 @@ import {
   LayoutService,
   IMenuCatrogy,
   IDailyOffer,
-  ILatestBlogPost
+  ILatestBlogPost,
 } from "../../services/layout.http";
-import { HeaderMenuItem } from "./header-menu-item";
+import { HeaderMenuDropdownItem } from "./header-menu-dropdown-item";
+import { routes } from "../../routes/routes";
 
 interface HeaderProps {
   user: IStoreState["auth"]["user"];
@@ -60,10 +61,10 @@ export const _Header: React.FC<HeaderProps> = ({ user, phone, menu }) => {
   }, [toggle, handleScroll]);
 
   useEffect(() => {
-    LayoutService.dailyOffer().then(res => {
+    LayoutService.dailyOffer().then((res) => {
       setDailyOffer(res.data.data);
     });
-    LayoutService.latestBlog().then(res => {
+    LayoutService.latestBlog().then((res) => {
       setLatestBlogPost(res.data.data);
     });
   }, []);
@@ -75,7 +76,7 @@ export const _Header: React.FC<HeaderProps> = ({ user, phone, menu }) => {
           active:
             activeModal === "search-modal" ||
             activeModal === "burger-menu" ||
-            activeModal === "filter"
+            activeModal === "filter",
         })}
         onClick={hideModal}
       ></div>
@@ -107,9 +108,14 @@ export const _Header: React.FC<HeaderProps> = ({ user, phone, menu }) => {
                       </Link>
                     </li>
 
-                    {AboutPagesMenu.map(menu => (
+                    {AboutPagesMenu.map((menu) => (
                       <li key={menu.to}>
-                        <Link to={menu.to} className="sup-hdr_link">
+                        <Link
+                          to={menu.to}
+                          className={classnames("sup-hdr_link", {
+                            active: menu.to === routes.howItWorks,
+                          })}
+                        >
                           {t(menu.title)}
                         </Link>
                       </li>
@@ -163,8 +169,8 @@ export const _Header: React.FC<HeaderProps> = ({ user, phone, menu }) => {
             <div className="header-menu d-flex justify-content-between">
               {latestBlogPost &&
                 dailyOffer &&
-                menu.map(item => (
-                  <HeaderMenuItem
+                menu.map((item) => (
+                  <HeaderMenuDropdownItem
                     latestBlogPost={latestBlogPost}
                     dailyOffer={dailyOffer}
                     key={item.id}
@@ -242,7 +248,7 @@ export const _Header: React.FC<HeaderProps> = ({ user, phone, menu }) => {
 const mapStateToProps = ({ info }: IStoreState) => {
   return {
     phone: info.contact_info.phone,
-    menu: info.layoutCategories
+    menu: info.layoutCategories,
   };
 };
 

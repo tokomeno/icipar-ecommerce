@@ -18,12 +18,12 @@ interface FooterProps {
 const _Footer: React.FC<FooterProps> = ({
   contact_info,
   socials,
-  categories
+  categories,
 }) => {
   const { t } = useTranslation();
-  const facebook = socials.find(i => i.social === "facebook");
-  const google = socials.find(i => i.social === "google");
-  const instagram = socials.find(i => i.social === "instagram");
+  const facebook = socials.find((i) => i.social === "facebook");
+  const google = socials.find((i) => i.social === "google");
+  const instagram = socials.find((i) => i.social === "instagram");
   return (
     <React.Fragment>
       <footer className="site__footer">
@@ -93,7 +93,7 @@ const _Footer: React.FC<FooterProps> = ({
               <div className="row justify-content-center">
                 <div className="col-md-3 d-none d-md-block">
                   <div className="title">{t("produkqcia")}</div>
-                  {categories.map(c => (
+                  {categories.map((c) => (
                     <NavLink
                       key={c.id}
                       to={routes.catalog + "?categories[]=" + c.id}
@@ -102,10 +102,19 @@ const _Footer: React.FC<FooterProps> = ({
                       {c.title}
                     </NavLink>
                   ))}
+                  <NavLink
+                    to={
+                      routes.catalog +
+                      "?discount_range[]=0-0.25&discount_range[]=0.25-0.5&discount_range[]=0.5-0.75&discount_range[]=0.75-1"
+                    }
+                    className="footer-link"
+                  >
+                    {t("sale")}
+                  </NavLink>
                 </div>
                 <div className="col-md-3 d-none d-md-block">
                   <div className="title">{t("about_company")}</div>
-                  {AboutPagesMenu.map(menu => (
+                  {AboutPagesMenu.map((menu) => (
                     <NavLink key={menu.to} to={menu.to} className="footer-link">
                       {t(menu.title)}
                     </NavLink>
@@ -168,7 +177,7 @@ const mapStateToProps = ({ info }: IStoreState) => {
   return {
     contact_info: info.contact_info,
     socials: info.socials,
-    categories: info.layoutCategories
+    categories: info.layoutCategories,
   };
 };
 

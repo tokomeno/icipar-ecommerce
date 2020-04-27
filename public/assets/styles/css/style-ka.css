@@ -4129,7 +4129,7 @@ sub {
   margin-right: 15px;
 }
 
-.site__header .header .sup-hdr_link:hover {
+.site__header .header .sup-hdr_link.active, .site__header .header .sup-hdr_link:hover {
   color: #FA7268;
   text-shadow: 0.5px 0 #fa7268;
 }

@@ -2,7 +2,7 @@ import React from "react";
 import {
   IMenuCatrogy,
   IDailyOffer,
-  ILatestBlogPost
+  ILatestBlogPost,
 } from "../../services/layout.http";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
@@ -14,10 +14,10 @@ type HeaderMenuItemProps = {
   latestBlogPost: ILatestBlogPost;
   // brands: IBrandSliderItem[];
 };
-export const HeaderMenuItem: React.FC<HeaderMenuItemProps> = ({
+export const HeaderMenuDropdownItem: React.FC<HeaderMenuItemProps> = ({
   item,
   dailyOffer,
-  latestBlogPost
+  latestBlogPost,
 }) => {
   const { t } = useTranslation();
   return (
@@ -51,7 +51,7 @@ export const HeaderMenuItem: React.FC<HeaderMenuItemProps> = ({
             <div className="inner-menu_block categories">
               <div className="title">{t("brands")}</div>
               <div className="items">
-                {Object.keys(item.brands).map(brandLatter => (
+                {Object.keys(item.brands).map((brandLatter) => (
                   <React.Fragment key={brandLatter}>
                     <div className="letter">{brandLatter}</div>
                     {item.brands[brandLatter].map((b, i) => (

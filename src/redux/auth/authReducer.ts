@@ -2,7 +2,7 @@ import {
   AuthState as IAuthState,
   AuthActions,
   AuthActionTypes,
-  IUser
+  IUser,
 } from "./authTypes";
 
 let initState: IAuthState = {
@@ -10,7 +10,7 @@ let initState: IAuthState = {
   token: null,
   user: null,
   loading: false,
-  errors: null
+  errors: null,
 };
 
 export const authReducer = (
@@ -25,12 +25,12 @@ export const authReducer = (
         errors: null,
         user,
         token,
-        isAuth: true
+        isAuth: true,
       };
     case AuthActionTypes.setAuthErrors:
       return {
         ...state,
-        errors: action.payload
+        errors: action.payload,
       };
     case AuthActionTypes.logoutUser:
       return {
@@ -39,15 +39,15 @@ export const authReducer = (
         token: null,
         user: null,
         loading: false,
-        errors: null
+        errors: null,
       };
     case AuthActionTypes.updateAvatar: {
       return {
         ...state,
         user: {
           ...state.user,
-          avatar: action.payload
-        } as IUser
+          avatar: action.payload,
+        } as IUser,
       };
     }
     default:

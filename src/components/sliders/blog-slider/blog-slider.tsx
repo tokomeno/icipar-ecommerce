@@ -7,6 +7,8 @@ import { useTranslation } from "react-i18next";
 import { HomePageBlogSlider, BlogService } from "../../../services/blog.http";
 import { DefaultSpinner } from "../../spinners/spinner";
 import classnames from "classnames";
+import { useHistory } from "react-router-dom";
+import { routes } from "../../../routes/routes";
 
 interface BlogSliderProps {}
 
@@ -35,6 +37,7 @@ const params = {
 
 export const BlogSlider: React.FC<BlogSliderProps> = () => {
   const { t } = useTranslation();
+  const history = useHistory();
   const [blogs, setBlogs] = useState<HomePageBlogSlider["blog_posts"]>([]);
   const [categories, setCatrgories] = useState<{ id: number; title: string }[]>(
     []
@@ -73,7 +76,10 @@ export const BlogSlider: React.FC<BlogSliderProps> = () => {
       <div className="blogSlider-top">
         <div className="container">
           <div className="d-flex flex-column flex-md-row">
-            <h3 className="news-titleBlock_title  section-title">
+            <h3
+              onClick={() => history.push(routes.blogs)}
+              className="news-titleBlock_title  section-title cursor-pointer"
+            >
               <img src="/assets/images/blog-icon.svg" alt="blog icon" />
               {t("blog")}
             </h3>

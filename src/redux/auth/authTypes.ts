@@ -27,7 +27,7 @@ export enum AuthActionTypes {
   setCurrentUser = "setCurrentUser",
   logoutUser = "logoutUser",
   setAuthErrors = "setAuthErrors",
-  updateAvatar = "updateAvatar"
+  updateAvatar = "updateAvatar",
 }
 
 export interface SetAuthErrorAction {

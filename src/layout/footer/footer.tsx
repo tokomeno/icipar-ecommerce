@@ -117,6 +117,15 @@ const _Footer: React.FC<FooterProps> = ({
                   >
                     {t("sale")}
                   </NavLink>
+                  <NavLink to={routes.allBrands} className="footer-link">
+                    {t("brands")}
+                  </NavLink>
+                  <NavLink to={routes.giftCard} className="footer-link">
+                    {t("gift_card")}
+                  </NavLink>
+                  <NavLink to={routes.blogs} className="footer-link">
+                    {t("blog")}
+                  </NavLink>
                 </div>
                 <div className="col-md-3 d-none d-md-block">
                   <div className="title">{t("about_company")}</div>
@@ -137,9 +146,9 @@ const _Footer: React.FC<FooterProps> = ({
                   <NavLink to={routes.profileInfo} className="footer-link">
                     {t("personal_info")}
                   </NavLink>
-                  {/* <NavLink href="#!" className="footer-link">
-                    {t("sayidlebis_istoria")}
-                  </NavLink> */}
+                  <NavLink to={routes.orders} className="footer-link">
+                    {t("order_history")}
+                  </NavLink>
                 </div>
                 <div className="col-md-3 col-7 contact-block">
                   <div className="title">{t("contact")}</div>
@@ -158,10 +167,13 @@ const _Footer: React.FC<FooterProps> = ({
                     <img src="/assets/images/marker-w.svg" alt="stores" />
                     {t("shops")}
                   </NavLink>
-                  {/* <NavLink to={} className="footer-link d-flex">
+                  <NavLink
+                    to={routes.staticPages("delivery_terms")}
+                    className="footer-link d-flex"
+                  >
                     <img src="/assets/images/car-w.svg" alt="car" />
                     {t("delivery_terms")}
-                  </NavLink> */}
+                  </NavLink>
                 </div>
               </div>
             </div>

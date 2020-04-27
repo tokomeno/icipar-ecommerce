@@ -6,12 +6,12 @@ import { routes } from "../routes/routes";
 interface PageSideMenuProps {}
 
 export const AboutPagesMenu = [
-  { title: "about_us", to: routes.aboutUs },
-  { title: "how_it_works", to: routes.howItWorks },
-  // { title: "delivery_terms", to: "#!" },
+  { title: "about_us", to: routes.staticPages("about-us") },
+  { title: "how_it_works", to: routes.staticPages("how-it-works") },
   { title: "contact", to: routes.contact },
-  { title: "faq", to: routes.faq },
+  { title: "faq", to: routes.staticPages("faq") },
 ];
+
 export const PageSideMenu: React.FC<PageSideMenuProps> = (props) => {
   const { t } = useTranslation();
   return (

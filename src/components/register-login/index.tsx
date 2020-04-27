@@ -12,12 +12,17 @@ import { IStoreState } from "../../redux/mainReducer";
 import { TermModal } from "./terms-modal";
 import { ConfirmPhone } from "./confirm-phone";
 import { IUser } from "../../redux/auth/authTypes";
+import { setAuthErrors } from "../../redux/auth/authActions";
 
 interface RegisterLoginProps {
   user: IStoreState["auth"]["user"];
+  setAuthErrors: typeof setAuthErrors;
 }
 
-const _RegisterLogin: React.FC<RegisterLoginProps> = ({ user }) => {
+const _RegisterLogin: React.FC<RegisterLoginProps> = ({
+  user,
+  setAuthErrors,
+}) => {
   const { hideModal, activeModal, setActiveModal } = useContext<
     IActiveModalContext
   >(ActiveModalContext);
@@ -59,12 +64,18 @@ const _RegisterLogin: React.FC<RegisterLoginProps> = ({ user }) => {
             <div className="col-lg-6 login_content">
               <LoginForm
                 isActive={activeModal === "login-modal"}
-                showRegisterForm={() => setActiveModal("terms-modal")}
+                showRegisterForm={() => {
+                  setAuthErrors(null);
+                  setActiveModal("terms-modal");
+                }}
                 hideModal={hideModal}
               />
               <RegisterForm
                 isActive={activeModal === "register-modal"}
-                showLoginForm={() => setActiveModal("login-modal")}
+                showLoginForm={() => {
+                  setAuthErrors(null);
+                  setActiveModal("login-modal");
+                }}
                 onRegister={(user: IUser | null) => {
                   console.log(user);
                   if (user && user.phone) return setActiveAfterRegisterForm();
@@ -88,4 +99,6 @@ const _RegisterLogin: React.FC<RegisterLoginProps> = ({ user }) => {
 const mapStateToProps = ({ auth }: IStoreState) => ({
   user: auth.user,
 });
-export const RegisterLogin = connect(mapStateToProps)(_RegisterLogin);
+export const RegisterLogin = connect(mapStateToProps, { setAuthErrors })(
+  _RegisterLogin
+);

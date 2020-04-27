@@ -19,8 +19,8 @@ export const StaticPage: React.FC<StaticPageProps> = ({ match }) => {
   const [page, setPage] = useState<IStaticPage | null>(null);
   useEffect(() => {
     Axios.get<{ data: IStaticPage }>(STATIC_PAGE + match.params.slug)
-      .then(res => setPage(res.data.data))
-      .catch(err => {
+      .then((res) => setPage(res.data.data))
+      .catch((err) => {
         alert("404");
         console.error(err);
       });

@@ -35,5 +35,7 @@ export const routes = {
 
   blogs: "/blogs",
   blogShow: "/blogs/:slug",
-  staticPages: "/page/:slug",
+  staticPages: (slug: string) => {
+    return `/page/${slug}`;
+  },
 };

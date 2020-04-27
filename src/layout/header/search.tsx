@@ -20,12 +20,12 @@ const _Search: React.FC<SearchProps> = ({ categories = [] }) => {
     keyword,
     setKeyword,
     activeTab,
-    setActiveTab
+    setActiveTab,
   } = useProductAutocomplete();
 
   return (
     <div className="col-md-7" style={{ position: "relative" }}>
-      <form className="search d-flex justify-content-between">
+      <div className="search d-flex justify-content-between">
         <Dropdown className={"search-dropdown dropdown d-flex"}>
           <Dropdown.Toggle className="btn btn-secondary " id="categories">
             <img src="/assets/images/squares.svg" alt="squares icon" />
@@ -36,7 +36,7 @@ const _Search: React.FC<SearchProps> = ({ categories = [] }) => {
           <Dropdown.Menu className="search-menu">
             {!activeTab ? null : (
               <a
-                onClick={e => {
+                onClick={(e) => {
                   e.preventDefault();
                   setActiveTab(null);
                 }}
@@ -46,7 +46,7 @@ const _Search: React.FC<SearchProps> = ({ categories = [] }) => {
                 {t("categories")}
               </a>
             )}
-            {categories.map(c => (
+            {categories.map((c) => (
               <Dropdown.Item
                 key={c.id}
                 className="dropdown-item"
@@ -70,7 +70,7 @@ const _Search: React.FC<SearchProps> = ({ categories = [] }) => {
         <button onClick={handleSubmit} type="button" className="search-btn">
           <i className="fas fa-search" />
         </button>
-      </form>
+      </div>
       <ProductAutocompleteDropdown
         resetProducts={resetProducts}
         products={products}
@@ -80,7 +80,7 @@ const _Search: React.FC<SearchProps> = ({ categories = [] }) => {
 };
 
 const mapStateToProps = ({ info }: IStoreState) => ({
-  categories: info.layoutCategories
+  categories: info.layoutCategories,
 });
 
 export const Search = connect(mapStateToProps)(_Search);

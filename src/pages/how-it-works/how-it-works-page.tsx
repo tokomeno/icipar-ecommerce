@@ -4,7 +4,7 @@ import { PageSideMenu } from "../../components/pageSideMenu";
 
 interface HowItWorksPageProps {}
 
-export const HowItWorksPage: React.FC<HowItWorksPageProps> = props => {
+export const HowItWorksPage: React.FC<HowItWorksPageProps> = (props) => {
   return (
     <div className="container">
       <div className="about row">

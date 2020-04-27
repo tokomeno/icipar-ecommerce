@@ -14,7 +14,6 @@ interface FilterCheckboxesProps {
   }[];
   type?: "colors";
 }
-type ICheckbox = (number | string)[];
 
 export const FilterCheckboxes: React.FC<FilterCheckboxesProps> = React.memo(
   ({ checkboxes, type, filterName }) => {

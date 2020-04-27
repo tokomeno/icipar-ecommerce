@@ -96,17 +96,23 @@ const _Footer: React.FC<FooterProps> = ({
                   {categories.map((c) => (
                     <NavLink
                       key={c.id}
-                      to={routes.catalog + "?categories[]=" + c.id}
+                      to={{
+                        pathname: routes.catalog,
+                        search: "categories[]=" + c.id,
+                        state: "refresh",
+                      }}
                       className="footer-link"
                     >
                       {c.title}
                     </NavLink>
                   ))}
                   <NavLink
-                    to={
-                      routes.catalog +
-                      "?discount_range[]=0-0.25&discount_range[]=0.25-0.5&discount_range[]=0.5-0.75&discount_range[]=0.75-1"
-                    }
+                    to={{
+                      pathname: routes.catalog,
+                      search:
+                        "discount_range[]=0-0.25&discount_range[]=0.25-0.5&discount_range[]=0.5-0.75&discount_range[]=0.75-1",
+                      state: "refresh",
+                    }}
                     className="footer-link"
                   >
                     {t("sale")}

@@ -32,13 +32,21 @@ export const HeaderMenuDropdownItem: React.FC<HeaderMenuItemProps> = ({
               <div className="title">{t("categories")}</div>
               <div className="items">
                 <NavLink
-                  to={routes.catalog + `?genders[]=2`}
+                  to={{
+                    pathname: routes.catalog,
+                    search: `genders[]=2`,
+                    state: "refresh",
+                  }}
                   className="items-link"
                 >
                   {t("man")}
                 </NavLink>
                 <NavLink
-                  to={routes.catalog + `?genders[]=1`}
+                  to={{
+                    pathname: routes.catalog,
+                    search: `genders[]=1`,
+                    state: "refresh",
+                  }}
                   className="items-link"
                 >
                   {t("women")}

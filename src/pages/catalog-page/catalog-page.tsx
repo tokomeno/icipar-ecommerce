@@ -1,5 +1,4 @@
-import React, { useContext, useEffect } from "react";
-
+import React, { useContext, useEffect, useRef } from "react";
 import { Product } from "../../components/product/product";
 import { useProducts } from "../../hooks/useProducts/useProducts";
 import { useTranslation } from "react-i18next";
@@ -9,6 +8,8 @@ import { PorductFilterContext } from "../../contexts/productFilterContext";
 import { ProductContetnLoader } from "../../components/product/product-content-loader";
 import { ActiveModalContext } from "../../contexts/modalContex";
 import classnames from "classnames";
+import { useLocation, useHistory } from "react-router-dom";
+import { routes } from "../../routes/routes";
 // import { dummyProductData } from "../../data/product";
 
 interface CatalogPageProps {}
@@ -31,6 +32,23 @@ export const CatalogPage: React.FC<CatalogPageProps> = () => {
   }, [setFilterFromQueryString]);
 
   const { activeModal, hideModal } = useContext(ActiveModalContext);
+
+  // WHEN CLICKING CATALOG PAGE LINK FROM CATALOG PAGE WITH NEW QUERY STRING IN WINDOW
+  const { state } = useLocation();
+  const { push } = useHistory();
+  const firstMount = useRef(true);
+  useEffect(() => {
+    if (state && !firstMount.current) {
+      setFilterFromQueryString();
+      window.scrollTo(0, 0);
+      push({
+        state: undefined,
+        pathname: routes.catalog,
+        search: window.location.search,
+      });
+    }
+    firstMount.current = false;
+  }, [state, setFilterFromQueryString, push]);
 
   if (!productFilterData) return <div></div>;
   return (

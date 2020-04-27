@@ -7,7 +7,7 @@ import { setCurrentUser } from "../../redux/auth/authActions";
 import { useTranslation } from "react-i18next";
 import { API_FB_LOGIN_URL } from "../../api/endpoints";
 import { ActiveModalContext } from "../../contexts/modalContex";
-import { FACEBOOK_CLIENT_ID } from "../../consts";
+import { FACEBOOK_CLIENT_ID } from "../../consts/services";
 
 const FbLoginButton = ({ setCurrentUser }) => {
   const { t } = useTranslation();

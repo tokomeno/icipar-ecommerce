@@ -1,11 +1,11 @@
 import React from "react";
 import { GoogleLogin } from "react-google-login";
 import { connect } from "react-redux";
-// import { API_GA_LOGIN_URL } from "../../api/endpoints";
-import { GOOGLE_CLIENT_ID } from "../../consts";
+import { API_GA_LOGIN_URL } from "../../api/endpoints";
+import { GOOGLE_CLIENT_ID } from "../../consts/services";
 import { setCurrentUser } from "../../redux/auth/authActions";
 import { useTranslation } from "react-i18next";
-// import Axios from "axios";
+import axios from "axios";
 
  
 const GaText = () => {
@@ -15,28 +15,30 @@ const GaText = () => {
 
 class GoogleLoginButton extends React.PureComponent {
   responseGoogle = (res) => {
-    console.log(res);
+    // console.log(res);
     // const { profileObj } = res;
-    console.log(res);
     // const userData = {
     //   ...res
-    //   // accessToken: res.accessToken,
-    //   // googleId: res.googleId,
-    //   // name: profileObj.givenName,
-    //   // second_name: profileObj.familyName,
-    //   // email: profileObj.email,
-    //   // imageUrl: null
+      // accessToken: res.accessToken,
+      // googleId: res.googleId,
+      // name: profileObj.givenName,
+      // second_name: profileObj.familyName,
+      // email: profileObj.email,
+      // imageUrl: null
     // };
-
-    // Axios.post(API_GA_LOGIN_URL, { userData })
-    // .then(res => {
-    //   // this.props.setCurrentUser({
-    //   //   user: res.data.user,
-    //   //   token: res.data.token
-    //   // });
-    // })
-    // .catch(err => console.log(err));
-   
+    axios
+    .get(`${API_GA_LOGIN_URL}?token=${res.accessToken}`, { ...res })
+    .then(res => {
+      setCurrentUser({
+        user: res.data.user,
+        token: res.data.token
+      });
+      // hideModal(); TODO: hide modal
+    })
+    .catch(err => {
+      console.log("დაფიქსირდა შეცდომა");
+    });
+     
   };
   render() {
     return (

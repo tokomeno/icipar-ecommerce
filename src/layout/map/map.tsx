@@ -18,14 +18,14 @@ const _MapComponent: React.FC<MapComponentProps> = ({ children, branches }) => {
   return (
     <div className="map-content">
       <button
-        onClick={() => setMapBlockActive(prevState => !prevState)}
+        onClick={() => setMapBlockActive((prevState) => !prevState)}
         className="map-btn"
       >
         {t("our_shops")}
       </button>
       <div className={classnames("map-block", { active: mapBlockActive })}>
         <div id="map">
-          <BranchMap shops={branches} />
+          <BranchMap centerData={undefined} shops={branches} />
         </div>
       </div>
     </div>
@@ -34,7 +34,7 @@ const _MapComponent: React.FC<MapComponentProps> = ({ children, branches }) => {
 
 const mapStateToProps = ({ info }: IStoreState) => {
   return {
-    branches: info.branches
+    branches: info.branches,
   };
 };
 

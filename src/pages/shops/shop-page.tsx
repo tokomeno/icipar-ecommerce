@@ -27,6 +27,10 @@ export const _ShopPage: React.FC<ShopPageProps> = ({ branches }) => {
     setFilterBranches(filtered);
   }, [branches, searchInput.value]);
 
+  const [mapCentetedBranch, setMapCentetedBranch] = useState<
+    IBranch | undefined
+  >(undefined);
+
   if (!branches) return <LayoutSpinner></LayoutSpinner>;
   return (
     <div className="content">
@@ -44,17 +48,19 @@ export const _ShopPage: React.FC<ShopPageProps> = ({ branches }) => {
               </button> */}
             </form>
             <div className="shops">
-              {filterBranches.map(shop => (
+              {filterBranches.map((shop) => (
                 <div
                   key={shop.id}
                   data-geo-lat={shop.lat}
                   data-geo-long={shop.lng}
                   className={classnames("shops-item", {
-                    "hover active": shop.id === activeId
+                    "hover active": shop.id === activeId,
                   })}
-                  onClick={() =>
-                    setActiveId(shop.id === activeId ? null : shop.id)
-                  }
+                  onClick={() => {
+                    setActiveId(shop.id === activeId ? null : shop.id);
+                    setMapCentetedBranch(shop);
+                  }}
+                  onMouseEnter={() => setMapCentetedBranch(shop)}
                 >
                   <div className="top d-flex align-items-center justify-content-between">
                     <div className="location">{shop.full_address}</div>
@@ -79,7 +85,17 @@ export const _ShopPage: React.FC<ShopPageProps> = ({ branches }) => {
           </div>
           <div className="col-md-8">
             <div id="map_canvas" style={{ width: "100%" }}>
-              <BranchMap shops={branches} />
+              <BranchMap
+                centerData={
+                  mapCentetedBranch
+                    ? {
+                        lat: parseFloat(mapCentetedBranch.lat),
+                        lng: parseFloat(mapCentetedBranch.lng),
+                      }
+                    : undefined
+                }
+                shops={branches}
+              />
             </div>
           </div>
         </div>
@@ -90,15 +106,15 @@ export const _ShopPage: React.FC<ShopPageProps> = ({ branches }) => {
 
 const mapStateToProps = ({ info }: IStoreState) => {
   return {
-    branches: info.branches
+    branches: info.branches,
   };
 };
 
 export const ShopPage = connect(mapStateToProps)(_ShopPage);
 
 const filterByValue = (array: any[], string: string) => {
-  return array.filter(o =>
-    Object.keys(o).some(k => {
+  return array.filter((o) =>
+    Object.keys(o).some((k) => {
       if (typeof o[k] === "string") {
         return o[k].toLowerCase().includes(string.toLowerCase());
       }

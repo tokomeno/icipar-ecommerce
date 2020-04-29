@@ -1,10 +1,13 @@
 import React from "react";
 import { IBranch } from "../services/branch.http";
-import GoogleMapReact from "google-map-react";
+import GoogleMapReact, { Coords } from "google-map-react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { GOOGLE_MAP_API_KEY } from "../consts/services";
 
-export const BranchMap: React.FC<{ shops: IBranch[] }> = ({ shops }) => {
+export const BranchMap: React.FC<{
+  shops: IBranch[];
+  centerData: Coords | undefined;
+}> = ({ shops, centerData }) => {
   if (shops.length === 0) {
     return null;
   }
@@ -16,6 +19,7 @@ export const BranchMap: React.FC<{ shops: IBranch[] }> = ({ shops }) => {
           lat: shops[0] ? parseFloat(shops[0].lat) : 41.716667,
           lng: shops[0] ? parseFloat(shops[0].lng) : 44.783333,
         }}
+        center={centerData}
         defaultZoom={14}
       >
         {shops.map((shop, index) => {

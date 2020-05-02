@@ -14,11 +14,11 @@ export const AUTH_BASE_URL =
 export const PRODUCT_BASE_URL =
   process.env.PRODUCT_BASE_URL || "http://3.18.107.107/api";
 
-export const CART_BATH_URL =
-  process.env.CART_BATH_URL || "http://13.59.255.224/api";
+export const CART_BASE_URL =
+  process.env.CART_BASE_URL || "http://13.59.255.224/api";
 
 export const DISCOUNT_BASE_URL =
-  process.env.CART_BATH_URL || "http://3.19.28.160/api";
+  process.env.CART_BASE_URL || "http://3.19.28.160/api";
 
 export const MAIN_BASE_URL =
   process.env.MAIN_BASE_URL || "http://18.188.27.23/api";

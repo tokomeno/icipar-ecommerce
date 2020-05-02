@@ -1,7 +1,7 @@
 import {
   AUTH_BASE_URL,
   PRODUCT_BASE_URL,
-  CART_BATH_URL,
+  CART_BASE_URL,
   DISCOUNT_BASE_URL,
   ORDER_BASE_URL,
   MAIN_BASE_URL,
@@ -86,15 +86,15 @@ export const DAYLY_OFFER = PRODUCT_BASE_URL + "/layout/daily-offer";
 
 // Cart
 // https://app.swaggerhub.com/apis-docs/badzaghua/iciparis-cart/1.0.0
-export const GET_CART = CART_BATH_URL + "/get-cart";
-export const CART_TOGGLE = CART_BATH_URL + "/toggle-item";
-export const TOGGLE_BUNDLE_CART = CART_BATH_URL + "/toggle-bundle";
+export const GET_CART = CART_BASE_URL + "/get-cart";
+export const CART_TOGGLE = CART_BASE_URL + "/toggle-item";
+export const TOGGLE_BUNDLE_CART = CART_BASE_URL + "/toggle-bundle";
 
-export const APPLY_POROMOTION = CART_BATH_URL + "/apply-promotion";
-export const CANCEL_PROMOTION = CART_BATH_URL + "/cancel-promotion";
+export const APPLY_POROMOTION = CART_BASE_URL + "/apply-promotion";
+export const CANCEL_PROMOTION = CART_BASE_URL + "/cancel-promotion";
 
-export const ADD_GIFT_CART_TO_CART = CART_BATH_URL + "/new-gift-card/add";
-export const REMOVE_GIFT_CART_TO_CART = CART_BATH_URL + "/new-gift-card/remove";
+export const ADD_GIFT_CART_TO_CART = CART_BASE_URL + "/new-gift-card/add";
+export const REMOVE_GIFT_CART_TO_CART = CART_BASE_URL + "/new-gift-card/remove";
 
 // Promotions
 // https://app.swaggerhub.com/apis-docs/badzaghua/iciparis-promotions/1.0

@@ -1,6 +1,5 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { AboutPagesMenu } from "../../components/pageSideMenu";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { IStoreState } from "../../redux/mainReducer";
@@ -129,11 +128,32 @@ const _Footer: React.FC<FooterProps> = ({
                 </div>
                 <div className="col-md-3 d-none d-md-block">
                   <div className="title">{t("about_company")}</div>
-                  {AboutPagesMenu.map((menu) => (
-                    <NavLink key={menu.to} to={menu.to} className="footer-link">
-                      {t(menu.title)}
-                    </NavLink>
-                  ))}
+
+                  <NavLink
+                    to={routes.staticPages("about-us")}
+                    className="footer-link"
+                  >
+                    {t("about_us")}
+                  </NavLink>
+                  <NavLink to={routes.contact} className="footer-link">
+                    {t("contact")}
+                  </NavLink>
+                  <NavLink
+                    to={routes.staticPages("how_it_works")}
+                    className="footer-link"
+                  >
+                    {t("how_it_works")}
+                  </NavLink>
+                  <NavLink to={routes.shops} className="footer-link">
+                    {t("shops")}
+                  </NavLink>
+
+                  <NavLink
+                    to={routes.staticPages("faq")}
+                    className="footer-link"
+                  >
+                    {t("faq")}
+                  </NavLink>
                 </div>
                 <div className="col-md-3 d-none d-md-block">
                   <div className="title">{t("personal_profile")}</div>

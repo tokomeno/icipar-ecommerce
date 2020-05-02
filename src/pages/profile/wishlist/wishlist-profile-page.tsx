@@ -5,17 +5,23 @@ import { connect } from "react-redux";
 import { IFavoritesState } from "../../../redux/favorites/favoritesTypes";
 import { IStoreState } from "../../../redux/mainReducer";
 import { toggleFavorite } from "../../../redux/favorites/favoritesActions";
+import { routes } from "../../../routes/routes";
+import { useHistory } from "react-router-dom";
+import { increaseItem } from "../../../redux/cart/cartActions";
 
 interface WishlistProfilePageProps {
   favorites: IFavoritesState["items"];
   toggleFavorite: typeof toggleFavorite;
+  increaseItem: typeof increaseItem;
 }
 
 export const _WishlistProfilePage: React.FC<WishlistProfilePageProps> = ({
   favorites,
-  toggleFavorite
+  toggleFavorite,
+  increaseItem,
 }) => {
   const { t } = useTranslation();
+  const { push } = useHistory();
 
   return (
     <ProfileBasePage>
@@ -33,11 +39,21 @@ export const _WishlistProfilePage: React.FC<WishlistProfilePageProps> = ({
               </tr>
             </thead>
             <tbody>
-              {favorites.map(favoriteProduct => (
+              {favorites.map((favoriteProduct) => (
                 <tr key={favoriteProduct.id}>
                   <td className="first-td">
                     <a href="#!" className="d-flex align-items-center">
-                      <div className="image d-flex align-items-center justify-content-center">
+                      <div
+                        onClick={() => {
+                          push(
+                            routes.productShow(
+                              favoriteProduct.id,
+                              favoriteProduct.slug
+                            )
+                          );
+                        }}
+                        className="image d-flex align-items-center justify-content-center"
+                      >
                         <img src={favoriteProduct.thumbnail} alt="cart" />
                       </div>
                       <div>
@@ -81,20 +97,20 @@ export const _WishlistProfilePage: React.FC<WishlistProfilePageProps> = ({
                   </td>
                   <td className="text-center bag-td">
                     <div
-                      onClick={e => {
+                      onClick={(e) => {
                         e.preventDefault();
-                        toggleFavorite(favoriteProduct.product_id);
+                        increaseItem(favoriteProduct.item_id);
                       }}
                       className="bag d-flex flex-column align-items-center"
                     >
-                      <img src="/assets/images/loved.svg" alt="cart" />
+                      <img src="/assets/images/bag.svg" alt="cart" />
                       <img
-                        src="/assets/images/loved.svg"
+                        src="/assets/images/bag.svg"
                         alt="cart"
                         className="hover"
                       />
                       <a href="#!" className="add-bag">
-                        {t("remove_from_favorite")}
+                        {t("add_to_cart")}
                       </a>
                     </div>
                   </td>
@@ -129,9 +145,10 @@ export const _WishlistProfilePage: React.FC<WishlistProfilePageProps> = ({
   );
 };
 const mapStateToProps = ({ favorites }: IStoreState) => ({
-  favorites: favorites.items
+  favorites: favorites.items,
 });
 
-export const WishlistProfilePage = connect(mapStateToProps, { toggleFavorite })(
-  _WishlistProfilePage
-);
+export const WishlistProfilePage = connect(mapStateToProps, {
+  toggleFavorite,
+  increaseItem,
+})(_WishlistProfilePage);

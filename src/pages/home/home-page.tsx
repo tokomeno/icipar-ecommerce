@@ -51,6 +51,9 @@ export const HomePage: React.FC<HomePageProps> = () => {
         sectionId={"news__slide"}
       />
       <ProductSlider
+        showMoreLink={
+          "/catalog?discount_range[]=0-0.25&discount_range[]=0.25-0.5&discount_range[]=0.5-0.75&discount_range[]=0.75-1"
+        }
         classes={{ sectionClasses: ["saleslider"] }}
         title={t("sales")}
         showMoreNumber={123}

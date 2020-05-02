@@ -20,6 +20,7 @@ interface ProductSliderProps {
   };
   isHot?: boolean;
   sectionId?: string;
+  showMoreLink?: string;
 }
 
 const params = {
@@ -66,6 +67,7 @@ export const ProductSlider: React.FC<ProductSliderProps> = ({
   isHot,
   fetchUrl,
   sectionId,
+  showMoreLink,
 }) => {
   const { t } = useTranslation();
   const [productByCategory, setProductByCategory] = useState<
@@ -128,7 +130,10 @@ export const ProductSlider: React.FC<ProductSliderProps> = ({
       <div className="slider-section-top">
         <div className=" d-flex align-items-center justify-content-sm-center justify-content-between xs-titlesblock">
           <h3 className="slider-section-top_title section-title">{title}</h3>
-          <NavLink to={routes.catalog} className="slider-section-top_link">
+          <NavLink
+            to={showMoreLink || routes.catalog}
+            className="slider-section-top_link"
+          >
             <span>/</span>
             {t("show_more")}
             {/* ({showMoreNumber}) */}

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Swiper from "react-id-swiper";
+import Swiper, { SwiperInstance } from "react-id-swiper";
 // import chunk from "lodash.chunk";
-import { useSliderNav } from "../../../hooks/common/useSliderNav";
 import { useTranslation } from "react-i18next";
 import { IBrandSliderItem, BrandService } from "../../../services/brand.http";
 import { routes } from "../../../routes/routes";
@@ -14,32 +13,39 @@ const params = {
   speed: 800,
   autoplay: {
     delay: 2500,
-    disableOnInteraction: false
+    disableOnInteraction: false,
   },
-  pagination: {
-    el: ".brand-slider .swiper-pagination",
-    clickable: true
-  },
-  observer: true
+  observer: true,
 };
 export const BrandSlider: React.FC<BrandSliderProps> = () => {
+  const [swiper, setSwiper] = useState<null | SwiperInstance>(null);
+
+  const goNext = () => {
+    if (swiper) {
+      swiper.slideNext();
+    }
+  };
+  const goPrev = () => {
+    if (swiper) {
+      swiper.slidePrev();
+    }
+  };
+
   const { t } = useTranslation();
   const [brands, setBrands] = useState<IBrandSliderItem[]>([]);
 
   useEffect(() => {
     BrandService.getFeaturedBrands()
-      .then(res => {
+      .then((res) => {
         if (res.data.data) {
           setBrands(res.data.data);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }, []);
-  // brands = brandsSlider;
 
-  const { sliderNav, currentSliderIndex } = useSliderNav(BrandSlider.length, 0);
   return (
     <section className="brands">
       <div className="container">
@@ -48,30 +54,24 @@ export const BrandSlider: React.FC<BrandSliderProps> = () => {
         </h3>
         <div className="slider">
           <Swiper
-            activeSlideKey={currentSliderIndex.toString()}
+            getSwiper={(s) => setSwiper(s)}
             containerClass="brands-slider swiper-container"
             {...params}
           >
-            {brands.map(b => (
+            {brands.map((b, i) => (
               <NavLink
                 to={routes.brandShow(b.slug)}
-                key={b.slug}
+                key={b.slug + i}
                 className="swiper-slide"
               >
                 <img key={b.slug} src={b.logo} alt="chanel" />
               </NavLink>
             ))}
           </Swiper>
-          <div
-            onClick={() => sliderNav("forward")}
-            className="swiper-button-next"
-          >
+          <div onClick={goPrev} className="swiper-button-next">
             <img src="/assets/images/next.svg" alt="next" />
           </div>
-          <div
-            onClick={() => sliderNav("backward")}
-            className="swiper-button-prev"
-          >
+          <div onClick={goNext} className="swiper-button-prev">
             <img src="/assets/images/next.svg" alt="prev" />
           </div>
         </div>

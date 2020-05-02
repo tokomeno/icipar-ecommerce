@@ -2,12 +2,14 @@ import React from "react";
 import {
   removeItem,
   increaseItem,
-  decreaseItem
+  decreaseItem,
 } from "../../../redux/cart/cartActions";
 import { useTranslation } from "react-i18next";
 import { ICartState, ICartItem } from "../../../redux/cart/cartTypes";
 import classnames from "classnames";
 import { ProductHeartBtn } from "../../../components/product/product-heart-btn";
+import { useHistory } from "react-router-dom";
+import { routes } from "../../../routes/routes";
 
 export type CartItemProps = {
   cartItem: ICartItem;
@@ -21,15 +23,20 @@ export const CartItem: React.FC<CartItemProps> = ({
   removeItem,
   increaseItem,
   decreaseItem,
-  loadingItemId
+  loadingItemId,
 }) => {
   const { t } = useTranslation();
-
+  const { push } = useHistory();
   return (
     <tr>
       <td className="first-td">
         <a href="#!" className="d-flex align-items-center">
-          <div className="image d-flex align-items-center justify-content-center">
+          <div
+            onClick={() => {
+              push(routes.productShow(cartItem.product_id, cartItem.slug));
+            }}
+            className="image d-flex align-items-center justify-content-center"
+          >
             <img src={cartItem.thumbnail} alt="cart" />
           </div>
           <div>
@@ -64,7 +71,7 @@ export const CartItem: React.FC<CartItemProps> = ({
         <div className="quantity d-flex flex-column align-items-center">
           <span
             className={classnames("plus", {
-              "opacity-03": loadingItemId === cartItem.item_id
+              "opacity-03": loadingItemId === cartItem.item_id,
             })}
             onClick={() =>
               loadingItemId !== cartItem.item_id &&
@@ -78,7 +85,7 @@ export const CartItem: React.FC<CartItemProps> = ({
           </span>
           <span
             className={classnames("min", {
-              "opacity-03": loadingItemId === cartItem.item_id
+              "opacity-03": loadingItemId === cartItem.item_id,
             })}
             onClick={() =>
               loadingItemId !== cartItem.item_id &&

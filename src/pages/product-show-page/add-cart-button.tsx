@@ -42,8 +42,8 @@ const _AddCartButton: React.FC<AddCartButtonProps> = ({
     <div className="price-block d-flex align-items-center justify-content-sm-start justify-content-center">
       <div className="price-cont">
         <div className="price">
-          {activeItem.price}
-          <sub>D</sub>
+          {activeItem.price} {"  "}
+          <sub> D</sub>
         </div>
         {/* "card-owner" კლასი დაამატეთ "sale" კლასს */}
         {activeItem.original_price &&

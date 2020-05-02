@@ -23,7 +23,7 @@ const _ProductHeartBtn: React.FC<ProductHeartBtnProps> = ({
   isActive,
   loadingId,
   extraClassname,
-  children
+  children,
 }) => {
   if (!isAuth)
     return (
@@ -31,12 +31,13 @@ const _ProductHeartBtn: React.FC<ProductHeartBtnProps> = ({
     );
   return (
     <button
-      onClick={() => {
+      onClick={(e) => {
+        e.stopPropagation();
         if (isAuth && loadingId !== productId) toogleFavorite(productId);
       }}
       disabled={productId === loadingId}
       className={classnames("heart disableOpacity", extraClassname, {
-        active: isActive
+        active: isActive,
       })}
     >
       {children ? (
@@ -66,17 +67,17 @@ const mapStateToProps = (
     isAuth: !!auth.token,
     isActive:
       favorites.itemsByKeys && !!favorites.itemsByKeys[ownProps.productId],
-    loadingId: favorites.loadingId
+    loadingId: favorites.loadingId,
   };
 };
 
 export const ProductHeartBtn = connect(mapStateToProps, {
-  toogleFavorite: toggleFavorite
+  toogleFavorite: toggleFavorite,
 })(_ProductHeartBtn);
 
 const NotLoginHeart: React.FC<{ extraClassname?: string }> = ({
   extraClassname,
-  children
+  children,
 }) => {
   const { t } = useTranslation();
   return (

@@ -4,7 +4,7 @@ import {
   SetLoadingItemIdAction,
   ICartState,
   SetErrorAction,
-  ICartItem
+  ICartItem,
 } from "./cartTypes";
 import { Dispatch } from "redux";
 import {
@@ -12,7 +12,7 @@ import {
   GET_CART,
   ADD_GIFT_CART_TO_CART,
   REMOVE_GIFT_CART_TO_CART,
-  TOGGLE_BUNDLE_CART
+  TOGGLE_BUNDLE_CART,
 } from "../../api/endpoints";
 import { axiosWithToken } from "../../api/axios-with-token";
 import { AxiosResponse } from "axios";
@@ -23,10 +23,10 @@ export const fetchCart: Function = () => {
   return async (dispatch: Dispatch) => {
     axiosWithToken
       .get<{ data: ICartState }>(GET_CART)
-      .then(res => {
+      .then((res) => {
         dispatch<SetCartAction>(setCart(res.data.data));
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
       });
   };
@@ -34,7 +34,7 @@ export const fetchCart: Function = () => {
 
 export const setCart = (cart: ICartState): SetCartAction => ({
   type: CartActionsType.setCart,
-  payload: cart
+  payload: cart,
 });
 
 export const increaseItem: (itemId: number) => void = (itemId: number) => {
@@ -43,12 +43,12 @@ export const increaseItem: (itemId: number) => void = (itemId: number) => {
   return (dispatch: Dispatch) => {
     dispatch<SetLoadingItemIdAction>({
       type: CartActionsType.loadingItemId,
-      payload: itemId
+      payload: itemId,
     });
-    toogleItemRequest(itemId, qnty).then(res => {
+    toogleItemRequest(itemId, qnty).then((res) => {
       dispatch<SetCartAction>({
         type: CartActionsType.setCart,
-        payload: res.data.data
+        payload: res.data.data,
       });
     });
   };
@@ -60,12 +60,12 @@ export const decreaseItem: (itemId: number) => void = (itemId: number) => {
   return (dispatch: Dispatch) => {
     dispatch<SetLoadingItemIdAction>({
       type: CartActionsType.loadingItemId,
-      payload: itemId
+      payload: itemId,
     });
-    toogleItemRequest(itemId, qnty).then(res => {
+    toogleItemRequest(itemId, qnty).then((res) => {
       dispatch<SetCartAction>({
         type: CartActionsType.setCart,
-        payload: res.data.data
+        payload: res.data.data,
       });
     });
   };
@@ -78,12 +78,12 @@ export const changeQnty: (itemId: number, qnty: number) => void = (
   return (dispatch: Dispatch) => {
     dispatch<SetLoadingItemIdAction>({
       type: CartActionsType.loadingItemId,
-      payload: itemId
+      payload: itemId,
     });
-    toogleItemRequest(itemId, qnty).then(res => {
+    toogleItemRequest(itemId, qnty).then((res) => {
       dispatch<SetCartAction>({
         type: CartActionsType.setCart,
-        payload: res.data.data
+        payload: res.data.data,
       });
     });
   };
@@ -93,12 +93,12 @@ export const removeItem: (itemId: number) => void = (itemId: number) => {
   return (dispatch: Dispatch) => {
     dispatch<SetLoadingItemIdAction>({
       type: CartActionsType.loadingItemId,
-      payload: itemId
+      payload: itemId,
     });
-    toogleItemRequest(itemId, 0).then(res => {
+    toogleItemRequest(itemId, 0).then((res) => {
       dispatch<SetCartAction>({
         type: CartActionsType.setCart,
-        payload: res.data.data
+        payload: res.data.data,
       });
     });
   };
@@ -112,14 +112,14 @@ export const addGiftCart: (
   return (dispatch: Dispatch) => {
     axiosWithToken
       .post(ADD_GIFT_CART_TO_CART, requestData)
-      .then(res => {
+      .then((res) => {
         dispatch<SetCartAction>({
           type: CartActionsType.setCart,
-          payload: res.data.data
+          payload: res.data.data,
         });
         success_cb();
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err.response.data);
         if (err.response.data) {
           error_cb(err.response.data);
@@ -132,13 +132,13 @@ export const removeGiftCart: () => void = () => {
   return (dispatch: Dispatch) => {
     axiosWithToken
       .post(REMOVE_GIFT_CART_TO_CART)
-      .then(res => {
+      .then((res) => {
         dispatch<SetCartAction>({
           type: CartActionsType.setCart,
-          payload: res.data.data
+          payload: res.data.data,
         });
       })
-      .catch(err => console.error(err));
+      .catch((err) => console.error(err));
   };
 };
 
@@ -152,7 +152,7 @@ export const setBundleQntyToCart: (
   if (actionData.action !== "setNewQnty") {
     const currentBundle = store
       .getState()
-      .cart.bundles.find(b => b.bundle_id === bundle_id);
+      .cart.bundles.find((b) => b.bundle_id === bundle_id);
 
     qnty = currentBundle ? currentBundle.bundles_count : 0;
     if (actionData.action === "encrease") qnty += 1;
@@ -163,25 +163,27 @@ export const setBundleQntyToCart: (
     axiosWithToken
       .post(TOGGLE_BUNDLE_CART, {
         bundle_id,
-        bundles_count: !qnty || qnty < 0 ? 0 : qnty
+        bundles_count: !qnty || qnty < 0 ? 0 : qnty,
       })
-      .then(res => {
+      .then((res) => {
         dispatch<SetCartAction>({
           type: CartActionsType.setCart,
-          payload: res.data.data
+          payload: res.data.data,
         });
         if (success_cb) success_cb();
       })
-      .catch(err => {});
+      .catch((err) => {});
   };
 };
 
 const toogleItemRequest = (
   itemId: number,
   items_count: number
-): Promise<AxiosResponse<{
-  data: { items: ICartItem[]; original_amount: number } & any;
-}>> => {
+): Promise<
+  AxiosResponse<{
+    data: { items: ICartItem[]; original_amount: number } & any;
+  }>
+> => {
   return axiosWithToken.post<{
     data: { items: ICartItem[]; original_amount: number };
   }>(CART_TOGGLE + `?item_id=${itemId}&items_count=${items_count}`);
@@ -191,5 +193,5 @@ export const setCartErrors = (
   errors: ICartState["errors"]
 ): SetErrorAction => ({
   type: CartActionsType.setErrors,
-  payload: errors
+  payload: errors,
 });

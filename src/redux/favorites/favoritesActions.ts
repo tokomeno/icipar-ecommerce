@@ -1,7 +1,7 @@
 import {
   FavoritesActionsType,
   SetFavoritesAction,
-  SetFavoritesLoadingProductIdAction
+  SetFavoritesLoadingProductIdAction,
 } from "./favoritesTypes";
 import { Dispatch } from "redux";
 import { FavoritesService } from "../../services/favorites.http";
@@ -9,15 +9,15 @@ import { FavoritesService } from "../../services/favorites.http";
 export const fetchFavorites: Function = () => {
   return async (dispatch: Dispatch) => {
     FavoritesService.getAll()
-      .then(res => {
+      .then((res) => {
         if (res.data && res.data.data) {
           dispatch<SetFavoritesAction>({
             type: FavoritesActionsType.setFavorites,
-            payload: res.data.data
+            payload: res.data.data,
           });
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         // alert("დაფიქსირდა შეცდომა");
       });
@@ -30,12 +30,12 @@ export const toggleFavorite: (productId: number) => void = (
   return (dispatch: Dispatch) => {
     dispatch<SetFavoritesLoadingProductIdAction>({
       payload: productId,
-      type: FavoritesActionsType.loadingItemId
+      type: FavoritesActionsType.loadingItemId,
     });
-    FavoritesService.toogle(productId).then(res => {
+    FavoritesService.toogle(productId).then((res) => {
       dispatch<SetFavoritesAction>({
         type: FavoritesActionsType.setFavorites,
-        payload: res.data.data
+        payload: res.data.data,
       });
     });
   };

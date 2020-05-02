@@ -48,7 +48,7 @@ export interface IProductPreordable {
 export interface IProduct {
   id: number;
   title: string;
-  slug?: string | null;
+  slug: string;
   qty: number;
   thumbnail: string;
   rating: number;

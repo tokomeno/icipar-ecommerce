@@ -98,7 +98,7 @@ const App: React.FC<{}> = () => {
             <Route path={routes.catalog} exact component={CatalogPage} />
             <Route path={routes.giftCard} exact component={GiftCardPage} />
             <Route
-              path={routes.productShow(":id")}
+              path={routes.productShow(":id", ":slug")}
               exact
               component={ProducShowPage}
             />

@@ -2,6 +2,7 @@ import { IProduct } from "../services/product.http";
 
 export const dummyProductData: IProduct[] = [
   {
+    slug: "customsslug",
     being_sold_online: true,
     main_item_id: 1,
     id: 1,
@@ -10,10 +11,11 @@ export const dummyProductData: IProduct[] = [
     price_min: 1234,
     rating: 13,
     qty: 12,
-    thumbnail: "/assets/uploads/images/slider1.png"
+    thumbnail: "/assets/uploads/images/slider1.png",
   },
 
   {
+    slug: "customsslug",
     being_sold_online: true,
     main_item_id: 2,
     id: 2,
@@ -22,9 +24,10 @@ export const dummyProductData: IProduct[] = [
     price_min: 1234,
     rating: 13,
     qty: 12,
-    thumbnail: "/assets/uploads/images/slider2.png"
+    thumbnail: "/assets/uploads/images/slider2.png",
   },
   {
+    slug: "customsslug",
     being_sold_online: true,
     main_item_id: 3,
     id: 3,
@@ -33,9 +36,10 @@ export const dummyProductData: IProduct[] = [
     price_min: 1234,
     rating: 13,
     qty: 11,
-    thumbnail: "/assets/uploads/images/slider3.png"
+    thumbnail: "/assets/uploads/images/slider3.png",
   },
   {
+    slug: "customsslug",
     being_sold_online: true,
     main_item_id: 4,
     id: 4,
@@ -44,9 +48,10 @@ export const dummyProductData: IProduct[] = [
     price_min: 1234,
     rating: 13,
     qty: 11,
-    thumbnail: "/assets/uploads/images/slider4.png"
+    thumbnail: "/assets/uploads/images/slider4.png",
   },
   {
+    slug: "customsslug",
     being_sold_online: true,
     main_item_id: 5,
     id: 5,
@@ -55,9 +60,10 @@ export const dummyProductData: IProduct[] = [
     price_min: 1234,
     rating: 13,
     qty: 12,
-    thumbnail: "/assets/uploads/images/slider5.png"
+    thumbnail: "/assets/uploads/images/slider5.png",
   },
   {
+    slug: "customsslug",
     being_sold_online: true,
     main_item_id: 6,
     id: 6,
@@ -66,9 +72,10 @@ export const dummyProductData: IProduct[] = [
     price_min: 1234,
     rating: 13,
     qty: 12,
-    thumbnail: "/assets/uploads/images/slider6.png"
+    thumbnail: "/assets/uploads/images/slider6.png",
   },
   {
+    slug: "customsslug",
     being_sold_online: true,
     main_item_id: 7,
     id: 7,
@@ -77,6 +84,6 @@ export const dummyProductData: IProduct[] = [
     price_min: 1234,
     rating: 13,
     qty: 12,
-    thumbnail: "/assets/uploads/images/slider7.png"
-  }
+    thumbnail: "/assets/uploads/images/slider7.png",
+  },
 ];

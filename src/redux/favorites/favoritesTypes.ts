@@ -4,6 +4,8 @@ export interface IFavoritesItem {
   product_id: number;
   title: string;
   price?: number;
+  slug: string;
+  item_id: number;
 }
 
 export interface IFavoritesState {
@@ -15,7 +17,7 @@ export interface IFavoritesState {
 export enum FavoritesActionsType {
   setFavorites = "setFavorites",
   fetchFavorites = "fetchFavorites",
-  loadingItemId = "loadingItemId"
+  loadingItemId = "loadingItemId",
 }
 
 export interface SetFavoritesAction {

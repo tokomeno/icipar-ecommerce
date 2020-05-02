@@ -1,4 +1,5 @@
 export interface ICartItem {
+  slug?: string;
   item_id: number;
   items_count: number;
   price: number;

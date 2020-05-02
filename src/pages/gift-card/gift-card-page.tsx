@@ -34,7 +34,7 @@ const _GiftCardPage: React.FC<GiftCardPageProps> = ({ addGiftCart }) => {
       () => {
         setSuccessMessage(t("gift_card_added_in_cart"));
       },
-      errorMessage => {
+      (errorMessage) => {
         setErrorMessage(errorMessage);
       }
     );
@@ -62,7 +62,7 @@ const _GiftCardPage: React.FC<GiftCardPageProps> = ({ addGiftCart }) => {
           <button
             type="button"
             className={classnames("select-btn online", {
-              active: "DIGITAL" === cartType
+              active: "DIGITAL" === cartType,
             })}
             onClick={() => setCartType("DIGITAL")}
           >
@@ -71,7 +71,7 @@ const _GiftCardPage: React.FC<GiftCardPageProps> = ({ addGiftCart }) => {
           <button
             type="button"
             className={classnames("select-btn deliv", {
-              active: "PHYSICAL" === cartType
+              active: "PHYSICAL" === cartType,
             })}
             onClick={() => setCartType("PHYSICAL")}
           >

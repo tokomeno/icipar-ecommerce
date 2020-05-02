@@ -2,7 +2,7 @@ import React from "react";
 import ContentLoader from "react-content-loader";
 
 export const ProductContetnLoader: React.FC<{ items: number | null }> = ({
-  items = 10
+  items = 10,
 }) => {
   return (
     <>

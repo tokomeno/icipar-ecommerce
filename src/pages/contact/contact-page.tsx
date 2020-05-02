@@ -18,12 +18,12 @@ interface ContactPageProps {
 
 const _ContactPage: React.FC<ContactPageProps> = ({
   contact_info,
-  socials
+  socials,
 }) => {
   const { t } = useTranslation();
-  const facebook = socials.find(i => i.social === "facebook");
-  const google = socials.find(i => i.social === "google");
-  const instagram = socials.find(i => i.social === "instagram");
+  const facebook = socials.find((i) => i.social === "facebook");
+  const google = socials.find((i) => i.social === "google");
+  const instagram = socials.find((i) => i.social === "instagram");
   const { errors, setErrors } = useErrors<{
     email?: string[];
     message?: string[];
@@ -35,25 +35,25 @@ const _ContactPage: React.FC<ContactPageProps> = ({
   const myCaptcha = useCaptcha();
 
   const emailHandler = useInput("", () => {
-    setErrors(prev => {
+    setErrors((prev) => {
       const { email, ...restPrev } = prev;
       return restPrev;
     });
   });
   const messageHandler = useInput("", () => {
-    setErrors(prev => {
+    setErrors((prev) => {
       const { message, ...restPrev } = prev;
       return restPrev;
     });
   });
   const phoneHandler = useInput("", () => {
-    setErrors(prev => {
+    setErrors((prev) => {
       const { phone, ...restPrev } = prev;
       return restPrev;
     });
   });
   const nameHandler = useInput("", () => {
-    setErrors(prev => {
+    setErrors((prev) => {
       const { name, ...restPrev } = prev;
       return restPrev;
     });
@@ -65,9 +65,9 @@ const _ContactPage: React.FC<ContactPageProps> = ({
       message: messageHandler.value,
       phone: phoneHandler.value,
       name: nameHandler.value,
-      recaptcha_token: myCaptcha.recaptcha_token
+      recaptcha_token: myCaptcha.recaptcha_token,
     })
-      .then(res => {
+      .then((res) => {
         setErrors({});
         emailHandler.onChange("");
         messageHandler.onChange("");
@@ -75,7 +75,7 @@ const _ContactPage: React.FC<ContactPageProps> = ({
         nameHandler.onChange("");
         setSuccessMessage(true);
       })
-      .catch(err => {
+      .catch((err) => {
         setSuccessMessage(false);
         if (err.response.data && typeof err.response.data === "object") {
           setErrors(err.response.data);
@@ -137,7 +137,7 @@ const _ContactPage: React.FC<ContactPageProps> = ({
                       <ReCaptcha
                         sitekey={RECAPTCHA_SITE_KEY}
                         action="contact"
-                        verifyCallback={token => {
+                        verifyCallback={(token) => {
                           myCaptcha.setRecaptchaToken(token);
                         }}
                       />
@@ -225,7 +225,7 @@ const _ContactPage: React.FC<ContactPageProps> = ({
 const mapStateToProps = ({ info }: IStoreState) => {
   return {
     contact_info: info.contact_info,
-    socials: info.socials
+    socials: info.socials,
   };
 };
 

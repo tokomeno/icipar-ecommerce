@@ -9,7 +9,7 @@ interface CatBannerProps {
 export const CatBanner: React.FC<CatBannerProps> = ({ id = 1 }) => {
   const [banner, setBanner] = useState<IBanner | null>(null);
   useEffect(() => {
-    LayoutService.getBanner(id).then(res => setBanner(res.data.data));
+    LayoutService.getBanner(id).then((res) => setBanner(res.data.data));
   }, [id]);
   if (!banner) return null;
   return (

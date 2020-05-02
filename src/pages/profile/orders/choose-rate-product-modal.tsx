@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import {
   IActiveModalContext,
-  ActiveModalContext
+  ActiveModalContext,
 } from "../../../contexts/modalContex";
 import { Modal } from "react-bootstrap";
 import { Rating } from "../../../components/rating";
@@ -14,7 +14,7 @@ interface ChooseRateProductModalProps {
 }
 
 export const ChooseRateProductModal: React.FC<ChooseRateProductModalProps> = ({
-  order: { items }
+  order: { items },
 }) => {
   const { hideModal, activeModal, setActiveModal } = useContext<
     IActiveModalContext
@@ -46,7 +46,7 @@ export const ChooseRateProductModal: React.FC<ChooseRateProductModalProps> = ({
         </div>
         <div className="line" />
         <div className="choose-block">
-          {items.map(item => (
+          {items.map((item) => (
             <div
               key={item.id}
               className="choose-block_item d-flex align-items-sm-start align-items-start justify-content-between"
@@ -63,7 +63,7 @@ export const ChooseRateProductModal: React.FC<ChooseRateProductModalProps> = ({
               <a
                 href="#!"
                 className="link"
-                onClick={e => {
+                onClick={(e) => {
                   e.preventDefault();
                   moveToRateProductModal(item);
                 }}

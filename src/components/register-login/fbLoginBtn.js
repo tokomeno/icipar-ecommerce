@@ -13,9 +13,9 @@ const FbLoginButton = ({ setCurrentUser }) => {
   const { t } = useTranslation();
   const { hideModal } = useContext(ActiveModalContext);
 
-  const responseFacebook = res => {
+  const responseFacebook = (res) => {
     const userData = {
-      ...res
+      ...res,
       //   accessToken: res.accessToken,
       // facebookId: res.userID,
       //   name: res.name,
@@ -25,14 +25,14 @@ const FbLoginButton = ({ setCurrentUser }) => {
     };
     axios
       .get(`${API_FB_LOGIN_URL}?token=${res.accessToken}`, { userData })
-      .then(res => {
+      .then((res) => {
         setCurrentUser({
           user: res.data.user,
-          token: res.data.token
+          token: res.data.token,
         });
         hideModal();
       })
-      .catch(err => {
+      .catch((err) => {
         console.log("დაფიქსირდა შეცდომა");
       });
   };
@@ -42,7 +42,7 @@ const FbLoginButton = ({ setCurrentUser }) => {
       autoLoad={false}
       fields="name,email,picture"
       callback={responseFacebook}
-      render={renderProps => (
+      render={(renderProps) => (
         <a
           onClick={renderProps.onClick}
           href="#!"

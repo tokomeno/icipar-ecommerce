@@ -21,7 +21,7 @@ export const _BurgerNav: React.FC<BurgerNavProps> = ({ menu }) => {
     <React.Fragment>
       <div
         className={classnames("burger-nav", {
-          active: activeModal === "burger-menu"
+          active: activeModal === "burger-menu",
         })}
       >
         <button className="burger-close" onClick={hideModal}>
@@ -32,7 +32,7 @@ export const _BurgerNav: React.FC<BurgerNavProps> = ({ menu }) => {
             <MenuItem key={i} menu={m} />
           ))}
 
-          {AboutPagesMenu.map(menu => (
+          {AboutPagesMenu.map((menu) => (
             <NavLink key={menu.to} to={menu.to} className="burger-sub_link">
               {t(menu.title)}
             </NavLink>
@@ -75,7 +75,7 @@ const MenuItem: React.FC<{ menu: IMenuCatrogy }> = ({ menu }) => {
 
 const mapStateToProps = ({ info }: IStoreState) => {
   return {
-    menu: info.layoutCategories
+    menu: info.layoutCategories,
   };
 };
 

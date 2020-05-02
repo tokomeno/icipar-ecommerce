@@ -3,14 +3,14 @@ import { InfoActionTypes, IInfoState, InfoActions } from "./infoTypes";
 let initState: IInfoState = {
   contact_info: {
     phone: "",
-    email: ""
+    email: "",
   },
   socials: [],
   product_delivery_terms: {
-    content: ""
+    content: "",
   },
   branches: [],
-  layoutCategories: []
+  layoutCategories: [],
 };
 
 export const infoReducer = (
@@ -21,22 +21,22 @@ export const infoReducer = (
     case InfoActionTypes.SetSocialAndContactInfo:
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
       };
     case InfoActionTypes.SetPorductDeliveryTerms:
       return {
         ...state,
-        product_delivery_terms: action.payload
+        product_delivery_terms: action.payload,
       };
     case InfoActionTypes.SetBrnaches:
       return {
         ...state,
-        branches: action.payload
+        branches: action.payload,
       };
     case InfoActionTypes.SetLayoutCatrogires:
       return {
         ...state,
-        layoutCategories: action.payload
+        layoutCategories: action.payload,
       };
     default:
       return state;

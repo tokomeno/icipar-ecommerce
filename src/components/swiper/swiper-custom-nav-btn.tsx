@@ -5,7 +5,7 @@ type SwiperCustomNavBtnProps = {
   sliderNav: ISliderNav;
 };
 export const SwiperCustomNavBtn: React.FC<SwiperCustomNavBtnProps> = ({
-  sliderNav
+  sliderNav,
 }) => {
   return (
     <React.Fragment>

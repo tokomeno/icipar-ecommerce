@@ -22,19 +22,19 @@ export const useGiftCards = () => {
   >(null);
 
   useEffect(() => {
-    axiosWithToken.get<{ data: IGiftCard[] }>(GIFT_CARD).then(res => {
+    axiosWithToken.get<{ data: IGiftCard[] }>(GIFT_CARD).then((res) => {
       setGiftCard(res.data.data);
     });
 
     axiosWithToken
       .get<{ data: { discount_card_history: IDiscountCard[] } }>(DISCOUNT_CARD)
-      .then(res => {
+      .then((res) => {
         setDiscountGiftCard(res.data.data.discount_card_history);
       });
   }, []);
 
   return {
     giftCard,
-    discountGiftCard
+    discountGiftCard,
   };
 };

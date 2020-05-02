@@ -13,10 +13,10 @@ export const BlogPage: React.FC<BlogPageProps> = () => {
 
   useEffect(() => {
     BlogService.getAll()
-      .then(res => {
+      .then((res) => {
         setBlogs(res.data.data);
       })
-      .catch(err => {
+      .catch((err) => {
         alert("404");
         console.log(err);
       });
@@ -62,7 +62,7 @@ export const BlogPage: React.FC<BlogPageProps> = () => {
                   >
                     <div className="row blog-container blog-list">
                       {blogs.length ? (
-                        blogs.map(blog => (
+                        blogs.map((blog) => (
                           <div key={blog.slug} className="col-md-6 mb-20">
                             <BlogSliderItem blog={blog} />
                           </div>

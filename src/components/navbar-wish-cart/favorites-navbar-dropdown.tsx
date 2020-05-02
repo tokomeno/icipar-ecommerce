@@ -12,7 +12,7 @@ interface FavoritesNavbarDropdownProps {
 }
 
 const _FavoritesNavbarDropdown: React.FC<FavoritesNavbarDropdownProps> = ({
-  items
+  items,
 }) => {
   const { t } = useTranslation();
   return (
@@ -35,7 +35,7 @@ const _FavoritesNavbarDropdown: React.FC<FavoritesNavbarDropdownProps> = ({
 };
 
 const mapStateToProps = ({ favorites }: IStoreState) => ({
-  items: favorites.items
+  items: favorites.items,
 });
 
 export const FavoritesNavbarDropdown = connect(mapStateToProps)(

@@ -17,12 +17,12 @@ const _ProductCartBtn: React.FC<ProductCartBtnProps> = ({
   cartItem,
   mainItemId,
   increaseItem,
-  loadingItemId
+  loadingItemId,
 }) => {
   return (
     <button
       className={classnames("cart disableOpacity", {
-        active: cartItem && cartItem.items_count > 0
+        active: cartItem && cartItem.items_count > 0,
       })}
       disabled={mainItemId === loadingItemId}
       onClick={() =>
@@ -48,10 +48,10 @@ const mapStateToProps = (
   const cartItem = cart.itemsByKeys[mainItemId];
   return {
     cartItem,
-    loadingItemId: cart.loadingItemId
+    loadingItemId: cart.loadingItemId,
   };
 };
 
 export const ProductCartBtn = connect(mapStateToProps, {
-  increaseItem: increaseItem
+  increaseItem: increaseItem,
 })(_ProductCartBtn);

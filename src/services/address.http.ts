@@ -5,7 +5,7 @@ import {
   DELETE_USER_ADDRESSES,
   ADDRESS_MAKE_MAIN,
   EDIT_USER_ADDRESSES,
-  GET_CITIES
+  GET_CITIES,
 } from "../api/endpoints";
 
 export interface IAddress {

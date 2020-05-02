@@ -7,7 +7,7 @@ import { useProductAutocomplete } from "../../hooks/useProductAutocomplete";
 
 interface SearchNavProps {}
 
-export const SearchNav: React.FC<SearchNavProps> = props => {
+export const SearchNav: React.FC<SearchNavProps> = (props) => {
   const { activeModal, hideModal } = useContext(ActiveModalContext);
   const { t } = useTranslation();
   const {
@@ -15,13 +15,13 @@ export const SearchNav: React.FC<SearchNavProps> = props => {
     resetProducts,
     products,
     keyword,
-    setKeyword
+    setKeyword,
   } = useProductAutocomplete();
   return (
     <React.Fragment>
       <div
         className={classnames("search-nav", {
-          active: activeModal === "search-modal"
+          active: activeModal === "search-modal",
         })}
       >
         <div className="search-nav_block d-flex align-items-center justify-content-between">

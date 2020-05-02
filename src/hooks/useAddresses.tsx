@@ -6,9 +6,9 @@ export const useAddresses = () => {
   const [cities, setCities] = useState<ICity[]>([]);
   const [addresses, setAddresses] = useState<IAddress[] | null>(null);
   useEffect(() => {
-    AddressService.getAll().then(res => {
+    AddressService.getAll().then((res) => {
       setAddresses(
-        res.data.data.addresses.map(a => ({ ...a, uniqueId: uuidv4() }))
+        res.data.data.addresses.map((a) => ({ ...a, uniqueId: uuidv4() }))
       );
       setCities(res.data.data.cities);
     });

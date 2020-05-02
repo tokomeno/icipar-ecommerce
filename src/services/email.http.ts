@@ -16,7 +16,7 @@ export class EmailService {
     console.log(requestData);
     return Axios.post(SAVE_CONTACT, {
       ...requestData,
-      "g-recaptcha-response": requestData.recaptcha_token
+      "g-recaptcha-response": requestData.recaptcha_token,
     });
   }
 }

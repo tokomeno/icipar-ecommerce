@@ -7,17 +7,17 @@ export const useCards = () => {
   const [discountCard, setDiscountCard] = useState([]);
 
   useEffect(() => {
-    axiosWithToken.get(GIFT_CARD).then(res => {
+    axiosWithToken.get(GIFT_CARD).then((res) => {
       setGiftCard(res.data);
     });
 
-    axiosWithToken.get(DISCOUNT_CARD).then(res => {
+    axiosWithToken.get(DISCOUNT_CARD).then((res) => {
       setDiscountCard(res.data);
     });
   }, []);
 
   return {
     giftCard,
-    discountCard
+    discountCard,
   };
 };

@@ -11,7 +11,7 @@ type ITabNames = keyof IProductWithItems["details"] | "brand";
 
 export const ProductContent: React.FC<ProductContentProps> = ({
   details,
-  brand
+  brand,
 }) => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<ITabNames>("description");
@@ -22,10 +22,10 @@ export const ProductContent: React.FC<ProductContentProps> = ({
       <div className="nav nav-tabs prod-menu d-flex justify-content-lg-center justify-content-start">
         <a
           className={classnames("prod-menu_link nav-link", {
-            active: activeTab === "description"
+            active: activeTab === "description",
           })}
           href="#!"
-          onClick={e => {
+          onClick={(e) => {
             e.preventDefault();
             setActiveTab("description");
           }}
@@ -34,9 +34,9 @@ export const ProductContent: React.FC<ProductContentProps> = ({
         </a>
         <a
           className={classnames("prod-menu_link nav-link", {
-            active: activeTab === "ingredients"
+            active: activeTab === "ingredients",
           })}
-          onClick={e => {
+          onClick={(e) => {
             e.preventDefault();
             setActiveTab("ingredients");
           }}
@@ -46,9 +46,9 @@ export const ProductContent: React.FC<ProductContentProps> = ({
         </a>
         <a
           className={classnames("prod-menu_link nav-link", {
-            active: activeTab === "usage"
+            active: activeTab === "usage",
           })}
-          onClick={e => {
+          onClick={(e) => {
             e.preventDefault();
             setActiveTab("usage");
           }}
@@ -59,9 +59,9 @@ export const ProductContent: React.FC<ProductContentProps> = ({
 
         <a
           className={classnames("prod-menu_link nav-link", {
-            active: activeTab === "brand"
+            active: activeTab === "brand",
           })}
-          onClick={e => {
+          onClick={(e) => {
             e.preventDefault();
             setActiveTab("brand");
           }}

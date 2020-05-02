@@ -4,7 +4,7 @@ import { useInput } from "../../../hooks/common/useInput";
 import {
   AddressService,
   ICity,
-  IAddress
+  IAddress,
 } from "../../../services/address.http";
 import { ProfileInput } from "../../../components/profile-input";
 import { useToggle } from "../../../hooks/common/useToggle";
@@ -22,7 +22,7 @@ interface AddressFormProps {
 
 export const AddressForm: React.FC<AddressFormProps> = ({
   cities,
-  onNewAddressSave
+  onNewAddressSave,
 }) => {
   const [successMessage, setSuccessMessage] = useState<null | string>(null);
   const { t } = useTranslation();
@@ -32,15 +32,15 @@ export const AddressForm: React.FC<AddressFormProps> = ({
   const { value: comment, onChange: setcomment } = useInput("");
   const {
     value: contact_person_name,
-    onChange: setcontact_person_name
+    onChange: setcontact_person_name,
   } = useInput("");
   const {
     value: contact_person_email,
-    onChange: setcontact_person_email
+    onChange: setcontact_person_email,
   } = useInput("");
   const {
     value: contact_person_phone,
-    onChange: setcontact_person_phone
+    onChange: setcontact_person_phone,
   } = useInput("");
 
   const { isActive: isMain } = useToggle(false);
@@ -56,14 +56,14 @@ export const AddressForm: React.FC<AddressFormProps> = ({
       contact_person_name,
       contact_person_email,
       contact_person_phone,
-      is_main: isMain
+      is_main: isMain,
     })
-      .then(res => {
+      .then((res) => {
         setErrors({});
         setSuccessMessage(t("address_saved_successfully"));
         onNewAddressSave(res.data.data);
       })
-      .catch(err => {
+      .catch((err) => {
         setSuccessMessage(null);
         if (err.response && err.response.data && err.response.data.error) {
           setErrors(err.response.data.error);
@@ -93,7 +93,7 @@ export const AddressForm: React.FC<AddressFormProps> = ({
           className="custom-select"
         >
           <option>{t("choose_city")}</option>
-          {cities.map(city => (
+          {cities.map((city) => (
             <option key={city.id} value={city.id}>
               {city.city}
             </option>

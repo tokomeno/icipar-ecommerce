@@ -4,7 +4,7 @@ import { axiosWithToken } from "./api/axios-with-token";
 
 export const suportedLangs = {
   ka: "ka_GE",
-  en: "en_US"
+  en: "en_US",
 };
 
 export const changeLanguage = (lng: "ka" | "en") => {

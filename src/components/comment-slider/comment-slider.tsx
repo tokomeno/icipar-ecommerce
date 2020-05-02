@@ -16,7 +16,7 @@ interface CommentSliderProps {}
 
 const params = {
   autoplay: {
-    delay: 1000
+    delay: 1000,
   },
   slidesPerView: 4,
   // spaceBetween: 60,
@@ -24,24 +24,24 @@ const params = {
   renderNextButton: () => null,
   breakpoints: {
     1499: {
-      slidesPerView: 4
+      slidesPerView: 4,
     },
     1199: {
       slidesPerView: 4,
-      spaceBetween: 10
+      spaceBetween: 10,
     },
     767: {
-      slidesPerView: 3
+      slidesPerView: 3,
     },
     575: {
       slidesPerView: 2,
-      spaceBetween: 10
+      spaceBetween: 10,
     },
     420: {
-      slidesPerView: 1
-    }
+      slidesPerView: 1,
+    },
   },
-  observer: true
+  observer: true,
 };
 
 export const CommentSlider: React.FC<CommentSliderProps> = () => {
@@ -50,10 +50,10 @@ export const CommentSlider: React.FC<CommentSliderProps> = () => {
   useEffect(() => {
     axiosWithToken
       .get<{ data: IComment[] }>(FETCH_TESTIMONIALS)
-      .then(res => {
+      .then((res) => {
         setComments(res.data.data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }, []);

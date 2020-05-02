@@ -9,8 +9,8 @@ const sliderParams = {
   speed: 500,
   pagination: {
     el: ".swiper-pagination",
-    clickable: true
-  }
+    clickable: true,
+  },
 };
 
 export const SectionSliders: React.FC<SectionSlidersProps> = () => {
@@ -22,10 +22,10 @@ export const SectionSliders: React.FC<SectionSlidersProps> = () => {
   );
   useEffect(() => {
     SliderService.getSection()
-      .then(res => {
+      .then((res) => {
         setSliderSections(res.data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }, []);

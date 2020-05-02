@@ -19,5 +19,5 @@ export const reducers = combineReducers<IStoreState>({
   favorites: favoritesReducer,
   auth: authReducer,
   cart: cartReducer,
-  info: infoReducer
+  info: infoReducer,
 });

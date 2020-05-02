@@ -11,7 +11,7 @@ export const Reviews: React.FC<ReveiwProps> = ({ product_id }) => {
   const [reviews, setReviews] = useState<IProductReview[]>([]);
 
   useEffect(() => {
-    ProductService.getProductReviews(product_id).then(res =>
+    ProductService.getProductReviews(product_id).then((res) =>
       setReviews(res.data.data)
     );
   }, [setReviews, product_id]);
@@ -38,7 +38,7 @@ export const Reviews: React.FC<ReveiwProps> = ({ product_id }) => {
         <div className="review-block">
           <div className="container">
             <div className="reviews-list">
-              {reviews.map(review => (
+              {reviews.map((review) => (
                 <div className="review-block_item">
                   <Rating ratable={false} rating={review.rate} />
                   <h4 className="title">{review.title}</h4>

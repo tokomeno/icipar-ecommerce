@@ -34,6 +34,6 @@ const _Layout: React.FC<LayoutProps> = ({ children, auth }) => {
 };
 
 const mapStateToProps = ({ auth }: IStoreState) => ({
-  auth: auth
+  auth: auth,
 });
 export const Layout = connect(mapStateToProps)(_Layout);

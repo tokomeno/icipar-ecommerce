@@ -17,27 +17,27 @@ const params = {
   renderNextButton: () => null,
   breakpoints: {
     1799: {
-      spaceBetween: 30
+      spaceBetween: 30,
     },
     1199: {
       slidesPerView: 4,
-      spaceBetween: 40
+      spaceBetween: 40,
     },
     991: {
       slidesPerView: 3,
-      spaceBetween: 50
+      spaceBetween: 50,
     },
     767: {
-      slidesPerView: 2
+      slidesPerView: 2,
     },
     575: {
-      slidesPerView: 1.5
+      slidesPerView: 1.5,
     },
     400: {
       slidesPerView: 1.5,
-      spaceBetween: 20
-    }
-  }
+      spaceBetween: 20,
+    },
+  },
   // pagination: {
   //   el: ".likes-slider .swiper-pagination",
   //   clickable: true
@@ -46,7 +46,7 @@ const params = {
 
 export const ProductSimpleSlider: React.FC<ProductSimpleSliderProps> = ({
   title,
-  products
+  products,
 }) => {
   const { sliderNav, currentSliderIndex } = useSliderNav(products.length, 0);
   return (
@@ -59,7 +59,7 @@ export const ProductSimpleSlider: React.FC<ProductSimpleSliderProps> = ({
             activeSlideKey={currentSliderIndex.toString()}
             {...params}
           >
-            {products.map(p => (
+            {products.map((p) => (
               <Product key={p.id} wrapperClass={"swiper-slide"} product={p} />
             ))}
           </Swiper>

@@ -67,7 +67,7 @@ const Countdown: React.FC<{
   let seconds = Math.floor((distance % (1000 * 60)) / 1000);
   useEffect(() => {
     const r = setInterval(() => {
-      setRerender(p => p + 1);
+      setRerender((p) => p + 1);
     }, 1000);
     return () => {
       clearInterval(r);

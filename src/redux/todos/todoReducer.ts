@@ -6,7 +6,7 @@ export const todosReducer = (state: Todo[] = [], action: TodoActions) => {
     case ActionTypes.fetchTodos:
       return action.payload;
     case ActionTypes.deleteTodo:
-      return state.filter(t => t.id !== action.payload);
+      return state.filter((t) => t.id !== action.payload);
     default:
       return [];
   }

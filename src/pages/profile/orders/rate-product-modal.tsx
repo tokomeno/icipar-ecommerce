@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import {
   IActiveModalContext,
-  ActiveModalContext
+  ActiveModalContext,
 } from "../../../contexts/modalContex";
 import { Modal } from "react-bootstrap";
 import { Rating } from "../../../components/rating";
@@ -29,12 +29,12 @@ export const RateProductModal: React.FC<RateProductModalProps> = ({ item }) => {
     ProductService.reviewProduct({
       product_id: item.product_id,
       comment: textInputHandler.value,
-      rate: rate as number
+      rate: rate as number,
     })
-      .then(res => {
+      .then((res) => {
         hideModal();
       })
-      .catch(err => {
+      .catch((err) => {
         if (err.response.data) {
           setErrors(err.response.data);
         } else {
@@ -54,7 +54,7 @@ export const RateProductModal: React.FC<RateProductModalProps> = ({ item }) => {
       </button>
 
       <div className="title">{t("rate")}</div>
-      <Rating ratable={true} onRateChange={r => setRate(r)} />
+      <Rating ratable={true} onRateChange={(r) => setRate(r)} />
       {errors.rate && <p className="text-danger">{errors.rate}</p>}
       <div className="line" />
       <form className="d-flex flex-column">

@@ -14,7 +14,7 @@ import { LayoutSpinner } from "../../components/spinners/layout-spinner";
 import {
   ProductService,
   IProductWithItems,
-  IProduct
+  IProduct,
 } from "../../services/product.http";
 import { ProductHot } from "../../components/product/product-hot";
 
@@ -25,17 +25,17 @@ interface ProducShowPageProps {
 
 const _ProducShowPage: React.FC<ProducShowPageProps> = ({
   match,
-  product_delivery_terms
+  product_delivery_terms,
 }) => {
   const { t } = useTranslation();
   const { product } = useProduct(match.params.id);
   const [othersBought, setOthersBought] = useState<IProduct[]>([]);
   const [similarTo, setSimilarTo] = useState<IProduct[]>([]);
   useEffect(() => {
-    ProductService.getSimilar(match.params.id).then(res =>
+    ProductService.getSimilar(match.params.id).then((res) =>
       setSimilarTo(res.data.data)
     );
-    ProductService.getOtherBought(match.params.id).then(res =>
+    ProductService.getOtherBought(match.params.id).then((res) =>
       setOthersBought(res.data.data)
     );
   }, [match.params.id]);
@@ -47,7 +47,7 @@ const _ProducShowPage: React.FC<ProducShowPageProps> = ({
   const setActiveItemFromId = useCallback(
     (id: number) => {
       if (!product) return;
-      const item = product.items.find(i => i.id === id);
+      const item = product.items.find((i) => i.id === id);
       if (item) setActiveItem(item);
     },
     [product]
@@ -65,12 +65,12 @@ const _ProducShowPage: React.FC<ProducShowPageProps> = ({
   useEffect(() => {
     if (!product) return;
     ProductService.getBranchesForProduct(product.id)
-      .then(res => {
+      .then((res) => {
         if (res.data && Array.isArray(res.data.data)) {
-          setBranches(res.data.data.filter(i => i.full_address));
+          setBranches(res.data.data.filter((i) => i.full_address));
         }
       })
-      .catch(res => console.error(res));
+      .catch((res) => console.error(res));
   }, [product]);
 
   if (!product || !activeItem) return <LayoutSpinner />;
@@ -120,7 +120,7 @@ const _ProducShowPage: React.FC<ProducShowPageProps> = ({
 
 const mapStateToProps = ({ info }: IStoreState) => {
   return {
-    product_delivery_terms: info.product_delivery_terms.content
+    product_delivery_terms: info.product_delivery_terms.content,
   };
 };
 

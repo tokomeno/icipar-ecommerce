@@ -19,7 +19,7 @@ const _ProfileBasePage: React.FC<ProfileBasePageProps> = ({
   children,
   modal,
   logoutUser,
-  user
+  user,
 }) => {
   const location = useLocation();
 
@@ -29,7 +29,7 @@ const _ProfileBasePage: React.FC<ProfileBasePageProps> = ({
       <div className="container">
         <div
           className={classnames("profile", {
-            shoppingCart: location.pathname !== "/profile"
+            shoppingCart: location.pathname !== "/profile",
           })}
         >
           <div className="d-flex">
@@ -42,7 +42,7 @@ const _ProfileBasePage: React.FC<ProfileBasePageProps> = ({
   );
 };
 const mapStateToProps = ({ auth }: IStoreState) => ({
-  user: auth.user as IUser
+  user: auth.user as IUser,
 });
 
 export const ProfileBasePage = connect(mapStateToProps, { logoutUser })(

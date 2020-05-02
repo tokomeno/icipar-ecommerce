@@ -10,7 +10,7 @@ i18n
   .init({
     resources: {
       en: en,
-      ka: ka
+      ka: ka,
     },
     lng: "ka",
     fallbackLng: "en",
@@ -19,20 +19,20 @@ i18n
     load: "languageOnly",
     whitelist: ["ka", "en"],
     interpolation: {
-      escapeValue: false // not needed for react as it escapes by default
+      escapeValue: false, // not needed for react as it escapes by default
     },
     // have a common namespace used around the full app
     ns: ["translations"],
     defaultNS: "translations",
 
-    keySeparator: false // we use content as keys
+    keySeparator: false, // we use content as keys
   })
-  .then(function(t) {
+  .then(function (t) {
     // console.log("initialized and ready to go!");
     // // initialized and ready to go!
     // console.log(i18n.t("hey"));
   })
-  .catch(e => {
+  .catch((e) => {
     console.log("localizations not initialaized");
   });
 

@@ -3,7 +3,7 @@ import {
   SetSocialAndContactInfoAction,
   SetPorductDeliveryTermsAction,
   SetBrnachesAction,
-  SetLayoutCatrogiresAction
+  SetLayoutCatrogiresAction,
 } from "./infoActions";
 import { IMenuCatrogy } from "../../services/layout.http";
 
@@ -29,7 +29,7 @@ export enum InfoActionTypes {
   SetSocialAndContactInfo,
   SetPorductDeliveryTerms,
   SetBrnaches,
-  SetLayoutCatrogires
+  SetLayoutCatrogires,
 }
 
 export type InfoActions =

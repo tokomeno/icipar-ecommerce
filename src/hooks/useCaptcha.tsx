@@ -7,6 +7,6 @@ export const useCaptcha = () => {
   return {
     recaptcha_token,
     setRecaptchaToken,
-    captchaRef
+    captchaRef,
   };
 };

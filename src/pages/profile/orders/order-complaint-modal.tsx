@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import {
   IActiveModalContext,
-  ActiveModalContext
+  ActiveModalContext,
 } from "../../../contexts/modalContex";
 import { Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
@@ -14,7 +14,7 @@ interface OrderComplaintModalProps {
 }
 
 export const OrderComplaintModal: React.FC<OrderComplaintModalProps> = ({
-  order
+  order,
 }) => {
   const { hideModal, activeModal } = useContext<IActiveModalContext>(
     ActiveModalContext
@@ -27,10 +27,10 @@ export const OrderComplaintModal: React.FC<OrderComplaintModalProps> = ({
   const handleSubmit = () => {
     OrderService.complaint({
       complaint: inputHandler.value,
-      order_id: order.id
+      order_id: order.id,
     })
-      .then(res => hideModal())
-      .catch(err => {
+      .then((res) => hideModal())
+      .catch((err) => {
         if (err.response.data) {
           setErrors(err.response.data);
         }

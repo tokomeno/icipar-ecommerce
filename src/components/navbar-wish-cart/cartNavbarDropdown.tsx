@@ -13,7 +13,7 @@ interface CardNavbarDropdownProps {
 
 const _CartNavbarDropdown: React.FC<CardNavbarDropdownProps> = ({
   cartItems,
-  totalPrice
+  totalPrice,
 }) => {
   const { t } = useTranslation();
   return (
@@ -47,7 +47,7 @@ const _CartNavbarDropdown: React.FC<CardNavbarDropdownProps> = ({
 
 const mapStateToProps = ({ cart }: IStoreState) => ({
   cartItems: cart.items,
-  totalPrice: cart.totalPrice
+  totalPrice: cart.totalPrice,
 });
 
 export const CartNavbarDropdown = connect(mapStateToProps)(_CartNavbarDropdown);

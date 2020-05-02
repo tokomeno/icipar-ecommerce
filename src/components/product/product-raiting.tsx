@@ -8,7 +8,7 @@ interface ProductRaitingProps {
 
 export const ProductRaiting: React.FC<ProductRaitingProps> = ({
   rateNum,
-  starRate
+  starRate,
 }) => {
   return (
     <div className="d-flex">

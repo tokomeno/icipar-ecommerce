@@ -8,13 +8,13 @@ export const useCounter = (
     return typeof defaultValue === "function" ? defaultValue() : defaultValue;
   });
   const decrease = () => {
-    setState(prev => {
+    setState((prev) => {
       if (minValue && prev <= minValue) return prev;
       return prev - 1;
     });
   };
   const increase = () => {
-    setState(prev => prev + 1);
+    setState((prev) => prev + 1);
   };
 
   return { counter, decrease, increase, setCounter: setState };

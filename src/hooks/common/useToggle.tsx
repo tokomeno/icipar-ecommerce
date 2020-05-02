@@ -4,7 +4,7 @@ export const useToggle = (defaultValue: boolean = false) => {
   const [isActive, setToggle] = useState(defaultValue);
 
   const toggle = useCallback(() => {
-    setToggle(prevState => !prevState);
+    setToggle((prevState) => !prevState);
   }, [setToggle]);
 
   const setActive = useCallback(() => {

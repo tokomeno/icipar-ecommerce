@@ -9,24 +9,24 @@ const params = {
   speed: 800,
   autoplay: {
     delay: 2500,
-    disableOnInteraction: false
+    disableOnInteraction: false,
   },
   pagination: {
     el: ".main-slider-lg .swiper-pagination",
-    clickable: true
-  }
+    clickable: true,
+  },
 };
 export const MainSlider: React.FC<MainSliderProps> = () => {
   const [sliders, setSliders] = useState<ISlider[]>([]);
 
   useEffect(() => {
     SliderService.getMainSlider()
-      .then(res => {
+      .then((res) => {
         if (res.data.data) {
           setSliders(res.data.data);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         alert("დაფიქსირდა შეცდომა");
         console.log(err);
       });

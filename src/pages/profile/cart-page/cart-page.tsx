@@ -17,7 +17,7 @@ const _CartPage: React.FC<CartPageProps> = ({ totalPrice }) => {
   const {
     isActive: FirstStep,
     setActive: showContent,
-    setInActive: goToCheckout
+    setInActive: goToCheckout,
   } = useToggle(true);
 
   const [customer, setCustomer] = useState<Partial<ICustomer>>({});
@@ -25,9 +25,9 @@ const _CartPage: React.FC<CartPageProps> = ({ totalPrice }) => {
 
   useEffect(() => {
     CustomerService.getCustomer()
-      .then(res => setCustomer(res.data.data))
-      .catch(err => {});
-    AddressService.getCities().then(res => setCities(res.data.data));
+      .then((res) => setCustomer(res.data.data))
+      .catch((err) => {});
+    AddressService.getCities().then((res) => setCities(res.data.data));
   }, []);
 
   if (!customer || !cities) return <ProfileSpinner />;
@@ -50,7 +50,7 @@ const _CartPage: React.FC<CartPageProps> = ({ totalPrice }) => {
 };
 const mapStateToProps = ({ cart }: IStoreState) => {
   return {
-    totalPrice: cart.totalPrice
+    totalPrice: cart.totalPrice,
   };
 };
 

@@ -8,7 +8,7 @@ interface ProductSliderItemProps {
 }
 
 export const ProductSliderItem: React.FC<ProductSliderItemProps> = ({
-  product
+  product,
 }) => {
   return (
     <div className="swiper-slide">
@@ -19,10 +19,10 @@ export const ProductSliderItem: React.FC<ProductSliderItemProps> = ({
         <div className="option d-flex justify-content-between align-items-center">
           <div className="d-flex">
             <div className="rating">
-              {[1, 2, 3, 4, 5].map(i => (
+              {[1, 2, 3, 4, 5].map((i) => (
                 <span
                   className={classnames("fa fa-star", {
-                    checked: i < product.rating
+                    checked: i < product.rating,
                   })}
                 />
               ))}

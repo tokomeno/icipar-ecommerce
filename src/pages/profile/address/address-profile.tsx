@@ -9,7 +9,9 @@ import { useAddresses } from "../../../hooks/useAddresses";
 
 interface AddressProiflePageProps {}
 
-export const AddressProiflePage: React.FC<AddressProiflePageProps> = props => {
+export const AddressProiflePage: React.FC<AddressProiflePageProps> = (
+  props
+) => {
   const { cities, addresses, setAddresses } = useAddresses();
 
   const { t } = useTranslation();
@@ -17,12 +19,12 @@ export const AddressProiflePage: React.FC<AddressProiflePageProps> = props => {
   const deleteAddress = useCallback(
     (id: number) => {
       if (!Array.isArray(addresses)) return;
-      const deleteAddress = addresses.find(a => a.id === id);
+      const deleteAddress = addresses.find((a) => a.id === id);
       if (!deleteAddress) return;
 
-      AddressService.delete(deleteAddress.id).then(res => {
-        setAddresses(prevState =>
-          prevState!.filter(ad => ad.id !== deleteAddress.id)
+      AddressService.delete(deleteAddress.id).then((res) => {
+        setAddresses((prevState) =>
+          prevState!.filter((ad) => ad.id !== deleteAddress.id)
         );
       });
     },
@@ -32,7 +34,7 @@ export const AddressProiflePage: React.FC<AddressProiflePageProps> = props => {
   const onNewAddressSave = useCallback(
     (address: IAddress) => {
       console.log(address);
-      setAddresses(prev => {
+      setAddresses((prev) => {
         if (prev) return [...prev, { ...address }];
         return [address];
       });
@@ -40,10 +42,10 @@ export const AddressProiflePage: React.FC<AddressProiflePageProps> = props => {
     [setAddresses]
   );
   const makeMainAddress = (id: number) => {
-    AddressService.makeMain(id).then(res => {
-      setAddresses(prev => {
+    AddressService.makeMain(id).then((res) => {
+      setAddresses((prev) => {
         if (!prev) return prev;
-        return prev.map(a => ({ ...a, is_main: a.id === id }));
+        return prev.map((a) => ({ ...a, is_main: a.id === id }));
       });
     });
   };
@@ -51,10 +53,10 @@ export const AddressProiflePage: React.FC<AddressProiflePageProps> = props => {
   const getAddressText = useCallback(
     (id: number) => {
       if (!addresses || !cities) return;
-      const address = addresses.find(a => a.id === id);
+      const address = addresses.find((a) => a.id === id);
       if (!address) return;
       // eslint-disable-next-line eqeqeq
-      const city = cities.find(c => c.id == address.city_id);
+      const city = cities.find((c) => c.id == address.city_id);
       let text = "";
       if (city && city.city) text += city.city;
       if (address.full_address) text += ", " + address.full_address;
@@ -89,7 +91,7 @@ export const AddressProiflePage: React.FC<AddressProiflePageProps> = props => {
           <div className="row">
             <AddressForm cities={cities} onNewAddressSave={onNewAddressSave} />
             <div className="col-sm-6">
-              {addresses.map(address => (
+              {addresses.map((address) => (
                 <div key={address.id} className="d-flex flex-column info-item">
                   <label className="d-flex" htmlFor="loc">
                     {address.is_main && (

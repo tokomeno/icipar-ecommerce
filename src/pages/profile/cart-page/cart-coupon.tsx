@@ -10,7 +10,7 @@ export type CartItemProps = {
 
 export const CartCoupon: React.FC<CartItemProps> = ({
   removeGiftCart,
-  giftCard
+  giftCard,
 }) => {
   const { t } = useTranslation();
 

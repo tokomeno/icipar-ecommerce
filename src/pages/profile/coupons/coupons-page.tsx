@@ -8,7 +8,7 @@ import classnames from "classnames";
 
 interface CouponsPageProps {}
 
-export const CouponsPage: React.FC<CouponsPageProps> = props => {
+export const CouponsPage: React.FC<CouponsPageProps> = (props) => {
   const { amountCoupons, discountCoupons } = useCoupons();
   const { t } = useTranslation();
 
@@ -30,11 +30,11 @@ export const CouponsPage: React.FC<CouponsPageProps> = props => {
             }
             body={
               <>
-                {amountCoupons.map(c => (
+                {amountCoupons.map((c) => (
                   <tr
                     key={c.code}
                     className={classnames("coupons-tr", {
-                      used: c.status !== "active"
+                      used: c.status !== "active",
                     })}
                   >
                     <td>
@@ -49,7 +49,7 @@ export const CouponsPage: React.FC<CouponsPageProps> = props => {
                     <td className="text-right">
                       <div
                         className={classnames("days", {
-                          "used-txt": c.status !== "active"
+                          "used-txt": c.status !== "active",
                         })}
                       >
                         {c.status !== "active" ? c.validity_date : t("used")}
@@ -75,11 +75,11 @@ export const CouponsPage: React.FC<CouponsPageProps> = props => {
             }
             body={
               <>
-                {discountCoupons.map(c => (
+                {discountCoupons.map((c) => (
                   <tr
                     key={c.code}
                     className={classnames("coupons-tr", {
-                      used: c.status !== "active"
+                      used: c.status !== "active",
                     })}
                   >
                     <td>
@@ -103,7 +103,7 @@ export const CouponsPage: React.FC<CouponsPageProps> = props => {
                     <td className="text-right">
                       <div
                         className={classnames("days", {
-                          "used-txt": c.status !== "active"
+                          "used-txt": c.status !== "active",
                         })}
                       >
                         {c.status === "active" ? c.days_left : t("used")}

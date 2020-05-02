@@ -7,7 +7,7 @@ interface CommentSliderItemProps {
 }
 
 export const CommentSliderItem: React.FC<CommentSliderItemProps> = ({
-  comment: { author_name, rate, text }
+  comment: { author_name, rate, text },
 }) => {
   return (
     <div className="swiper-slide d-flex flex-column align-items-center justify-content-center">

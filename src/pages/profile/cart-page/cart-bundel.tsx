@@ -12,7 +12,7 @@ export type CartBundelProps = {
 };
 export const CartBundel: React.FC<CartBundelProps> = ({
   bundle,
-  setBundleQntyToCart
+  setBundleQntyToCart,
 }) => {
   const { t } = useTranslation();
   const { isLoading, startLoading, stopLoading } = useLoader();
@@ -31,7 +31,7 @@ export const CartBundel: React.FC<CartBundelProps> = ({
                 onClick={() =>
                   setBundleQntyToCart(bundle.bundle_id || 1, {
                     action: "setNewQnty",
-                    qnty: 0
+                    qnty: 0,
                   })
                 }
                 className="profbtns_btn"
@@ -57,7 +57,7 @@ export const CartBundel: React.FC<CartBundelProps> = ({
         <div className="quantity d-flex flex-column align-items-center">
           <span
             className={classnames("plus", {
-              "opacity-03": isLoading
+              "opacity-03": isLoading,
             })}
             onClick={() => {
               if (isLoading) return;
@@ -76,7 +76,7 @@ export const CartBundel: React.FC<CartBundelProps> = ({
           </span>
           <span
             className={classnames("min", {
-              "opacity-03": isLoading
+              "opacity-03": isLoading,
             })}
             onClick={() => {
               if (isLoading) return;

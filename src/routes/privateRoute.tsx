@@ -16,7 +16,7 @@ const _PrivateRoute: React.FC<PrivateRouteProps> = ({ children, isAuth }) => (
 
 const mapStateToProps = ({ auth }: IStoreState) => {
   return {
-    isAuth: auth.isAuth
+    isAuth: auth.isAuth,
   };
 };
 

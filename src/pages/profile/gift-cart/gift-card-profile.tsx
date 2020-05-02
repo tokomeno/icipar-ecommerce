@@ -8,7 +8,9 @@ import classnames from "classnames";
 
 interface GiftCardProfilePageProps {}
 
-export const GiftCardProfilePage: React.FC<GiftCardProfilePageProps> = props => {
+export const GiftCardProfilePage: React.FC<GiftCardProfilePageProps> = (
+  props
+) => {
   const { t } = useTranslation();
   const { discountGiftCard, giftCard } = useGiftCards();
   if (!discountGiftCard || !giftCard) return <ProfileSpinner />;
@@ -27,11 +29,11 @@ export const GiftCardProfilePage: React.FC<GiftCardProfilePageProps> = props => 
             }
             body={
               <>
-                {giftCard.map(c => (
+                {giftCard.map((c) => (
                   <tr
                     key={c.code}
                     className={classnames("coupons-tr", {
-                      used: c.status !== "active"
+                      used: c.status !== "active",
                     })}
                   >
                     <td>
@@ -61,7 +63,7 @@ export const GiftCardProfilePage: React.FC<GiftCardProfilePageProps> = props => 
                   <tr
                     key={index}
                     className={classnames("coupons-tr", {
-                      used: c.status !== "active"
+                      used: c.status !== "active",
                     })}
                   >
                     <td>

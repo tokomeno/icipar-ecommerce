@@ -1,4 +1,14 @@
 {
+  "editor.wordWrap": "on",
+  // Controls the wrapping column of the editor when `editor.wordWrap` is `wordWrapColumn` or `bounded`.
+  "editor.wordWrapColumn": 80,
+  "typescript.updateImportsOnFileMove.enabled": "always",
   "editor.formatOnSave": true,
-  "liveServer.settings.multiRootWorkspaceName": "icipar"
+  "liveServer.settings.multiRootWorkspaceName": "icipar",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
 }

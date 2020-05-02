@@ -10,7 +10,7 @@ export class FavoritesService {
   }
   static toogle(productId: number) {
     return axiosWithToken.post<{ data: any }>(TOGGLE_FAVORITES, {
-      product_id: productId
+      product_id: productId,
     });
   }
 }

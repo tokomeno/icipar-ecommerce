@@ -11,7 +11,7 @@ import { CustomerService } from "../../../services/customer.http";
 
 interface InfoProfilePageProps {}
 
-export const InfoProfilePage: React.FC<InfoProfilePageProps> = props => {
+export const InfoProfilePage: React.FC<InfoProfilePageProps> = (props) => {
   const { t } = useTranslation();
   const { isLoading, stopLoading } = useLoader(true);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
@@ -25,7 +25,7 @@ export const InfoProfilePage: React.FC<InfoProfilePageProps> = props => {
   const { value: new_password, onChange: setNew_password } = useInput();
   const {
     value: new_password_confirmation,
-    onChange: setConfirm_password
+    onChange: setConfirm_password,
   } = useInput();
 
   const [originalData, setOriginalData] = useState<{
@@ -45,13 +45,13 @@ export const InfoProfilePage: React.FC<InfoProfilePageProps> = props => {
         birth_date,
         old_password,
         new_password,
-        new_password_confirmation
+        new_password_confirmation,
       })
-      .then(res => {
+      .then((res) => {
         setSuccessMessage(t("profile_info_updated"));
         setErrors({});
       })
-      .catch(err => {
+      .catch((err) => {
         if (err.response && err.response.data && err.response.data.error) {
           setErrors(err.response.data.error);
         } else {
@@ -76,13 +76,13 @@ export const InfoProfilePage: React.FC<InfoProfilePageProps> = props => {
 
   useEffect(() => {
     CustomerService.getCustomer()
-      .then(res => {
+      .then((res) => {
         if (typeof res.data.data === "object") {
           setOriginalData(res.data.data as any);
           stopLoading();
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         alert("დაფიქსირდა შედცომა");
       });

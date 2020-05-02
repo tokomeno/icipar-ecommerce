@@ -12,16 +12,17 @@ const topics = [
         id: "url-parameters",
         description:
           "URL parameters are parameters whose values are set dynamically in a page's URL. This allows a route to render the same component while passing that component the dynamic portion of the URL so it can change based off of it.",
-        url: "https://tylermcginnis.com/react-router-url-parameters/"
+        url: "https://tylermcginnis.com/react-router-url-parameters/",
       },
       {
         name: "Programmatically navigate",
         id: "programmatically-navigate",
         description:
           "When building an app with React Router, eventually you'll run into the question of navigating programmatically. The goal of this post is to break down the correct approaches to programmatically navigating with React Router.",
-        url: "https://tylermcginnis.com/react-router-programmatically-navigate/"
-      }
-    ]
+        url:
+          "https://tylermcginnis.com/react-router-programmatically-navigate/",
+      },
+    ],
   },
   {
     name: "React.js",
@@ -34,15 +35,15 @@ const topics = [
         description:
           "React Lifecycle events allow you to tie into specific phases of a components lifecycle",
         url:
-          "https://tylermcginnis.com/an-introduction-to-life-cycle-events-in-react-js/"
+          "https://tylermcginnis.com/an-introduction-to-life-cycle-events-in-react-js/",
       },
       {
         name: "React AHA Moments",
         id: "react-aha",
         description: "A collection of 'Aha' moments while learning React.",
-        url: "https://tylermcginnis.com/react-aha-moments/"
-      }
-    ]
+        url: "https://tylermcginnis.com/react-aha-moments/",
+      },
+    ],
   },
   {
     name: "Functional Programming",
@@ -55,7 +56,7 @@ const topics = [
         id: "imperative-declarative",
         description:
           "A guide to understanding the difference between Imperative and Declarative programming.",
-        url: "https://tylermcginnis.com/imperative-vs-declarative-programming/"
+        url: "https://tylermcginnis.com/imperative-vs-declarative-programming/",
       },
       {
         name:
@@ -64,10 +65,10 @@ const topics = [
         description:
           "A guide to building UI with pure functions and function composition in React",
         url:
-          "https://tylermcginnis.com/building-user-interfaces-with-pure-functions-and-function-composition-in-react-js/"
-      }
-    ]
-  }
+          "https://tylermcginnis.com/building-user-interfaces-with-pure-functions-and-function-composition-in-react-js/",
+      },
+    ],
+  },
 ];
 
 function Resource({ match }) {
@@ -93,7 +94,7 @@ function Topic({ match }) {
       <p>{topic.description}</p>
 
       <ul>
-        {topic.resources.map(sub => (
+        {topic.resources.map((sub) => (
           <li key={sub.id}>
             <Link to={`${match.url}/${sub.id}`}>{sub.name}</Link>
           </li>

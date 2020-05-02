@@ -7,7 +7,11 @@ import { Rating } from "../../components/rating";
 import { Dropdown } from "react-bootstrap";
 import { IProductWithItems } from "../../services/product.http";
 import { ProductHeartBtn } from "../../components/product/product-heart-btn";
-import { FacebookShareButton, TwitterShareButton } from "react-share";
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  PinterestShareButton,
+} from "react-share";
 
 interface ItemProps {
   product: IProductWithItems;
@@ -47,7 +51,10 @@ export const Item: React.FC<ItemProps> = ({
           </div>
           <div className="col-md-7">
             <div className="description">
-              <Social />
+              <Social
+                media={activeItem.thumbnail}
+                description={activeItem.title}
+              />
               <div className="d-flex align-items-center">
                 <Rating rating={product.rating} />
                 {/* <div className="review">
@@ -211,7 +218,10 @@ const CustomToggle = React.forwardRef<any, any>(
   )
 );
 
-const Social = () => (
+const Social: React.FC<{ media: string; description?: string }> = ({
+  media,
+  description,
+}) => (
   <div className="social">
     <FacebookShareButton
       className="fb social-item d-flex align-items-center justify-content-center"
@@ -237,11 +247,18 @@ const Social = () => (
       </a>
     </TwitterShareButton>
 
-    {/* <a
-      href="#!"
+    <PinterestShareButton
+      url={window.location.href}
+      media={media}
+      description={description}
       className="p social-item d-flex align-items-center justify-content-center"
     >
-      <i className="fab fa-pinterest" />
-    </a> */}
+      <a
+        href="#!"
+        className="p social-item d-flex align-items-center justify-content-center"
+      >
+        <i className="fab fa-pinterest" />
+      </a>
+    </PinterestShareButton>
   </div>
 );

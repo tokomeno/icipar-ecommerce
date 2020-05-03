@@ -34,7 +34,11 @@ export const tryLocalAuth = () => {
 };
 
 const ifUserTokenIsNotValidLogout = (token: string) => {
-  AuthService.checkUserToken(token).catch((err) => {
-    store.dispatch(logoutUser());
-  });
+  AuthService.checkUserToken(token)
+    .then((res) => {
+      // TODO: Update user state
+    })
+    .catch((err) => {
+      store.dispatch(logoutUser());
+    });
 };

@@ -50,6 +50,15 @@ export const authReducer = (
         } as IUser,
       };
     }
+    case AuthActionTypes.setSubscribed: {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          is_subscribed: true,
+        } as IUser,
+      };
+    }
     default:
       return state;
   }

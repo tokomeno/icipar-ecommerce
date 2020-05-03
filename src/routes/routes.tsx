@@ -34,7 +34,9 @@ export const routes = {
   profileGiftCard: "/profile/gift-cards",
 
   blogs: "/blogs",
-  blogShow: "/blogs/:slug",
+  blogShow: (slug: string) => {
+    return `/blogs/${slug}`;
+  },
   staticPages: (slug: string) => {
     return `/page/${slug}`;
   },

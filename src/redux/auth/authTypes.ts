@@ -1,11 +1,13 @@
 // TODO: ADD User Type When ip will be rady
 export interface IUser {
   [key: string]: any;
-  is_subscribed?: boolean;
   avatar: string;
   id: number;
   phone: number | null;
   email: number | null;
+  // has_filled_profile: b da has_subscribed_news_letter
+  is_subscribed: boolean;
+  has_filled_profile: boolean;
 }
 
 export interface AuthState {
@@ -28,6 +30,7 @@ export enum AuthActionTypes {
   logoutUser = "logoutUser",
   setAuthErrors = "setAuthErrors",
   updateAvatar = "updateAvatar",
+  setSubscribed = "setSubscribed",
 }
 
 export interface SetAuthErrorAction {
@@ -52,8 +55,13 @@ export interface LogoutUserAction {
   type: AuthActionTypes.logoutUser;
 }
 
+export interface UserHasSubscribedToNews {
+  type: AuthActionTypes.setSubscribed;
+}
+
 export type AuthActions =
   | SetCurrentUserAction
   | SetAuthErrorAction
   | LogoutUserAction
-  | UpdateAvatarAction;
+  | UpdateAvatarAction
+  | UserHasSubscribedToNews;

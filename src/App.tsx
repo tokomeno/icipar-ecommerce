@@ -103,7 +103,11 @@ const App: React.FC<{}> = () => {
               component={ProducShowPage}
             />
 
-            <Route path={routes.blogShow} exact component={BlogShowPage} />
+            <Route
+              path={routes.blogShow(":slug")}
+              exact
+              component={BlogShowPage}
+            />
             <Route path={routes.blogs} exact component={BlogPage} />
 
             <Route

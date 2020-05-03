@@ -1,5 +1,6 @@
 {
   "translations": {
+    "logo_name": "logo.svg",
     "hey": "გამარჯობა",
     "hotOffer": "ცხელი შეთავაზება",
     "our_brands": "ჩვენი ბრენდები",
@@ -181,7 +182,7 @@
     "main": "მთავარი",
     "payment_success": "გადახდა წარმატებით განხორციელდა",
     "payment_fail": "გადახდისას მოხდა შეცდომა",
-    "subscribe_to_the_news_and_get_header_text": "გამოიწერეთ სიახლეები და მიიღეთ 15%-იანი ფასდაკლება",
+    "subscribe_to_the_news_and_get_header_text": "გამოიწერეთ სიახლეები და მიიღეთ 10%-იანი ფასდაკლება",
     "website_rules": "საიტის წესები",
     "please_read_rules": "გთხოვთ გაეცნოთ წესებს",
     "agree": "ვეთანხმები",
@@ -198,6 +199,10 @@
     "hot_deal": "Hot Deal",
     "recomendations_for_you": "რეკომენდაციები შენთვის",
     "brands_a_z": "ბრენდები A - Z",
-    "all": "ყველა"
+    "all": "ყველა",
+    "subscribe_news": "გამოიწერე სიახლეები",
+    "get_10_percantage_sael": "მიიღე 10%-იანი ფასდაკლება",
+    "fill_profile_completely": "შეავსე შენი პროფილი სრულად",
+    "kargi": "კარგი"
   }
 }

@@ -19,6 +19,7 @@ export interface IDailyOffer {
   original_price: number;
   discounted_price: number;
   discount_rate: number;
+  slug: string;
 }
 
 export interface ILatestBlogPost {

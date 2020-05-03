@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { ProfileLeft } from "../../components/profile-left/profile-left";
 import { connect } from "react-redux";
 import { IUser } from "../../redux/auth/authTypes";
-import { logoutUser } from "../../redux/auth/authActions";
+import {
+  logoutUser,
+  userHasSubscribedToNews,
+} from "../../redux/auth/authActions";
 import { IStoreState } from "../../redux/mainReducer";
 import { useLocation } from "react-router-dom";
 import classnames from "classnames";
+import { useTranslation } from "react-i18next";
+import { useInput } from "../../hooks/common/useInput";
+import { EmailService } from "../../services/email.http";
+import { CouponModal } from "../../components/coupon-modal";
+import { useToggle } from "../../hooks/common/useToggle";
 
 interface ProfileBasePageProps {
   children: React.ReactNode;
@@ -26,6 +34,9 @@ const _ProfileBasePage: React.FC<ProfileBasePageProps> = ({
   return (
     <>
       {modal}
+      {!user.is_subscribed && <SubscirbeNewsLetterPopUp />}
+      {!user.has_filled_profile && <CouponModal />}
+
       <div className="container">
         <div
           className={classnames("profile", {
@@ -47,4 +58,66 @@ const mapStateToProps = ({ auth }: IStoreState) => ({
 
 export const ProfileBasePage = connect(mapStateToProps, { logoutUser })(
   _ProfileBasePage
+);
+
+const _SubscirbeNewsLetterPopUp: React.FC<{
+  userHasSubscribedToNews: typeof userHasSubscribedToNews;
+}> = ({ userHasSubscribedToNews }) => {
+  const { setActive: setHide, isActive: isHidden } = useToggle(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const { t } = useTranslation();
+  const inputHandler = useInput("");
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    EmailService.subscribe(inputHandler.value)
+      .then((res) => {
+        setErrorMessage(null);
+        setSuccessMessage(t("you_have_subscribed"));
+        userHasSubscribedToNews();
+        setTimeout(() => {
+          setSuccessMessage(null);
+        }, 2000);
+      })
+      .catch((err) => {
+        if (Array.isArray(err.response.data.email)) {
+          setErrorMessage(err.response.data.email.join(" "));
+        }
+      });
+  };
+  if (isHidden) return null;
+
+  return (
+    <div className="checkout-saleBAnner d-none d-lg-block">
+      <button
+        onClick={setHide}
+        className="close-sale d-flex align-items-center justify-content-center"
+      >
+        <i className="fas fa-times" />
+      </button>
+      <img src="/assets/images/sale-banner1.png" alt="" />
+      <div className="bg text-center">
+        <div className="title">{t("get_10_percantage_sael")}</div>
+        <div className="txt">{t("subscribe_news")}</div>
+        <div className="d-flex justify-content-center">
+          <div>
+            <input
+              type="email"
+              className="link"
+              {...inputHandler}
+              placeholder={t("enter_your_email")}
+            />
+            {errorMessage && <p className="text-danger">{errorMessage}</p>}
+          </div>
+          <button onClick={handleSubmit}>
+            <img src="/assets/images/arrow-right.svg" alt="" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const SubscirbeNewsLetterPopUp = connect(null, { userHasSubscribedToNews })(
+  _SubscirbeNewsLetterPopUp
 );

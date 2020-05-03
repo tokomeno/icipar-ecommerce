@@ -2,6 +2,7 @@ import React from "react";
 import { IDailyOffer, ILatestBlogPost } from "../../services/layout.http";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
+import { routes } from "../../routes/routes";
 
 export const DropDownOffer: React.FC<{
   dailyOffer: IDailyOffer;
@@ -13,7 +14,7 @@ export const DropDownOffer: React.FC<{
       <div className="suggestion left">
         <div className="title">{t("daily_offer")}</div>
         <NavLink
-          to={`/product/${dailyOffer.product_id}`}
+          to={routes.productShow(dailyOffer.product_id, dailyOffer.slug)}
           className="d-flex align-items-center flex-column"
         >
           <div className="image">
@@ -39,7 +40,7 @@ export const DropDownOffer: React.FC<{
       <div className="suggestion">
         <div className="title">{t("blog_post")}</div>
         <NavLink
-          to={`/blog/${latestBlogPost.slug}`}
+          to={routes.blogShow(latestBlogPost.slug)}
           className="d-flex align-items-center flex-column"
         >
           <div className="image">

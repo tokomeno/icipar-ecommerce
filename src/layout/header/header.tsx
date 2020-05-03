@@ -157,7 +157,7 @@ export const _Header: React.FC<HeaderProps> = ({ user, phone, menu }) => {
             <div className="container">
               <div className="row align-items-center">
                 <Link to="/" className="logo col-md-3">
-                  <img src="/assets/images/logo.svg" alt="logo" />
+                  <img src={"/assets/images/" + t("logo_name")} alt="logo" />
                 </Link>
                 <Search />
                 <div className="col-md-2 d-flex align-items-center justify-content-end">
@@ -252,7 +252,7 @@ export const _Header: React.FC<HeaderProps> = ({ user, phone, menu }) => {
                   <span />
                 </div>
                 <Link to="/" className="logo-xs">
-                  <img src="/assets/images/logo.svg" alt="logo" />
+                  <img src={"/assets/images/" + t("logo_name")} alt="logo" />
                 </Link>
               </div>
               <div className="d-flex">

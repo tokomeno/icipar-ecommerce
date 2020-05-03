@@ -7,6 +7,7 @@ import {
   SetAuthErrorAction,
   UpdateAvatarAction,
   LogoutUserAction,
+  UserHasSubscribedToNews,
 } from "./authTypes";
 import { Dispatch } from "redux";
 import { API_LOGIN_URL, API_REGISTER_URL } from "../../api/endpoints";
@@ -117,6 +118,12 @@ export const logoutUser = (): LogoutUserAction => {
   setGenericTokenAsHeader();
   return {
     type: AuthActionTypes.logoutUser,
+  };
+};
+
+export const userHasSubscribedToNews = (): UserHasSubscribedToNews => {
+  return {
+    type: AuthActionTypes.setSubscribed,
   };
 };
 

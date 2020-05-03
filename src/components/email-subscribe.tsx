@@ -5,17 +5,23 @@ import { useTranslation } from "react-i18next";
 import { useInput } from "../hooks/common/useInput";
 
 import { EmailService } from "../services/email.http";
+import { connect } from "react-redux";
+import { userHasSubscribedToNews } from "../redux/auth/authActions";
 
-export const EmailSubscribe: React.FC = () => {
+const _EmailSubscribe: React.FC<{
+  userHasSubscribedToNews: typeof userHasSubscribedToNews;
+}> = ({ userHasSubscribedToNews }) => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const { t } = useTranslation();
   const inputHandler = useInput("");
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
     EmailService.subscribe(inputHandler.value)
       .then((res) => {
         setErrorMessage(null);
         setSuccessMessage(t("you_have_subscribed"));
+        userHasSubscribedToNews();
         setTimeout(() => {
           setSuccessMessage(null);
         }, 2000);
@@ -46,3 +52,7 @@ export const EmailSubscribe: React.FC = () => {
     </div>
   );
 };
+
+export const EmailSubscribe = connect(null, { userHasSubscribedToNews })(
+  _EmailSubscribe
+);

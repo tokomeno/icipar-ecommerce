@@ -22,6 +22,8 @@ import {
 } from "../../services/layout.http";
 import { HeaderMenuDropdownItem } from "./header-menu-dropdown-item";
 import { routes } from "../../routes/routes";
+import { DropDownOffer } from "./drop-down-offer";
+import { HeaderMenuBrandDropdownItem } from "./header-menu-brand-dropdown-item";
 
 interface HeaderProps {
   user: IStoreState["auth"]["user"];
@@ -170,14 +172,29 @@ export const _Header: React.FC<HeaderProps> = ({ user, phone, menu }) => {
               {latestBlogPost &&
                 dailyOffer &&
                 menu.map((item) => (
-                  <HeaderMenuDropdownItem
-                    latestBlogPost={latestBlogPost}
-                    dailyOffer={dailyOffer}
-                    key={item.id}
-                    item={item}
-                  />
+                  <div className="header-menu_item">
+                    <NavLink
+                      to={{
+                        pathname: routes.catalog,
+                        search: "categories[]=" + item.id,
+                        state: "refresh",
+                      }}
+                      className="link"
+                    >
+                      {item.title}
+                      <HeaderMenuDropdownItem
+                        key={item.id}
+                        item={item}
+                        offer={
+                          <DropDownOffer
+                            latestBlogPost={latestBlogPost}
+                            dailyOffer={dailyOffer}
+                          />
+                        }
+                      />
+                    </NavLink>
+                  </div>
                 ))}
-
               <div className="header-menu_item">
                 <Link
                   to={{
@@ -194,6 +211,16 @@ export const _Header: React.FC<HeaderProps> = ({ user, phone, menu }) => {
               <div className="header-menu_item">
                 <Link to={routes.allBrands} className="link">
                   {t("brands")}
+                  {latestBlogPost && dailyOffer && (
+                    <HeaderMenuBrandDropdownItem
+                      offer={
+                        <DropDownOffer
+                          latestBlogPost={latestBlogPost}
+                          dailyOffer={dailyOffer}
+                        />
+                      }
+                    />
+                  )}
                 </Link>
               </div>
               <div className="header-menu_item">

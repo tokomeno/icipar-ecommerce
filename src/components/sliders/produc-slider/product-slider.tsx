@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import classnames from "classnames";
-import Swiper from "react-id-swiper";
-import { useSliderNav } from "../../../hooks/common/useSliderNav";
+import Swiper, { SwiperInstance } from "react-id-swiper";
 import { Product } from "../../product/product";
 import { SwiperCustomNavBtn } from "../../swiper/swiper-custom-nav-btn";
 import { axiosWithToken } from "../../../api/axios-with-token";
@@ -69,6 +68,8 @@ export const ProductSlider: React.FC<ProductSliderProps> = ({
   sectionId,
   showMoreLink,
 }) => {
+  const [swiper, setSwiper] = useState<null | SwiperInstance>(null);
+
   const { t } = useTranslation();
   const [productByCategory, setProductByCategory] = useState<
     IProductByCateogry[]
@@ -98,8 +99,6 @@ export const ProductSlider: React.FC<ProductSliderProps> = ({
       })
       .catch((err) => console.log(err));
   }, [fetchUrl]);
-
-  const { sliderNav, currentSliderIndex } = useSliderNav(products.length, 0);
 
   const loader = (
     <section
@@ -162,7 +161,7 @@ export const ProductSlider: React.FC<ProductSliderProps> = ({
         <div className="container">
           <Swiper
             // shouldSwiperUpdate
-            activeSlideKey={currentSliderIndex.toString()}
+            getSwiper={(s) => setSwiper(s)}
             {...params}
           >
             {products.map((product, index) => (
@@ -175,7 +174,7 @@ export const ProductSlider: React.FC<ProductSliderProps> = ({
             ))}
           </Swiper>
         </div>
-        <SwiperCustomNavBtn sliderNav={sliderNav} />
+        <SwiperCustomNavBtn swiper={swiper} />
       </div>
     </section>
   );

@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Product } from "../../product/product";
 import { SwiperCustomNavBtn } from "../../swiper/swiper-custom-nav-btn";
-import { useSliderNav } from "../../../hooks/common/useSliderNav";
-import Swiper from "react-id-swiper";
+import Swiper, { SwiperInstance } from "react-id-swiper";
 import { IProduct } from "../../../services/product.http";
 
 interface ProductSimpleSliderProps {
@@ -38,17 +37,14 @@ const params = {
       spaceBetween: 20,
     },
   },
-  // pagination: {
-  //   el: ".likes-slider .swiper-pagination",
-  //   clickable: true
-  // }
 };
 
 export const ProductSimpleSlider: React.FC<ProductSimpleSliderProps> = ({
   title,
   products,
 }) => {
-  const { sliderNav, currentSliderIndex } = useSliderNav(products.length, 0);
+  const [swiper, setSwiper] = useState<null | SwiperInstance>(null);
+
   return (
     <div className="like-prod likes-slider">
       <h3 className="title text-center">{title}</h3>
@@ -56,7 +52,7 @@ export const ProductSimpleSlider: React.FC<ProductSimpleSliderProps> = ({
         <div className="container">
           <Swiper
             containerClass={"like-container swiper-container"}
-            activeSlideKey={currentSliderIndex.toString()}
+            getSwiper={(s) => setSwiper(s)}
             {...params}
           >
             {products.map((p) => (
@@ -64,7 +60,7 @@ export const ProductSimpleSlider: React.FC<ProductSimpleSliderProps> = ({
             ))}
           </Swiper>
         </div>
-        <SwiperCustomNavBtn sliderNav={sliderNav} />
+        <SwiperCustomNavBtn swiper={swiper} />
       </div>
     </div>
   );

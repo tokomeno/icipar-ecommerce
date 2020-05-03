@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSliderNav } from "../../../hooks/common/useSliderNav";
-import Swiper from "react-id-swiper";
+import Swiper, { SwiperInstance } from "react-id-swiper";
 import { BlogSliderItem } from "./blog-slider-item";
 import { SwiperCustomNavBtn } from "../../swiper/swiper-custom-nav-btn";
 import { useTranslation } from "react-i18next";
@@ -36,6 +35,8 @@ const params = {
 };
 
 export const BlogSlider: React.FC<BlogSliderProps> = () => {
+  const [swiper, setSwiper] = useState<null | SwiperInstance>(null);
+
   const { t } = useTranslation();
   const history = useHistory();
   const [blogs, setBlogs] = useState<HomePageBlogSlider["blog_posts"]>([]);
@@ -68,8 +69,6 @@ export const BlogSlider: React.FC<BlogSliderProps> = () => {
         console.log(err);
       });
   }, []);
-
-  const { sliderNav, currentSliderIndex } = useSliderNav(blogs.length, 0);
 
   return (
     <section className="blogSection" data-aos-off="fade-up">
@@ -107,8 +106,8 @@ export const BlogSlider: React.FC<BlogSliderProps> = () => {
         <div className="container">
           {activeTabId ? (
             <Swiper
+              getSwiper={(s) => setSwiper(s)}
               containerClass={"blog-container swiper-container"}
-              activeSlideKey={currentSliderIndex.toString()}
               {...params}
             >
               {blogs.map((blog, index) => (
@@ -119,7 +118,7 @@ export const BlogSlider: React.FC<BlogSliderProps> = () => {
             <DefaultSpinner />
           )}
         </div>
-        <SwiperCustomNavBtn sliderNav={sliderNav} />
+        <SwiperCustomNavBtn swiper={swiper} />
       </div>
     </section>
   );

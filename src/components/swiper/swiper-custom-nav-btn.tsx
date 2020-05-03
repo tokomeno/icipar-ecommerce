@@ -1,22 +1,32 @@
 import React from "react";
-import { ISliderNav } from "../../hooks/common/useSliderNav";
+import { SwiperInstance } from "react-id-swiper";
 
 type SwiperCustomNavBtnProps = {
-  sliderNav: ISliderNav;
+  swiper: SwiperInstance | null;
 };
 export const SwiperCustomNavBtn: React.FC<SwiperCustomNavBtnProps> = ({
-  sliderNav,
+  swiper,
 }) => {
+  const goNext = () => {
+    if (swiper) {
+      swiper.slideNext();
+    }
+  };
+  const goPrev = () => {
+    if (swiper) {
+      swiper.slidePrev();
+    }
+  };
   return (
     <React.Fragment>
       <div
-        onClick={() => sliderNav("forward")}
+        onClick={goNext}
         className="swiper-button-next d-flex align-items-center justify-content-center"
       >
         <i className="fas fa-angle-right" />
       </div>
       <div
-        onClick={() => sliderNav("backward")}
+        onClick={goPrev}
         className="swiper-button-prev d-flex align-items-center justify-content-center"
       >
         <i className="fas fa-angle-left" />

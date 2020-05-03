@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { SwiperCustomNavBtn } from "../swiper/swiper-custom-nav-btn";
-import Swiper from "react-id-swiper";
-import { useSliderNav } from "../../hooks/common/useSliderNav";
+import Swiper, { SwiperInstance } from "react-id-swiper";
 import { CommentSliderItem } from "./comment-slider-item";
 import { axiosWithToken } from "../../api/axios-with-token";
 import { FETCH_TESTIMONIALS } from "../../api/endpoints";
@@ -46,6 +45,7 @@ const params = {
 
 export const CommentSlider: React.FC<CommentSliderProps> = () => {
   const [comments, setComments] = useState<IComment[]>([]);
+  const [swiper, setSwiper] = useState<null | SwiperInstance>(null);
 
   useEffect(() => {
     axiosWithToken
@@ -58,13 +58,12 @@ export const CommentSlider: React.FC<CommentSliderProps> = () => {
       });
   }, []);
 
-  const { sliderNav, currentSliderIndex } = useSliderNav(5, 0);
   return (
     <div className="comments">
       <div className="container">
         <Swiper
           containerClass={"swiper-container comment-slider"}
-          activeSlideKey={currentSliderIndex.toString()}
+          getSwiper={(s) => setSwiper(s)}
           {...params}
         >
           {comments.map((comment, i) => (
@@ -72,9 +71,7 @@ export const CommentSlider: React.FC<CommentSliderProps> = () => {
           ))}
         </Swiper>
       </div>
-      {comments.length > 0 ? (
-        <SwiperCustomNavBtn sliderNav={sliderNav} />
-      ) : null}
+      {comments.length > 0 ? <SwiperCustomNavBtn swiper={swiper} /> : null}
     </div>
   );
 };

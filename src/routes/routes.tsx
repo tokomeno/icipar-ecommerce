@@ -40,4 +40,7 @@ export const routes = {
   staticPages: (slug: string) => {
     return `/page/${slug}`;
   },
+  productByTags: () => {
+    return `/products-by-tag`;
+  },
 };

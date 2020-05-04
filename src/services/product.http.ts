@@ -8,6 +8,7 @@ import {
   PRODUCT_SIMILAR_TO,
   PRODUCT_OTHERS_BOUGHT,
   FETCH_PRODUCT_REVIEW,
+  FETCH_PRODUCTS_BY_TAG,
 } from "../api/endpoints";
 import { IProductFilterData } from "../hooks/useProductFilterAttributes";
 import { axiosWithToken } from "../api/axios-with-token";
@@ -95,6 +96,7 @@ export interface IProductWithItems {
   };
   preorderable?: any;
   items: Item[];
+  tags: { tag: string }[];
 }
 
 interface Item {
@@ -171,6 +173,14 @@ export class ProductService {
   static getOtherBought(productId: number | string) {
     return Axios.get<{ data: IProduct[] }>(
       `${PRODUCT_OTHERS_BOUGHT}${productId}`
+    );
+  }
+
+  static getProductsByTag(tag: string, url: string | null = null) {
+    const fetchUrl = url ? url : FETCH_PRODUCTS_BY_TAG + tag;
+    console.log(fetchUrl);
+    return Axios.get<{ data: IProduct[]; links: { next: string | null } }>(
+      fetchUrl
     );
   }
 }

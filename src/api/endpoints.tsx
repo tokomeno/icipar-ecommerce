@@ -48,6 +48,7 @@ export const MY_RECOMENDATIONS =
   PRODUCT_BASE_URL + "/featured-products/recommended";
 export const FETCH_PRODUCTS_URL = PRODUCT_BASE_URL + "/products";
 export const FETCH_PRODUCTS_FILTER_DATA = PRODUCT_BASE_URL + "/product-filters";
+export const FETCH_PRODUCTS_BY_TAG = PRODUCT_BASE_URL + "/products-by-tag?tag=";
 
 export const FETCH_PRODUCT_URL = PRODUCT_BASE_URL + "/product";
 

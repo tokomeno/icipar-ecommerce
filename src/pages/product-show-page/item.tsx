@@ -12,6 +12,8 @@ import {
   TwitterShareButton,
   PinterestShareButton,
 } from "react-share";
+import { routes } from "../../routes/routes";
+import { NavLink } from "react-router-dom";
 
 interface ItemProps {
   product: IProductWithItems;
@@ -36,17 +38,20 @@ export const Item: React.FC<ItemProps> = ({
       <div className="container">
         <div className="row">
           <div className="col-md-5">
-            {/* <div className="prod-tags d-none d-md-flex align-items-center">
-              <a href="#!" className="prod-tags_link">
-                SUMMER 2013 (1,400)
-              </a>
-              <a href="#!" className="prod-tags_link">
-                WINTER 2013 (500)
-              </a>
-              <a href="#!" className="prod-tags_link">
-                BAST CARE (13)
-              </a>
-            </div> */}
+            <div className="prod-tags d-none d-md-flex align-items-center">
+              {product.tags &&
+                typeof Array.isArray(product.tags) &&
+                product.tags.map((tag) => (
+                  <>
+                    <NavLink
+                      to={routes.productByTags() + "?tag=" + tag.tag}
+                      className="prod-tags_link"
+                    >
+                      {tag.tag}
+                    </NavLink>
+                  </>
+                ))}
+            </div>
             <ProductShowSlider activeItem={activeItem} />
           </div>
           <div className="col-md-7">

@@ -42,6 +42,7 @@ import { RECAPTCHA_SITE_KEY } from "./consts/services";
 import { setDefaultLang } from "./langsUtil";
 import { PaymentCallbackPage } from "./pages/profile/payment-callback-page/payment-callback-page";
 import { ConfirmEmailPage } from "./pages/confirm-email/confirm-email-page";
+import { ProductsByTagPage } from "./pages/products-by-tags/products-by-tags";
 
 import axios from "axios";
 import { setUserBlockedStatus } from "./api/axios-with-token";
@@ -116,6 +117,11 @@ const App: React.FC<{}> = () => {
             />
 
             <Route path={routes.catalog} exact component={CatalogPage} />
+            <Route
+              path={routes.productByTags()}
+              exact
+              component={ProductsByTagPage}
+            />
             <Route path={routes.giftCard} exact component={GiftCardPage} />
             <Route
               path={routes.productShow(":id", ":slug")}

@@ -90,7 +90,7 @@ export const CatalogBrandSlider: React.FC<CatalogBrandSliderProps> = ({
             {brandSlider.banners.map((banner, i) => (
               <div className="swiper-slide" key={i}>
                 <div className="brand-banner">
-                  <img src={banner} alt="chanel banner" />
+                  <img src={banner.banner} alt="chanel banner" />
                   <div className="bg" />
                 </div>
               </div>

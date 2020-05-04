@@ -37,8 +37,8 @@ export interface IBrandShow {
 export interface IBrandCatalogSlider {
   id: number;
   name: string;
-  banners: string[];
-  links: string[];
+  banners: { banner: string }[];
+  links: { link: string }[];
   logo: string;
   slug: string;
 }

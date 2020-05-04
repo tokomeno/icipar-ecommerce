@@ -81,8 +81,8 @@ export const PorductFilterProvider: React.FC<{}> = ({ children }) => {
   const setFilterGender: IPorductFilterContext["setFilterGender"] = useCallback(
     (gender) => {
       const g = {
-        men: 1,
-        women: 2,
+        men: 2,
+        women: 1,
       };
       setProductFilterData((prevState) => ({
         ...prevState,

@@ -46,8 +46,7 @@ export const AboutBrandPage: React.FC<AboutBrandPageProps> = ({ match }) => {
             </div>
             <div className="swiper-pagination" />
           </div>
-
-          <div className="d-flex flex-column align-items-center">
+          {/* <div className="d-flex flex-column align-items-center">
             <h2 className="title">{t("brand_history")}</h2>
             <p className="txt text-center">
               ეს არის სინათლისა და სიცოცხლის სურნელი - კეთილშობილი და
@@ -60,7 +59,76 @@ export const AboutBrandPage: React.FC<AboutBrandPageProps> = ({ match }) => {
               className="about-brand_content"
               dangerouslySetInnerHTML={{ __html: brand.body }}
             ></div>
+          </div> */}
+          <div className="d-flex flex-column align-items-center">
+            <h2 className="title">{t("brand_history")}</h2>
+            <p
+              className="txt text-center"
+              dangerouslySetInnerHTML={{ __html: brand.history }}
+            />
+            <div className="about-brand_content">
+              <div className="row">
+                <div className="col-sm-5">
+                  <div className="image">
+                    <img src={brand.how_started_photo} alt="" />
+                  </div>
+                </div>
+                <div className="col-sm-7">
+                  <div className="desc d-flex flex-column justify-content-center">
+                    <h2 className="desc_title">{t("how_started")}</h2>
+                    <p
+                      className="txt"
+                      dangerouslySetInnerHTML={{
+                        __html: brand.how_started_text,
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="row flex-sm-row flex-column-reverse">
+                <div className="col-sm-7">
+                  <div className="desc d-flex flex-column align-items-sm-end align-items-center justify-content-center">
+                    <h2 className="desc_title text-right">
+                      {t("where_founded")}
+                    </h2>
+                    <p
+                      className="txt text-right"
+                      dangerouslySetInnerHTML={{
+                        __html: brand.where_founded_text,
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className="col-sm-5">
+                  <div className="image">
+                    <img src={brand.where_founded_photo} alt="" />
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-sm-5">
+                  <div className="image">
+                    <img
+                      src={brand.latest_collection_photo}
+                      alt="chanel bleu"
+                    />
+                  </div>
+                </div>
+                <div className="col-sm-7">
+                  <div className="desc d-flex flex-column justify-content-center">
+                    <h2 className="desc_title">{t("latest_collection")}</h2>
+                    <p
+                      className="txt"
+                      dangerouslySetInnerHTML={{
+                        __html: brand.latest_collection_text,
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+          ;
         </div>
       </div>
     </>

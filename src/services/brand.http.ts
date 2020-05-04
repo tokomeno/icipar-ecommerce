@@ -20,7 +20,18 @@ export interface IAllBrandsResponse {
 export interface IBrandShow {
   name: string;
   banner: string;
-  body: string;
+  logo: string;
+
+  history: string;
+
+  how_started_photo: string;
+  how_started_text: string;
+
+  where_founded_photo: string;
+  where_founded_text: string;
+
+  latest_collection_photo: string;
+  latest_collection_text: string;
 }
 
 export interface IBrandCatalogSlider {

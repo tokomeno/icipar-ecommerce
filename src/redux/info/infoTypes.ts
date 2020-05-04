@@ -4,6 +4,7 @@ import {
   SetPorductDeliveryTermsAction,
   SetBrnachesAction,
   SetLayoutCatrogiresAction,
+  SetUserHasBeenBlockedAction,
 } from "./infoActions";
 import { IMenuCatrogy } from "../../services/layout.http";
 
@@ -18,6 +19,7 @@ export interface IInfoState {
   };
   branches: IBranch[];
   layoutCategories: IMenuCatrogy[];
+  is_user_blocked: false | string;
 }
 
 export interface ISocial {
@@ -30,10 +32,12 @@ export enum InfoActionTypes {
   SetPorductDeliveryTerms,
   SetBrnaches,
   SetLayoutCatrogires,
+  SetUserHasBeenBlocked,
 }
 
 export type InfoActions =
   | SetSocialAndContactInfoAction
   | SetPorductDeliveryTermsAction
   | SetBrnachesAction
-  | SetLayoutCatrogiresAction;
+  | SetLayoutCatrogiresAction
+  | SetUserHasBeenBlockedAction;

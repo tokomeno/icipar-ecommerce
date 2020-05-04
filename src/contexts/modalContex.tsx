@@ -1,4 +1,4 @@
-import React, { createContext, useState, useCallback } from "react";
+import React, { createContext, useState, useCallback, useEffect } from "react";
 
 export type IActiveModalContext = {
   activeModal:
@@ -26,11 +26,11 @@ export const ActiveModalProvider: React.FC<{}> = ({ children }) => {
     activeModal: null,
   });
 
-  const hideModal = () => {
+  const hideModal = useCallback(() => {
     document.body.style.overflowY = "initial";
     document.body.style.overflowX = "initial";
-    setState({ ...state, activeModal: null });
-  };
+    setState((prev) => ({ ...prev, activeModal: null }));
+  }, [setState]);
 
   const setActiveModal: IActiveModalContext["setActiveModal"] = useCallback(
     (name) => {
@@ -42,6 +42,12 @@ export const ActiveModalProvider: React.FC<{}> = ({ children }) => {
     },
     [setState]
   );
+
+  useEffect(() => {
+    document.addEventListener("hide-context-modal", function (e) {
+      hideModal();
+    });
+  }, [hideModal]);
 
   return (
     <ActiveModalContext.Provider

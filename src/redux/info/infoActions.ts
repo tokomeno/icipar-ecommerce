@@ -24,6 +24,20 @@ export interface SetPorductDeliveryTermsAction {
   type: InfoActionTypes.SetPorductDeliveryTerms;
 }
 
+export interface SetUserHasBeenBlockedAction {
+  type: InfoActionTypes.SetUserHasBeenBlocked;
+  payload: false | string;
+}
+
+export const setUserHasBeenBlocked = (
+  isBlocked: false | string
+): SetUserHasBeenBlockedAction => {
+  return {
+    payload: isBlocked,
+    type: InfoActionTypes.SetUserHasBeenBlocked,
+  };
+};
+
 export const setLayoutCatogriesAction = () => {
   return (dispatch: Dispatch) => {
     LayoutService.productCategories()

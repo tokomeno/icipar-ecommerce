@@ -11,6 +11,7 @@ let initState: IInfoState = {
   },
   branches: [],
   layoutCategories: [],
+  is_user_blocked: false,
 };
 
 export const infoReducer = (
@@ -37,6 +38,11 @@ export const infoReducer = (
       return {
         ...state,
         layoutCategories: action.payload,
+      };
+    case InfoActionTypes.SetUserHasBeenBlocked:
+      return {
+        ...state,
+        is_user_blocked: action.payload,
       };
     default:
       return state;

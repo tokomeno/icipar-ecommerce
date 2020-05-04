@@ -5,7 +5,6 @@ export interface IUser {
   id: number;
   phone: number | null;
   email: number | null;
-  // has_filled_profile: b da has_subscribed_news_letter
   is_subscribed: boolean;
   has_filled_profile: boolean;
 }

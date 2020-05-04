@@ -27,11 +27,17 @@ import { HeaderMenuBrandDropdownItem } from "./header-menu-brand-dropdown-item";
 
 interface HeaderProps {
   user: IStoreState["auth"]["user"];
+  isBlocked: IStoreState["info"]["is_user_blocked"];
   phone: string;
   menu: IMenuCatrogy[];
 }
 
-export const _Header: React.FC<HeaderProps> = ({ user, phone, menu }) => {
+export const _Header: React.FC<HeaderProps> = ({
+  user,
+  phone,
+  menu,
+  isBlocked,
+}) => {
   const { t } = useTranslation();
   const history = useHistory();
   const { setActiveModal, activeModal, hideModal } = useContext<
@@ -84,6 +90,11 @@ export const _Header: React.FC<HeaderProps> = ({ user, phone, menu }) => {
       ></div>
       <header className={classnames("site__header", { active: isActive })}>
         <div className="header d-flex flex-md-column flex-column-reverse">
+          {isBlocked && (
+            <div className="header-sale text-center">
+              <p className="header-sale_txt d-none d-md-block">{isBlocked}</p>
+            </div>
+          )}
           {user && !user.is_subscribed && (
             <div className="header-sale text-center">
               <p className="header-sale_txt d-none d-md-block">
@@ -294,6 +305,7 @@ const mapStateToProps = ({ info }: IStoreState) => {
   return {
     phone: info.contact_info.phone,
     menu: info.layoutCategories,
+    isBlocked: info.is_user_blocked,
   };
 };
 

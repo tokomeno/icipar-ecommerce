@@ -43,6 +43,9 @@ import { setDefaultLang } from "./langsUtil";
 import { PaymentCallbackPage } from "./pages/profile/payment-callback-page/payment-callback-page";
 import { ConfirmEmailPage } from "./pages/confirm-email/confirm-email-page";
 
+import axios from "axios";
+import { setUserBlockedStatus } from "./api/axios-with-token";
+
 export const HistoryContext = React.createContext<History>(
   (null as any) as History
 );
@@ -53,6 +56,23 @@ export interface match<P> {
   path: string;
   url: string;
 }
+
+// Add a response interceptor
+axios.interceptors.response.use(
+  function (response) {
+    return response;
+  },
+  function (error) {
+    if (error.response.status === 403) {
+      setUserBlockedStatus(
+        error.response && error.response.data
+          ? error.response.data.error
+          : "You Have Been Blocked"
+      );
+    }
+    return Promise.reject(error);
+  }
+);
 
 setDefaultLang();
 tryLocalAuth();

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Product } from "../../components/product/product";
 import { useProducts } from "../../hooks/useProducts/useProducts";
 import { useTranslation } from "react-i18next";
@@ -10,7 +10,8 @@ import { ActiveModalContext } from "../../contexts/modalContex";
 import classnames from "classnames";
 import { useLocation, useHistory } from "react-router-dom";
 import { routes } from "../../routes/routes";
-// import { dummyProductData } from "../../data/product";
+import { CatalogBrandSlider } from "../../components/catalog-brand-slider/catalog-brand-slider";
+import queryString from "query-string";
 
 interface CatalogPageProps {}
 
@@ -34,7 +35,8 @@ export const CatalogPage: React.FC<CatalogPageProps> = () => {
   const { activeModal, hideModal } = useContext(ActiveModalContext);
 
   // WHEN CLICKING CATALOG PAGE LINK FROM CATALOG PAGE WITH NEW QUERY STRING IN WINDOW
-  const { state } = useLocation();
+  // Need to reset filter from query string
+  const { state, search } = useLocation();
   const { push } = useHistory();
   const firstMount = useRef(true);
   useEffect(() => {
@@ -49,6 +51,19 @@ export const CatalogPage: React.FC<CatalogPageProps> = () => {
     }
     firstMount.current = false;
   }, [state, setFilterFromQueryString, push]);
+
+  const [brandSliderId, setbrandSliderId] = useState<number | null>(null);
+  useEffect(() => {
+    const a = queryString.parse(search, {
+      arrayFormat: "bracket",
+      parseNumbers: true,
+    });
+    if (a.slider_brand_id && typeof a.slider_brand_id === "number") {
+      setbrandSliderId(a.slider_brand_id);
+    } else {
+      setbrandSliderId(null);
+    }
+  }, [search]);
 
   if (!productFilterData) return <div></div>;
   return (
@@ -69,6 +84,7 @@ export const CatalogPage: React.FC<CatalogPageProps> = () => {
             <CatalogFilters />
           </div>
           <div className="catalog">
+            {brandSliderId && <CatalogBrandSlider brand_id={brandSliderId} />}
             <div className="catalog_top d-flex justify-content-between align-items-center flex-column flex-lg-row">
               <PriceSorter ordering={productFilterData.order || "price"} />
             </div>

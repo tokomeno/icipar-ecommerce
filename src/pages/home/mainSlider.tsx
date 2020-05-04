@@ -61,15 +61,13 @@ const Item: React.FC<ItemProps> = ({ slider }) => {
       <div className="container swiper-slide-content flex-sm-row flex-column">
         <img
           src={slider.image}
-          // src="/assets/uploads/images/slide1.png"
-          alt="chanel"
+          alt=""
           className="main-photo d-none d-sm-block"
         />
         {/* xs */}
         <img
           src={slider.image}
-          // src="/assets/uploads/images/slide1-xs.png"
-          alt="chanel"
+          alt=""
           className="main-photo d-block d-sm-none"
         />
         <div className="desc text-center">

@@ -1,5 +1,10 @@
 import { axiosWithToken } from "../api/axios-with-token";
-import { FEATURED_BRANDS, SHOW_BRAND, ALL_BRANDS } from "../api/endpoints";
+import {
+  FEATURED_BRANDS,
+  SHOW_BRAND,
+  ALL_BRANDS,
+  BRAND_IN_SEARCH,
+} from "../api/endpoints";
 
 export type IBrandSliderItem = {
   slug: string;
@@ -17,6 +22,16 @@ export interface IBrandShow {
   banner: string;
   body: string;
 }
+
+export interface IBrandCatalogSlider {
+  id: number;
+  name: string;
+  banners: string[];
+  links: string[];
+  logo: string;
+  slug: string;
+}
+
 export class BrandService {
   static getAll() {
     return axiosWithToken.get<IAllBrandsResponse>(ALL_BRANDS);
@@ -28,5 +43,11 @@ export class BrandService {
 
   static getFeaturedBrands() {
     return axiosWithToken.get<{ data: IBrandSliderItem[] }>(FEATURED_BRANDS);
+  }
+
+  static getCatalogBrandSlider(brandId: number) {
+    return axiosWithToken.get<{ data: IBrandCatalogSlider }>(
+      BRAND_IN_SEARCH + "?brand_id=" + brandId
+    );
   }
 }

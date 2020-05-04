@@ -54,7 +54,12 @@ export const HeaderMenuDropdownItem: React.FC<HeaderMenuItemProps> = ({
                   {item.brands[brandLatter].map((b, i) => (
                     <NavLink
                       key={i}
-                      to={routes.brandShow(b.slug)}
+                      to={{
+                        pathname: routes.catalog,
+                        state: "refresh",
+                        search:
+                          "?brands[]=" + b.id + "&slider_brand_id=" + b.id,
+                      }}
                       className="letter-link"
                     >
                       {b.name}

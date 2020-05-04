@@ -171,8 +171,8 @@ export const _Header: React.FC<HeaderProps> = ({ user, phone, menu }) => {
             <div className="header-menu d-flex justify-content-between">
               {latestBlogPost &&
                 dailyOffer &&
-                menu.map((item) => (
-                  <div className="header-menu_item">
+                menu.map((item, i) => (
+                  <div className="header-menu_item" key={i}>
                     <NavLink
                       to={{
                         pathname: routes.catalog,
@@ -182,17 +182,17 @@ export const _Header: React.FC<HeaderProps> = ({ user, phone, menu }) => {
                       className="link"
                     >
                       {item.title}
-                      <HeaderMenuDropdownItem
-                        key={item.id}
-                        item={item}
-                        offer={
-                          <DropDownOffer
-                            latestBlogPost={latestBlogPost}
-                            dailyOffer={dailyOffer}
-                          />
-                        }
-                      />
                     </NavLink>
+                    <HeaderMenuDropdownItem
+                      key={item.id}
+                      item={item}
+                      offer={
+                        <DropDownOffer
+                          latestBlogPost={latestBlogPost}
+                          dailyOffer={dailyOffer}
+                        />
+                      }
+                    />
                   </div>
                 ))}
               <div className="header-menu_item">
@@ -209,19 +209,19 @@ export const _Header: React.FC<HeaderProps> = ({ user, phone, menu }) => {
                 </Link>
               </div>
               <div className="header-menu_item">
-                <Link to={routes.allBrands} className="link">
+                <NavLink to={routes.allBrands} className="link">
                   {t("brands")}
-                  {latestBlogPost && dailyOffer && (
-                    <HeaderMenuBrandDropdownItem
-                      offer={
-                        <DropDownOffer
-                          latestBlogPost={latestBlogPost}
-                          dailyOffer={dailyOffer}
-                        />
-                      }
-                    />
-                  )}
-                </Link>
+                </NavLink>
+                {latestBlogPost && dailyOffer && (
+                  <HeaderMenuBrandDropdownItem
+                    offer={
+                      <DropDownOffer
+                        latestBlogPost={latestBlogPost}
+                        dailyOffer={dailyOffer}
+                      />
+                    }
+                  />
+                )}
               </div>
               <div className="header-menu_item">
                 <Link to={routes.giftCard} className="link">

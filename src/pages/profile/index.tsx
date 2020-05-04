@@ -65,7 +65,7 @@ const _SubscirbeNewsLetterPopUp: React.FC<{
 }> = ({ userHasSubscribedToNews }) => {
   const { setActive: setHide, isActive: isHidden } = useToggle(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [, setSuccessMessage] = useState<string | null>(null);
   const { t } = useTranslation();
   const inputHandler = useInput("");
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {

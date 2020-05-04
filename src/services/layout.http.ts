@@ -34,7 +34,7 @@ export interface ICategory {
 }
 export type IMenuCatrogy = ICategory & {
   brands: {
-    [key: string]: { name: string; slug: string }[];
+    [key: string]: { name: string; slug: string; id: number }[];
   };
 };
 

@@ -21,8 +21,9 @@ export const HeaderMenuBrandDropdownItem: React.FC<HeaderMenuItemProps> = ({
           <div className="brands-list">
             <div className="title">{t("brands_a_z")}</div>
             <div className="list">
-              {alphabet.map((l) => (
+              {alphabet.map((l, i) => (
                 <NavHashLink
+                  key={i}
                   to={routes.allBrands + "#" + l}
                   className="list-item"
                 >

@@ -55,6 +55,7 @@ interface IPorductFilterContext {
   setNewKeyword: (keyword: string) => void;
   setPriceRange: (price: [number, number]) => void;
   setPriceSorter: (order: "price" | "-price") => void;
+  setFilterGender: (g: "men" | "women") => void;
 }
 
 export const PorductFilterContext = createContext<IPorductFilterContext>(
@@ -75,6 +76,20 @@ export const PorductFilterProvider: React.FC<{}> = ({ children }) => {
       setProductFilterData((prevState) => ({ ...prevState, [filterKey]: ids }));
     },
     [setProductFilterData]
+  );
+
+  const setFilterGender: IPorductFilterContext["setFilterGender"] = useCallback(
+    (gender) => {
+      const g = {
+        men: 1,
+        women: 2,
+      };
+      setProductFilterData((prevState) => ({
+        ...prevState,
+        genders: [g[gender]],
+      }));
+    },
+    []
   );
 
   const setNewKeyword = useCallback(
@@ -110,6 +125,7 @@ export const PorductFilterProvider: React.FC<{}> = ({ children }) => {
         setFilterFromQueryString,
         setPriceRange,
         setPriceSorter,
+        setFilterGender,
       }}
     >
       {children}

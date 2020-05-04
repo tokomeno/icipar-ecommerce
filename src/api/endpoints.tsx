@@ -83,6 +83,7 @@ export const PRODUCT_CATEGORIES =
   PRODUCT_BASE_URL + "/layout/product-categories";
 export const LAYOUT_BRNADS = PRODUCT_BASE_URL + "/layout/brands?category_id=";
 export const DAYLY_OFFER = PRODUCT_BASE_URL + "/layout/daily-offer";
+export const BRAND_IN_SEARCH = PRODUCT_BASE_URL + "/brand-in-search";
 
 // Cart
 // https://app.swaggerhub.com/apis-docs/badzaghua/iciparis-cart/1.0.0

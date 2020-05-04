@@ -5,12 +5,12 @@ import { setUserHasBeenBlocked } from "../redux/info/infoActions";
 
 const axiosWithToken = axios.create();
 // Add a response interceptor
-axios.interceptors.response.use(
+axiosWithToken.interceptors.response.use(
   function (response) {
     return response;
   },
   function (error) {
-    if (error.response.status === 403) {
+    if (error && error.response && error.response.status === 403) {
       setUserBlockedStatus(
         error.response && error.response.data
           ? error.response.data.error

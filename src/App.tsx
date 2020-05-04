@@ -64,7 +64,7 @@ axios.interceptors.response.use(
     return response;
   },
   function (error) {
-    if (error.response.status === 403) {
+    if (error && error.response && error.response.status === 403) {
       setUserBlockedStatus(
         error.response && error.response.data
           ? error.response.data.error

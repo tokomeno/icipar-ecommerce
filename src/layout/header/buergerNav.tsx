@@ -32,6 +32,33 @@ export const _BurgerNav: React.FC<BurgerNavProps> = ({ menu }) => {
             <MenuItem key={i} menu={m} />
           ))}
 
+          <NavLink
+            to={{
+              pathname: routes.catalog,
+              search:
+                "discount_range[]=0-0.25&discount_range[]=0.25-0.5&discount_range[]=0.5-0.75&discount_range[]=0.75-1",
+              state: "refresh",
+            }}
+            className="burger-sub_link"
+          >
+            {t("sale")}
+          </NavLink>
+          <NavLink to={routes.allBrands} className="burger-sub_link">
+            {t("brands")}
+          </NavLink>
+          <NavLink to={routes.giftCard} className="burger-sub_link">
+            {t("gift_cart")}
+          </NavLink>
+          <NavLink to="/catalog" className="burger-sub_link">
+            {t("catalog")}
+          </NavLink>
+          <NavLink
+            to={routes.blogs}
+            className="burger-sub_link text-main-color"
+          >
+            {t("blog")}
+          </NavLink>
+
           {AboutPagesMenu.map((menu) => (
             <NavLink key={menu.to} to={menu.to} className="burger-sub_link">
               {t(menu.title)}

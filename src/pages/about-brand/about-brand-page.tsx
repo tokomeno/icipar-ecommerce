@@ -128,7 +128,6 @@ export const AboutBrandPage: React.FC<AboutBrandPageProps> = ({ match }) => {
               </div>
             </div>
           </div>
-          ;
         </div>
       </div>
     </>

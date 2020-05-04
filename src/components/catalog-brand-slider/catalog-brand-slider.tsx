@@ -98,7 +98,6 @@ export const CatalogBrandSlider: React.FC<CatalogBrandSliderProps> = ({
           </Swiper>
         </div>
       </div>
-      ;
     </>
   );
 };

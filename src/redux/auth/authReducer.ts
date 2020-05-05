@@ -27,6 +27,11 @@ export const authReducer = (
         token,
         isAuth: true,
       };
+    case AuthActionTypes.setUpdatedUserData:
+      return {
+        ...state,
+        user: action.payload,
+      };
     case AuthActionTypes.setAuthErrors:
       return {
         ...state,

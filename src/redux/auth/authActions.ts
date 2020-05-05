@@ -8,6 +8,7 @@ import {
   UpdateAvatarAction,
   LogoutUserAction,
   UserHasSubscribedToNews,
+  SetUpdatedUserDataAction,
 } from "./authTypes";
 import { Dispatch } from "redux";
 import { API_LOGIN_URL, API_REGISTER_URL } from "../../api/endpoints";
@@ -35,6 +36,11 @@ export const setCurrentUser = ({
     payload: { user, token },
   };
 };
+
+export const setUpdatedUserData = (user: IUser): SetUpdatedUserDataAction => ({
+  type: AuthActionTypes.setUpdatedUserData,
+  payload: user,
+});
 
 interface LoginUserParams {
   userData: {

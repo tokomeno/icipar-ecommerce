@@ -31,12 +31,24 @@ const _ProfileBasePage: React.FC<ProfileBasePageProps> = ({
 }) => {
   const location = useLocation();
 
+  const {
+    isActive: showCouoponModal,
+    setInActive: hideCouponModal,
+  } = useToggle(true);
+  const {
+    isActive: showNewsLetterPopup,
+    setInActive: hideNewsLetterPopup,
+  } = useToggle(true);
+
   return (
     <>
       {modal}
-      {!user.is_subscribed && <SubscirbeNewsLetterPopUp />}
-      {!user.has_filled_profile && <CouponModal />}
-
+      {!user.is_subscribed && showNewsLetterPopup && (
+        <SubscirbeNewsLetterPopUp hide={hideNewsLetterPopup} />
+      )}
+      {!user.has_filled_profile && showCouoponModal && (
+        <CouponModal hide={hideCouponModal} />
+      )}
       <div className="container">
         <div
           className={classnames("profile", {
@@ -60,10 +72,12 @@ export const ProfileBasePage = connect(mapStateToProps, { logoutUser })(
   _ProfileBasePage
 );
 
+/////////////////////////////////////////////////////////////
+
 const _SubscirbeNewsLetterPopUp: React.FC<{
   userHasSubscribedToNews: typeof userHasSubscribedToNews;
-}> = ({ userHasSubscribedToNews }) => {
-  const { setActive: setHide, isActive: isHidden } = useToggle(false);
+  hide: () => void;
+}> = ({ userHasSubscribedToNews, hide }) => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [, setSuccessMessage] = useState<string | null>(null);
   const { t } = useTranslation();
@@ -85,12 +99,11 @@ const _SubscirbeNewsLetterPopUp: React.FC<{
         }
       });
   };
-  if (isHidden) return null;
 
   return (
     <div className="checkout-saleBAnner d-none d-lg-block">
       <button
-        onClick={setHide}
+        onClick={hide}
         className="close-sale d-flex align-items-center justify-content-center"
       >
         <i className="fas fa-times" />

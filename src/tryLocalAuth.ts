@@ -1,6 +1,10 @@
 import { store } from "./redux/store";
 
-import { setCurrentUser, logoutUser } from "./redux/auth/authActions";
+import {
+  setCurrentUser,
+  logoutUser,
+  setUpdatedUserData,
+} from "./redux/auth/authActions";
 
 import { setGenericTokenAsHeader } from "./api/inital-auth";
 import { fetchCart } from "./redux/cart/cartActions";
@@ -36,7 +40,9 @@ export const tryLocalAuth = () => {
 const ifUserTokenIsNotValidLogout = (token: string) => {
   AuthService.checkUserToken(token)
     .then((res) => {
-      // TODO: Update user state
+      if (res.data) {
+        store.dispatch(setUpdatedUserData(res.data));
+      }
     })
     .catch((err) => {
       store.dispatch(logoutUser());

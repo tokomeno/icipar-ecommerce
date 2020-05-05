@@ -9,6 +9,7 @@ import {
 } from "../api/endpoints";
 import Axios from "axios";
 import { IProduct } from "./product.http";
+import { IUser } from "../redux/auth/authTypes";
 
 export interface MyRecomendations {
   category_id: number;
@@ -33,7 +34,7 @@ export class AuthService {
   }
 
   static checkUserToken(token: string) {
-    return Axios.get(CHECK_USER_TOKEN, {
+    return Axios.get<IUser>(CHECK_USER_TOKEN, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

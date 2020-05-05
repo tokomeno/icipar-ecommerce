@@ -27,8 +27,7 @@ const _Layout: React.FC<LayoutProps> = ({ children, auth }) => {
         </div>
       </main>
       <Footer />
-      {/* {!auth.isAuth && <RegisterLogin />} */}
-      <RegisterLogin />
+      {!auth.isAuth && <RegisterLogin />}
     </React.Fragment>
   );
 };

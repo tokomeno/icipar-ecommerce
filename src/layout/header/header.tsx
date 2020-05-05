@@ -146,7 +146,7 @@ export const _Header: React.FC<HeaderProps> = ({
                 <div className="col-lg-3 col-md-4 text-right">
                   {user ? (
                     <NavLink to="/profile" className="sup-hdr_link login-user">
-                      <img src={user.avatar} alt="user" />
+                      <img src={user.avatar || undefined} alt="user" />
                       {user.name}
                     </NavLink>
                   ) : (

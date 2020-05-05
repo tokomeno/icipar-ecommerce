@@ -14,7 +14,7 @@ const GaText = () => {
 
 class GoogleLoginButton extends React.PureComponent {
   responseGoogle = (res) => {
-    // console.log(res);
+    console.log(res);
     // const { profileObj } = res;
     // const userData = {
     //   ...res
@@ -24,8 +24,9 @@ class GoogleLoginButton extends React.PureComponent {
     // second_name: profileObj.familyName,
     // email: profileObj.email,
     // imageUrl: null
-    // };
-    axios
+    // }; 
+    if(typeof res === "object" && res.accessToken ){
+      axios
       .get(`${API_GA_LOGIN_URL}?token=${res.accessToken}`, { ...res })
       .then((res) => {
         setCurrentUser({
@@ -35,8 +36,9 @@ class GoogleLoginButton extends React.PureComponent {
         // hideModal(); TODO: hide modal
       })
       .catch((err) => {
-        console.log("დაფიქსირდა შეცდომა");
+        console.log(err);
       });
+    }
   };
   render() {
     return (

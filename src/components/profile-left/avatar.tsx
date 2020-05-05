@@ -39,7 +39,7 @@ const _Avatar: React.FC<AvatarProps> = ({ user, updateAvatar }) => {
         }}
         className="user-image"
       >
-        <img src={user.avatar} alt="user" />
+        <img src={user.avatar || undefined} alt="user" />
         <input
           ref={fileInput}
           style={{ display: "none" }}

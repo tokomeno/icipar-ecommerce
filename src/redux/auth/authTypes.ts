@@ -1,7 +1,7 @@
 // TODO: ADD User Type When ip will be rady
 export interface IUser {
   [key: string]: any;
-  avatar: string;
+  avatar: string | null;
   id: number;
   phone: number | null;
   email: number | null;
@@ -26,6 +26,7 @@ export interface AuthState {
 
 export enum AuthActionTypes {
   setCurrentUser = "setCurrentUser",
+  setUpdatedUserData = "setUpdatedUserData",
   logoutUser = "logoutUser",
   setAuthErrors = "setAuthErrors",
   updateAvatar = "updateAvatar",
@@ -43,6 +44,10 @@ export interface SetCurrentUserAction {
     user: IUser;
     token: string;
   };
+}
+export interface SetUpdatedUserDataAction {
+  type: AuthActionTypes.setUpdatedUserData;
+  payload: IUser;
 }
 
 export interface UpdateAvatarAction {
@@ -63,4 +68,5 @@ export type AuthActions =
   | SetAuthErrorAction
   | LogoutUserAction
   | UpdateAvatarAction
-  | UserHasSubscribedToNews;
+  | UserHasSubscribedToNews
+  | SetUpdatedUserDataAction;

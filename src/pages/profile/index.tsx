@@ -19,7 +19,7 @@ import { useToggle } from "../../hooks/common/useToggle";
 interface ProfileBasePageProps {
   children: React.ReactNode;
   modal?: React.ReactNode;
-  user: IUser;
+  user: IUser | null;
   logoutUser: typeof logoutUser;
 }
 
@@ -43,10 +43,10 @@ const _ProfileBasePage: React.FC<ProfileBasePageProps> = ({
   return (
     <>
       {modal}
-      {!user.is_subscribed && showNewsLetterPopup && (
+      {user && !user.is_subscribed && showNewsLetterPopup && (
         <SubscirbeNewsLetterPopUp hide={hideNewsLetterPopup} />
       )}
-      {!user.has_filled_profile && showCouoponModal && (
+      {user && !user.has_filled_profile && showCouoponModal && (
         <CouponModal hide={hideCouponModal} />
       )}
       <div className="container">

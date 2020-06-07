@@ -1,7 +1,8 @@
 import React, { useRef } from "react";
 import { IProduct } from "../services/product.http";
-import { useDeteckOutsideClick } from "../hooks/common/useDeteckOutsideClick";
+import { useDetectOutsideClick } from "../hooks/common/useDetectOutsideClick";
 import { NavLink } from "react-router-dom";
+import { routes } from "../routes/routes";
 
 interface ProductAutocompleteDropdownProps {
   products: IProduct[];
@@ -13,7 +14,7 @@ export const ProductAutocompleteDropdown: React.FC<ProductAutocompleteDropdownPr
   resetProducts,
 }) => {
   const searchDropdownRef = useRef(null);
-  useDeteckOutsideClick(searchDropdownRef, () => {
+  useDetectOutsideClick(searchDropdownRef, () => {
     resetProducts();
   });
   if (products.length === 0) return null;
@@ -29,7 +30,7 @@ export const ProductAutocompleteDropdown: React.FC<ProductAutocompleteDropdownPr
             <NavLink
               key={product.id}
               onClick={resetProducts}
-              to={`/product/${product.id}`}
+              to={routes.productShow(product.id, product.slug)}
               className="d-flex align-items-center item"
             >
               <div className="image d-flex align-items-center justify-content-center">

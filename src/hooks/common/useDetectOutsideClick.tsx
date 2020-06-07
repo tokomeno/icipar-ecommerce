@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export const useDeteckOutsideClick = (
+export const useDetectOutsideClick = (
   ref: React.MutableRefObject<any>,
   cb: Function
 ) => {

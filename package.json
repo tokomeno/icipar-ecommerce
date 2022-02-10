@@ -31,7 +31,7 @@
     "i18next": "^19.4.3",
     "lodash.chunk": "^4.2.0",
     "lodash.debounce": "^4.0.8",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "query-string": "^6.12.1",
     "react": "^16.13.0",
     "react-bootstrap": "^1.0.1",
